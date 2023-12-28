@@ -20,8 +20,8 @@ export default function Nav() {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
-        <Image src="/assets/images/logo.svg" alt="Promptopia logo" width={30} height={30} className="object-contain" />
-        <p className="logo_text">Promptopia</p>
+        <Image src="/assets/images/eazyaLogo.png" alt="EazyA logo" width={30} height={30} className="object-contain" />
+        <p className="logo_text">EazyA</p>
       </Link>
 
       {/* Desktop Navigation */}
@@ -47,7 +47,7 @@ export default function Nav() {
         )}
       </div>
 
-      {/* Desktop Navigation */}
+      {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
         {session?.user ? (
           <div className="flex">

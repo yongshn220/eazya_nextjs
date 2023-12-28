@@ -12,3 +12,7 @@ const UserSchema = new Schema({
     required: [true, 'Username is required!'],
   }
 })
+
+const User = models.User || model("User", UserSchema)
+
+export default User

@@ -3,6 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { connectToDB } from "@utils/database";
 import User from '@models/user'
 
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -20,6 +21,9 @@ const handler = NextAuth({
     },
     async signIn({profile}) {
       try {
+        console.log(profile.email)
+        if (!profile.email.endsWith("@stonybrook.edu")) return false
+
         await connectToDB()
         const userExists = await User.findOne({
           email: profile.email
