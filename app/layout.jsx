@@ -16,10 +16,12 @@ export default function RootLayout({children}) {
           <div className="main ">
             <div className="gradient"></div>
           </div>
-            <main className="app">
-              <Nav/>
+          <main className="app">
+            <Nav/>
+            <div className="content">
               {children}
-            </main>
+            </div>
+          </main>
         </Provider>
       </body>
     </html>

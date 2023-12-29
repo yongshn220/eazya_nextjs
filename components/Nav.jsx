@@ -19,10 +19,25 @@ export default function Nav() {
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
-      <Link href="/" className="flex gap-2 flex-center">
-        <Image src="/assets/images/eazyaLogo.png" alt="EazyA logo" width={30} height={30} className="object-contain" />
-        <p className="logo_text">EazyA</p>
-      </Link>
+      <div className="flex gap-20 flex-center">
+        <div>
+          <Link href="/" className="flex gap-2 flex-center">
+            <Image src="/assets/images/eazyaLogo.png" alt="EazyA logo" width={30} height={30} className="object-contain" />
+            <p className="logo_text">EazyA</p>
+          </Link>
+        </div>
+        <div className="flex gap-5">
+          <Link href="/" className="flex">
+            <p className="font-satoshi font-semibold text-lg text-black">Events</p>
+          </Link>
+          <Link href="/" className="flex">
+            <p className="font-satoshi font-semibold text-lg text-black">Community</p>
+          </Link>
+          <Link href="/" className="flex">
+            <p className="font-satoshi font-semibold text-lg text-black">Buy & Sell</p>
+          </Link>
+        </div>
+      </div>
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
@@ -57,10 +72,10 @@ export default function Nav() {
                 <Link href="/profile" className="dropdown_link" onClick={() => setToggleDropdown(false)}> My Profile </Link>
                 <Link href="/create-prompt" className="dropdown_link" onClick={() => setToggleDropdown(false)}> Create Prompt </Link>
                 <button type="button" className="mt-5 w-full black_btn"
-                        onClick={() => {
-                          setToggleDropdown(false)
-                          signOut()
-                        }}
+                  onClick={() => {
+                    setToggleDropdown(false)
+                    signOut()
+                  }}
                 >
                   Sign Out
                 </button>
