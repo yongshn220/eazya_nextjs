@@ -7,7 +7,7 @@ export default function CommunityPreview({type}) {
         <p className="text-md font-semibold text-gray-500 ">{type}</p>
       </div>
 
-      <ul role="list" class="divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-100">
         <TextPost/>
         <TextPost/>
         <TextPost/>
