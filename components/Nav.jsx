@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import {Button} from "@components/ui/button";
 
 export default function Nav() {
   const { data: session } = useSession()
@@ -43,8 +44,7 @@ export default function Nav() {
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">Create Post</Link>
-            <button type="button" onClick={signOut} className="outline_btn">Sign Out</button>
+            <Button variant="outline" onClick={signOut}>Sign Out</Button>
             <Link href="/profile">
               <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" />
             </Link>
@@ -53,9 +53,9 @@ export default function Nav() {
           <>
             {providers &&
               Object.values(providers).map((provider) => (
-                <button type="button" key={provider.name} onClick={() => signIn(provider.id)} className="black_btn">
+                <Button key={provider.name} variant="outline" onClick={() => signIn(provider.id)}>
                   Sign In
-                </button>
+                </Button>
               ))
             }
           </>
@@ -70,7 +70,6 @@ export default function Nav() {
             {toggleDropdown &&
               <div className="dropdown">
                 <Link href="/profile" className="dropdown_link" onClick={() => setToggleDropdown(false)}> My Profile </Link>
-                <Link href="/create-prompt" className="dropdown_link" onClick={() => setToggleDropdown(false)}> Create Prompt </Link>
                 <button type="button" className="mt-5 w-full black_btn"
                   onClick={() => {
                     setToggleDropdown(false)

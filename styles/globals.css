@@ -151,11 +151,11 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6 pb-20;
 }
 
 .content {
-  @apply w-full flex justify-center flex-center max-w-4xl;
+  @apply w-full flex justify-center flex-start max-w-4xl min-h-screen;
 }
 
 .black_btn {
@@ -166,8 +166,12 @@
   @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
-.head_text {
+.head1_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+
+.head2_text {
+  @apply mt-5 text-3xl font-extrabold leading-[1.15] text-black sm:text-5xl;
 }
 
 .orange_gradient {
@@ -179,11 +183,11 @@
 }
 
 .blue_gradient {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent;
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+  @apply mt-3 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
 
 .search_input {
@@ -230,7 +234,7 @@
 }
 
 .glass_box {
-  @apply flex-1 break-inside-avoid rounded-lg border bg-white/20 bg-clip-padding p-4 py-2 backdrop-blur-lg backdrop-filter w-full h-fit flex flex-center;
+  @apply flex-1 break-inside-avoid rounded-lg border bg-white/20 bg-clip-padding p-4 backdrop-blur-lg backdrop-filter w-full h-fit flex flex-col flex-center;
 }
 
 .flex-center {
@@ -250,8 +254,8 @@
 }
 
 /* Product Grid Component */
-.grid_2358 {
-  @apply mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:gap-x-8 gap-x-6 gap-y-10;
+.grid_image {
+  @apply mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 gap-x-6 gap-y-10;
 }
 
 .grid_12 {

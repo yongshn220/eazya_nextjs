@@ -1,19 +1,20 @@
-import ImagePost from "@components/contentItems/ImagePost";
+import EventPostBox from "@components/contentItems/EventPostBox";
+import Link from 'next/link'
 
 export default function EventPreview() {
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <div className="flex flex-col border-s-4">
-        <h1 className="mx-4 font-satoshi text-xl font-bold text-gray-900 ">Events</h1>
-        {/*<p className="mx-4 font-satoshi text-md text-gray-900">See the upcoming events on campus</p>*/}
-      </div>
+      <Link href="/events">
+        <div className="flex flex-col border-s-4 cursor-pointer">
+          <h1 className="mx-4 font-satoshi text-xl font-bold text-gray-900 hover:text-blue-500">Events</h1>
+        </div>
+      </Link>
 
-      <div className="grid_2358">
-        <ImagePost/>
-        <ImagePost/>
-        <ImagePost/>
-        <ImagePost/>
-        <ImagePost/>
+      <div className="grid_image">
+        <EventPostBox/>
+        <EventPostBox/>
+        <EventPostBox/>
+        <EventPostBox/>
       </div>
     </section>
   )

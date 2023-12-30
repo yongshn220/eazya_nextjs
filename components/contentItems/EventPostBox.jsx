@@ -1,8 +1,8 @@
 
 
-export default function ImagePricePost() {
+export default function EventPostBox() {
   return (
-    <div className="group relative">
+    <div className="group relative glass_box">
       <div
         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-50">
         <img
@@ -11,17 +11,16 @@ export default function ImagePricePost() {
           className="h-full w-full object-cover object-center lg:h-full lg:w-full"
         />
       </div>
-      <div className="mt-4 flex justify-between">
-        <div>
-          <h3 className="text-sm text-gray-700">
-            <a href="#">
-              <span aria-hidden="true" className="absolute inset-0"></span>
-              Basic Tee
-            </a>
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">Black</p>
+      <div className="w-full mt-4 flex flex-col gap-3">
+        <h3 className="text-md font-bold text-gray-900 line-clamp-1">Event Title</h3>
+        <div className="flex flex-col gap-1 text-sm text-gray-700">
+          <p className="line-clamp-1">
+            Dec 12, 12pm
+          </p>
+          <p className="line-clamp-1">
+            Tabler Center #108
+          </p>
         </div>
-        <p className="text-sm font-medium text-gray-900">$35</p>
       </div>
     </div>
   )

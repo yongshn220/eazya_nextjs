@@ -9,7 +9,7 @@ export default function CommunityGroupPreview() {
 
       <div className="grid_12">
         <CommunityPreview type={"General"} />
-        <CommunityPreview type={"Knowledge"} />
+        <CommunityPreview type={"Find Member"} />
       </div>
 
     </section>
