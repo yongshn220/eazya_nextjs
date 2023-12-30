@@ -1,6 +1,6 @@
 
 
-export default function TextPost() {
+export default function TextPostItem() {
   return (
     <li className="flex justify-between gap-x-4 py-5">
       <div className="flex flex-col  gap-3">

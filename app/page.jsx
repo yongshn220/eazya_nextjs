@@ -1,6 +1,6 @@
-import EventPreview from '@components/previews/EventPreview'
-import CommunityGroupPreview from '@components/previews/CommunityGroupPreview'
-import StorePreview from "@components/previews/StorePreview";
+import EventPreview from '@containers/home/EventPreview'
+import CommunityGroupPreview from '@containers/home/CommunityGroupPreview'
+import StorePreview from "@containers/home/StorePreview";
 
 
 export default function Home() {

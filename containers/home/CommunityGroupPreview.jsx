@@ -1,4 +1,4 @@
-import CommunityPreview from "@components/previews/CommunityPreview";
+import CommunityPreview from "@containers/home/CommunityPreview";
 
 export default function CommunityGroupPreview() {
   return (

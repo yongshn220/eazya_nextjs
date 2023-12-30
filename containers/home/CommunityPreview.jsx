@@ -1,4 +1,4 @@
-import TextPost from "@components/contentItems/TextPost";
+import TextPostItem from "@components/contents/TextPostItem";
 import Link from 'next/link'
 
 export default function CommunityPreview({type}) {
@@ -10,12 +10,12 @@ export default function CommunityPreview({type}) {
         </div>
       </Link>
 
-      <ul role="list" className="divide-y">
-        <TextPost/>
-        <TextPost/>
-        <TextPost/>
-        <TextPost/>
-        <TextPost/>
+      <ul role="list" className="divide-y divide-gray-300">
+        <TextPostItem/>
+        <TextPostItem/>
+        <TextPostItem/>
+        <TextPostItem/>
+        <TextPostItem/>
       </ul>
     </div>
   )

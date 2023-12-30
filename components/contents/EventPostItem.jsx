@@ -1,6 +1,6 @@
 
 
-export default function EventPostBox() {
+export default function EventPostItem() {
   return (
     <div className="group relative glass_box">
       <div

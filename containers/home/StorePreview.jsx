@@ -1,4 +1,4 @@
-import SellingItemBox from "@components/contentItems/SellingItemBox";
+import SellingPostItem from "@components/contents/SellingPostItem";
 
 export default function StorePreview() {
   return (
@@ -9,10 +9,10 @@ export default function StorePreview() {
       </div>
 
       <div className="grid_image">
-        <SellingItemBox/>
-        <SellingItemBox/>
-        <SellingItemBox/>
-        <SellingItemBox/>
+        <SellingPostItem/>
+        <SellingPostItem/>
+        <SellingPostItem/>
+        <SellingPostItem/>
       </div>
     </section>
   )

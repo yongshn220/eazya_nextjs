@@ -1,4 +1,4 @@
-import EventPostBox from "@components/contentItems/EventPostBox";
+import EventPostItem from "@components/contents/EventPostItem";
 import Link from 'next/link'
 
 export default function EventPreview() {
@@ -11,10 +11,10 @@ export default function EventPreview() {
       </Link>
 
       <div className="grid_image">
-        <EventPostBox/>
-        <EventPostBox/>
-        <EventPostBox/>
-        <EventPostBox/>
+        <EventPostItem/>
+        <EventPostItem/>
+        <EventPostItem/>
+        <EventPostItem/>
       </div>
     </section>
   )

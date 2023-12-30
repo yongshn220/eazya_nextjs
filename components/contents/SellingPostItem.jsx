@@ -1,6 +1,6 @@
 
 
-export default function SellingItemBox() {
+export default function SellingPostItem() {
   return (
     <div className="group relative glass_box">
       <div
@@ -13,7 +13,7 @@ export default function SellingItemBox() {
       </div>
       <div className="mt-4 flex flex-col gap-1">
         <h3 className="text-sm text-gray-700">
-          <a href="#" className="line-clamp-2">
+          <a href="components/contentItems#" className="line-clamp-2">
             <span aria-hidden="true" className="absolute inset-0"></span>
             This is a sample item title This is a sample item title
           </a>

@@ -171,7 +171,7 @@
 }
 
 .head2_text {
-  @apply mt-5 text-3xl font-extrabold leading-[1.15] text-black sm:text-5xl;
+  @apply mt-5 py-1 text-3xl font-extrabold leading-[1.15] text-black sm:text-5xl;
 }
 
 .orange_gradient {
@@ -191,7 +191,7 @@
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-80 rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm font-medium focus:border-blue-500 focus:outline-none focus:ring-1;
 }
 
 .copy_btn {
