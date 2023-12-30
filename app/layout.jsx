@@ -1,5 +1,5 @@
 import '@styles/globals.css'
-import Nav from "@components/Nav";
+import Nav from "@components/nav/Nav";
 import Provider from "@components/Provider";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@lib/utils"

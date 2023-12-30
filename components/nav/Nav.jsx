@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import {Button} from "@components/ui/button";
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import NavDrawer from "@components/nav/NavDrawer";
 
 
 export default function Nav() {
   const { data: session } = useSession()
   const [providers, setProviders] = useState(null)
-  const [toggleDropdown, setToggleDropdown] = useState(false)
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -19,6 +19,7 @@ export default function Nav() {
     }
     setupProviders().then()
   }, [])
+
 
   return (
     <nav className="w-full mb-16 pt-3">
@@ -79,32 +80,12 @@ export default function Nav() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex relative">
+        <div className="flex relative bg-amber-200">
           <div className="flex">
-            <HamburgerMenuIcon width={25} height={25} onClick={() => setToggleDropdown((prev) => !prev)}/>
-            {/*<Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" onClick={() => setToggleDropdown((prev) => !prev)}/>*/}
-            {toggleDropdown &&
-              <div className="dropdown">
-                <Link href="/profile" className="dropdown_link" onClick={() => setToggleDropdown(false)}> My Profile </Link>
-                <button type="button" className="mt-5 w-full black_btn"
-                        onClick={() => {
-                          setToggleDropdown(false)
-                          signOut()
-                        }}
-                >
-                  Sign Out
-                </button>
-                <>
-                  {providers &&
-                    Object.values(providers).map((provider) => (
-                      <Button key={provider.name} onClick={() => signIn(provider.id)} className="black_btn">
-                        Sign In
-                      </Button>
-                    ))
-                  }
-                </>
-              </div>
-            }
+            <NavDrawer providers={providers}/>
+            {/*{toggleDropdown &&*/}
+            {/*  */}
+            {/*}*/}
           </div>
         </div>
       </div>
