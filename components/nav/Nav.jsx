@@ -79,14 +79,8 @@ export default function Nav() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="flex relative bg-amber-200">
-          <div className="flex">
-            <NavDrawer providers={providers}/>
-            {/*{toggleDropdown &&*/}
-            {/*  */}
-            {/*}*/}
-          </div>
+        <div className="flex relative">
+          <NavDrawer providers={providers}/>
         </div>
       </div>
     </nav>
