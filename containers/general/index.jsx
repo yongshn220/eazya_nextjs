@@ -1,6 +1,6 @@
 "use client"
 
-import ContentHeader from "@components/contents/ContentHeader";
+import ContentHomeHeader from "@components/contents/ContentHomeHeader";
 import GeneralMenu from "@containers/general/Menu";
 import GeneralSearch from "@containers/general/Search";
 import GeneralPosts from "@containers/general/Posts";
@@ -14,7 +14,12 @@ export default function General() {
 
   return (
     <section className="w-full">
-      <ContentHeader title={selectedMenu} subtitle="See the upcoming events on the campus" buttonName="Post"/>
+      <ContentHomeHeader
+        title={selectedMenu}
+        subtitle="See the upcoming events on the campus"
+        buttonName="Post"
+        createRoute="create-general-post"
+      />
       <div className="w-full">
         <div className="w-full flex-col justify-center gap-20">
           <GeneralMenu type={selectedMenu} setType={setSelectedMenu}/>
