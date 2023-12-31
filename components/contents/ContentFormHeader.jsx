@@ -5,7 +5,7 @@ export default function ContentFormHeader({mode, title, subtitle}) {
   if (mode === "Create") mode = "Add"
 
   return (
-    <div className="flex justify-between sm:flex-col pb-5 border-b">
+    <div className="flex justify-between sm:flex-col">
       <p className="head2_text blue_gradient">
         {`${mode} ${title}`}
       </p>
