@@ -1,4 +1,4 @@
-import TextPostItem from "@components/contents/TextPostItem";
+import TextPostItem from "@components/postItems/TextPostItem";
 import Link from 'next/link'
 
 export default function CommunityPreview({type}) {

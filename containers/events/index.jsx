@@ -1,4 +1,4 @@
-import ContentHomeHeader from "@components/contents/ContentHomeHeader";
+import ContentHomeHeader from "@components/contentHeaders/ContentHomeHeader";
 import EventPosts from "@containers/events/Posts";
 import PostPagination from "@components/page/PostPagination";
 

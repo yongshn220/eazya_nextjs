@@ -1,14 +1,14 @@
 "use client"
-import ContentFormHeader from "@components/contents/ContentFormHeader";
-import EventForm from "@components/event/EventForm";
+import EventForm from "@containers/create-event-post/EventForm";
 import {useState} from "react";
 
 export default function CreateEventPost() {
   const [eventPost, setEventPost] = useState({
     title: "",
-    timestamp: 0,
     location: "",
     description: "",
+    date: "",
+    image: "",
   })
 
   return (

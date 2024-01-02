@@ -1,4 +1,4 @@
-import EventPostItem from "@components/contents/EventPostItem";
+import EventPostItem from "@components/postItems/EventPostItem";
 import Link from 'next/link'
 
 export default function EventPreview() {

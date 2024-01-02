@@ -1,8 +1,15 @@
+"use client"
 
+import { useRouter } from 'next/navigation'
+export default function EventPostItem({id}) {
 
-export default function EventPostItem() {
+  const router = useRouter()
+  function handleOnPostClick() {
+    router.push(`/events/${id}`)
+  }
+
   return (
-    <div className="group relative glass_box">
+    <div className="group relative glass_box" onClick={handleOnPostClick}>
       <div
         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-50">
         <img

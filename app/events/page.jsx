@@ -1,6 +1,6 @@
 import Events from "@containers/events";
 
-export default function EventHome() {
+export default function EventPage() {
   return (
     <Events/>
   )

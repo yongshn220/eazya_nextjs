@@ -1,4 +1,4 @@
-import SellingPostItem from "@components/contents/SellingPostItem";
+import SellingPostItem from "@components/postItems/SellingPostItem";
 
 export default function StorePosts() {
   return (

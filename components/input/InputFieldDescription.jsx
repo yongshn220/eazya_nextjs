@@ -1,16 +1,17 @@
-export default function InputFieldDefault({title, value, placeholder, onChangeHandler}) {
+export default function InputFieldDescription({title, value, placeholder, onChangeHandler}) {
   return (
-    <label className="w-full">
+    <label className="w-full ">
       <span className="font-satoshi font-semibold text-base text-gray-700">
         {title}
       </span>
-      <input
+      <textarea
         value={value}
         placeholder={placeholder}
         onChange={onChangeHandler}
         required
-        className="form_input"
-      />
+        className="form_textarea"
+      >
+      </textarea>
     </label>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import ContentHomeHeader from "@components/contents/ContentHomeHeader";
+import ContentHomeHeader from "@components/contentHeaders/ContentHomeHeader";
 import GeneralMenu from "@containers/general/Menu";
 import GeneralSearch from "@containers/general/Search";
 import GeneralPosts from "@containers/general/Posts";

@@ -1,4 +1,4 @@
-import SellingPostItem from "@components/contents/SellingPostItem";
+import SellingPostItem from "@components/postItems/SellingPostItem";
 import Link from 'next/link'
 
 export default function StorePreview() {

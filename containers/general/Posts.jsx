@@ -1,4 +1,4 @@
-import TextDetailPostItem from "@components/contents/TextDetailPostItem";
+import TextDetailPostItem from "@components/postItems/TextDetailPostItem";
 import PostPagination from "@components/page/PostPagination";
 
 export default function GeneralPosts({type}) {
