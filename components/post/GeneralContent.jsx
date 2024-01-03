@@ -1,15 +1,7 @@
-import InfoHeader from "@components/headers/InfoHeader";
-import {HamburgerMenuIcon} from "@radix-ui/react-icons";
 
 export default function GeneralContent() {
   return (
     <section className="w-full flex-start flex-col gap-10 mt-4 pb-20 border-b border-gray-300">
-      <div className="w-full flex-center gap-6">
-        <InfoHeader/>
-        <div className="cursor-pointer">
-          <HamburgerMenuIcon width={25} height={25} />
-        </div>
-      </div>
       <p className="text-2xl font-bold">Stony Brook Football Club</p>
       <p className="whitespace-pre-wrap">
         "What is Lorem Ipsum??<br/><br/>

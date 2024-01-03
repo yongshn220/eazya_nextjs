@@ -1,6 +1,7 @@
+
 export default function EventContent() {
   return (
-    <section className="w-full flex-center flex-col gap-10 mt-10 pb-20 border-b border-gray-300">
+    <section className="w-full flex-center flex-col gap-10 mt-4 pb-20 border-b border-gray-300">
       <div className="flex-center flex-col gap-4">
         <div className="glassmorphism w-[20rem] h-[27rem]"/>
         <p className="text-2xl font-bold">Stony Brook Football Club</p>
