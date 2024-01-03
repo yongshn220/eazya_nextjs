@@ -1,6 +1,6 @@
 
 export const PostType = {
-  EVENT: "postTypeEvent",
-  GENERAL: "postTypeGeneral",
-  STORE: "postTypeStore",
+  EVENT: "Event",
+  GENERAL: "General",
+  STORE: "Store",
 }

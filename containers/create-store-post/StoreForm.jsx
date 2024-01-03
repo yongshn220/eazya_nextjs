@@ -1,4 +1,4 @@
-import ContentFormHeader from "@components/contentHeaders/ContentFormHeader";
+import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
 import InputFieldDefault from "@components/input/InputFieldDefault";
@@ -12,7 +12,7 @@ export default function StoreForm({mode, post, setPost}) {
 
   return (
     <div className="w-full">
-      <ContentFormHeader
+      <FormHeader
         mode={mode}
         title="Item"
         subtitle="Sell second-hand bulabula"

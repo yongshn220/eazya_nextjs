@@ -1,6 +1,6 @@
 "use client"
 
-import ContentHomeHeader from "@components/contentHeaders/ContentHomeHeader";
+import HomeHeader from "@components/headers/HomeHeader";
 import GeneralMenu from "@containers/general/Menu";
 import GeneralSearch from "@containers/general/Search";
 import GeneralPosts from "@containers/general/Posts";
@@ -14,7 +14,7 @@ export default function General() {
 
   return (
     <section className="w-full">
-      <ContentHomeHeader
+      <HomeHeader
         title={selectedMenu}
         subtitle="See the upcoming events on the campus"
         buttonName="Post"

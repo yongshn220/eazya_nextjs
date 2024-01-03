@@ -1,4 +1,4 @@
-import ContentFormHeader from "@components/contentHeaders/ContentFormHeader";
+import FormHeader from "@components/headers/FormHeader";
 import Image from 'next/image'
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
@@ -12,7 +12,7 @@ export default function EventForm({mode, post, setPost}) {
 
   return (
     <div className="w-full">
-      <ContentFormHeader
+      <FormHeader
         mode={mode}
         title="Event"
         subtitle="Share the upcoming event on the campus"

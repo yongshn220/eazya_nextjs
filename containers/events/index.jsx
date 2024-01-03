@@ -1,11 +1,11 @@
-import ContentHomeHeader from "@components/contentHeaders/ContentHomeHeader";
+import HomeHeader from "@components/headers/HomeHeader";
 import EventPosts from "@containers/events/Posts";
 import PostPagination from "@components/page/PostPagination";
 
 export default function Events() {
   return (
     <section className="w-full">
-      <ContentHomeHeader
+      <HomeHeader
         title="Events"
         subtitle="See the upcoming events on the campus"
         buttonName="Event"

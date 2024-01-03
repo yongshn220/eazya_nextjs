@@ -1,5 +1,5 @@
 
-export default function ContentFormHeader({mode, title, subtitle}) {
+export default function FormHeader({mode, title, subtitle}) {
 
   if (mode === "Create") mode = "Add"
 
