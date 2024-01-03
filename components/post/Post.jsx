@@ -1,4 +1,4 @@
-import ContentHeader from "@components/headers/ContentHeader";
+import PostHeader from "@components/headers/PostHeader";
 import EventContent from "@components/post/EventContent";
 import GeneralContent from "@components/post/GeneralContent";
 import StoreContent from "@components/post/StoreContent";
@@ -12,7 +12,7 @@ export default function Post({type, post}) {
 
   return (
     <section className="w-full flex flex-col">
-      <ContentHeader title={type} subtitle={subtitle}/>
+      <PostHeader title={type} subtitle={subtitle}/>
       <Contents type={type}/>
       <CreateComment/>
       <CommentList/>

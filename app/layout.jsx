@@ -1,9 +1,11 @@
 import '@styles/globals.css'
+import '@radix-ui/themes/styles.css';
 import Nav from "@components/nav/Nav";
 import Provider from "@components/Provider";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@lib/utils"
 import Footer from "@components/Footer";
+import {Theme} from "@radix-ui/themes";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,19 +26,20 @@ export default function RootLayout({children}) {
         "min-h-screen bg-background font-sans antialiased",
         fontSans.variable
       )}>
-        <Provider>
-          <div className="main ">
-            <div className="gradient"></div>
-          </div>
-          <main className="app">
-            <Nav/>
-            <div className="content">
-              {children}
+        <Theme>
+          <Provider>
+            <div className="main ">
+              <div className="gradient"></div>
             </div>
-          </main>
-          <Footer/>
-        </Provider>
-
+            <main className="app">
+              <Nav/>
+              <div className="content">
+                {children}
+              </div>
+            </main>
+            <Footer/>
+          </Provider>
+        </Theme>
       </body>
     </html>
   )

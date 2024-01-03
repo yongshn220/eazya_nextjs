@@ -1,14 +1,14 @@
 import {Button} from "@components/ui/button";
 import Link from 'next/link'
 
-export default function ContentHeader({ title, subtitle }) {
+export default function PostHeader({ title, subtitle }) {
   return (
     <div className="w-full flex sm:flex-col pb-3 border-b">
-      <p className="text-xl font-bold">
+      <p className="font-semibold">
         SBU {title}
         {
           subtitle !== "" &&
-          <span className="ml-2 text-lg font-normal">
+          <span className="ml-2 font-normal">
             / {subtitle}
           </span>
         }
