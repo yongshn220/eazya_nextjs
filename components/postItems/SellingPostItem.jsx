@@ -14,10 +14,9 @@ export default function SellingPostItem({id}) {
         </div>
         <div className="mt-4 flex flex-col gap-1">
           <h3 className="text-sm text-gray-700">
-            <a href="components/contentItems#" className="line-clamp-2">
-              <span aria-hidden="true" className="absolute inset-0"></span>
+            <p className="line-clamp-2">
               This is a sample item title This is a sample item title
-            </a>
+            </p>
           </h3>
           <p className="text-md font-medium text-gray-900">$35</p>
         </div>

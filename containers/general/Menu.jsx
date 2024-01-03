@@ -1,7 +1,7 @@
 import {Button} from "@components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select"
 import {GeneralMenuType} from "@components/constants/enums";
-const selectedColor = 'text-blue-500'
+import {hoveredTextColor} from "@components/constants/values";
 
 export default function GeneralMenu({type, setType}) {
   return (
@@ -10,7 +10,8 @@ export default function GeneralMenu({type, setType}) {
         {
           Object.values(GeneralMenuType).map((menuType) => (
             <Button variant="Ghost"
-              className={type === menuType ? selectedColor : ''}
+              key={menuType}
+              className={type === menuType ? hoveredTextColor : ''}
               onClick={() => setType(menuType)}
             >
               {menuType}
@@ -29,6 +30,7 @@ export default function GeneralMenu({type, setType}) {
               {
                 Object.values(GeneralMenuType).map((menuType) => (
                   <SelectItem
+                    key={menuType}
                     value={menuType}
                   >
                     {menuType}

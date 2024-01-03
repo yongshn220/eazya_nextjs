@@ -6,6 +6,7 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import {Button} from "@components/ui/button";
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import NavDrawer from "@components/nav/NavDrawer";
+import NavDropDown from "@components/nav/NavDropDown";
 
 
 export default function Nav() {
@@ -48,12 +49,7 @@ export default function Nav() {
 
         <div className="sm:flex hidden">
           {session?.user ? (
-            <div className="flex gap-3 md:gap-5">
-              <Button variant="outline" onClick={signOut}>Sign Out</Button>
-              <Link href="/profile">
-                <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" />
-              </Link>
-            </div>
+            <NavDropDown/>
           ) : (
             <>
               {providers &&

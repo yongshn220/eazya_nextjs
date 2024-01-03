@@ -1,21 +1,12 @@
 "use client"
 
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import {Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger,} from "@/components/ui/drawer"
 import {Button} from "@components/ui/button";
 import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
 import Link from "next/link";
 import { signIn, signOut, useSession } from 'next-auth/react'
 import {useState} from "react";
-import Image from "@node_modules/next/image";
+import Image from "next/image";
 
 export default function NavDrawer({providers}) {
   const { data: session } = useSession()
@@ -68,7 +59,10 @@ export default function NavDrawer({providers}) {
                 session?.user ?
                 <>
                   <Link href="/profile" className="dropdown_link" onClick={() => setIsOpen(false)}>
-                    <p className="text-lg">My Profile</p>
+                    <p className="text-lg">My Activity</p>
+                  </Link>
+                  <Link href="/profile" className="dropdown_link" onClick={() => setIsOpen(false)}>
+                    <p className="text-lg">Account</p>
                   </Link>
                   <Button onClick={handleSignOut} className="w-full">Sign Out</Button>
                 </>

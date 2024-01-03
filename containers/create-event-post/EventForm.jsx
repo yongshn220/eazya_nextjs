@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
 import InputFieldDefault from "@components/input/InputFieldDefault";
+import {hoveredTextColor} from "@components/constants/values";
 
 export default function EventForm({mode, post, setPost}) {
 
@@ -22,7 +23,7 @@ export default function EventForm({mode, post, setPost}) {
           className="flex-center sm:hidden w-[10rem] h-[10rem] mt-7 border border-dashed rounded-lg break-inside-avoid cursor-pointer group"
           onClick={handleAddImage}
         >
-          <p className="text-gray-500 group-hover:text-blue-500">Add Image</p>
+          <p className={`text-gray-500 group-hover:${hoveredTextColor}`}>Add Image</p>
         </div>
         <div className="w-full flex flex-row sm:h-80 ">
           <div className="w-full flex-between flex-col sm:mr-10 gap-4 sm:gap-0">
@@ -34,7 +35,7 @@ export default function EventForm({mode, post, setPost}) {
             className="hidden sm:flex justify-center items-center w-[20rem] mt-7 border border-dashed rounded-lg break-inside-avoid cursor-pointer group"
             onClick={handleAddImage}
           >
-            <p className="text-gray-500 group-hover:text-blue-500">Add Image</p>
+            <p className={`text-gray-500 group-hover:${hoveredTextColor}`}>Add Image</p>
           </div>
         </div>
         <label className="w-full ">
