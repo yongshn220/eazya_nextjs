@@ -5,12 +5,12 @@ import GeneralMenu from "@containers/general/Menu";
 import GeneralSearch from "@containers/general/Search";
 import GeneralPosts from "@containers/general/Posts";
 import {useState} from "react";
-import {Menu} from "@containers/general/constants";
 import PostPagination from "@components/page/PostPagination";
+import {GeneralMenuType} from "@components/constants/enums";
 
 
 export default function General() {
-  const [selectedMenu, setSelectedMenu] = useState(Menu.GENERAL)
+  const [selectedMenu, setSelectedMenu] = useState(GeneralMenuType.GENERAL)
 
   return (
     <section className="w-full">

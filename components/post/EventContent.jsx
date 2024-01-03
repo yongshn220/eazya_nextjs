@@ -1,4 +1,4 @@
-export default function GeneralContent() {
+export default function EventContent() {
   return (
     <section className="w-full flex-center flex-col gap-10 mt-10 pb-20 border-b border-gray-300">
       <div className="flex-center flex-col gap-4">

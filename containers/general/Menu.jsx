@@ -1,6 +1,6 @@
 import {Button} from "@components/ui/button";
-import {Menu} from "@containers/general/constants";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select"
+import {GeneralMenuType} from "@components/constants/enums";
 const selectedColor = 'text-blue-500'
 
 export default function GeneralMenu({type, setType}) {
@@ -8,7 +8,7 @@ export default function GeneralMenu({type, setType}) {
     <div>
       <div className="hidden md:flex justify-center bg-white border-b">
         {
-          Object.values(Menu).map((menuType) => (
+          Object.values(GeneralMenuType).map((menuType) => (
             <Button variant="Ghost"
               className={type === menuType ? selectedColor : ''}
               onClick={() => setType(menuType)}
@@ -27,7 +27,7 @@ export default function GeneralMenu({type, setType}) {
           <SelectContent>
             <SelectGroup>
               {
-                Object.values(Menu).map((menuType) => (
+                Object.values(GeneralMenuType).map((menuType) => (
                   <SelectItem
                     value={menuType}
                   >
