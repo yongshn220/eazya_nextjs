@@ -1,3 +1,7 @@
+export const FormMode = {
+  CREATE: "Create ",
+  EDIT: "Edit",
+}
 
 export const PostType = {
   EVENT: "Event",

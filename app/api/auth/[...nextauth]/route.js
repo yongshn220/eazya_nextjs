@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { connectToDB } from "@utils/database";
 import User from '@models/user'
+import {UniversityIds} from "@components/constants/values";
 
 
 const handler = NextAuth({
@@ -21,8 +22,9 @@ const handler = NextAuth({
     },
     async signIn({profile}) {
       try {
-        console.log(profile.email)
-        if (!profile.email.endsWith("@stonybrook.edu")) return false
+        const emailDomain = profile.email.split('@')[1]
+        const universityId = emailDomain.split('.')[0]
+        if (!UniversityIds.includes(universityId)) return false
 
         await connectToDB()
         const userExists = await User.findOne({
@@ -33,7 +35,8 @@ const handler = NextAuth({
           await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture
+            image: profile.picture,
+            universityId: universityId,
           })
         }
         return true
