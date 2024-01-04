@@ -4,7 +4,8 @@ import Image from "next/image";
 import {useSession} from "next-auth/react";
 import {Button} from "@components/ui/button";
 import {useState} from "react";
-import {selectedTextColor} from "@components/constants/values";
+import {highlightedTextColor} from "@components/constants/values";
+import ActivityList from "@containers/my-activity/ActivityList";
 
 const ActivityMenu = {
   RECENT: "Recent",
@@ -34,11 +35,13 @@ export default function MyActivity() {
       <div className="flex-start gap-10 mt-16 font-semibold pb-2 border-b border-gray-300 ">
         {
           Object.values(ActivityMenu).map(activity => {
-            const textColor = selectedActivity === activity? selectedTextColor : ""
+            const textColor = selectedActivity === activity? highlightedTextColor : ""
             return <p className={`${textColor} cursor-pointer`} onClick={() => setSelectedActivity(activity)}>{activity}</p>
           })
         }
       </div>
+      
+      <ActivityList/>
     </section>
   )
 }
