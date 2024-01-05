@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function SellingPostItem({id}) {
+export default function StorePostItem({id}) {
   return (
     <Link href={`/store/${id}`}>
       <div className="group relative glass_box">

@@ -1,4 +1,4 @@
-import SellingPostItem from "@components/postItems/SellingPostItem";
+import StorePostItem from "@containers/store/StorePostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
@@ -13,10 +13,10 @@ export default function StorePreview() {
       </Link>
 
       <div className="grid_image">
-        <SellingPostItem/>
-        <SellingPostItem/>
-        <SellingPostItem/>
-        <SellingPostItem/>
+        <StorePostItem/>
+        <StorePostItem/>
+        <StorePostItem/>
+        <StorePostItem/>
       </div>
     </section>
   )

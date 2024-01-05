@@ -1,4 +1,4 @@
-import ActivityItem from "@components/postItems/ActivityItem";
+import ActivityItem from "@containers/my-activity/ActivityItem";
 
 export default function ActivityList() {
   return (

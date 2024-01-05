@@ -2,7 +2,7 @@ import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
-export default function TextDetailPostItem({id}) {
+export default function GeneralDetailPostItem({id}) {
   return (
     <div>
       <Link href={`/general/${id}`}>

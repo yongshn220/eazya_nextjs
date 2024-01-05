@@ -1,4 +1,4 @@
-import TextPostItem from "@components/postItems/TextPostItem";
+import GeneralPostItem from "@containers/general/GeneralPostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
@@ -12,11 +12,11 @@ export default function CommunityPreview({type}) {
       </Link>
 
       <ul role="list" className="divide-y divide-gray-300">
-        <TextPostItem id={1}/>
-        <TextPostItem id={1}/>
-        <TextPostItem id={1}/>
-        <TextPostItem id={1}/>
-        <TextPostItem id={1}/>
+        <GeneralPostItem id={1}/>
+        <GeneralPostItem id={1}/>
+        <GeneralPostItem id={1}/>
+        <GeneralPostItem id={1}/>
+        <GeneralPostItem id={1}/>
       </ul>
     </div>
   )

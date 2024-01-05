@@ -1,6 +1,6 @@
 import HomeHeader from "@components/headers/HomeHeader";
 import PostPagination from "@components/page/PostPagination";
-import SellingPostItem from "@components/postItems/SellingPostItem";
+import StorePostItem from "@containers/store/StorePostItem";
 import StorePosts from "@containers/store/Posts";
 
 export default function Store() {

@@ -1,14 +1,16 @@
+"use client"
+
 import { useQuery } from '@tanstack/react-query'
-import { getEventPostsApi } from "@services/eventPost";
+import {eventPostKey, getEventPostIdsApi} from "@services/eventPost";
 import {useState} from "react";
 
-export default function useEventPosts() {
+export default function useEventPostIds() {
   const [page, setPage] = useState(1)
 
   const {data, isLoading} = useQuery({
-    queryKey: ['getEventPostsApi', page],
-    queryFn: () => getEventPostsApi(page),
-    staleTime: 30 * 1000,
+    queryKey: [eventPostKey.getEventPostIdsApi, page],
+    queryFn: () => getEventPostIdsApi(page),
+    staleTime: 5000,
     keepPreviousData : true,
   })
 

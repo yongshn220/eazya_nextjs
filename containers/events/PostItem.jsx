@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import useEventPost from "@containers/events/useEventPost";
 
 export default function EventPostItem({id}) {
+  const {eventPost, isLoading} = useEventPost(id)
+
   return (
     <Link href={`/events/${id}`}>
       <div className="group relative glass_box">

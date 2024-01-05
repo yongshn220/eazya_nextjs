@@ -1,4 +1,4 @@
-import EventPostItem from "@components/postItems/EventPostItem";
+import PostItem from "@containers/events/PostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
@@ -12,10 +12,10 @@ export default function EventPreview() {
       </Link>
 
       <div className="grid_image">
-        <EventPostItem/>
-        <EventPostItem/>
-        <EventPostItem/>
-        <EventPostItem/>
+        <PostItem/>
+        <PostItem/>
+        <PostItem/>
+        <PostItem/>
       </div>
     </section>
   )

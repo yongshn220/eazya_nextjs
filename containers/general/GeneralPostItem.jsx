@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
-export default function TextPostItem({id}) {
+export default function GeneralPostItem({id}) {
   return (
     <div>
       <Link href={`/general/${id}`}>
