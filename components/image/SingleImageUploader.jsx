@@ -2,14 +2,14 @@
 import imageCompression from "browser-image-compression";
 import {useState} from "react";
 
-export default function SingleImageUploader({children, onLoadEnd}) {
-  const [isLoadingImage, setIsLoadingImage] = useState(false)
-
+export default function SingleImageUploader({disabled, children, onLoadEnd, setIsLoading}) {
   async function handleImageChange(e) {
     const file = e.target.files[0];
+    e.target.value = '' // To detect the same file later.
+
     if (!file) return;
 
-    setIsLoadingImage(true);
+    setIsLoading(true);
 
     try {
       const options = {
@@ -24,27 +24,28 @@ export default function SingleImageUploader({children, onLoadEnd}) {
       reader.readAsDataURL(compressedFile);
       reader.onloadend = () => {
         onLoadEnd(reader.result)
-        setIsLoadingImage(false)
+        setIsLoading(false)
       };
     }
     catch (error) {
       console.error(error);
-      setIsLoadingImage(false)
+      setIsLoading(false)
     }
   }
 
   return (
-    <div>
+    <div className="w-full h-full">
       <input
         type="file"
         id="file-input"
         style={{display: 'none'}}
         accept="image/*,image/heic"
+        disabled={disabled}
         onChange={handleImageChange}
       />
       <label htmlFor="file-input">
         {children}
       </label>
     </div>
-)
+  )
 }
