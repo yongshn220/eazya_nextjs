@@ -2,14 +2,11 @@ import { connectToDB } from '@utils/database'
 import EventPost from '@models/eventPost'
 import { StatusCodes } from 'http-status-codes'
 
-export async function GET(req) {
+export async function GET(req, { params }) {
   try {
     await connectToDB()
 
-    const id = req.params.id
-    const eventPost = await EventPost.findById(id)
-
-    console.log(id, eventPost)
+    const eventPost = await EventPost.findById(params.id)
 
     return new Response(JSON.stringify(eventPost), {status: StatusCodes.OK})
 

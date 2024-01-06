@@ -5,15 +5,12 @@ import {StatusCodes} from "http-status-codes";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 
 
-export async function POST(req, res) {
-  console.log(req.params, res)
+export async function POST(req) {
   const session = await getServerSession(authOptions)
-  console.log(2)
   if (!session) return new Response("Fail to create a post", {status: StatusCodes.UNAUTHORIZED})
-  console.log(3)
+
   const {image, title, date, time, location, description } = await req.json()
 
-  console.log(session.user.id, session.user.universityId, new Date().toISOString())
   try {
     await connectToDB()
     const newEventPost = new EventPost({
