@@ -12,10 +12,10 @@ export default function EventPreview() {
       </Link>
 
       <div className="grid_image">
-        <PostItem/>
-        <PostItem/>
-        <PostItem/>
-        <PostItem/>
+        {/*<PostItem/>*/}
+        {/*<PostItem/>*/}
+        {/*<PostItem/>*/}
+        {/*<PostItem/>*/}
       </div>
     </section>
   )

@@ -34,6 +34,6 @@ const EventPostSchema = new Schema({
   }],
 })
 
-const EventPost = models.User || model("EventPost", EventPostSchema)
+const EventPost = models.EventPost || model("EventPost", EventPostSchema)
 
 export default EventPost

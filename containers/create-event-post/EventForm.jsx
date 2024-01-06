@@ -1,5 +1,3 @@
-"use client"
-
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
@@ -7,15 +5,10 @@ import InputFieldDefault from "@components/input/InputFieldDefault";
 import {hoveredTextColor} from "@components/constants/values";
 import InputFieldDescription from "@components/input/InputFieldDescription";
 import SingleImageUploader from "@components/image/SingleImageUploader";
-import {useState} from "react";
 import ImageContainer from "@containers/create-event-post/ImageContainer";
 
-export default function EventForm({mode, post, setPost}) {
-  const [isImageLoading, setIsImageLoading] = useState(false)
 
-  function handleSubmit() {
-
-  }
+export default function EventForm({mode, post, setPost, handleSubmit, isImageLoading, setIsImageLoading}) {
 
   return (
     <div className="w-full">
@@ -24,7 +17,7 @@ export default function EventForm({mode, post, setPost}) {
         title="Event"
         subtitle="Share the upcoming event on the campus"
       />
-      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12">
+      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={handleSubmit}>
         <div
           className="flex-center sm:hidden w-[10rem] h-[10rem] mt-7 border border-dashed rounded-lg break-inside-avoid cursor-pointer group"
         >
@@ -57,7 +50,7 @@ export default function EventForm({mode, post, setPost}) {
                                placeholder="Description"/>
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
-          <Button onClick={handleSubmit}>{mode}</Button>
+          <Button type="submit">{mode}</Button>
         </div>
       </form>
     </div>

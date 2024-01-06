@@ -4,8 +4,7 @@ import { connectToDB } from "@utils/database";
 import User from '@models/user'
 import {UniversityIds} from "@components/constants/values";
 
-
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -18,6 +17,7 @@ const handler = NextAuth({
         email: session.user.email
       })
       session.user.id = sessionUser._id.toString()
+      session.user.universityId = sessionUser.universityId.toString()
       return session
     },
     async signIn({profile}) {
@@ -46,6 +46,8 @@ const handler = NextAuth({
       }
     }
   }
-})
+}
 
-export { handler as GET, handler as POST}
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
+

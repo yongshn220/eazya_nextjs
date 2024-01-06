@@ -8,7 +8,9 @@ export async function GET(req) {
 
     const id = req.params.id
     const eventPost = await EventPost.findById(id)
-    
+
+    console.log(id, eventPost)
+
     return new Response(JSON.stringify(eventPost), {status: StatusCodes.OK})
 
   }

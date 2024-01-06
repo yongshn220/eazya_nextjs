@@ -2,7 +2,7 @@ import Link from 'next/link'
 import useEventPost from "@containers/events/useEventPost";
 
 export default function EventPostItem({id}) {
-  const {eventPost, isLoading} = useEventPost(id)
+  // const {eventPost, isLoading} = useEventPost(id)
 
   return (
     <Link href={`/events/${id}`}>

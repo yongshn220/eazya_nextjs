@@ -9,10 +9,12 @@ export async function GET(req) {
   try {
     await connectToDB()
 
-    const page = parseInt(req.query.page) || DEFAULT_PAGE_NUMBER
-    const limit = parseInt(req.query.limit) || DEFAULT_PAGE_LIMIT
+    const { searchParams } = new URL(req.url)
+    const page = parseInt(searchParams.get('page')) || DEFAULT_PAGE_NUMBER
+    const limit = parseInt(searchParams.get('limit')) || DEFAULT_PAGE_LIMIT
 
     const skip = (page - 1) * limit
+
     const eventPosts = await EventPost.find({}).skip(skip).limit(limit)
     const ids = eventPosts.map(post => post._id)
 

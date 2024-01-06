@@ -10,7 +10,7 @@ export default function useEventPostIds() {
   const {data, isLoading} = useQuery({
     queryKey: [eventPostKey.getEventPostIdsApi, page],
     queryFn: () => getEventPostIdsApi(page),
-    staleTime: 5000,
+    staleTime: 30 * 1000,
     keepPreviousData : true,
   })
 

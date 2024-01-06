@@ -2,9 +2,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import { signIn, useSession, getProviders } from 'next-auth/react'
 import {Button} from "@components/ui/button";
-import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import NavDrawer from "@components/nav/NavDrawer";
 import NavDropDown from "@components/nav/NavDropDown";
 
