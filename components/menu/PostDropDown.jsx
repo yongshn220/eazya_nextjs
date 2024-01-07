@@ -5,9 +5,9 @@ import {useSession} from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
 import {dangerTextColor} from "@components/constants/values";
-import {ConfirmAlertDialog} from "@components/util/ConfirmAlertDialog";
+import {DeletePostAlertDialog} from "@components/util/DeletePostAlertDialog";
 import {useState} from "react";
-export default function PostDropDown({authorId}) {
+export default function PostDropDown({post}) {
   const {data: session} = useSession()
   const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -18,14 +18,14 @@ export default function PostDropDown({authorId}) {
 
   return (
     <div className="flex gap-3 md:gap-5">
-      <ConfirmAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen}/>
+      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={() => {}}/>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <HamburgerMenuIcon width={25} height={25} className="my-1"/>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {
-            (!session || session.user.id !== authorId) ?
+            (!session || session.user.id !== post.authorId) ?
             <>
               <DropdownMenuItem >Share</DropdownMenuItem>
               <DropdownMenuItem >Report</DropdownMenuItem>

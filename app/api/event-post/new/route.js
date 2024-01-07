@@ -12,8 +12,9 @@ export async function POST(req) {
   const session = await getServerSession(authOptions)
   if (!session) return new Response("Fail to create a post", {status: StatusCodes.UNAUTHORIZED})
 
-  const {image, title, date, time, location, description } = await req.json()
+  const {image, type, title, date, time, location, description } = await req.json()
 
+  console.log("type", type)
   const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
   const storage = new Storage({ credentials })
 
@@ -36,6 +37,7 @@ export async function POST(req) {
     const newEventPost = new EventPost({
       authorId: session.user.id,
       universityId: session.user.universityId,
+      type,
       image: publicUrl,
       title,
       date,

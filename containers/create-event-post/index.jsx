@@ -1,7 +1,7 @@
 "use client"
 import EventForm from "@containers/create-event-post/EventForm";
 import {useState} from "react";
-import {FormMode} from "@components/constants/enums";
+import {FormMode, PostType} from "@components/constants/enums";
 import {useRouter} from "next/navigation";
 import useCreateEventPost from "@containers/create-event-post/useCreateEventPost";
 
@@ -11,6 +11,7 @@ export default function CreateEventPost() {
   const [isImageLoading, setIsImageLoading] = useState(false)
   const [eventPost, setEventPost] = useState({
     universityId: "",
+    type: PostType.EVENT,
     image: "",
     title: "",
     date: "",

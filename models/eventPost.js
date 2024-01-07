@@ -1,9 +1,11 @@
 import { Schema, model, models } from 'mongoose'
 import {UniversityIds} from "@components/constants/values";
+import {PostType} from "@components/constants/enums";
 
 const EventPostSchema = new Schema({
   authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
   universityId:   { type: String, enum: Object.values(UniversityIds), required: true, },
+  type:           { type: String, enum: Object.values(PostType), required: true, },
   image:          { type: String, default: "" },
   title:          { type: String, required: true, },
   date:           { type: String, default: "", },

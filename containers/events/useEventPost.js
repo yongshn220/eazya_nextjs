@@ -8,7 +8,7 @@ export default function useEventPost(id) {
   })
 
   return {
-    eventPost: data,
+    post: data,
     isLoading,
   }
 }
