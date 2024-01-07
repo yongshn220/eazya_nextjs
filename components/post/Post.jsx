@@ -10,20 +10,21 @@ import {PostType} from "@components/constants/enums";
 export default function Post({type, post}) {
   const subtitle = post.tag?? ""
 
+  // todo: post.authorId should not be visible in frontend. Should be handled differently later.
   return (
     <section className="w-full flex flex-col">
-      <PostHeader title={type} subtitle={subtitle}/>
-      <Contents type={type}/>
+      <PostHeader title={type} subtitle={subtitle} authorId={post.authorId}/>
+      <Contents type={type} post={post}/>
       <CreateComment/>
       <CommentList/>
     </section>
   )
 }
 
-function Contents({type}) {
+function Contents({type, post}) {
   return (
     <>
-      {type === PostType.EVENT && <EventContent/>}
+      {type === PostType.EVENT && <EventContent post={post}/>}
       {type === PostType.GENERAL && <GeneralContent/>}
       {type === PostType.STORE && <StoreContent/>}
     </>

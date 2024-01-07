@@ -2,8 +2,9 @@ import {Button} from "@components/ui/button";
 import Link from 'next/link'
 import InfoHeader from "@components/headers/InfoHeader";
 import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
+import PostDropDown from "@components/menu/PostDropDown";
 
-export default function PostHeader({ title, subtitle }) {
+export default function PostHeader({ title, subtitle, authorId }) {
   return (
     <div>
       <div className="w-full flex sm:flex-col pb-3 border-b">
@@ -18,10 +19,10 @@ export default function PostHeader({ title, subtitle }) {
         </p>
       </div>
 
-      <div className="w-full flex-center gap-6 mt-10 mb-5">
+      <div className="w-full flex-center gap-6 mt-3 mb-5">
         <InfoHeader/>
         <div className="cursor-pointer">
-          <HamburgerMenuIcon width={25} height={25} />
+          <PostDropDown authorId={authorId}/>
         </div>
       </div>
     </div>
