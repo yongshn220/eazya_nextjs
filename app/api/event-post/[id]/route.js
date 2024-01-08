@@ -8,7 +8,6 @@ import {Storage} from "@node_modules/@google-cloud/storage";
 export async function GET(req, { params }) {
   try {
     await connectToDB()
-
     const eventPost = await EventPost.findById(params.id)
     return new Response(JSON.stringify(eventPost), {status: StatusCodes.OK})
 
@@ -21,12 +20,12 @@ export async function GET(req, { params }) {
 export async function DELETE(req, {params}) {
   try {
     const session = await getServerSession(authOptions)
-    if (session) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
+    if (!session) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
 
     const eventPost = await EventPost.findById(params.id)
     if (!eventPost) return new Response("Not found", {status: StatusCodes.NOT_FOUND})
 
-    if (session.user.id !== eventPost.authorId) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
+    if (session.user.id !== eventPost.authorId.toString()) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
 
     const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
     const storage = new Storage({ credentials })

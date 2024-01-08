@@ -7,7 +7,7 @@ import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
 import {dangerTextColor} from "@components/constants/values";
 import {DeletePostAlertDialog} from "@components/util/DeletePostAlertDialog";
 import {useState} from "react";
-export default function PostDropDown({post}) {
+export default function PostDropDown({authorId, handlePostDelete}) {
   const {data: session} = useSession()
   const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -18,14 +18,14 @@ export default function PostDropDown({post}) {
 
   return (
     <div className="flex gap-3 md:gap-5">
-      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={() => {}}/>
+      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={handlePostDelete}/>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <HamburgerMenuIcon width={25} height={25} className="my-1"/>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {
-            (!session || session.user.id !== post.authorId) ?
+            (!session || session.user.id !== authorId) ?
             <>
               <DropdownMenuItem >Share</DropdownMenuItem>
               <DropdownMenuItem >Report</DropdownMenuItem>

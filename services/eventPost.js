@@ -8,9 +8,11 @@ export const getEventPostApi = (id) => Fetch.get(domain + `/${id}`)
 
 export const createEventPostApi = (eventPost) => Fetch.post(domain + `/new`, eventPost)
 
+export const deleteEventPostApi = (id) => Fetch.delete(domain + `/${id}`)
 
 export const eventPostKey = {
   getEventPostIdsApi: "getEventPostIdsApi",
   createEventPostApi: "createEventPostApi",
   getEventPostApi: "getEventPostApi",
+  deleteEventPostApi: "deleteEventPostApi",
 }

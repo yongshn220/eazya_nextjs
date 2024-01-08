@@ -1,29 +1,35 @@
-import Post from "@components/post/Post";
+"use client"
+
 import useEventPost from "@containers/events/useEventPost";
 import LoadingCircle from "@components/animation/LoadingCircle";
 import PostHeader from "@components/headers/PostHeader";
-import {PostType} from "@components/constants/enums";
 import EventContent from "@containers/events/id/Content";
-import GeneralContent from "@components/post/GeneralContent";
-import StoreContent from "@components/post/StoreContent";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
+import { useRouter } from 'next/navigation'
+import useDeleteEventPost from "@containers/events/id/useDeleteEventPost";
 
 export default function EventPost({id}) {
   const {post, isLoading} = useEventPost(id)
+  const deleteEventMutation = useDeleteEventPost()
+  const router = useRouter()
 
   if (isLoading) {
     return (<LoadingCircle/>)
   }
 
-  console.log(post)
+  function handlePostDelete() {
+    deleteEventMutation.mutate(id)
+    router.push('/events')
+  }
 
   return (
     <section className="w-full flex flex-col">
-      <PostHeader title={post.type} subtitle={post.tag?? ""} post={post}/>
+      <PostHeader post={post} handlePostDelete={handlePostDelete}/>
       <EventContent post={post}/>
       <CreateComment/>
       <CommentList/>
     </section>
   )
 }
+

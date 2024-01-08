@@ -7,8 +7,7 @@ export default function EventContent({post}) {
         <div className="glassmorphism w-[20rem] h-[27rem]">
           <Image
             src={post.image}
-            layout="fill"
-            objectFit="contain"
+            fill={true}
             alt="event post image"
           />
         </div>
@@ -18,7 +17,6 @@ export default function EventContent({post}) {
           <p className="text-md font-semibold text-gray-700">{post.location}</p>
         </div>
       </div>
-
       <p className="whitespace-pre-wrap">{post.description}</p>
     </section>
   )

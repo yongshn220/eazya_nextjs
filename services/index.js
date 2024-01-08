@@ -29,7 +29,21 @@ export const Fetch = {
   },
 
   update: async (uri, id) => {},
-  delete: async (uri, id) => {},
+  delete: async (uri, id) => {
+    try {
+      const response = await fetch(uri, {
+        method: "DELETE",
+        body: JSON.stringify(id)
+      })
+      if (response.ok) {
+        return true
+      }
+    }
+    catch (error) {
+      console.log(error)
+      return false
+    }
+  },
   patch: async (uri, id) => {},
 }
 
