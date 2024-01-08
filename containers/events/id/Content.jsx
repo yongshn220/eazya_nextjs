@@ -4,11 +4,12 @@ export default function EventContent({post}) {
   return (
     <section className="w-full flex-center flex-col gap-10 mt-4 pb-20 border-b border-gray-300">
       <div className="flex-center flex-col gap-4">
-        <div className="glassmorphism w-[20rem] h-[27rem]">
+        <div className="relative glassmorphism w-[20rem] h-[27rem]">
           <Image
             src={post.image}
             fill={true}
-            alt="event post image"
+            sizes="20vw"
+            alt="Event Post Image"
           />
         </div>
         <p className="text-2xl font-bold">{post.title}</p>

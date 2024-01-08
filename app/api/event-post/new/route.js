@@ -14,15 +14,10 @@ export async function POST(req) {
 
   const {image, type, title, date, time, location, description } = await req.json()
 
-  console.log("type", type)
   const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
   const storage = new Storage({ credentials })
 
-  const matches = image.match(/^data:.+\/(.+);base64,(.*)$/);
-    if (!matches) {
-      throw new Error('Invalid image data');
-    }
-  const base64Data = matches[2];
+  const base64Data = image.split(';base64,').pop();
   const buffer = Buffer.from(base64Data, 'base64');
 
   const imageName = `event/${session.user.email}/${Date.now()}-${uuidv4()}`
@@ -50,7 +45,8 @@ export async function POST(req) {
       comments: [],
     })
     newEventPost.save()
-    return new Response(JSON.stringify(newEventPost), {status: StatusCodes.OK})
+
+    return new Response({status: StatusCodes.OK})
   }
   catch (error) {
     return new Response({status: StatusCodes.INTERNAL_SERVER_ERROR})

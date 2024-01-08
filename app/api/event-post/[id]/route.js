@@ -21,29 +21,32 @@ export async function DELETE(req, {params}) {
   try {
     const session = await getServerSession(authOptions)
     if (!session) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
-
+    console.log(1)
     const eventPost = await EventPost.findById(params.id)
     if (!eventPost) return new Response("Not found", {status: StatusCodes.NOT_FOUND})
 
     if (session.user.id !== eventPost.authorId.toString()) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
-
+console.log(2)
     const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
     const storage = new Storage({ credentials })
-    const bucketName = 'eazya_bucket_sbu'
-    const file = storage.bucket(bucketName).file(eventPost.image)
-
+    const imageUrl = new URL(eventPost.image);
+    const urlPathParts = imageUrl.pathname.split('/').filter(part => part);
+    const bucketName = urlPathParts[0];
+    const filePath = urlPathParts.slice(1).join('/');
+    const file = storage.bucket(bucketName).file(filePath);
+console.log(3)
     try { await EventPost.findByIdAndDelete(params.id) }
     catch (error) {
       console.log(error)
       return new Response("Fail to delete image from db", {status: StatusCodes.INTERNAL_SERVER_ERROR})
     }
-
+console.log(4)
     try { await file.delete() }
     catch (error) {
       console.log(error)
       return new Response("Fail to delete image from storage", {status: StatusCodes.INTERNAL_SERVER_ERROR})
     }
-
+console.log(5)
     return new Response("Event post deleted successfully", { status: StatusCodes.OK });
   }
   catch (error) {

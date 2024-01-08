@@ -13,9 +13,9 @@ export default function InfoHeader() {
         <p className="text-sm text-gray-500">4 hours ago</p>
       </div>
       <div className="flex-center px-2 py-1 border border-gray-300 rounded-full">
-        <Image src="/assets/icons/triangle.svg" width={15} height={15} className="mr-2 cursor-pointer"/>
+        <Image src="/assets/icons/triangle.svg" width={15} height={15} className="mr-2 cursor-pointer" alt="triangle"/>
         <p className="border-l border-r px-2">12</p>
-        <Image src="/assets/icons/invertedTriangle.svg" width={15} height={15} className="ml-2 cursor-pointer"/>
+        <Image src="/assets/icons/invertedTriangle.svg" width={15} height={15} className="ml-2 cursor-pointer" alt="inverted triangle"/>
       </div>
     </div>
   )
