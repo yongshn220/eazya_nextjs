@@ -5,6 +5,7 @@ import {connectToDB} from "@utils/database";
 import {ObjectId} from "mongodb";
 import {PostType} from "@components/constants/enums";
 import EventPost from "@models/eventPost";
+import CommentBaseSchema from "@models/commentBase";
 
 
 export async function POST(req) {
@@ -14,10 +15,10 @@ export async function POST(req) {
 
     await connectToDB()
 
-    const {type, postId, authorId, content, isSecret} = await req.json()
+    const {postType, postId, content, isSecret} = await req.json()
 
     let PostModel;
-    if (type === PostType.EVENT) PostModel = EventPost
+    if (postType === PostType.EVENT) PostModel = EventPost
     else PostModel = ""
 
     const post = PostModel.findById(postId)
@@ -25,13 +26,15 @@ export async function POST(req) {
 
     const newComment = {
       _id: ObjectId,
-      authorId,
+      authorId: session.user.id,
       authorName: "",
       content,
       createdAt: new Date().toISOString(),
       isSecret,
       replies: []
     }
+    if (CommentBaseSchema.validateSync(newComment))
+
 
     post.comments.push(newComment)
     await post.save()

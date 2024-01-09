@@ -8,11 +8,17 @@ import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
 import { useRouter } from 'next/navigation'
 import useDeleteEventPost from "@containers/events/id/useDeleteEventPost";
+import {useState} from "react";
 
 export default function EventPost({id}) {
+  const router = useRouter()
   const {post, isLoading} = useEventPost(id)
   const deleteEventMutation = useDeleteEventPost()
-  const router = useRouter()
+
+  const {comment, setComment} = useState({
+    content: "",
+    isSecret: false
+  })
 
   if (isLoading) {
     return (<LoadingCircle/>)
@@ -23,11 +29,13 @@ export default function EventPost({id}) {
     router.push('/events')
   }
 
+
+
   return (
     <section className="w-full flex flex-col">
       <PostHeader post={post} handlePostDelete={handlePostDelete}/>
       <EventContent post={post}/>
-      <CreateComment/>
+      <CreateComment comment={comment} setComment={setComment}/>
       <CommentList/>
     </section>
   )

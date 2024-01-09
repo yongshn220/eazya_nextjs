@@ -1,6 +1,7 @@
 import { Schema, model, models } from 'mongoose'
 import {UniversityIds} from "@components/constants/values";
 import {PostType} from "@components/constants/enums";
+import CommentBaseSchema from "@models/commentBase";
 
 const EventPostSchema = new Schema({
   authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -18,24 +19,7 @@ const EventPostSchema = new Schema({
     upvoted:        [{ type: Schema.Types.ObjectId, ref: 'User' }],
     downvoted:      [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
-  comments:       [{
-    _id:            { type: Schema.Types.ObjectId, required: true },
-    authorId:       { type: Schema.Types.ObjectId, required: true },
-    authorName:     { type: String, required: true },
-    content:        { type: String, required: true },
-    createdAt:      { type: Date, required: true },
-    isSecret:       { type: Boolean, default: false, required: true },
-    replies:        [{
-      _id:            { type: Schema.Types.ObjectId, required: true },
-      authorId:       { type: Schema.Types.ObjectId, required: true },
-      authorName:     { type: String, required: true },
-      content:        { type: String, required: true },
-      createdAt:      { type: Date, required: true },
-      isSecret:       { type: Boolean, default: false, required: true },
-    }]
-  }],
 })
 
-const EventPost = models.EventPost || model("EventPost", EventPostSchema)
-
+const EventPost = models.EventPost || model("EventPost", CommentBaseSchema.discriminator("EventPost", EventPostSchema))
 export default EventPost

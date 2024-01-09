@@ -14,8 +14,6 @@ export default function EventPostItem({id}) {
     return <></>
   }
 
-  console.log(post.image)
-
   return (
     <Link href={`/events/${id}`}>
       <div className="group relative glass_box">
@@ -23,9 +21,9 @@ export default function EventPostItem({id}) {
           className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-50">
           <Image
             src={post.image}
-            width={10}
-            height={10}
-            alt="Front of men&#039;s Basic Tee in black."
+            width={200}
+            height={200}
+            alt="post item image"
           />
         </div>
         <div className="w-full mt-4 flex flex-col gap-3">

@@ -1,13 +1,13 @@
 import InfoHeader from "@components/headers/InfoHeader";
 import PostDropDown from "@components/menu/PostDropDown";
 
-export default function PostHeader({ post, handlePostDelete }) {
+export default function PostHeader({post, handlePostDelete }) {
 
   return (
     <div>
       <div className="w-full flex sm:flex-col pb-3 border-b">
         <p className="font-semibold">
-          SBU {post.title}
+          SBU {post.type}
           <span className="ml-2 font-normal">
             {post.tag ? `/ ${post.tag}` : ''}
           </span>
