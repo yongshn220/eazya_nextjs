@@ -5,10 +5,9 @@ import {connectToDB} from "@utils/database";
 import {ObjectId} from "mongodb";
 import {PostType} from "@components/constants/enums";
 import EventPost from "@models/eventPost";
-import CommentBaseSchema from "@models/commentBase";
 
 
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions)
     if (!session) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
@@ -33,13 +32,11 @@ export async function POST(req) {
       isSecret,
       replies: []
     }
-    if (CommentBaseSchema.validateSync(newComment))
-
 
     post.comments.push(newComment)
     await post.save()
 
-    return new Response(JSON.stringify(newComment), {status: StatusCodes})
+    return new Response(JSON.stringify(newComment), {status: StatusCodes.OK})
   }
   catch (error) {
     return new Response("Fail to create a comment", {status: StatusCodes.INTERNAL_SERVER_ERROR})

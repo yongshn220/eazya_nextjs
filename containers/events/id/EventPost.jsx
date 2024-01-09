@@ -15,11 +15,6 @@ export default function EventPost({id}) {
   const {post, isLoading} = useEventPost(id)
   const deleteEventMutation = useDeleteEventPost()
 
-  const {comment, setComment} = useState({
-    content: "",
-    isSecret: false
-  })
-
   if (isLoading) {
     return (<LoadingCircle/>)
   }
@@ -29,14 +24,12 @@ export default function EventPost({id}) {
     router.push('/events')
   }
 
-
-
   return (
     <section className="w-full flex flex-col">
       <PostHeader post={post} handlePostDelete={handlePostDelete}/>
       <EventContent post={post}/>
-      <CreateComment comment={comment} setComment={setComment}/>
-      <CommentList/>
+      <CreateComment postType={post.type} postId={post.id}/>
+      <CommentList comments={post.comments}/>
     </section>
   )
 }

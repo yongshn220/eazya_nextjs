@@ -1,10 +1,10 @@
 import '@styles/globals.css'
 import '@radix-ui/themes/styles.css';
 import Nav from "@components/nav/Nav";
-import Provider from "@components/Provider";
+import Provider from "@components/provider/Provider";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@lib/utils"
-import Footer from "@components/Footer";
+import Footer from "@components/footer/Footer";
 import {Theme} from "@radix-ui/themes";
 
 export const fontSans = FontSans({
