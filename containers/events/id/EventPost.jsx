@@ -24,6 +24,8 @@ export default function EventPost({id}) {
     router.push('/events')
   }
 
+  console.log("pi", post)
+
   return (
     <section className="w-full flex flex-col">
       <PostHeader post={post} handlePostDelete={handlePostDelete}/>

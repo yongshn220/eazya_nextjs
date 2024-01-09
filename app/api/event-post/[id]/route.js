@@ -9,7 +9,11 @@ export async function GET(req, { params }) {
   try {
     await connectToDB()
     const eventPost = await EventPost.findById(params.id)
-    return new Response(JSON.stringify(eventPost), {status: StatusCodes.OK})
+    if (!eventPost) new Response(StatusCodes.NOT_FOUND)
+
+    const obj = eventPost.toObject()
+
+    return new Response(JSON.stringify(obj), {status: StatusCodes.OK})
 
   }
   catch (error) {

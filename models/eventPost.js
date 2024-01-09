@@ -19,7 +19,10 @@ const EventPostSchema = new Schema({
     upvoted:        [{ type: Schema.Types.ObjectId, ref: 'User' }],
     downvoted:      [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
-})
+  comments: [CommentBaseSchema]
+}, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
-const EventPost = models.EventPost || model("EventPost", CommentBaseSchema.discriminator("EventPost", EventPostSchema))
+EventPostSchema.virtual('id').get(function() {return this._id.toHexString()})
+
+const EventPost = models.EventPost || model("EventPost", EventPostSchema)
 export default EventPost

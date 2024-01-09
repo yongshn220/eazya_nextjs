@@ -22,6 +22,6 @@ const CommentBaseSchema = new Schema({
         downvoted:      [{ type: Schema.Types.ObjectId, ref: 'User' }]
       },
     }]
-}, { discriminatorKey: "postType"})
+})
 
-export default CommentBaseSchema;
+export default CommentBaseSchema

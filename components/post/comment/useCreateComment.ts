@@ -4,17 +4,21 @@ import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 import {createCommentApi} from "@services/comment";
 
 
-export default function useCreateComment(postType: string, postId: string, content: string, isSecret: boolean) {
+export default function useCreateComment(postId: string) {
   const queryClient = useQueryClient()
-  const req: CreateCommentRequest = {postType, postId, content, isSecret}
 
   return useMutation({
-    mutationFn: () => createCommentApi(req),
+    mutationFn: (req: CreateCommentRequest) => createCommentApi(req),
     onSuccess: (newComment) => {
-      queryClient.setQueryData([eventPostKey.getEventPostApi, postId], (prevPost: Object) => {
-        const newPost:any = { ...prevPost }
-        newPost.comments = [...newPost.comments, newComment]
-        return newPost
+      queryClient.setQueryData([eventPostKey.getEventPostApi, postId], (prevPost: any) => {
+        if (!prevPost.comments) {
+          prevPost.comments = [];
+        }
+
+        return {
+          ...prevPost,
+          comments: [...prevPost.comments, newComment]
+        };
       })
     }
   })

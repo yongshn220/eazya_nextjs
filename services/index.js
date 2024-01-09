@@ -19,7 +19,7 @@ export const Fetch = {
         body: JSON.stringify(data)
       })
       if (response.ok) {
-        return true
+        return response.json()
       }
     }
     catch (error) {

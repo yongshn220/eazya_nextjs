@@ -5,16 +5,23 @@ import {Button} from "@components/ui/button";
 import {Checkbox} from "@components/ui/checkbox";
 import useCreateComment from "@components/post/comment/useCreateComment";
 import {useState} from "react";
+import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 
 export default function CreateComment({postType, postId}) {
   const [comment, setComment] = useState({content: "", isSecret: false})
-  const createCommentMutation = useCreateComment(postType, postId, comment.content, comment.isSecret)
+  const createCommentMutation = useCreateComment(postId)
+
+  function handleSubmit(e: any) {
+    e.preventDefault()
+    const req: CreateCommentRequest = { postType, postId, content: comment.content, isSecret:comment.isSecret }
+    createCommentMutation.mutate(req)
+  }
 
   return (
-    <section className="mt-10">
+    <form className="mt-10" onSubmit={handleSubmit}>
       <p className="text-lg">5 Comments</p>
       <div className="flex flex-col glassmorphism mt-4 p-4 gap-5">
-        <InputFieldDefault title="" value="" placeholder="Add a comment..." onChangeHandler={() => {}}/>
+        <InputFieldDefault title="" value={comment.content} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
         <div className="flex-between">
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" onClick={() => {setComment(prev => ({...prev, isSecret: !prev.isSecret}))}}/>
@@ -25,9 +32,9 @@ export default function CreateComment({postType, postId}) {
               Secret Comment
             </label>
           </div>
-          <Button>Post</Button>
+          <Button type="submit">Post</Button>
         </div>
       </div>
-    </section>
+    </form>
   )
 }

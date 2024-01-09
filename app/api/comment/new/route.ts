@@ -5,6 +5,8 @@ import {connectToDB} from "@utils/database";
 import {ObjectId} from "mongodb";
 import {PostType} from "@components/constants/enums";
 import EventPost from "@models/eventPost";
+import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
+import mongoose from "mongoose";
 
 
 export async function POST(req: Request) {
@@ -14,22 +16,21 @@ export async function POST(req: Request) {
 
     await connectToDB()
 
-    const {postType, postId, content, isSecret} = await req.json()
+    const commentReq: CreateCommentRequest = await req.json()
 
     let PostModel;
-    if (postType === PostType.EVENT) PostModel = EventPost
-    else PostModel = ""
+    if (commentReq.postType === PostType.EVENT) PostModel = EventPost
+    else PostModel = "" // ToDo: handle all posts.
 
-    const post = PostModel.findById(postId)
+    const post = await PostModel.findById(commentReq.postId)
     if (!post) return new Response("Not found", {status: StatusCodes.NOT_FOUND})
 
     const newComment = {
-      _id: ObjectId,
       authorId: session.user.id,
-      authorName: "",
-      content,
+      authorName: post.authorId === session.user.id? "Author" : "Commentator",
+      content: commentReq.content,
       createdAt: new Date().toISOString(),
-      isSecret,
+      isSecret: commentReq.isSecret,
       replies: []
     }
 
