@@ -1,31 +1,30 @@
 import { connectToDB } from '@utils/database'
-import EventPost from '@models/eventPost'
+import {EventPost, EventPostModel} from '@models/eventPost'
 import { StatusCodes } from 'http-status-codes'
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {getServerSession} from "next-auth/next";
 import {Storage} from "@node_modules/@google-cloud/storage";
 
-export async function GET(req, { params }) {
+export async function GET(req: Request, { params }) {
   try {
     await connectToDB()
-    const eventPost = await EventPost.findById(params.id)
-    if (!eventPost) new Response(StatusCodes.NOT_FOUND)
+    const eventPost = await EventPostModel.findById(params.id)
+    if (!eventPost) new Response("Post not found", {status: StatusCodes.NOT_FOUND})
 
-    const obj = eventPost.toObject()
+    const obj: EventPost = eventPost.toObject()
 
     return new Response(JSON.stringify(obj), {status: StatusCodes.OK})
-
   }
   catch (error) {
     return new Response("Failed to fetch all event posts", {status: StatusCodes.INTERNAL_SERVER_ERROR})
   }
 }
 
-export async function DELETE(req, {params}) {
+export async function DELETE(req: Request, {params}) {
   try {
     const session = await getServerSession(authOptions)
     if (!session) return new Response("Unauthorized", {status: StatusCodes.UNAUTHORIZED})
-    const eventPost = await EventPost.findById(params.id)
+    const eventPost = await EventPostModel.findById(params.id)
 
     if (!eventPost) return new Response("Not found", {status: StatusCodes.NOT_FOUND})
 
@@ -39,7 +38,7 @@ export async function DELETE(req, {params}) {
     const filePath = urlPathParts.slice(1).join('/');
     const file = storage.bucket(bucketName).file(filePath);
 
-    try { await EventPost.findByIdAndDelete(params.id) }
+    try { await EventPostModel.findByIdAndDelete(params.id) }
     catch (error) {
       console.log(error)
       return new Response("Fail to delete image from db", {status: StatusCodes.INTERNAL_SERVER_ERROR})

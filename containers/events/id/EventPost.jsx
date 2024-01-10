@@ -24,14 +24,12 @@ export default function EventPost({id}) {
     router.push('/events')
   }
 
-  console.log("pi", post)
-
   return (
     <section className="w-full flex flex-col">
       <PostHeader post={post} handlePostDelete={handlePostDelete}/>
       <EventContent post={post}/>
       <CreateComment postType={post.type} postId={post.id}/>
-      <CommentList comments={post.comments}/>
+      <CommentList postType={post.type} postId={post.id} comments={post.comments}/>
     </section>
   )
 }

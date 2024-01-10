@@ -7,7 +7,8 @@ export default function useCreateEventPost() {
 
   return useMutation({
     mutationFn: (post) => createEventPostApi(post),
-    onSuccess: () => {
+    onSuccess: (newPost) => {
+      queryClient.setQueryData([eventPostKey.getEventPostApi, newPost.id], newPost)
       queryClient.invalidateQueries({
         queryKey: [eventPostKey.getEventPostIdsApi, 1]
       })

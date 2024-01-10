@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import { Storage } from '@google-cloud/storage';
 import { connectToDB } from '@utils/database'
-import EventPost from "@models/eventPost";
+import {EventPostModel} from "@models/eventPost";
 import {StatusCodes} from "http-status-codes";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import { v4 as uuidv4 } from 'uuid';
@@ -29,7 +29,7 @@ export async function POST(req) {
 
   try {
     await connectToDB()
-    const newEventPost = new EventPost({
+    const newEventPost = new EventPostModel({
       authorId: session.user.id,
       universityId: session.user.universityId,
       type,
@@ -46,9 +46,9 @@ export async function POST(req) {
     })
     newEventPost.save()
 
-    return new Response({status: StatusCodes.OK})
+    return new Response(JSON.stringify(newEventPost), {status: StatusCodes.OK})
   }
   catch (error) {
-    return new Response({status: StatusCodes.INTERNAL_SERVER_ERROR})
+    return new Response("Fail to create a post", {status: StatusCodes.INTERNAL_SERVER_ERROR})
   }
 }

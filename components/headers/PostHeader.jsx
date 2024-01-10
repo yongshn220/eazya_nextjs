@@ -15,7 +15,7 @@ export default function PostHeader({post, handlePostDelete }) {
       </div>
 
       <div className="w-full flex-center gap-6 mt-3 mb-5">
-        <InfoHeader/>
+        <InfoHeader author={"Author"} date={post.createdAt}/>
         <div className="cursor-pointer">
           <PostDropDown authorId={post.authorId} handlePostDelete={handlePostDelete}/>
         </div>

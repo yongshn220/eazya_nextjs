@@ -1,5 +1,5 @@
 import { connectToDB } from '@utils/database'
-import EventPost from '@models/eventPost'
+import {EventPostModel} from '@models/eventPost'
 import { StatusCodes } from 'http-status-codes'
 
 const DEFAULT_PAGE_NUMBER = 1;
@@ -15,7 +15,7 @@ export async function GET(req) {
 
     const skip = (page - 1) * limit
 
-    const eventPosts = await EventPost.find({}).skip(skip).limit(limit)
+    const eventPosts = await EventPostModel.find({}).skip(skip).limit(limit)
     const ids = eventPosts.map(post => post._id)
 
     return new Response(JSON.stringify(ids), {status: StatusCodes.OK})

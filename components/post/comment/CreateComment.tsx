@@ -9,7 +9,7 @@ import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 
 export default function CreateComment({postType, postId}) {
   const [comment, setComment] = useState({content: "", isSecret: false})
-  const createCommentMutation = useCreateComment(postId)
+  const createCommentMutation = useCreateComment()
 
   function handleSubmit(e: any) {
     e.preventDefault()
