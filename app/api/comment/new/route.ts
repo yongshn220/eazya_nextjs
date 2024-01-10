@@ -6,7 +6,6 @@ import {PostType} from "@components/constants/enums";
 import {EventPostModel} from "@models/eventPost";
 import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 import {CommentBase} from "@models/base/commentBase";
-import {Types} from "mongoose";
 
 
 export async function POST(req: Request) {
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
       content: commentReq.content,
       createdAt: new Date(),
       isSecret: commentReq.isSecret,
-      voteUsers: [],
+      voteUser: { upvoted: [], downvoted: [] },
       replies: [],
     }
 

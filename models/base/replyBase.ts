@@ -9,7 +9,7 @@ export const ReplyBaseSchema = new Schema({
   content:        { type: String, required: true },
   createdAt:      { type: Date, required: true },
   isSecret:       { type: Boolean, default: false, required: true },
-  voteUsers:      { type: VoteUserBaseSchema, default: [], required: true },
+  voteUser:       { type: VoteUserBaseSchema, required: true },
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
 ReplyBaseSchema.virtual('id').get(function() {return this._id.toHexString()})
@@ -23,5 +23,5 @@ export interface ReplyBase {
   content:        string;
   createdAt:      Date;
   isSecret:       boolean;
-  voteUsers:      VoteUser[];
+  voteUser:       VoteUser;
 }

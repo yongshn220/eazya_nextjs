@@ -41,7 +41,7 @@ export async function POST(req) {
       description,
       createdAt: new Date().toISOString(),
       outOfService: false,
-      voteUsers: {upvoted: [], downvoted: []},
+      voteUser: {upvoted: [], downvoted: []},
       comments: [],
     })
     newEventPost.save()

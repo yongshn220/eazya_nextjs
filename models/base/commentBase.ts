@@ -8,7 +8,7 @@ export const CommentBaseSchema = new Schema({
   content:      { type: String, required: true },
   createdAt:    { type: Date, required: true },
   isSecret:     { type: Boolean, default: false, required: true },
-  voteUsers:    { type: VoteUserBaseSchema, default: [], required: true },
+  voteUser:    { type: VoteUserBaseSchema, required: true },
   replies:      [ReplyBaseSchema]
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
@@ -22,6 +22,6 @@ export interface CommentBase {
   content:      string;
   createdAt:    Date;
   isSecret:     boolean;
-  voteUsers:    VoteUser[];
+  voteUser:     VoteUser;
   replies:      Array<ReplyBase>;
 }

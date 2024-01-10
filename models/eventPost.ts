@@ -16,8 +16,8 @@ const EventPostSchema = new Schema({
   description:    { type: String, required: true, },
   createdAt:      { type: Date, required: true, },
   outOfService:   { type: Boolean, required: true, },
-  voteUsers:      { type: VoteUserBaseSchema, default: [], required: true },
-  comments:       [CommentBaseSchema]
+  voteUser:       { type: VoteUserBaseSchema, required: true },
+  comments:       [ CommentBaseSchema ]
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
 EventPostSchema.virtual('id').get(function() {return this._id.toHexString()})
@@ -25,18 +25,18 @@ EventPostSchema.virtual('id').get(function() {return this._id.toHexString()})
 export const EventPostModel = models.EventPost || model("EventPost", EventPostSchema)
 
 export interface EventPost {
-  id?:          string;
-  authorId:     string;
-  universityId: string;
-  type:         string;
-  image:        string;
-  title:        string;
-  date:         string;
-  time:         string;
-  location:     string;
-  description:  string;
-  createdAt:    Date;
-  outOfService: boolean;
-  voteUsers:    VoteUser;
-  comments:     Array<CommentBase>;
+  id?:            string;
+  authorId:       string;
+  universityId:   string;
+  type:           string;
+  image:          string;
+  title:          string;
+  date:           string;
+  time:           string;
+  location:       string;
+  description:    string;
+  createdAt:      Date;
+  outOfService:   boolean;
+  voteUser:       VoteUser;
+  comments:       Array<CommentBase>;
 }

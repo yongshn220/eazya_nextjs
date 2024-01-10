@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       content: replyReq.content,
       createdAt: new Date(),
       isSecret: replyReq.isSecret,
-      voteUsers: [],
+      voteUser: { upvoted: [], downvoted: [] },
     }
 
     const comment = post.comments.id(replyReq.commentId)
