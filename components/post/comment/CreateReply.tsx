@@ -15,6 +15,7 @@ export default function CreateReply({postType, postId, commentId}) {
     e.preventDefault()
     const req: CreateReplyRequest = { postType, postId, commentId, content: reply.content, isSecret:reply.isSecret }
     createReplyMutation.mutate(req)
+    setReply((prev) => ({...prev, content: ""}))
   }
 
   return (
