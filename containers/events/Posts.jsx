@@ -1,14 +1,12 @@
-"use client"
 
 import PostItem from "@containers/events/PostItem";
 import useEventPostIds from "@containers/events/useEventPostIds";
+import {getEventPostIdsApi} from "@services/eventPost";
 
-export default function EventPosts() {
-  const {page, setPage, data: eventPostIds, isLoading } = useEventPostIds()
 
-  if (isLoading) {
-    return (<div>loading</div>)
-  }
+
+export default async function EventPosts() {
+  const eventPostIds = await getEventPostIdsApi(1)
 
   return (
     <div className="grid_image">

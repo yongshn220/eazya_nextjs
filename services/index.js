@@ -1,7 +1,9 @@
+const baseURL = process.env.NEXT_BASE_URL
+
 export const Fetch = {
   get: async (uri) => {
     try {
-      const response = await fetch(uri, {method: "GET"})
+      const response = await fetch(baseURL+ uri, {method: "GET"})
       if (response.ok) {
         return response.json()
       }
@@ -14,7 +16,7 @@ export const Fetch = {
 
   post: async (uri, data) => {
     try {
-      const response = await fetch(uri, {
+      const response = await fetch(baseURL + uri, {
         method: "POST",
         body: JSON.stringify(data)
       })
@@ -31,7 +33,7 @@ export const Fetch = {
   update: async (uri, id) => {},
   delete: async (uri, id) => {
     try {
-      const response = await fetch(uri, {
+      const response = await fetch(baseURL + uri, {
         method: "DELETE",
         body: JSON.stringify(id)
       })

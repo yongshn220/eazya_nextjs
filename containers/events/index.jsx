@@ -2,6 +2,7 @@ import HomeHeader from "@components/headers/HomeHeader";
 import EventPosts from "@containers/events/Posts";
 import PostPagination from "@components/page/PostPagination";
 
+
 export default function Events() {
   return (
     <section className="w-full">

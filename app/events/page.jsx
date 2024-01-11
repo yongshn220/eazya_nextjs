@@ -1,6 +1,6 @@
 import Events from "@containers/events";
 
-export default function EventPage() {
+export default async function EventPage() {
   return (
     <Events/>
   )

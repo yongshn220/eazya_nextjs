@@ -7,7 +7,8 @@ export default function InfoHeader({author, date}) {
         <div className="flex flex-center gap-2">
           <img className="h-6 w-6 flex-none rounded-full bg-gray-50"
                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-               alt=""/>
+               alt=""
+          />
           <p className="text-sm font-semibold">{author}</p>
         </div>
         <p className="text-sm text-gray-500">{date}</p>

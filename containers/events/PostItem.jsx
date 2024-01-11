@@ -1,15 +1,9 @@
 import Link from 'next/link'
-import useEventPost from "@containers/events/useEventPost";
-import LoadingCircle from "@components/animation/LoadingCircle";
 import Image from 'next/image'
+import {getEventPostApi} from "@services/eventPost";
 
-export default function EventPostItem({id}) {
-  const {post, isLoading} = useEventPost(id)
-
-  if (isLoading) {
-    return (<LoadingCircle/>)
-  }
-
+export default async function EventPostItem({id}) {
+  const post = await getEventPostApi(id)
   if (!post) {
     return <></>
   }

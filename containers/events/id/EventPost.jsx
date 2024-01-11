@@ -1,27 +1,21 @@
-"use client"
-
 import useEventPost from "@containers/events/useEventPost";
 import LoadingCircle from "@components/animation/LoadingCircle";
 import PostHeader from "@components/headers/PostHeader";
 import EventContent from "@containers/events/id/Content";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import useDeleteEventPost from "@containers/events/id/useDeleteEventPost";
-import {useState} from "react";
+import {getEventPostApi} from "@services/eventPost";
 
-export default function EventPost({id}) {
-  const router = useRouter()
-  const {post, isLoading} = useEventPost(id)
-  const deleteEventMutation = useDeleteEventPost()
+export default async function EventPost({id}) {
+  const post = await getEventPostApi(id)
 
-  if (isLoading) {
-    return (<LoadingCircle/>)
-  }
 
-  function handlePostDelete() {
-    deleteEventMutation.mutate(id)
-    router.push('/events')
+  async function handlePostDelete() {
+    "use server"
+    // deleteEventMutation.mutate(id)
+    // router.push('/events')
   }
 
   return (

@@ -22,3 +22,8 @@ export const GeneralMenuType = {
   ...GeneralTag,
   ALL: "All",
 }
+
+export enum VoteType {
+  UP = "voteTypeUp",
+  DOWN = "voteTypeDown",
+}

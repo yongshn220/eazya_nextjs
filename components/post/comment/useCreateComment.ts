@@ -2,7 +2,6 @@ import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {eventPostKey} from "@services/eventPost";
 import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 import {createCommentApi} from "@services/comment";
-import {EventPost} from "@models/eventPost";
 
 export default function useCreateComment() {
   const queryClient = useQueryClient()

@@ -1,3 +1,5 @@
+"use client"
+
 import Comment from '@components/post/comment/Comment'
 import {useState} from "react";
 
