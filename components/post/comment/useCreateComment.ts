@@ -10,14 +10,7 @@ export default function useCreateComment() {
   return useMutation({
     mutationFn: (req: CreateCommentRequest) => createCommentApi(req),
     onSuccess: (newComment) => {
-      queryClient.setQueryData([eventPostKey.getEventPostApi, newComment.postId], (prevPost: EventPost) => {
-        if (!prevPost.comments) prevPost.comments = [];
-        console.log([...prevPost.comments, newComment])
-        return {
-          ...prevPost,
-          comments: [...prevPost.comments, newComment]
-        }
-      })
+      queryClient.invalidateQueries({queryKey: [eventPostKey.getEventPostApi, newComment.postId]})
     }
   })
 }

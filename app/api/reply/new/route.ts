@@ -27,6 +27,7 @@ export async function POST(req: Request) {
     if (!post) return new Response("Not found", {status: StatusCodes.NOT_FOUND})
 
     const newReply: ReplyBase = {
+      postId: replyReq.postId,
       commentId: replyReq.commentId,
       authorId: session.user.id,
       authorName: post.authorId === session.user.id? "Author" : "Commentator",

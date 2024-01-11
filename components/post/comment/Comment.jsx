@@ -7,7 +7,6 @@ import CreateReply from "@components/post/comment/CreateReply";
 
 export default function Comment({postType, postId, comment}) {
   const [isReplyOn, setIsReplyOn] = useState(false)
-
   return (
     <div className="flex flex-col py-5 gap-4 border-b border-gray-300">
       <InfoHeader author={comment.authorName} date={comment.createdAt}/>

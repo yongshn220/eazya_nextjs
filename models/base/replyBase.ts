@@ -17,6 +17,7 @@ ReplyBaseSchema.virtual('id').get(function() {return this._id.toHexString()})
 
 export interface ReplyBase {
   id?:            string;
+  postId:         string;
   commentId:      string;
   authorId:       string;
   authorName:     string;
