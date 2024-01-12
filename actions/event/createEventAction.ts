@@ -8,6 +8,7 @@ import {EventPostModel} from "@models/collections/eventPost";
 import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
 
 export async function createEventPostAction(req: CreateEventPostRequest) {
+
   const session = await getServerSession(authOptions)
   if (!session) return {status: StatusCodes.UNAUTHORIZED}
 

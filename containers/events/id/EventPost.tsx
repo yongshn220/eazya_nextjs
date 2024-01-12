@@ -5,7 +5,7 @@ import CommentList from "@components/post/comment/CommentList";
 import {deleteEventPostApi, getEventPostApi} from "@services/eventPost";
 import {IEventPost} from "@models/collections/eventPost";
 import {IPostHeader} from "@models/types/postHeader";
-import {deleteEventPostAction} from "@actions/event/eventAction";
+import {deleteEventPostAction} from "@actions/event/deleteEventAction";
 import { revalidatePath } from 'next/cache'
 
 

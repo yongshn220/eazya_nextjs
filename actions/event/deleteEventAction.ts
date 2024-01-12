@@ -8,6 +8,7 @@ import {v4 as uuidv4} from "@node_modules/uuid/dist/esm-node";
 import {connectToDB} from "@utils/database";
 
 export async function deleteEventPostAction(id: string) {
+
   try {
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
@@ -33,8 +34,5 @@ export async function deleteEventPostAction(id: string) {
   }
   catch (error) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
-  }
-  finally {
-    revalidatePath('/events')
   }
 }
