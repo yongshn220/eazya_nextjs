@@ -2,11 +2,10 @@ import PostHeader from "@components/headers/PostHeader";
 import EventContent from "@containers/events/id/Content";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
-import {deleteEventPostApi, getEventPostApi} from "@services/eventPost";
+import {getEventPostApi} from "@services/eventPost";
 import {IEventPost} from "@models/collections/eventPost";
 import {IPostHeader} from "@models/types/postHeader";
-import {deleteEventPostAction} from "@actions/event/deleteEventAction";
-import { revalidatePath } from 'next/cache'
+import deleteEventPostAction from "@actions/event/deleteEventAction";
 
 
 export default async function EventPost({id}) {
@@ -14,8 +13,7 @@ export default async function EventPost({id}) {
 
   async function handlePostDelete() {
     "use server"
-    if (await deleteEventPostAction(id))
-      revalidatePath('/events')
+    await deleteEventPostAction(id)
   }
 
   const postHeaderData: IPostHeader = {

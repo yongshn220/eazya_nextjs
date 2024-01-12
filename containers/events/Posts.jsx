@@ -1,6 +1,5 @@
 
 import PostItem from "@containers/events/PostItem";
-import useEventPostIds from "@containers/events/useEventPostIds";
 import {getEventPostIdsApi} from "@services/eventPost";
 
 

@@ -1,6 +1,6 @@
 import EventForm from "@containers/create-event-post/EventForm";
 import {FormMode, PostType} from "@components/constants/enums";
-import {createEventPostAction} from "@actions/event/createEventAction";
+import createEventPostAction from "@actions/event/createEventAction";
 import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
 import { redirect } from 'next/navigation'
 import {revalidatePath} from "next/cache";
@@ -21,8 +21,6 @@ export default function CreateEventPost() {
     }
 
     await createEventPostAction(req)
-    revalidatePath('/events')
-    redirect('/events')
   }
 
   return (

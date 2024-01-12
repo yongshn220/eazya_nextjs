@@ -1,17 +1,20 @@
+"use server"
+
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {EventPostModel} from "@models/collections/eventPost";
 import {Storage} from "@node_modules/@google-cloud/storage";
-import {revalidatePath} from "@node_modules/next/cache";
-import {v4 as uuidv4} from "@node_modules/uuid/dist/esm-node";
+import {revalidatePath} from "next/cache";
 import {connectToDB} from "@utils/database";
+import {redirect} from "@node_modules/next/navigation";
 
-export async function deleteEventPostAction(id: string) {
-
+export default async function deleteEventPostAction(id: string) {
   try {
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
+
+    await connectToDB()
 
     const eventPost = await EventPostModel.findById(id)
 
@@ -34,5 +37,9 @@ export async function deleteEventPostAction(id: string) {
   }
   catch (error) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
+  }
+  finally {
+    revalidatePath('/events')
+    redirect('/events')
   }
 }

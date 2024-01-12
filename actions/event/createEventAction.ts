@@ -1,3 +1,5 @@
+"use server"
+
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
@@ -6,8 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
 import {connectToDB} from "@utils/database";
 import {EventPostModel} from "@models/collections/eventPost";
 import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
+import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
 
-export async function createEventPostAction(req: CreateEventPostRequest) {
+export default async function createEventPostAction(req: CreateEventPostRequest) {
 
   const session = await getServerSession(authOptions)
   if (!session) return {status: StatusCodes.UNAUTHORIZED}
@@ -50,5 +54,9 @@ export async function createEventPostAction(req: CreateEventPostRequest) {
   }
   catch (error) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
+  }
+  finally {
+    revalidatePath('/events')
+    redirect('/events')
   }
 }
