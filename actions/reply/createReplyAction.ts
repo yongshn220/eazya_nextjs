@@ -1,16 +1,16 @@
 "use server"
 
-import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
-import {revalidatePath} from "@node_modules/next/cache";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
+import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {PostType} from "@components/constants/enums";
 import {EventPostModel} from "@models/collections/eventPost";
-import {CommentBase} from "@models/base/commentBase";
+import {ReplyBase} from "@models/base/replyBase";
+import {revalidatePath} from "@node_modules/next/cache";
 
-export default async function createCommentAction(req: CreateCommentRequest) {
+export default async function createReplyAction(req: CreateReplyRequest) {
   try {
     await connectToDB()
 
@@ -24,21 +24,24 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     const post = await PostModel.findById(req.postId)
     if (!post) return {status: StatusCodes.NOT_FOUND}
 
-    const newComment: CommentBase = {
+    const newReply: ReplyBase = {
       postId: req.postId,
+      commentId: req.commentId,
       authorId: session.user.id,
       authorName: post.authorId === session.user.id? "Author" : "Commentator",
       content: req.content,
       createdAt: new Date(),
       isSecret: req.isSecret,
       voteUser: { upvoted: [], downvoted: [] },
-      replies: [],
     }
 
-    post.comments.push(newComment)
+    const comment = post.comments.id(req.commentId)
+    if (!comment) return {status: StatusCodes.NOT_FOUND}
+
+    comment.replies.push(newReply)
     await post.save()
 
-    return newComment
+    return newReply
   }
   catch (error) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}

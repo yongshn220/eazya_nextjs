@@ -4,17 +4,16 @@ import {Button} from "@components/ui/button";
 import {Checkbox} from "@components/ui/checkbox";
 import {useState} from "react";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
-import useCreateReply from "@components/post/comment/useCreateReply";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
+import createReplyAction from "@actions/reply/createReplyAction";
 
 export default function CreateReply({postType, postId, commentId}) {
   const [reply, setReply] = useState({content: "", isSecret: false})
-  const createReplyMutation = useCreateReply()
 
-  function handleSubmit(e: any) {
+  async function handleSubmit(e: any) {
     e.preventDefault()
     const req: CreateReplyRequest = { postType, postId, commentId, content: reply.content, isSecret:reply.isSecret }
-    createReplyMutation.mutate(req)
+    await createReplyAction(req)
     setReply((prev) => ({...prev, content: ""}))
   }
 

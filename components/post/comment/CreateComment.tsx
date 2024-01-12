@@ -10,11 +10,11 @@ import createCommentAction from "@actions/comment/createCommentAction";
 export default function CreateComment({postType, postId}) {
   const [comment, setComment] = useState({content: "", isSecret: false})
 
-
   async function handleSubmit(e: any) {
     e.preventDefault()
     const req: CreateCommentRequest = { postType, postId, content: comment.content, isSecret:comment.isSecret }
     await createCommentAction(req)
+    setComment((prev) => ({...prev, content: ""}))
   }
 
   return (
