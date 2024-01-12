@@ -1,16 +1,15 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
+import {useRouter} from 'next/navigation'
 
-export function DeletePostAlertDialog({open, onOpenChange, onContinue}) {
+
+export function DeletePostAlertDialog({open, onOpenChange, onContinue, routeHref}) {
+  const router = useRouter()
+
+  function handleDelete() {
+    onContinue()
+    router.push(routeHref)
+  }
+
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>
@@ -25,7 +24,7 @@ export function DeletePostAlertDialog({open, onOpenChange, onContinue}) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

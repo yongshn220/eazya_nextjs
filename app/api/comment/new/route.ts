@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next"
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {connectToDB} from "@utils/database";
 import {PostType} from "@components/constants/enums";
-import {EventPostModel} from "@models/eventPost";
+import {EventPostModel} from "@models/collections/eventPost";
 import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 import {CommentBase} from "@models/base/commentBase";
 

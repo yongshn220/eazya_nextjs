@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 import { connectToDB } from "@utils/database";
-import User from '@models/user'
+import User from '@models/collections/user'
 import {UniversityIds} from "@components/constants/values";
 
 export const authOptions: NextAuthOptions = {

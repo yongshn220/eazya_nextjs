@@ -19,22 +19,22 @@ export default function CreateComment({postType, postId}) {
 
   return (
     <form className="mt-10" onSubmit={handleSubmit}>
-      <p className="text-lg">5 Comments</p>
-      <div className="flex flex-col glassmorphism mt-4 p-4 gap-5">
-        <InputFieldDefault title="" value={comment.content} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
-        <div className="flex-between">
-          <div className="flex items-center space-x-2">
-            <Checkbox id="terms" onClick={() => {setComment(prev => ({...prev, isSecret: !prev.isSecret}))}}/>
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Secret Comment
-            </label>
-          </div>
-          <Button type="submit">Post</Button>
-        </div>
-      </div>
+      {/*<p className="text-lg">5 Comments</p>*/}
+      {/*<div className="flex flex-col glassmorphism mt-4 p-4 gap-5">*/}
+      {/*  <InputFieldDefault name="" value={comment.content} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>*/}
+      {/*  <div className="flex-between">*/}
+      {/*    <div className="flex items-center space-x-2">*/}
+      {/*      <Checkbox id="terms" onClick={() => {setComment(prev => ({...prev, isSecret: !prev.isSecret}))}}/>*/}
+      {/*      <label*/}
+      {/*        htmlFor="terms"*/}
+      {/*        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"*/}
+      {/*      >*/}
+      {/*        Secret Comment*/}
+      {/*      </label>*/}
+      {/*    </div>*/}
+      {/*    <Button type="submit">Post</Button>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </form>
   )
 }

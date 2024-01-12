@@ -1,4 +1,4 @@
-import EventPost from "@containers/Events/id/EventPost";
+import EventPost from "@containers/events/id/EventPost";
 
 
 export default async function EventPostPage({ params }) {

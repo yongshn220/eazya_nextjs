@@ -2,7 +2,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {createReplyApi} from "@services/reply";
 import {eventPostKey} from "@services/eventPost";
-import {EventPost} from "@models/eventPost";
+import {EventPost} from "@models/collections/eventPost";
 
 
 export default function useCreateReply() {

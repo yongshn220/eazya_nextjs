@@ -24,7 +24,7 @@ EventPostSchema.virtual('id').get(function() {return this._id.toHexString()})
 
 export const EventPostModel = models.EventPost || model("EventPost", EventPostSchema)
 
-export interface EventPost {
+export interface IEventPost {
   id?:            string;
   authorId:       string;
   universityId:   string;

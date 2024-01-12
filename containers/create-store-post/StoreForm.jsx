@@ -36,8 +36,8 @@ export default function StoreForm({mode, post, setPost}) {
           </div>
         </div>
 
-        <InputFieldDefault title="Title" value={post.title} onChangeHandler={(e) => setPost({...post, title: e.target.value})} placeholder="Title"/>
-        <InputFieldDefault title="Price" value={post.date} onChangeHandler={(e) => setPost({...post, date: e.target.value})} placeholder="Price"/>
+        <InputFieldDefault name="Title" value={post.title} onChangeHandler={(e) => setPost({...post, title: e.target.value})} placeholder="Title"/>
+        <InputFieldDefault name="Price" value={post.date} onChangeHandler={(e) => setPost({...post, date: e.target.value})} placeholder="Price"/>
         <InputFieldDescription title="Description" value={post.description} onChangeHandler={(e) => setPost({...post, description: e.target.value})} placeholder="Description" />
 
         <div className="w-full flex-end mb-5 gap-7">

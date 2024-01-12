@@ -1,16 +1,22 @@
 "use client"
 
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {useSession} from 'next-auth/react'
-import {useRouter} from 'next/navigation'
 import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
 import {dangerTextColor} from "@components/constants/values";
 import {DeletePostAlertDialog} from "@components/util/DeletePostAlertDialog";
 import {useState} from "react";
-export default function PostDropDown({authorId, handlePostDelete}) {
+import {IDropDown} from "@components/headers/PostHeader";
+
+interface Props {
+  dropDownData: IDropDown
+}
+
+export default function PostDropDown({dropDownData}: Props) {
   const {data: session} = useSession()
-  const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+
+  const {authorId, postDeleteHandler, deleteHref, editHref} = dropDownData
 
   function toggleDeleteDialogOpen() {
     setIsDeleteDialogOpen(prev => !prev)
@@ -18,7 +24,7 @@ export default function PostDropDown({authorId, handlePostDelete}) {
 
   return (
     <div className="flex gap-3 md:gap-5">
-      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={handlePostDelete}/>
+      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={postDeleteHandler} routeHref={deleteHref}/>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <HamburgerMenuIcon width={25} height={25} className="my-1"/>

@@ -1,5 +1,5 @@
 import { connectToDB } from '@utils/database'
-import {EventPostModel} from '@models/eventPost'
+import {EventPostModel} from '@models/collections/eventPost'
 import { StatusCodes } from 'http-status-codes'
 
 const DEFAULT_PAGE_NUMBER = 1;

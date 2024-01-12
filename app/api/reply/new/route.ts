@@ -4,7 +4,7 @@ import {StatusCodes} from "@node_modules/http-status-codes";
 import {connectToDB} from "@utils/database";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {PostType} from "@components/constants/enums";
-import {EventPostModel} from "@models/eventPost";
+import {EventPostModel} from "@models/collections/eventPost";
 import {ReplyBase} from "@models/base/replyBase";
 import {Types} from "mongoose";
 

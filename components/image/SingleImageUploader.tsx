@@ -1,11 +1,10 @@
-"use client"
 import imageCompression from "browser-image-compression";
-import {useState} from "react";
 
-export default function SingleImageUploader({disabled, children, onLoadEnd, setIsLoading}) {
+export default function SingleImageUploader({setImage, disabled, setIsLoading, children}) {
   async function handleImageChange(e) {
     const file = e.target.files[0];
-    e.target.value = '' // To detect the same file later.
+
+    console.log(file)
 
     if (!file) return;
 
@@ -18,17 +17,19 @@ export default function SingleImageUploader({disabled, children, onLoadEnd, setI
         useWebWorker: true
       };
 
-      const compressedFile = await imageCompression(file, options);
+      // const compressedFile = await imageCompression(file, options);
 
       const reader = new FileReader();
-      reader.readAsDataURL(compressedFile);
+      reader.readAsDataURL(file);
       reader.onloadend = () => {
-        onLoadEnd(reader.result)
         setIsLoading(false)
+        setImage(reader.result)
       };
     }
     catch (error) {
       console.error(error);
+    }
+    finally {
       setIsLoading(false)
     }
   }
@@ -38,10 +39,12 @@ export default function SingleImageUploader({disabled, children, onLoadEnd, setI
       <input
         type="file"
         id="file-input"
+        name="Image"
         style={{display: 'none'}}
         accept="image/*,image/heic"
         disabled={disabled}
         onChange={handleImageChange}
+        // onInput={handleImageChange}
       />
       <label htmlFor="file-input">
         {children}

@@ -1,13 +1,13 @@
-export default function InputFieldDefault({title, value, placeholder, onChangeHandler}) {
+export default function InputFieldDefault({name, value, placeholder}) {
   return (
     <label className="w-full">
       <span className="font-satoshi font-semibold text-base text-gray-700">
-        {title}
+        {name}
       </span>
       <input
-        value={value}
+        name={name}
+        defaultValue={value}
         placeholder={placeholder}
-        onChange={onChangeHandler}
         required
         className="form_input"
       />

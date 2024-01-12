@@ -3,10 +3,10 @@ export const FormMode = {
   EDIT: "Edit",
 }
 
-export const PostType = {
-  EVENT: "Event",
-  GENERAL: "General",
-  STORE: "Store",
+export enum PostType {
+  EVENT = "Event",
+  GENERAL = "General",
+  STORE = "Store",
 }
 
 export const GeneralTag = {
