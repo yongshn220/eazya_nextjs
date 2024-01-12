@@ -1,9 +1,14 @@
+import { headers } from 'next/headers'
+
 const baseURL = process.env.NEXT_BASE_URL
 
 export const Fetch = {
   get: async (uri) => {
     try {
-      const response = await fetch(baseURL+ uri, {method: "GET"})
+      const response = await fetch(baseURL+ uri, {
+        method: "GET",
+        headers: headers()
+      })
       if (response.ok) {
         return response.json()
       }

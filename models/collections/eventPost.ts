@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose'
 import {UniversityIds} from "@components/constants/values";
-import {PostType} from "@components/constants/enums";
+import {PostType, VoteType} from "@components/constants/enums";
 import {CommentBase, CommentBaseSchema} from "@models/base/commentBase";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 
@@ -17,6 +17,7 @@ const EventPostSchema = new Schema({
   createdAt:      { type: Date, required: true, },
   outOfService:   { type: Boolean, required: true, },
   voteUser:       { type: VoteUserBaseSchema, required: true },
+  votes:          { type: Number, default: 0, required: true  },
   comments:       [ CommentBaseSchema ]
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
@@ -38,5 +39,7 @@ export interface IEventPost {
   createdAt:      Date;
   outOfService:   boolean;
   voteUser:       VoteUser;
+  votes:          number;
+  myVoteType?:     VoteType;
   comments:       Array<CommentBase>;
 }

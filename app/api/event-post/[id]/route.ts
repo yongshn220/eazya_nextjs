@@ -1,9 +1,10 @@
-import { connectToDB } from '@utils/database'
-import {IEventPost, EventPostModel} from '@models/collections/eventPost'
-import { StatusCodes } from 'http-status-codes'
+import {connectToDB} from '@utils/database'
+import {EventPostModel, IEventPost} from '@models/collections/eventPost'
+import {StatusCodes} from 'http-status-codes'
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {getServerSession} from "next-auth/next";
-import {Storage} from "@node_modules/@google-cloud/storage";
+import {VoteType} from "@components/constants/enums";
+import {VoteUser} from "@models/base/voteUserBase";
 
 export async function GET(req: Request, { params }) {
   try {
@@ -11,11 +12,40 @@ export async function GET(req: Request, { params }) {
     const eventPost = await EventPostModel.findById(params.id)
     if (!eventPost) new Response("Post not found", {status: StatusCodes.NOT_FOUND})
 
-    const obj: IEventPost = eventPost.toObject()
+    const post = eventPost.toObject() as IEventPost
 
-    return new Response(JSON.stringify(obj), {status: StatusCodes.OK})
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      post.voteUser = {upvoted: [], downvoted: []} // Conceal user info
+      post.myVoteType = VoteType.NONE
+      return new Response(JSON.stringify(post), {status: StatusCodes.OK})
+    }
+
+    const userId = session.user.id
+
+    post.myVoteType = getUserVoteType(userId, post.voteUser)
+    post.voteUser = { upvoted: [], downvoted: []}
+
+    post.comments.forEach(comment => {
+      comment.myVoteType = getUserVoteType(userId, comment.voteUser)
+      comment.voteUser = { upvoted: [], downvoted: []}
+      comment.replies.forEach(reply => {
+        reply.myVoteType = getUserVoteType(userId, reply.voteUser)
+        reply.voteUser = { upvoted: [], downvoted: []}
+      })
+    })
+
+    return new Response(JSON.stringify(post), {status: StatusCodes.OK})
   }
   catch (error) {
     return new Response("Failed to fetch all event posts", {status: StatusCodes.INTERNAL_SERVER_ERROR})
   }
+}
+
+function getUserVoteType(userId: string, voteUser: VoteUser) {
+  const upvoteIds = voteUser.upvoted.map(id => id.toString())
+  const downvoteIds = voteUser.downvoted.map(id => id.toString())
+  if (upvoteIds.includes(userId)) return VoteType.UP
+  if (downvoteIds.includes(userId)) return VoteType.DOWN
+  else return VoteType.NONE
 }

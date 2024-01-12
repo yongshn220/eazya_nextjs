@@ -1,6 +1,7 @@
+import {PostType} from "@components/constants/enums";
 
 export interface CreateReplyRequest {
-    postType: string;
+    postType: PostType;
     postId: string;
     commentId: string;
     content: string;

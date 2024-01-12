@@ -5,10 +5,9 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
-import {PostType} from "@components/constants/enums";
-import {EventPostModel} from "@models/collections/eventPost";
 import {ReplyBase} from "@models/base/replyBase";
 import {revalidatePath} from "@node_modules/next/cache";
+import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 
 export default async function createReplyAction(req: CreateReplyRequest) {
   try {
@@ -17,9 +16,7 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
-    let PostModel;
-    if (req.postType === PostType.EVENT) PostModel = EventPostModel
-    else PostModel = "" // TODO: handle all posts.
+    const PostModel = GetPostModelByType(req.postType)
 
     const post = await PostModel.findById(req.postId)
     if (!post) return {status: StatusCodes.NOT_FOUND}
@@ -33,6 +30,7 @@ export default async function createReplyAction(req: CreateReplyRequest) {
       createdAt: new Date(),
       isSecret: req.isSecret,
       voteUser: { upvoted: [], downvoted: [] },
+      votes: 0,
     }
 
     const comment = post.comments.id(req.commentId)

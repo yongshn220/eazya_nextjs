@@ -1,6 +1,16 @@
-import Image from "next/image";
+"use client"
 
-export default function InfoHeader({author, date}) {
+import Image from "next/image";
+import {VoteType} from "@components/constants/enums";
+import triangleIcon from "@public/assets/icons/triangle.svg";
+import filledTriangleIcon from "@public/assets/icons/filledTriangle.svg"
+import invertedTriangleIcon from "@public/assets/icons/invertedTriangle.svg"
+import invertedFilledTriangle from "@public/assets/icons/invertedFilledTriangle.svg"
+
+
+export default function InfoHeader({author, date, votes, createVoteHandler, myVoteType}) {
+  myVoteType = myVoteType ?? VoteType.NONE
+
   return (
     <div className="w-full flex-between">
       <div className="flex-center gap-5">
@@ -14,9 +24,13 @@ export default function InfoHeader({author, date}) {
         <p className="text-sm text-gray-500">{date}</p>
       </div>
       <div className="flex-center px-2 py-1 border border-gray-300 rounded-full">
-        <Image src="/assets/icons/triangle.svg" width={15} height={15} className="mr-2 cursor-pointer" alt="triangle"/>
-        <p className="border-l border-r px-2">12</p>
-        <Image src="/assets/icons/invertedTriangle.svg" width={15} height={15} className="ml-2 cursor-pointer" alt="inverted triangle"/>
+        <Image src={(myVoteType === VoteType.UP)? filledTriangleIcon : triangleIcon} width={15} height={15} className="mr-2 cursor-pointer" alt="triangle"
+          onClick={() => createVoteHandler(VoteType.UP)}
+        />
+        <p className="border-l border-r px-2 font-satoshi">{votes}</p>
+        <Image src={(myVoteType === VoteType.DOWN) ? invertedFilledTriangle : invertedTriangleIcon} width={15} height={15} className="ml-2 cursor-pointer" alt="inverted triangle"
+          onClick={() => createVoteHandler(VoteType.DOWN)}
+        />
       </div>
     </div>
   )

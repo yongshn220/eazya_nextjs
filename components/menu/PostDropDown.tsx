@@ -16,7 +16,7 @@ export default function PostDropDown({dropDownData}: Props) {
   const {data: session} = useSession()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
-  const {authorId, postDeleteHandler, deleteHref, editHref} = dropDownData
+  const {authorId, postDeleteHandler, editHref} = dropDownData
 
   function toggleDeleteDialogOpen() {
     setIsDeleteDialogOpen(prev => !prev)
@@ -24,7 +24,7 @@ export default function PostDropDown({dropDownData}: Props) {
 
   return (
     <div className="flex gap-3 md:gap-5">
-      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={postDeleteHandler} routeHref={deleteHref}/>
+      <DeletePostAlertDialog open={isDeleteDialogOpen} onOpenChange={toggleDeleteDialogOpen} onContinue={postDeleteHandler}/>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <HamburgerMenuIcon width={25} height={25} className="my-1"/>

@@ -6,9 +6,8 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
-import {PostType} from "@components/constants/enums";
-import {EventPostModel} from "@models/collections/eventPost";
 import {CommentBase} from "@models/base/commentBase";
+import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 
 export default async function createCommentAction(req: CreateCommentRequest) {
   try {
@@ -17,9 +16,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
-    let PostModel;
-    if (req.postType === PostType.EVENT) PostModel = EventPostModel
-    else PostModel = "" // TODO: handle all posts.
+    const PostModel = GetPostModelByType(req.postType)
 
     const post = await PostModel.findById(req.postId)
     if (!post) return {status: StatusCodes.NOT_FOUND}
@@ -32,6 +29,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
       createdAt: new Date(),
       isSecret: req.isSecret,
       voteUser: { upvoted: [], downvoted: [] },
+      votes: 0,
       replies: [],
     }
 

@@ -12,27 +12,26 @@ import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 
 export default async function createEventPostAction(req: CreateEventPostRequest) {
-
-  const session = await getServerSession(authOptions)
-  if (!session) return {status: StatusCodes.UNAUTHORIZED}
-
-  const {image, type, title, date, time, location, description } = req
-
-  const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
-  const storage = new Storage({ credentials })
-
-  const arrayBuffer = await image.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
-
-  const imageName = `event/${session.user.email}/${Date.now()}-${uuidv4()}`
-  const bucketName = 'eazya_bucket_sbu'
-  const file = storage.bucket(bucketName).file(imageName)
-  await file.save(buffer)
-
-  const publicUrl = `https://storage.googleapis.com/${bucketName}/${imageName}`;
-
   try {
     await connectToDB()
+    const session = await getServerSession(authOptions)
+    if (!session) return {status: StatusCodes.UNAUTHORIZED}
+
+    const {image, type, title, date, time, location, description } = req
+
+    const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
+    const storage = new Storage({ credentials })
+
+    const arrayBuffer = await image.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+
+    const imageName = `event/${session.user.email}/${Date.now()}-${uuidv4()}`
+    const bucketName = 'eazya_bucket_sbu'
+    const file = storage.bucket(bucketName).file(imageName)
+    await file.save(buffer)
+
+    const publicUrl = `https://storage.googleapis.com/${bucketName}/${imageName}`;
+
     const newEventPost = new EventPostModel({
       authorId: session.user.id,
       universityId: session.user.universityId,

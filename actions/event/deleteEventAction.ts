@@ -11,10 +11,11 @@ import {redirect} from "@node_modules/next/navigation";
 
 export default async function deleteEventPostAction(id: string) {
   try {
+    await connectToDB()
+
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
-    await connectToDB()
 
     const eventPost = await EventPostModel.findById(id)
 

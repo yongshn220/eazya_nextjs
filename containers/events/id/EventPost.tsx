@@ -6,20 +6,34 @@ import {getEventPostApi} from "@services/eventPost";
 import {IEventPost} from "@models/collections/eventPost";
 import {IPostHeader} from "@models/types/postHeader";
 import deleteEventPostAction from "@actions/event/deleteEventAction";
+import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
+import {PostType, VoteType} from "@components/constants/enums";
+import createVoteAction from "@actions/vote/createVoteAction";
 
 
 export default async function EventPost({id}) {
   const post: IEventPost  = await getEventPostApi(id)
 
-  async function handlePostDelete() {
+  async function handleDeletePost() {
     "use server"
     await deleteEventPostAction(id)
   }
 
+  async function handleCreateVote(voteType: VoteType) {
+    "use server"
+    const req: CreateVoteRequest = {
+      postType: PostType.EVENT,
+      postId: post.id,
+      voteType: voteType,
+    }
+
+    await createVoteAction(req)
+  }
+
   const postHeaderData: IPostHeader = {
     post,
-    postDeleteHandler: handlePostDelete,
-    deleteHref: "/events",
+    deletePostHandler: handleDeletePost,
+    createVoteHandler: handleCreateVote,
     editHref: "#",
   }
 

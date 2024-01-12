@@ -26,4 +26,5 @@ export const GeneralMenuType = {
 export enum VoteType {
   UP = "voteTypeUp",
   DOWN = "voteTypeDown",
+  NONE = "voteTypeNone",
 }

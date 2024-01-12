@@ -1,14 +1,6 @@
 import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
-import {useRouter} from 'next/navigation'
 
-
-export function DeletePostAlertDialog({open, onOpenChange, onContinue, routeHref}) {
-  const router = useRouter()
-
-  function handleDelete() {
-    onContinue()
-    router.push(routeHref)
-  }
+export function DeletePostAlertDialog({open, onOpenChange, onContinue}) {
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -24,7 +16,7 @@ export function DeletePostAlertDialog({open, onOpenChange, onContinue, routeHref
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
