@@ -1,16 +1,18 @@
-import {connectToDB} from '@utils/database'
-import {EventPostModel, IEventPost} from '@models/collections/eventPost'
-import {StatusCodes} from 'http-status-codes'
+import {connectToDB} from "@utils/database";
+import {EventPostModel, IEventPost} from "@models/collections/eventPost";
+import {StatusCodes} from "@node_modules/http-status-codes";
+import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {getServerSession} from "next-auth/next";
 import {VoteType} from "@components/constants/enums";
 import {VoteUser} from "@models/base/voteUserBase";
 
-export async function GET(req: Request, { params }) {
+
+export async function GetEventAction(postId: string) {
+  console.log("GET EVENT ACTION OCCURS")
   try {
     await connectToDB()
-    const eventPost = await EventPostModel.findById(params.id)
-    if (!eventPost) return new Response("Post not found", {status: StatusCodes.NOT_FOUND})
+    const eventPost = await EventPostModel.findById(postId)
+    if (!eventPost) return null
 
     const post = eventPost.toObject() as IEventPost
 
@@ -18,7 +20,7 @@ export async function GET(req: Request, { params }) {
     if (!session) {
       post.voteUser = {upvoted: [], downvoted: []} // Conceal user info
       post.myVoteType = VoteType.NONE
-      return new Response(JSON.stringify(post), {status: StatusCodes.OK})
+      return JSON.parse(JSON.stringify(post))
     }
 
     const userId = session.user.id
@@ -35,10 +37,10 @@ export async function GET(req: Request, { params }) {
       })
     })
 
-    return new Response(JSON.stringify(post), {status: StatusCodes.OK})
+    return JSON.parse(JSON.stringify(post))
   }
   catch (error) {
-    return new Response("Failed to fetch all event posts", {status: StatusCodes.INTERNAL_SERVER_ERROR})
+    return null
   }
 }
 
@@ -49,3 +51,4 @@ function getUserVoteType(userId: string, voteUser: VoteUser) {
   if (downvoteIds.includes(userId)) return VoteType.DOWN
   else return VoteType.NONE
 }
+

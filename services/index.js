@@ -7,7 +7,6 @@ export const Fetch = {
     try {
       const response = await fetch(baseURL+ uri, {
         method: "GET",
-        headers: headers()
       })
       if (response.ok) {
         return response.json()

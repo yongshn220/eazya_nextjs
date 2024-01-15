@@ -9,10 +9,12 @@ import deleteEventPostAction from "@actions/event/deleteEventAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import {PostType, VoteType} from "@components/constants/enums";
 import createVoteAction from "@actions/vote/createVoteAction";
+import {GetEventAction} from "@actions/event/getEventAction";
 
 
 export default async function EventPost({id}) {
-  const post: IEventPost  = await getEventPostApi(id)
+  const post: IEventPost  = await GetEventAction(id)
+  if (!post) return <></>
 
   async function handleDeletePost() {
     "use server"
