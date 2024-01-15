@@ -1,13 +1,12 @@
 import {connectToDB} from "@utils/database";
 import {EventPostModel, IEventPost} from "@models/collections/eventPost";
-import {StatusCodes} from "@node_modules/http-status-codes";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {VoteType} from "@components/constants/enums";
 import {VoteUser} from "@models/base/voteUserBase";
 
 
-export async function GetEventAction(postId: string) {
+export default async function GetEventAction(postId: string) {
   console.log("GET EVENT ACTION OCCURS")
   try {
     await connectToDB()

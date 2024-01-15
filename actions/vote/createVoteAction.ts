@@ -16,12 +16,12 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     await connectToDB()
 
     const session = await getServerSession(authOptions)
-    if (!session) return {status: StatusCodes.UNAUTHORIZED}
+    if (!session) return null
 
     const PostModel = GetPostModelByType(req.postType)
 
     const post = await PostModel.findById(req.postId)
-    if (!post) return {status: StatusCodes.NOT_FOUND}
+    if (!post) return null
     if (!req.commentId) {
       handleVoting(session.user.id, req.voteType, post)
       post.save()
@@ -44,7 +44,7 @@ export default async function createVoteAction(req: CreateVoteRequest) {
 
   }
   catch (error) {
-    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    return null
   }
   finally {
     revalidatePath(`/events/${req.postId}`)
@@ -56,20 +56,31 @@ function handleVoting(userId: string, voteType: VoteType, target: any) {
 
   if (voteType === VoteType.UP) {
     if (target.voteUser.upvoted.includes(userId)) {
-      target.voteUser.upvoted = target.voteUser.upvoted.filter((oid: ObjectId) => !oid.equals(id))
+      target.voteUser.upvoted = filterUserIdFromVotes(target.voteUser.upvoted, id)
     }
     else {
+      if (target.voteUser.downvoted.includes(userId)) {
+        target.voteUser.downvoted = filterUserIdFromVotes(target.voteUser.downvoted, id)
+      }
       target.voteUser.upvoted.push(id)
     }
   }
   else if (voteType === VoteType.DOWN) {
     if (target.voteUser.downvoted.includes(userId)) {
-      target.voteUser.downvoted = target.voteUser.downvoted.filter((oid: ObjectId) => !oid.equals(id))
+      target.voteUser.downvoted = filterUserIdFromVotes(target.voteUser.downvoted, id)
     }
     else {
+      if (target.voteUser.upvoted.includes(userId)) {
+        target.voteUser.upvoted = filterUserIdFromVotes(target.voteUser.upvoted, id)
+      }
       target.voteUser.downvoted.push(id)
     }
   }
 
   target.votes = target.voteUser.upvoted.length - target.voteUser.downvoted.length
+}
+
+
+function filterUserIdFromVotes(votes: Array<ObjectId>, userId: ObjectId) {
+  return votes.filter((oid: ObjectId) => !oid.equals(userId))
 }
