@@ -9,7 +9,7 @@ import {useState} from "react";
 import {IDropDown} from "@components/headers/PostHeader";
 
 interface Props {
-  dropDownData: IDropDown
+  dropDownData: IDropDown;
 }
 
 export default function PostDropDown({dropDownData}: Props) {

@@ -16,7 +16,6 @@ export default async function deleteEventPostAction(id: string) {
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
-
     const eventPost = await EventPostModel.findById(id)
 
     if (!eventPost) return {status: StatusCodes.NOT_FOUND}
@@ -37,7 +36,7 @@ export default async function deleteEventPostAction(id: string) {
     return { status: StatusCodes.OK }
   }
   catch (error) {
-    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    return null
   }
   finally {
     revalidatePath('/events')

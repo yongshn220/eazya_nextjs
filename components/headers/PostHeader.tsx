@@ -11,7 +11,7 @@ export interface IDropDown {
 }
 
 interface Props {
-  postHeaderData: IPostHeader
+  postHeaderData: IPostHeader;
 }
 
 export default function PostHeader({postHeaderData}: Props) {

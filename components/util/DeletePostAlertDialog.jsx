@@ -1,3 +1,4 @@
+"use client"
 import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
 
 export function DeletePostAlertDialog({open, onOpenChange, onContinue}) {
@@ -16,7 +17,7 @@ export function DeletePostAlertDialog({open, onOpenChange, onContinue}) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={() => onContinue()}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
