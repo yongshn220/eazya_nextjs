@@ -50,6 +50,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
       notificationType: NotificationType.COMMENT_ON_POST,
       postType: req.postType,
       postId: req.postId,
+      preview: post.title,
     }
     await createNotificationAction(notiReq)
 

@@ -74,7 +74,7 @@ function NotificationItem({notification}: Props) {
           <div className="text-xs text-gray-500">{notification.createdAt}</div>
         </div>
         <p className="w-full flex-start font-semibold line-clamp-1">
-          {notification.postTitle}
+          {notification.preview}
         </p>
         <p className="text-xs text-gray-600">
           {getMessageByNotificationType(notification.notificationType)}

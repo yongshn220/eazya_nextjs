@@ -9,4 +9,5 @@ export interface CreateNotificationRequest {
   postId:             string;
   commentId?:         string;
   replyId?:           string;
+  preview:           string;
 }

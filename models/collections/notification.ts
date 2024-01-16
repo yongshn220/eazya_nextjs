@@ -10,6 +10,7 @@ const NotificationSchema = new Schema({
   postId:             { type: Schema.Types.ObjectId, required: true },
   commentId:          { type: Schema.Types.ObjectId, required: false },
   replyId:            { type: Schema.Types.ObjectId, required: false },
+  preview:            { type: String, required: true },
   isRead:             { type: Boolean, default: false, required: true },
   createdAt:          { type: Date, required: true, },
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
@@ -25,7 +26,7 @@ export interface INotification {
   notificationType:   NotificationType;
   postType:           PostType;
   postId:             string;
-  postTitle?:         string;
+  preview:            string;
   commentId?:         string;
   replyId?:           string;
   isRead:             boolean;

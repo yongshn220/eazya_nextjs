@@ -15,17 +15,8 @@ export default async function getNotificationsAction() {
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    let notificationDocs = await NotificationModel.find({fromUserId: session.user.id})
-
-    const notificationsPromises = notificationDocs.map(async (notification) => {
-      let noti = notification.toObject() as INotification
-      const PostModel = GetPostModelByType(noti.postType)
-      const post = await PostModel.findById(noti.postId)
-      noti.postTitle = post ? post.title : ''
-      return noti
-    });
-
-    const notifications = await Promise.all(notificationsPromises);
+    let notifications = await NotificationModel.find({fromUserId: session.user.id})
+    notifications = notifications.map(notification => notification.toObject())
 
     return JSON.parse(JSON.stringify(notifications))
   }

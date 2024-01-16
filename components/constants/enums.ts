@@ -22,6 +22,12 @@ export enum NotificationType {
   NONE =                "None"
 }
 
+export enum UserActivityType {
+  CREATE_POST = "CreatePost",
+  CREATE_COMMENT = "CreateComment",
+  CREATE_REPLY = "CreateReply",
+}
+
 export const GeneralTag = {
   GENERAL: "General",
   INTERNATIONAL: "International",

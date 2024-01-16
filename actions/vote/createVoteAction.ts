@@ -100,26 +100,31 @@ function removeUserIdFromVotes(votes: Array<ObjectId>, userId: ObjectId) {
 }
 
 function createNotificationRequest(req: CreateVoteRequest, userId: string, votingTarget: any): CreateNotificationRequest {
-  let notificationType: NotificationType;
+  let notificationType: NotificationType
+  let preview: string
 
   if (!req.commentId) {
     notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_POST : NotificationType.DOWNVOTE_ON_POST
+    preview = votingTarget.title
   }
   else if (!req.replyId) {
     notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_COMMENT : NotificationType.DOWNVOTE_ON_COMMENT
+    preview = votingTarget.content
   }
   else {
     notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_REPLY : NotificationType.DOWNVOTE_ON_REPLY
+    preview = votingTarget.content
   }
 
   return {
     fromUserId: userId,
     toUserId: votingTarget.authorId,
-    notificationType: notificationType,
+    notificationType,
     postType: req.postType,
     postId: req.postId,
     commentId: req.commentId,
-    replyId: req.replyId
+    replyId: req.replyId,
+    preview,
   };
 }
 

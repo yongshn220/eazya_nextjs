@@ -51,6 +51,7 @@ export default async function createReplyAction(req: CreateReplyRequest) {
       postType: req.postType,
       postId: req.postId,
       commentId: req.commentId,
+      preview: comment.content,
     }
     await createNotificationAction(notiReq)
 
