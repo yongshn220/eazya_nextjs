@@ -15,8 +15,6 @@ export default async function EventPost({id}) {
   const post: IEventPost  = await getEventAction(id)
   if (!post) return <></>
 
-  console.log(post)
-
   async function handleDeletePost() {
     "use server"
     await deleteEventPostAction(id)

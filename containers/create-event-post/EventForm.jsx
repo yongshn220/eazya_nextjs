@@ -6,7 +6,6 @@ import {hoveredTextColor} from "@components/constants/values";
 import InputFieldDescription from "@components/input/InputFieldDescription";
 import ImageUploader from "@containers/create-event-post/ImageUploader";
 
-
 export default function EventForm({mode, handleSubmit}) {
   return (
     <div className="w-full">

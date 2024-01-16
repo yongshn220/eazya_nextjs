@@ -9,7 +9,8 @@ const userActivitySchema = new Schema({
   postId:             { type: Schema.Types.ObjectId, required: true },
   commentId:          { type: Schema.Types.ObjectId, required: false },
   replyId:            { type: Schema.Types.ObjectId, required: false },
-  createdAt:          { type: Date, required: true, },
+  preview:            { type: String, required: true },
+  createdAt:          { type: Date, required: true },
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 userActivitySchema.virtual('id').get(function() {return this._id.toHexString()})
 
@@ -24,5 +25,6 @@ export interface IUserActivity {
   postId:             string;
   commentId?:         string;
   replyId?:           string;
+  preview:            string;
   createdAt:          string;
 }

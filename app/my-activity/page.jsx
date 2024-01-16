@@ -1,6 +1,6 @@
 import MyActivity from "@containers/my-activity";
 
-export default function MyActivityPage() {
+export default async function MyActivityPage() {
   return (
     <MyActivity/>
   )

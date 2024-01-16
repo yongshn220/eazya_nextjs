@@ -4,12 +4,15 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {Storage} from "@node_modules/@google-cloud/storage";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {connectToDB} from "@utils/database";
 import {EventPostModel} from "@models/collections/eventPost";
 import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
+import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
+import {PostType, UserActivityType} from "@components/constants/enums";
+import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 
 export default async function createEventPostAction(req: CreateEventPostRequest) {
   try {
@@ -48,7 +51,16 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
       commentators: [],
       comments: [],
     })
-    newEventPost.save()
+    await newEventPost.save()
+
+    const activityReq: CreateUserActivityRequest = {
+      userActivityType: UserActivityType.CREATE_POST,
+      postType: PostType.EVENT,
+      postId: newEventPost._id,
+      preview: newEventPost.title,
+    }
+
+    await createUserActivityAction(activityReq)
 
     return newEventPost
   }

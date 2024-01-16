@@ -1,12 +1,12 @@
 export const FormMode = {
   CREATE: "Create ",
-  EDIT: "Edit",
+  EDIT:   "Edit",
 }
 
 export enum PostType {
-  EVENT = "Event",
-  GENERAL = "General",
-  STORE = "Store",
+  EVENT =     "Event",
+  GENERAL =   "General",
+  STORE =     "Store",
 }
 
 export enum NotificationType {
@@ -20,6 +20,13 @@ export enum NotificationType {
   DOWNVOTE_ON_COMMENT = "DownvoteOnComment",
   DOWNVOTE_ON_REPLY =   "DownvoteOnReply",
   NONE =                "None"
+}
+
+export enum ActivityMenu {
+  ALL =     "All",
+  EVENT =   "Event",
+  GENERAL = "General",
+  STORE =   "Buy & Sell",
 }
 
 export enum UserActivityType {
@@ -46,4 +53,13 @@ export enum VoteType {
   UP = "voteTypeUp",
   DOWN = "voteTypeDown",
   NONE = "voteTypeNone",
+}
+
+export function PostTypeToActivityMenu(postType: PostType) {
+  switch(postType) {
+    case PostType.EVENT: return ActivityMenu.EVENT
+    case PostType.GENERAL: return ActivityMenu.GENERAL
+    case PostType.STORE: return ActivityMenu.STORE
+    default: return ActivityMenu.ALL
+  }
 }

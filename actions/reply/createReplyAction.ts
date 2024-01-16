@@ -9,8 +9,10 @@ import {ReplyBase} from "@models/base/replyBase";
 import {revalidatePath} from "@node_modules/next/cache";
 import {getCommentAuthorNameAndSave, GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
-import {NotificationType} from "@components/constants/enums";
+import {NotificationType, PostType, UserActivityType} from "@components/constants/enums";
 import createNotificationAction from "@actions/notification/createNotificationAction";
+import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
+import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 
 export default async function createReplyAction(req: CreateReplyRequest) {
   try {
@@ -54,6 +56,18 @@ export default async function createReplyAction(req: CreateReplyRequest) {
       preview: comment.content,
     }
     await createNotificationAction(notiReq)
+
+    // USER ACTIVITY
+    const newReplyId = comment.replies[comment.replies.length - 1]._id
+    const activityReq: CreateUserActivityRequest = {
+      userActivityType: UserActivityType.CREATE_POST,
+      postType: PostType.EVENT,
+      postId: req.postId,
+      commentId: req.commentId,
+      replyId: newReplyId,
+      preview: req.content,
+    }
+    await createUserActivityAction(activityReq)
 
     return newReply
   }

@@ -1,11 +1,23 @@
-import { headers } from 'next/headers'
-
-const baseURL = process.env.NEXT_BASE_URL
 
 export const Fetch = {
-  get: async (uri) => {
+  sget: async (uri) => {
     try {
-      const response = await fetch(baseURL+ uri, {
+      const response = await fetch(process.env.NEXT_BASE_URL + uri, {
+        method: "GET",
+      })
+      if (response.ok) {
+        return response.json()
+      }
+    }
+    catch (error) {
+      console.log(error)
+      return false
+    }
+  },
+
+  cget: async (uri) => {
+    try {
+      const response = await fetch(uri, {
         method: "GET",
       })
       if (response.ok) {
@@ -20,7 +32,7 @@ export const Fetch = {
 
   post: async (uri, data) => {
     try {
-      const response = await fetch(baseURL + uri, {
+      const response = await fetch(process.env.NEXT_BASE_URL + uri, {
         method: "POST",
         body: JSON.stringify(data)
       })
@@ -37,7 +49,7 @@ export const Fetch = {
   update: async (uri, id) => {},
   delete: async (uri, id) => {
     try {
-      const response = await fetch(baseURL + uri, {
+      const response = await fetch(process.env.NEXT_BASE_URL + uri, {
         method: "DELETE",
         body: JSON.stringify(id)
       })

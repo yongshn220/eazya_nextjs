@@ -1,22 +1,15 @@
-"use client"
-
 import Image from "next/image";
-import {useSession} from "next-auth/react";
 import {Button} from "@components/ui/button";
-import {useState} from "react";
-import {highlightedTextColor} from "@components/constants/values";
-import ActivityList from "@containers/my-activity/ActivityList";
+import {getServerSession} from "next-auth/next";
+import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import ActivityContent from "@containers/my-activity/Content";
+import getUserActivitiesAction from "@actions/userActivity/getUserActivitiesAction";
 
-const ActivityMenu = {
-  RECENT: "Recent",
-  EVENT: "Event",
-  GENERAL: "General",
-  BUY_SELL: "Buy & Sell",
-}
+export default async function MyActivity() {
+  const session = await getServerSession(authOptions)
+  if (!session) return (<></>)
 
-export default function MyActivity() {
-  const {data: session} = useSession()
-  const [selectedActivity, setSelectedActivity] = useState(ActivityMenu.RECENT)
+  const activities = await getUserActivitiesAction(session)
 
   return (
     <section className="w-full">
@@ -27,21 +20,11 @@ export default function MyActivity() {
       <div className="flex-between glassmorphism mt-4">
         <div className="flex-center gap-4">
           <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" />
-          <p className="font-semibold">yongshn220@gmail.com</p>
+          <p className="font-semibold">{session?.user.email}</p>
         </div>
         <Button variant="outline">My Account</Button>
       </div>
-
-      <div className="flex-start gap-10 mt-16 font-semibold pb-2 border-b border-gray-300 ">
-        {
-          Object.values(ActivityMenu).map(activity => {
-            const textColor = selectedActivity === activity? highlightedTextColor : ""
-            return <p className={`${textColor} cursor-pointer`} onClick={() => setSelectedActivity(activity)}>{activity}</p>
-          })
-        }
-      </div>
-      
-      <ActivityList/>
+      <ActivityContent activities={activities}/>
     </section>
   )
 }

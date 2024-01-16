@@ -5,7 +5,7 @@ import {IPostHeader} from "@models/types/postHeader";
 import {IEventPost} from "@models/collections/eventPost";
 
 export interface IDropDown {
-  authorId: string;
+  isMine: boolean;
   postDeleteHandler: Function;
   editHref: string;
 }
@@ -18,7 +18,7 @@ export default function PostHeader({postHeaderData}: Props) {
   const post = postHeaderData.post as IEventPost
 
   const dropDownData: IDropDown = {
-    authorId: post.authorId,
+    isMine: post.isMine,
     postDeleteHandler: postHeaderData.deletePostHandler,
     editHref: postHeaderData.editHref
   }

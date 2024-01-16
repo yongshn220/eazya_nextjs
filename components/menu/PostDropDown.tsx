@@ -16,7 +16,7 @@ export default function PostDropDown({dropDownData}: Props) {
   const {data: session} = useSession()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
-  const {authorId, postDeleteHandler, editHref} = dropDownData
+  const {isMine, postDeleteHandler, editHref} = dropDownData
 
   function toggleDeleteDialogOpen() {
     setIsDeleteDialogOpen(prev => !prev)
@@ -31,7 +31,7 @@ export default function PostDropDown({dropDownData}: Props) {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {
-            (!session || session.user.id !== authorId) ?
+            (!session || !isMine) ?
             <>
               <DropdownMenuItem >Share</DropdownMenuItem>
               <DropdownMenuItem >Report</DropdownMenuItem>

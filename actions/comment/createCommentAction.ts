@@ -12,13 +12,14 @@ import {
   GetPostModelByType
 } from "@actions/actionHelper/helperFunctions";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
-import {NotificationType} from "@components/constants/enums";
+import {NotificationType, PostType, UserActivityType} from "@components/constants/enums";
 import createNotificationAction from "@actions/notification/createNotificationAction";
+import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
+import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 
 export default async function createCommentAction(req: CreateCommentRequest) {
   try {
     await connectToDB()
-
     const session = await getServerSession(authOptions)
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
@@ -40,10 +41,10 @@ export default async function createCommentAction(req: CreateCommentRequest) {
       votes: 0,
       replies: [],
     }
-
     post.comments.push(newComment)
     await post.save()
 
+    // NOTIFICATION
     const notiReq: CreateNotificationRequest = {
       fromUserId: session.user.id,
       toUserId: post.authorId.toString(),
@@ -53,6 +54,17 @@ export default async function createCommentAction(req: CreateCommentRequest) {
       preview: post.title,
     }
     await createNotificationAction(notiReq)
+
+    // USER ACTIVITY
+    const newCommentId = post.comments[post.comments.length - 1]._id;
+    const activityReq: CreateUserActivityRequest = {
+      userActivityType: UserActivityType.CREATE_POST,
+      postType: PostType.EVENT,
+      postId: newComment.postId,
+      commentId: newCommentId,
+      preview: newComment.content,
+    }
+    await createUserActivityAction(activityReq)
 
     return newComment
   }
