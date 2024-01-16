@@ -1,4 +1,5 @@
 "use client"
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
@@ -6,7 +7,6 @@ import { signIn, useSession, getProviders } from 'next-auth/react'
 import {Button} from "@components/ui/button";
 import NavDrawer from "@components/nav/NavDrawer";
 import NavDropDown from "@components/nav/NavDropDown";
-import NotificationIcon from "@public/assets/icons/notification.svg"
 import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
 
 export default function Nav() {

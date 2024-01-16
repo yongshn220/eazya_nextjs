@@ -25,8 +25,9 @@ export interface INotification {
   notificationType:   NotificationType;
   postType:           PostType;
   postId:             string;
+  postTitle?:         string;
   commentId?:         string;
   replyId?:           string;
   isRead:             boolean;
-  createdAt:          Date;
+  createdAt:          string;
 }
