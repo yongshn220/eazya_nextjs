@@ -12,15 +12,13 @@ import {redirect} from "@node_modules/next/navigation";
 export default async function deleteEventPostAction(id: string) {
   try {
     await connectToDB()
-
     const session = await getServerSession(authOptions)
-    if (!session) return {status: StatusCodes.UNAUTHORIZED}
+    if (!session) return null
 
     const eventPost = await EventPostModel.findById(id)
+    if (!eventPost) return null
 
-    if (!eventPost) return {status: StatusCodes.NOT_FOUND}
-
-    if (session.user.id !== eventPost.authorId.toString()) return {status: StatusCodes.UNAUTHORIZED}
+    if (session.user.id !== eventPost.authorId.toString()) return null
 
     const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
     const storage = new Storage({ credentials })
