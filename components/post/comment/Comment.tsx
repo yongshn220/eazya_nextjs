@@ -26,6 +26,7 @@ export default function Comment({postType, postId, comment, isReplyOn, onToggleR
         date={comment.createdAt}
         votes={comment.votes}
         myVoteType={comment.myVoteType}
+        isMine={comment.isMine}
         createVoteHandler={handleCreateVote}
       />
       <p className="text-sm leading-6 text-gray-900">{comment.content}</p>

@@ -42,9 +42,10 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
       time,
       location,
       description,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
       outOfService: false,
       voteUser: {upvoted: [], downvoted: []},
+      commentators: [],
       comments: [],
     })
     newEventPost.save()

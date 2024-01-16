@@ -6,10 +6,12 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
-import {VoteType} from "@components/constants/enums";
+import {NotificationType, VoteType} from "@components/constants/enums";
 import {revalidatePath} from "next/cache";
 import {ObjectId} from "mongodb";
 import mongoose from "mongoose";
+import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
+import createNotificationAction from "@actions/notification/createNotificationAction";
 
 export default async function createVoteAction(req: CreateVoteRequest) {
   try {
@@ -20,11 +22,24 @@ export default async function createVoteAction(req: CreateVoteRequest) {
 
     const PostModel = GetPostModelByType(req.postType)
 
+    const notiReq: CreateNotificationRequest = {
+      fromUserId: session.user.id,
+      toUserId: "",
+      notificationType: NotificationType.NONE,
+      postType: req.postType,
+      postId: req.postId,
+    }
+
     const post = await PostModel.findById(req.postId)
     if (!post) return null
     if (!req.commentId) {
       handleVoting(session.user.id, req.voteType, post)
       post.save()
+
+      notiReq.toUserId = post.authorId
+      notiReq.notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_POST : NotificationType.DOWNVOTE_ON_POST
+      await createNotificationAction(notiReq)
+
       return post.votes
     }
 
@@ -33,6 +48,12 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     if (!req.replyId) {
       handleVoting(session.user.id, req.voteType, comment)
       post.save()
+
+      notiReq.toUserId = comment.authorId
+      notiReq.notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_COMMENT : NotificationType.DOWNVOTE_ON_COMMENT
+      notiReq.commentId = req.commentId
+      await createNotificationAction(notiReq)
+
       return post.votes
     }
 
@@ -40,6 +61,13 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     if (!reply) return {status: StatusCodes.NOT_FOUND};
     handleVoting(session.user.id, req.voteType, reply)
     post.save()
+
+    notiReq.toUserId = reply.authorId
+    notiReq.notificationType = (req.voteType === VoteType.UP)? NotificationType.UPVOTE_ON_REPLY : NotificationType.DOWNVOTE_ON_REPLY
+    notiReq.commentId = req.commentId
+    notiReq.replyId = req.replyId
+    await createNotificationAction(notiReq)
+
     return post.votes
 
   }

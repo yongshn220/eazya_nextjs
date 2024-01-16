@@ -17,7 +17,8 @@ const EventPostSchema = new Schema({
   createdAt:      { type: Date, required: true, },
   outOfService:   { type: Boolean, required: true, },
   voteUser:       { type: VoteUserBaseSchema, required: true },
-  votes:          { type: Number, default: 0, required: true  },
+  votes:          { type: Number, default: 0, required: true },
+  commentators:   [{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments:       [ CommentBaseSchema ]
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
 
@@ -40,6 +41,8 @@ export interface IEventPost {
   outOfService:   boolean;
   voteUser:       VoteUser;
   votes:          number;
-  myVoteType?:     VoteType;
+  myVoteType?:    VoteType;
+  isMine?:        boolean;
+  commentators:   Array<string>;
   comments:       Array<CommentBase>;
 }

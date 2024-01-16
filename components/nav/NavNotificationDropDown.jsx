@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger
 } from "@components/ui/dropdown-menu";
 import MailIcon from '@public/assets/icons/mail.svg'
+import {Badge} from "@components/ui/badge";
 
 export default function NavNotificationDropDown() {
   return (
@@ -35,18 +36,16 @@ function NotificationItem() {
   return (
     <DropdownMenuItem className="cursor-pointer">
       <div className="w-full flex-start flex-col py-3 gap-2">
-        <div className="w-full flex-center gap-3">
-          <div>
-            <MailIcon/>
-          </div>
-          <div className="w-full flex-between">
-            <div className="font-semibold">This is a sample title</div>
-            <div className="text-xs text-gray-500">4 days ago</div>
-          </div>
+        <div className="w-full flex-between">
+          <Badge variant="outline" className="border-gray-300">General</Badge>
+          <div className="text-xs text-gray-500">4 days ago</div>
         </div>
-        <div className="ml-9 text-xs text-gray-600">
+        <p className="w-full flex-start font-semibold line-clamp-1">
+          This is a sample title and sample title and title and title and title
+        </p>
+        <p className="text-xs text-gray-600">
           Someone added a comment on you post.
-        </div>
+        </p>
       </div>
     </DropdownMenuItem>
   )

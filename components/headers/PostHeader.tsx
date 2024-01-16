@@ -41,6 +41,7 @@ export default function PostHeader({postHeaderData}: Props) {
           votes={post.votes}
           createVoteHandler={postHeaderData.createVoteHandler}
           myVoteType={post.myVoteType}
+          isMine={post.isMine}
         />
         <div className="cursor-pointer">
           <PostDropDown dropDownData={dropDownData}/>

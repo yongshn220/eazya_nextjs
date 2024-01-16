@@ -28,5 +28,6 @@ export interface ReplyBase {
   isSecret:       boolean;
   voteUser:       VoteUser;
   votes:          number;
-  myVoteType?:     VoteType;
+  myVoteType?:    VoteType;
+  isMine?:        boolean;
 }

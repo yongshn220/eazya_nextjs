@@ -17,15 +17,16 @@ export const CommentBaseSchema = new Schema({
 CommentBaseSchema.virtual('id').get(function() {return this._id.toHexString()})
 
 export interface CommentBase {
-  id?:          string;
-  postId:       string;
-  authorId:     string;
-  authorName:   string;
-  content:      string;
-  createdAt:    Date;
-  isSecret:     boolean;
-  voteUser:     VoteUser;
-  votes:        number;
-  myVoteType?:   VoteType;
-  replies:      Array<ReplyBase>;
+  id?:            string;
+  postId:         string;
+  authorId:       string;
+  authorName:     string;
+  content:        string;
+  createdAt:      Date;
+  isSecret:       boolean;
+  voteUser:       VoteUser;
+  votes:          number;
+  myVoteType?:    VoteType;
+  isMine?:        boolean;
+  replies:        Array<ReplyBase>;
 }

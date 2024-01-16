@@ -31,8 +31,9 @@ export default function Reply({reply, postType, postId, commentId}: Props) {
         author={reply.authorName}
         date={reply.createdAt}
         votes={reply.votes}
-        myVoteType={reply.myVoteType}
         createVoteHandler={handleCreateVote}
+        myVoteType={reply.myVoteType}
+        isMine={reply.isMine}
       />
       <p className="text-sm leading-6 text-gray-900">{reply.content}</p>
     </div>
