@@ -18,9 +18,9 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return {status: StatusCodes.UNAUTHORIZED}
+    if (!session) return null
 
-    const {image, type, title, date, time, location, description } = req
+    const {image, title, date, time, location, description } = req
 
     const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
     const storage = new Storage({ credentials })
@@ -38,7 +38,7 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
     const newEventPost = new EventPostModel({
       authorId: session.user.id,
       universityId: session.user.universityId,
-      type,
+      type: PostType.EVENT,
       image: publicUrl,
       title,
       date,
@@ -59,13 +59,13 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
       postId: newEventPost._id,
       preview: newEventPost.title,
     }
-
     await createUserActivityAction(activityReq)
 
     return newEventPost
   }
   catch (error) {
-    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    console.log(error)
+    return null
   }
   finally {
     revalidatePath('/events')

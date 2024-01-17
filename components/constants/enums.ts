@@ -35,18 +35,23 @@ export enum UserActivityType {
   CREATE_REPLY = "CreateReply",
 }
 
-export const GeneralTag = {
-  ENGLISH: "English",
-  KOREAN: "Korean",
-  CHINESE: "Chinese",
-  INDIAN: "Indian",
-  INTERNATIONAL: "International",
-  EXCHANGE: "Exchange",
+export enum GeneralCommunityType {
+  ENGLISH = "English",
+  KOREAN = "Korean",
+  CHINESE = "Chinese",
+  INDIAN = "Indian",
+  INTERNATIONAL = "International",
+  EXCHANGE = "Exchange",
 }
 
-export const GeneralMenuType = {
-  ...GeneralTag,
-  ALL: "All",
+export enum GeneralMenuType {
+  ENGLISH = "English",
+  KOREAN = "Korean",
+  CHINESE = "Chinese",
+  INDIAN = "Indian",
+  INTERNATIONAL = "International",
+  EXCHANGE = "Exchange",
+  ALL = "All",
 }
 
 export enum VoteType {

@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @tag {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["mongoose"],

@@ -10,7 +10,6 @@ export default function CreateEventPost() {
     "use server"
     const req: CreateEventPostRequest = {
       image: formData.get('Image') as File,
-      type: PostType.EVENT,
       title: formData.get('Title') as string,
       date: formData.get('Date') as string,
       time: formData.get('Time') as string ,

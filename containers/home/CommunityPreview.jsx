@@ -5,7 +5,7 @@ import {hoveredTextColor} from "@components/constants/values";
 export default function CommunityPreview({type}) {
   return (
     <div className="relative">
-      <Link href="/general">
+      <Link href="/general/tag/English">
         <div className="glass_box cursor-pointer group">
           <p className={`text-md font-semibold group-hover:${hoveredTextColor}`}>{type}</p>
         </div>
