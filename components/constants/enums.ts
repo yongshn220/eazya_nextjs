@@ -36,12 +36,12 @@ export enum UserActivityType {
 }
 
 export const GeneralTag = {
-  GENERAL: "General",
-  INTERNATIONAL: "International",
-  EXCHANGE: "Exchange",
+  ENGLISH: "English",
   KOREAN: "Korean",
   CHINESE: "Chinese",
   INDIAN: "Indian",
+  INTERNATIONAL: "International",
+  EXCHANGE: "Exchange",
 }
 
 export const GeneralMenuType = {

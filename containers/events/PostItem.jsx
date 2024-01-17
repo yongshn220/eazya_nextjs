@@ -11,12 +11,11 @@ export default async function EventPostItem({id}) {
   return (
     <Link href={`/events/${id}`}>
       <div className="group relative glass_box">
-        <div
-          className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-50">
+        <div className="relative w-full h-44 rounded-md bg-gray-200 group-hover:opacity-75 overflow-hidden">
           <Image
             src={post.image}
-            width={200}
-            height={200}
+            layout="fill"
+            objectFit="contain"
             alt="post item image"
           />
         </div>
@@ -26,9 +25,9 @@ export default async function EventPostItem({id}) {
             <p className="line-clamp-1">
               {post.date}
             </p>
-            <p className="line-clamp-1">
-              {post.location}
-            </p>
+            {/*<p className="line-clamp-1">*/}
+            {/*  {post.location}*/}
+            {/*</p>*/}
           </div>
         </div>
       </div>

@@ -8,9 +8,8 @@ import {useState} from "react";
 import PostPagination from "@components/page/PostPagination";
 import {GeneralMenuType} from "@components/constants/enums";
 
-
 export default function General() {
-  const [selectedMenu, setSelectedMenu] = useState(GeneralMenuType.GENERAL)
+  const [selectedMenu, setSelectedMenu] = useState(GeneralMenuType.ENGLISH)
 
   return (
     <section className="w-full">
