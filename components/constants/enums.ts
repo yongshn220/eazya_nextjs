@@ -44,16 +44,6 @@ export enum GeneralCommunityType {
   EXCHANGE = "Exchange",
 }
 
-export enum GeneralMenuType {
-  ENGLISH = "English",
-  KOREAN = "Korean",
-  CHINESE = "Chinese",
-  INDIAN = "Indian",
-  INTERNATIONAL = "International",
-  EXCHANGE = "Exchange",
-  ALL = "All",
-}
-
 export enum VoteType {
   UP = "voteTypeUp",
   DOWN = "voteTypeDown",

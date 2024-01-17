@@ -1,19 +1,8 @@
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
-import InputFieldDefault from "@components/input/InputFieldDefault";
-import InputFieldDescription from "@components/input/InputFieldDescription";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel, SelectSeparator,
-  SelectTrigger,
-  SelectValue
-} from "@components/ui/select";
-import {GeneralMenuType, GeneralCommunityType} from "@components/constants/enums";
-import React, {useState} from "react";
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue} from "@components/ui/select";
+import {GeneralCommunityType} from "@components/constants/enums";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
 import {CreateGeneralPostRequest} from "@models/requests/CreateGeneralPostRequest";

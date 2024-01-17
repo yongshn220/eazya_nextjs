@@ -1,6 +1,6 @@
 import {Button} from "@components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select"
-import {GeneralMenuType} from "@components/constants/enums";
+import {GeneralCommunityType} from "@components/constants/enums";
 import {hoveredTextColor} from "@components/constants/values";
 import Link from 'next/link'
 
@@ -11,7 +11,7 @@ export default function GeneralMenu({type}) {
       {/* desktop view */}
       <div className="hidden md:flex justify-center bg-white border-b">
         {
-          Object.values(GeneralMenuType).map((menuType) => (
+          Object.values(GeneralCommunityType).map((menuType) => (
             <Link href={`/general/tag/${menuType}`}>
               <Button variant="Ghost"
                 key={menuType}
@@ -33,7 +33,7 @@ export default function GeneralMenu({type}) {
           <SelectContent>
             <SelectGroup>
               {
-                Object.values(GeneralMenuType).map((menuType) => (
+                Object.values(GeneralCommunityType).map((menuType) => (
                   <SelectItem
                     key={menuType}
                     value={menuType}
