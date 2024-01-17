@@ -23,7 +23,7 @@ export default function GeneralForm({mode, post, setPost, submitHandler}: Props)
         title="General"
         subtitle="Share anything you like!"
       />
-      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-8" onSubmit={() => submitHandler()}>
+      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-8" onSubmit={(e) => submitHandler(e)}>
         <div className="w-full flex-start flex-col">
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Select a community
@@ -55,8 +55,8 @@ export default function GeneralForm({mode, post, setPost, submitHandler}: Props)
           </Select>
         </div>
 
-        <InputFieldDefaultClient name="Title" value={post.title} placeholder="Title" onChangeHandler={value => setPost(prev => ({...prev, title: value}))}/>
-        <InputFieldDescriptionClient name="Description" value={post.description} placeholder="Description" onChangeHandler={(value => setPost(prev => ({...prev, description: value})))}/>
+        <InputFieldDefaultClient name="Title" value={post.title} placeholder="Title" onChangeHandler={e => setPost(prev => ({...prev, title: e.target.value}))}/>
+        <InputFieldDescriptionClient name="Description" value={post.description} placeholder="Description" onChangeHandler={(e => setPost(prev => ({...prev, description: e.target.value})))}/>
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
           <Button type="submit">{mode}</Button>

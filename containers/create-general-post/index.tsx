@@ -6,16 +6,18 @@ import {GeneralCommunityType} from "@components/constants/enums";
 import createGeneralAction from "@actions/general/createGeneralAction";
 import {CreateGeneralPostRequest} from "@models/requests/CreateGeneralPostRequest";
 
-export default function CreateGeneralPost({tag}: {tag: GeneralCommunityType}) {
+export default function CreateGeneralPost({type}: {type: GeneralCommunityType}) {
   const [generalPost, setGeneralPost] = useState<CreateGeneralPostRequest>({
-    communityType: tag,
+    communityType: type,
     title: "",
     description: "",
   })
 
-  function handleSubmit() {
-    const req: CreateGeneralPostRequest = {...generalPost}
+  function handleSubmit(e) {
+    e.preventDefault()
 
+    const req: CreateGeneralPostRequest = {...generalPost}
+    console.log(req)
     createGeneralAction(req).then(() => {
 
     })

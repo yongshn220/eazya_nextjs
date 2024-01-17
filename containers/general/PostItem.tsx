@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
+import getGeneralAction from "@actions/general/getGeneralAction";
 
-export default function GeneralPostItem({id}) {
+export default async function GeneralPostItem({id}) {
+  const post = await getGeneralAction(id)
+  if (!post) {
+    return <></>
+  }
+
   return (
     <div>
       <Link href={`/general/${id}`}>
@@ -14,16 +20,16 @@ export default function GeneralPostItem({id}) {
                      alt=""/>
                 <p className="text-sm font-semibold">CSE Major</p>
               </div>
-              <p className="text-sm text-gray-500">4 days ago</p>
+              <p className="text-sm text-gray-500">{post.createdAt}</p>
             </div>
-            <p className={`text-md font-semibold leading-6 text-gray-900 line-clamp-1 hover:${hoveredTextColor}`}>This is sample post title This is sample post title This is sample post title</p>
+            <p className={`text-md font-semibold leading-6 text-gray-900 line-clamp-1 hover_text_blue`}>This is sample post title This is sample post title This is sample post title</p>
           </div>
           <div className="shrink-0 flex flex-col items-end  gap-3">
             <div className="mt-1 flex items-center gap-x-1.5">
               <div className="flex-none rounded-full bg-emerald-500/20 p-1">
                 <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
               </div>
-              <p className="text-xs leading-5 text-gray-500">423</p>
+              <p className="text-xs leading-5 text-gray-500">4234</p>
             </div>
             <div className="mt-1 flex items-center gap-x-1.5">
               <div className="flex-none rounded-full bg-emerald-500/20 p-1">

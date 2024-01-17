@@ -21,7 +21,7 @@ export default function ImageContainer({image, handleRemove, isLoading }) {
           `relative hidden sm:flex justify-center items-center w-[18rem] h-full border rounded-lg group
           ${isLoading ? '' : 'cursor-pointer hover:border-blue-300'}`}
       >
-        {isLoading ? <LoadingCircle/> : <p className={`text-gray-500 group-hover:${hoveredTextColor}`}>Add Image</p>}
+        {isLoading ? <LoadingCircle/> : <p className={`text-gray-500 hover_text_blue`}>Add Image</p>}
       </div>
     );
   }

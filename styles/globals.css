@@ -272,3 +272,7 @@
 .grid_1 {
   @apply mt-6 grid grid-cols-1 gap-y-10;
 }
+
+.hover_text_blue {
+  @apply hover:text-blue-500 group-hover:text-blue-500
+}

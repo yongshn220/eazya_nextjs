@@ -7,7 +7,7 @@ export default function StorePreview() {
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <Link href="/store">
         <div className="flex flex-col border-s-4 group cursor-pointer">
-          <h1 className={`mx-4 font-satoshi text-xl font-bold text-gray-900 group-hover:${hoveredTextColor}`}>Buy & Sell</h1>
+          <h1 className={`mx-4 font-satoshi text-xl font-bold text-gray-900 hover_text_blue`}>Buy & Sell</h1>
           <p className="mx-4 font-satoshi text-md text-gray-500">Second-hand market</p>
         </div>
       </Link>

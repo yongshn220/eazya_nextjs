@@ -18,7 +18,7 @@ export default function EventForm({mode, handleSubmit}) {
         <div
           className="flex-center sm:hidden w-[10rem] h-[10rem] mt-7 border border-dashed rounded-lg break-inside-avoid cursor-pointer group"
         >
-          <p className={`text-gray-500 group-hover:${hoveredTextColor}`}>Add Image</p>
+          <p className={`text-gray-500 hover_text_blue`}>Add Image</p>
         </div>
         <div className="w-full flex flex-row sm:h-[24rem] ">
           <div className="w-full flex-between flex-col sm:mr-10 gap-4 sm:gap-0">

@@ -1,13 +1,13 @@
-import GeneralPostItem from "@containers/general/GeneralPostItem";
+import GeneralPostItem from "@containers/general/PostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
 
 export default function CommunityPreview({type}) {
   return (
     <div className="relative">
-      <Link href="/general/tag/English">
+      <Link href="/general/type/English">
         <div className="glass_box cursor-pointer group">
-          <p className={`text-md font-semibold group-hover:${hoveredTextColor}`}>{type}</p>
+          <p className={`text-md font-semibold hover_text_blue`}>{type}</p>
         </div>
       </Link>
 

@@ -1,15 +1,19 @@
-import GeneralDetailPostItem from "@containers/general/GeneralDetailPostItem";
+import GeneralDetailPostItem from "@containers/general/DetailPostItem";
 import PostPagination from "@components/page/PostPagination";
+import getGeneralIdsAction from "@actions/general/getGeneralIdsAction";
 
-export default function GeneralPosts({type}) {
+export default async function GeneralPosts({type}) {
+
+  const postIds = await getGeneralIdsAction(type)
+
   return (
     <div>
       <ul role="list" className="divide-y divide-gray-300 border-t border-gray-300 ">
-        <GeneralDetailPostItem id={1}/>
-        <GeneralDetailPostItem id={2}/>
-        <GeneralDetailPostItem id={3}/>
-        <GeneralDetailPostItem id={4}/>
-        <GeneralDetailPostItem id={5}/>
+        {
+          postIds.map(id => (
+            <GeneralDetailPostItem id={id}/>
+          ))
+        }
       </ul>
     </div>
   )

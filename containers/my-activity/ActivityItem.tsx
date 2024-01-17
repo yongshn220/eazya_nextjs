@@ -24,7 +24,7 @@ export default function ActivityItem({activity}: Props) {
               {activity.createdAt}
             </p>
           </div>
-          <p className={`font-semibold group-hover:${hoveredTextColor}`}>{activity.preview}</p>
+          <p className={`font-semibold hover_text_blue`}>{activity.preview}</p>
         </div>
       </Link>
     </div>

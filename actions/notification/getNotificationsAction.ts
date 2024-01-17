@@ -5,6 +5,7 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {INotification, NotificationModel} from "@models/collections/notification";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
+import {toJson} from "@actions/actionHelper/utilFunction";
 
 
 const DEFAULT_NOTIFICATION_NUMBER = 10
@@ -18,7 +19,7 @@ export default async function getNotificationsAction() {
     let notifications = await NotificationModel.find({fromUserId: session.user.id})
     notifications = notifications.map(notification => notification.toObject())
 
-    return JSON.parse(JSON.stringify(notifications))
+    return toJson(notifications)
   }
   catch (error) {
     console.log(error)

@@ -12,7 +12,7 @@ export default function GeneralMenu({type}) {
       <div className="hidden md:flex justify-center bg-white border-b">
         {
           Object.values(GeneralCommunityType).map((menuType) => (
-            <Link href={`/general/tag/${menuType}`}>
+            <Link href={`/general/type/${menuType}`}>
               <Button variant="Ghost"
                 key={menuType}
                 className={type === menuType ? hoveredTextColor : ''}
