@@ -11,7 +11,7 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 
 
-export default async function getEventAction(postId: string) {
+export default async function getEventPostAction(postId: string) {
   try {
     await connectToDB()
     const eventPost = await EventPostModel.findById(postId)

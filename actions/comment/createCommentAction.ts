@@ -72,6 +72,6 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
-    revalidatePath(`/events/${req.postId}`)
+    revalidatePath(`/${req.postType}/${req.postId}`)
   }
 }

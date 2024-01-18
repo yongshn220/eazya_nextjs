@@ -1,9 +1,9 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import getGeneralAction from "@actions/general/getGeneralAction";
+import getGeneralPostAction from "@actions/general/getGeneralPostAction";
 
 export default async function GeneralDetailPostItem({id}) {
-  const post = await getGeneralAction(id)
+  const post = await getGeneralPostAction(id)
   if (!post) {
     return <></>
   }

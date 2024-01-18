@@ -1,10 +1,10 @@
 import GeneralDetailPostItem from "@containers/general/DetailPostItem";
 import PostPagination from "@components/page/PostPagination";
-import getGeneralIdsAction from "@actions/general/getGeneralIdsAction";
+import getGeneralPostIdsAction from "@actions/general/getGeneralPostIdsAction";
 
 export default async function GeneralPosts({type}) {
 
-  const postIds = await getGeneralIdsAction(type)
+  const postIds = await getGeneralPostIdsAction(type)
 
   return (
     <div>

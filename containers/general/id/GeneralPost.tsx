@@ -1,33 +1,30 @@
+import {PostType, VoteType} from "@components/constants/enums";
 import PostHeader from "@components/headers/PostHeader";
-import EventContent from "@containers/events/id/Content";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
-import {IEventPost} from "@models/collections/eventPost";
-import {IPostHeader} from "@models/types/postHeader";
-import deleteEventPostAction from "@actions/event/deleteEventPostAction";
+import {IGeneralPost} from "@models/collections/generalPost";
+import getGeneralPostAction from "@actions/general/getGeneralPostAction";
+import deleteGeneralPostAction from "@actions/general/deleteGeneralPostAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
-import {PostType, VoteType} from "@components/constants/enums";
 import createVoteAction from "@actions/vote/createVoteAction";
-import getEventPostAction from "@actions/event/getEventPostAction";
+import {IPostHeader} from "@models/types/postHeader";
+import GeneralContent from "@containers/general/id/Content";
 
-
-export default async function EventPost({id}) {
-  const post: IEventPost  = await getEventPostAction(id)
-  if (!post) return <></>
+export default async function GeneralPost({id}) {
+  const post: IGeneralPost = await getGeneralPostAction(id)
 
   async function handleDeletePost() {
     "use server"
-    await deleteEventPostAction(id)
+    await deleteGeneralPostAction(id)
   }
 
   async function handleCreateVote(voteType: VoteType) {
     "use server"
     const req: CreateVoteRequest = {
-      postType: PostType.EVENT,
+      postType: PostType.GENERAL,
       postId: post.id,
       voteType: voteType,
     }
-
     await createVoteAction(req)
   }
 
@@ -41,10 +38,9 @@ export default async function EventPost({id}) {
   return (
     <section className="w-full flex flex-col">
       <PostHeader postHeaderData={postHeaderData}/>
-      <EventContent post={post}/>
+      <GeneralContent post={post}/>
       <CreateComment postType={post.type} postId={post.id}/>
       <CommentList postType={post.type} postId={post.id} comments={post.comments}/>
     </section>
   )
 }
-

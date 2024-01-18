@@ -7,7 +7,7 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 
 
-export default async function getGeneralAction(postId: string) {
+export default async function getGeneralPostAction(postId: string) {
   try {
     await connectToDB()
     const generalPost = await GeneralPostModel.findById(postId)

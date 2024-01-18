@@ -3,7 +3,7 @@
 import {useState} from "react";
 import GeneralForm from "@containers/create-general-post/GeneralForm";
 import {GeneralCommunityType} from "@components/constants/enums";
-import createGeneralAction from "@actions/general/createGeneralAction";
+import createGeneralPostAction from "@actions/general/createGeneralPostAction";
 import {CreateGeneralPostRequest} from "@models/requests/CreateGeneralPostRequest";
 
 export default function CreateGeneralPost({type}: {type: GeneralCommunityType}) {
@@ -18,7 +18,7 @@ export default function CreateGeneralPost({type}: {type: GeneralCommunityType}) 
 
     const req: CreateGeneralPostRequest = {...generalPost}
     console.log(req)
-    createGeneralAction(req).then(() => {
+    createGeneralPostAction(req).then(() => {
 
     })
   }

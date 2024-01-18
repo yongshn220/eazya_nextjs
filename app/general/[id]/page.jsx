@@ -1,7 +1,9 @@
-import GeneralPost from "@containers/General/id/GeneralPost";
+import GeneralPost from "@containers/general/id/GeneralPost";
 
-export default function GeneralPostPage() {
+export default function GeneralPostPage({ params }) {
+  const postId = params.id
+
   return (
-    <GeneralPost/>
+    <GeneralPost id={postId}/>
   )
 }

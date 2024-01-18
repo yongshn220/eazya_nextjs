@@ -1,14 +1,14 @@
 import {PostType, VoteType} from "@components/constants/enums";
 import {EventPostModel, IEventPost} from "@models/collections/eventPost";
 import {VoteUser} from "@models/base/voteUserBase";
-import {IGeneralPost} from "@models/collections/generalPost";
+import {GeneralPostModel, IGeneralPost} from "@models/collections/generalPost";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 import {Session} from "@node_modules/next-auth";
 
 export function GetPostModelByType(postType: PostType) {
   if (postType === PostType.EVENT) return EventPostModel
-  if (postType === PostType.GENERAL) return EventPostModel
+  if (postType === PostType.GENERAL) return GeneralPostModel
   else return EventPostModel
 }
 

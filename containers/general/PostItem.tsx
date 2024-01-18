@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
-import getGeneralAction from "@actions/general/getGeneralAction";
+import getGeneralPostAction from "@actions/general/getGeneralPostAction";
 
 export default async function GeneralPostItem({id}) {
-  const post = await getGeneralAction(id)
+  const post = await getGeneralPostAction(id)
   if (!post) {
     return <></>
   }

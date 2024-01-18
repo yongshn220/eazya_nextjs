@@ -4,7 +4,7 @@ import {GeneralPostModel} from "@models/collections/generalPost";
 import {toJson} from "@actions/actionHelper/utilFunction";
 
 
-export default async function getGeneralIdsAction(communityType: GeneralCommunityType) {
+export default async function getGeneralPostIdsAction(communityType: GeneralCommunityType) {
   try {
     await connectToDB()
     const generalPosts = await GeneralPostModel.find({communityType: communityType})

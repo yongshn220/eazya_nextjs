@@ -1,6 +1,6 @@
 import EventForm from "@containers/create-event-post/EventForm";
 import {FormMode, PostType} from "@components/constants/enums";
-import createEventPostAction from "@actions/event/createEventAction";
+import createEventPostAction from "@actions/event/createEventPostAction";
 import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
 
 
