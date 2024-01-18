@@ -15,7 +15,6 @@ export default async function EventPostItem({id}) {
           <Image
             src={post.image}
             layout="fill"
-            objectFit="contain"
             alt="post item image"
           />
         </div>

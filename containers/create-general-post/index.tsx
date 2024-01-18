@@ -17,7 +17,6 @@ export default function CreateGeneralPost({type}: {type: GeneralCommunityType}) 
     e.preventDefault()
 
     const req: CreateGeneralPostRequest = {...generalPost}
-    console.log(req)
     createGeneralPostAction(req).then(() => {
 
     })

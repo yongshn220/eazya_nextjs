@@ -1,24 +1,12 @@
-import imageCompression from "browser-image-compression";
 
 export default function SingleImageUploader({setImage, disabled, setIsLoading, children}) {
   async function handleImageChange(e) {
-    const file = e.target.files[0];
-
-    console.log(file)
-
-    if (!file) return;
-
     setIsLoading(true);
 
+    const file = e.target.files[0];
+    if (!file) return;
+
     try {
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 1920,
-        useWebWorker: true
-      };
-
-      // const compressedFile = await imageCompression(file, options);
-
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
@@ -44,7 +32,6 @@ export default function SingleImageUploader({setImage, disabled, setIsLoading, c
         accept="image/*,image/heic"
         disabled={disabled}
         onChange={handleImageChange}
-        // onInput={handleImageChange}
       />
       <label htmlFor="file-input">
         {children}

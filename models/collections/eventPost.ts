@@ -30,7 +30,7 @@ export interface IEventPost {
   id?:            string;
   authorId:       string;
   universityId:   string;
-  type:           string;
+  type:           PostType;
   image:          string;
   title:          string;
   date:           string;
