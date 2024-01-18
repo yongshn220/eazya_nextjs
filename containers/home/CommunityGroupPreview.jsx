@@ -8,8 +8,8 @@ export default function CommunityGroupPreview() {
       </div>
 
       <div className="grid_12">
-        <GeneralPreview type={"General"} />
-        <GeneralPreview type={"Find Member"} />
+        <GeneralPreview/>
+        <GeneralPreview/>
       </div>
     </section>
   )

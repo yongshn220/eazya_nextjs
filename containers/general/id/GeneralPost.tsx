@@ -11,12 +11,12 @@ import {IPostHeader} from "@models/types/postHeader";
 import GeneralContent from "@containers/general/id/Content";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
-export default async function GeneralPost({id}) {
+export default async function GeneralPost({id, type}) {
   const post: IGeneralPost = await getGeneralPostAction(id)
 
   async function handleDeletePost() {
     "use server"
-    await deleteGeneralPostAction(id)
+    await deleteGeneralPostAction(id, type)
   }
 
   async function handleCreateVote(voteType: VoteType) {

@@ -7,6 +7,7 @@ export enum PostType {
   EVENT =     "Event",
   GENERAL =   "General",
   STORE =     "Store",
+  FIND_MEMBER = "Find Member",
 }
 
 export enum NotificationType {
@@ -34,6 +35,7 @@ export enum UserActivityType {
   CREATE_COMMENT = "CreateComment",
   CREATE_REPLY = "CreateReply",
 }
+
 
 export enum GeneralCommunityType {
   ENGLISH = "English",

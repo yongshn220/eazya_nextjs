@@ -49,7 +49,7 @@ export default async function createGeneralPostAction(req: CreateGeneralPostRequ
     return null
   }
   finally {
-    revalidatePath(`/general/type/${req.communityType}`)
-    redirect(`/general/type/${req.communityType}`)
+    revalidatePath(`/general/${req.communityType}`)
+    redirect(`/general/${req.communityType}`)
   }
 }

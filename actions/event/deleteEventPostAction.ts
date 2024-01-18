@@ -7,15 +7,15 @@ import {EventPostModel} from "@models/collections/eventPost";
 import {Storage} from "@node_modules/@google-cloud/storage";
 import {revalidatePath} from "next/cache";
 import {connectToDB} from "@utils/database";
-import {redirect} from "@node_modules/next/navigation";
+import {redirect} from "next/navigation";
 
-export default async function deleteEventPostAction(id: string) {
+export default async function deleteEventPostAction(postId: string) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    const eventPost = await EventPostModel.findById(id)
+    const eventPost = await EventPostModel.findById(postId)
     if (!eventPost) return null
 
     if (session.user.id !== eventPost.authorId.toString()) return null
@@ -28,10 +28,10 @@ export default async function deleteEventPostAction(id: string) {
     const filePath = urlPathParts.slice(1).join('/');
     const file = storage.bucket(bucketName).file(filePath);
 
-    await EventPostModel.findByIdAndDelete(id)
+    await EventPostModel.findByIdAndDelete(postId)
     await file.delete()
 
-    return { status: StatusCodes.OK }
+    return true
   }
   catch (error) {
     return null

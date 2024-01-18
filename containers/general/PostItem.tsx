@@ -3,7 +3,7 @@ import Link from 'next/link'
 import getGeneralPostAction from "@actions/general/getGeneralPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
-export default async function GeneralPostItem({id}) {
+export default async function GeneralPostItem({id, type}) {
   const post = await getGeneralPostAction(id)
   if (!post) {
     return <></>
@@ -13,8 +13,8 @@ export default async function GeneralPostItem({id}) {
 
   return (
     <div>
-      <Link href={`/general/${id}`}>
-        <div className="flex flex-col py-5 gap-4 cursor-pointer">
+      <Link href={`/general/${type}/${id}`}>
+        <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex-between items-center gap-5">
             <div className="flex flex-center gap-2">
               <img className="h-6 w-6 flex-none rounded-full bg-gray-50"
