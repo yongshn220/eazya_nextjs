@@ -16,7 +16,4 @@ export default async function getGeneralPostIdsAction(communityType: GeneralComm
     console.log(error)
     return null
   }
-  finally {
-
-  }
 }

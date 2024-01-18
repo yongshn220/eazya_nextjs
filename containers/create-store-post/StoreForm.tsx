@@ -5,9 +5,13 @@ import {CreateStorePostRequest} from "@models/requests/CreateStorePostRequest";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
 import MultipleImageUploader from "@components/image/MultipleImageUploader";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Image from 'next/image'
 import LoadingCircle from "@components/animation/LoadingCircle";
+import {Cross2Icon} from "@node_modules/@radix-ui/react-icons";
+import InputFieldPriceClient from "@components/input/InputFieldPriceClient";
+import {Simulate} from "react-dom/test-utils";
+import submit = Simulate.submit;
 
 const MAX_IMAGE_COUNT = 5
 
@@ -28,9 +32,12 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
   const [images, setImages] = useState<Array<Image>>([])
 
   useEffect(() => {
-
+    setPost((prev) => ({...prev, images: images.map(image => image.url)}))
   }, [images])
 
+  function handleRemoveImage(index) {
+    setImages(images => images.filter((_, i) => i !== index));
+  }
 
   return (
     <div className="w-full">
@@ -39,7 +46,7 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
         title="Item"
         subtitle="Sell second-hand bulabula"
       />
-      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12">
+      <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={(e) => submitHandler(e)}>
         <div className="w-full">
           <span className="font-satoshi font-semibold text-base text-gray-700">Image</span>
             <div className="w-full flex gap-6 mt-2 pb-2 overflow-x-auto">
@@ -50,13 +57,16 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
                 </div>
               </MultipleImageUploader>
               {
-                images.map((image) => (
-                  <div key={image.id} className="shrink-0 flex-center w-[8rem] h-[8rem] border-2 rounded-lg">
+                images.map((image, index) => (
+                  <div key={image.id} className="relative shrink-0 flex-center w-[8rem] h-[8rem] border-2 rounded-lg">
                     {
                       image.isLoading ?
                       <LoadingCircle/>
                         :
-                      <Image src={image.url} width={100} height={100} alt="store post image"/>
+                      <>
+                        <Image src={image.url} fill={true} sizes="20vw" alt="store post image" className="object-cover rounded-md"/>
+                        <Cross2Icon className="absolute right-1 top-1 p-0.5 cursor-pointer bg-gray-600 hover:bg-black rounded-full text-white" width={17} height={17} onClick={() => handleRemoveImage(index)}/>
+                      </>
                     }
                   </div>
                 ))
@@ -65,11 +75,11 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
         </div>
 
         <InputFieldDefaultClient name="Title" value={post.title} onChangeHandler={(e) => setPost({...post, title: e.target.value})} placeholder="Title"/>
-        <InputFieldDefaultClient name="Price" value={post.price} onChangeHandler={(e) => setPost({...post, date: e.target.value})} placeholder="Price"/>
+        <InputFieldPriceClient name="Price" value={post.price} onChangeHandler={(e) => setPost({...post, price: e.target.value})} placeholder="Price"/>
         <InputFieldDescriptionClient name="Description" value={post.description} onChangeHandler={(e) => setPost({...post, description: e.target.value})} placeholder="Description" />
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
-          <Button>{mode}</Button>
+          <Button type="submit">{mode}</Button>
         </div>
       </form>
     </div>

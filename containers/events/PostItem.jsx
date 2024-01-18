@@ -11,11 +11,14 @@ export default async function EventPostItem({id}) {
   return (
     <Link href={`/events/${id}`}>
       <div className="group relative glass_box">
-        <div className="relative w-full h-44 rounded-md bg-gray-200 group-hover:opacity-75 overflow-hidden">
+        <div className="relative w-full bg-gray-200 group-hover:opacity-75">
           <Image
             src={post.image}
-            layout="fill"
             alt="post item image"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full aspect-[3/4] object-cover rounded-md"
           />
         </div>
         <div className="w-full mt-4 flex flex-col gap-3">

@@ -2,9 +2,12 @@
 const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["mongoose"],
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
   },
   images: {
-    domains: ['lh3.googleusercontent.com', 'storage.googleapis.com'],
+    domains: ['lh3.googleusercontent.com', 'storage.googleapis.com', 'tailwindui.com'],
   },
   webpack(config) {
     config.experiments = {

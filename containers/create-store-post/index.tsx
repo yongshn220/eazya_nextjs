@@ -6,7 +6,7 @@ import {CreateStorePostRequest} from "@models/requests/CreateStorePostRequest"
 import createStorePostAction from "@actions/store/createStorePostAction";
 
 export default function CreateStorePost() {
-  const [storePost, setStorePost] = useState({
+  const [storePost, setStorePost] = useState<CreateStorePostRequest>({
     title: "",
     price: "",
     description: "",
@@ -16,6 +16,7 @@ export default function CreateStorePost() {
   function handleSubmit(e) {
     e.preventDefault()
 
+    console.log("handle submit")
     const req: CreateStorePostRequest = {...storePost}
     createStorePostAction(req).then(() => {
 

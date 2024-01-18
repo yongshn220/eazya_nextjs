@@ -1,19 +1,21 @@
 import StorePostItem from "@containers/store/StorePostItem";
+import getStorePostIdsAction from "@actions/store/getStorePostIdsAction";
 
-export default function StorePosts() {
-  const post = {}
+export default async function StorePosts() {
+  const postIds = await getStorePostIdsAction()
+
   return (
     <div className="grid_image">
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
-      <StorePostItem id={1} post={post}/>
+      {
+        postIds.map(id => (
+          <StorePostItem key={id} id={id}/>
+        ))
+      }
+      {
+        postIds.map(id => (
+          <StorePostItem key={id} id={id}/>
+        ))
+      }
     </div>
   )
 }

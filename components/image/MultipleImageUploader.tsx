@@ -14,7 +14,7 @@ export default function MultipleImageUploader({images, setImages, maxNum, childr
     const totalImages = images.length + files.length
 
     try {
-      if (totalImages < maxNum) {
+      if (totalImages <= maxNum) {
         files.forEach((file) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
@@ -24,7 +24,7 @@ export default function MultipleImageUploader({images, setImages, maxNum, childr
           reader.onloadend = () => {
             setImages((prevImages) => {
               return prevImages.map(prev => {
-                return (prev.id === imageId)? prev : {...prev, url: reader.result, isLoading: false}
+                return (prev.id !== imageId)? prev : {...prev, url: reader.result, isLoading: false}
               })
             })
           };

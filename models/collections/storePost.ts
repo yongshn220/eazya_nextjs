@@ -14,7 +14,7 @@ const StorePostSchema = new Schema({
   price:          { type: Number, required: true, default: 0 },
   description:    { type: String, required: true, },
   createdAt:      { type: Date, required: true, },
-  outOfService:   { type: Boolean, required: true, },
+  outOfService:   { type: Boolean, required: true, default: false },
   voteUser:       { type: VoteUserBaseSchema, required: true },
   votes:          { type: Number, default: 0, required: true },
   commentators:   [{ type: Schema.Types.ObjectId, ref: 'User' }],

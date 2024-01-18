@@ -1,5 +1,5 @@
 export interface CreateStorePostRequest {
-  images: Array<File>;
+  images: Array<string>;
   title: string;
   price: string;
   description: string;
