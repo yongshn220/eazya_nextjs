@@ -35,10 +35,16 @@ export default async function GeneralPost({id}) {
     editHref: "#",
   }
 
+  let numberOfComments = 0
+  post.comments.forEach(comment => {
+    numberOfComments += comment.replies.length + 1
+  })
+
   return (
     <section className="w-full flex flex-col">
       <PostHeader postHeaderData={postHeaderData}/>
       <GeneralContent post={post}/>
+      <p className="text-lg mt-5">{`${numberOfComments} Comments`}</p>
       <CreateComment postType={post.type} postId={post.id}/>
       <CommentList postType={post.type} postId={post.id} comments={post.comments}/>
     </section>

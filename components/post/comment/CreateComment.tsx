@@ -18,8 +18,7 @@ export default function CreateComment({postType, postId}) {
   }
 
   return (
-    <form className="mt-10" onSubmit={handleSubmit}>
-      <p className="text-lg">5 Comments</p>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-col glassmorphism mt-4 p-4 gap-5">
         <InputFieldDefaultClient name="" value={comment.content} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
         <div className="flex-between">
