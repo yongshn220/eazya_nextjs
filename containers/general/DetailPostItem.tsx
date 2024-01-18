@@ -1,12 +1,15 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
 import getGeneralPostAction from "@actions/general/getGeneralPostAction";
+import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
 export default async function GeneralDetailPostItem({id}) {
   const post = await getGeneralPostAction(id)
   if (!post) {
     return <></>
   }
+
+  const numberOfComments = getNumOfCommentsInPost(post)
 
   return (
     <div>
@@ -47,7 +50,7 @@ export default async function GeneralDetailPostItem({id}) {
                 <div className="flex-none rounded-full bg-emerald-500/20 p-1">
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
                 </div>
-                <p className="text-xs leading-5 text-gray-500">423</p>
+                <p className="text-xs leading-5 text-gray-500">{numberOfComments}</p>
               </div>
             </div>
           </div>

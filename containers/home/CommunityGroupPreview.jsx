@@ -1,4 +1,4 @@
-import CommunityPreview from "@containers/home/CommunityPreview";
+import GeneralPreview from "@containers/home/GeneralPreview";
 
 export default function CommunityGroupPreview() {
   return (
@@ -8,8 +8,8 @@ export default function CommunityGroupPreview() {
       </div>
 
       <div className="grid_12">
-        <CommunityPreview type={"General"} />
-        <CommunityPreview type={"Find Member"} />
+        <GeneralPreview type={"General"} />
+        <GeneralPreview type={"Find Member"} />
       </div>
     </section>
   )

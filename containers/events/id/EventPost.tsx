@@ -9,6 +9,7 @@ import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import {PostType, VoteType} from "@components/constants/enums";
 import createVoteAction from "@actions/vote/createVoteAction";
 import getEventPostAction from "@actions/event/getEventPostAction";
+import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
 
 export default async function EventPost({id}) {
@@ -38,10 +39,8 @@ export default async function EventPost({id}) {
     editHref: "#",
   }
 
-  let numberOfComments = 0
-  post.comments.forEach(comment => {
-    numberOfComments += comment.replies.length + 1
-  })
+  const numberOfComments = getNumOfCommentsInPost(post)
+
 
   return (
     <section className="w-full flex flex-col">

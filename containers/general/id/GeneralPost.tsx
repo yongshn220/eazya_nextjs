@@ -9,6 +9,7 @@ import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
 import GeneralContent from "@containers/general/id/Content";
+import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
 export default async function GeneralPost({id}) {
   const post: IGeneralPost = await getGeneralPostAction(id)
@@ -35,10 +36,7 @@ export default async function GeneralPost({id}) {
     editHref: "#",
   }
 
-  let numberOfComments = 0
-  post.comments.forEach(comment => {
-    numberOfComments += comment.replies.length + 1
-  })
+  const numberOfComments = getNumOfCommentsInPost(post)
 
   return (
     <section className="w-full flex flex-col">
