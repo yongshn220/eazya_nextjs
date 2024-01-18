@@ -11,11 +11,6 @@ export default async function StorePosts() {
           <StorePostItem key={id} id={id}/>
         ))
       }
-      {
-        postIds.map(id => (
-          <StorePostItem key={id} id={id}/>
-        ))
-      }
     </div>
   )
 }

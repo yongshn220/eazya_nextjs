@@ -1,8 +1,11 @@
 import StorePostItem from "@containers/store/StorePostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
+import getStorePostIdsAction from "@actions/store/getStorePostIdsAction";
 
-export default function StorePreview() {
+export default async function StorePreview() {
+  const storePostIds = await getStorePostIdsAction()
+
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <Link href="/store">
@@ -12,11 +15,12 @@ export default function StorePreview() {
         </div>
       </Link>
 
-      <div className="grid_image">
-        <StorePostItem/>
-        <StorePostItem/>
-        <StorePostItem/>
-        <StorePostItem/>
+      <div className="grid_preview_image">
+        {
+          storePostIds.slice(0, 4).map((id) => (
+            <StorePostItem key={id} id={id}/>
+          ))
+        }
       </div>
     </section>
   )

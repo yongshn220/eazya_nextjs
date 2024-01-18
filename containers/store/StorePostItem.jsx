@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import getStorePostAction from "@actions/store/getStorePostAction";
 import Image from 'next/image'
 
@@ -8,8 +7,6 @@ export default async function StorePostItem({id}) {
   if (!post) {
     return <></>
   }
-
-  const numberOfComments = getNumOfCommentsInPost(post)
 
   return (
     <Link href={`/store/${id}`}>

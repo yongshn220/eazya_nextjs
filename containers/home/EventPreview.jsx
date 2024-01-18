@@ -1,6 +1,5 @@
-import PostItem from "@containers/events/PostItem";
+import EventPostItem from "@containers/events/PostItem";
 import Link from 'next/link'
-import {hoveredTextColor} from "@components/constants/values";
 import {getEventPostIdsApi} from "@services/eventPost";
 
 export default async function EventPreview() {
@@ -14,10 +13,10 @@ export default async function EventPreview() {
         </div>
       </Link>
 
-      <div className="grid_image">
+      <div className="grid_preview_image">
         {
-          eventPostIds.slice(0, 5).map((id) => (
-            <PostItem key={id} id={id}/>
+          eventPostIds.slice(0, 4).map((id) => (
+            <EventPostItem key={id} id={id}/>
           ))
         }
       </div>

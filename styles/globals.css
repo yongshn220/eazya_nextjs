@@ -265,13 +265,15 @@
   @apply mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 gap-x-6 gap-y-10;
 }
 
+.grid_preview_image {
+  @apply mt-6 grid grid-cols-2 md:grid-cols-4 xl:gap-x-8 gap-x-6 gap-y-10;
+}
+
+
 .grid_12 {
   @apply mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-20;
 }
 
-.grid_1 {
-  @apply mt-6 grid grid-cols-1 gap-y-10;
-}
 
 .hover_text_blue {
   @apply hover:text-blue-500 group-hover:text-blue-500
