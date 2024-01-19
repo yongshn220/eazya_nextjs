@@ -1,6 +1,8 @@
 import Store from '@containers/store'
-export default function StoreHome() {
+export default function StoreHome({ params }) {
+  const postId = params.id
+
   return (
-    <Store/>
+    <Store id={postId}/>
   )
 }

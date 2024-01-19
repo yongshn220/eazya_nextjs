@@ -25,6 +25,7 @@ StorePostSchema.virtual('id').get(function() {return this._id.toHexString()})
 export const StorePostModel = models.StorePost || model("StorePost", StorePostSchema)
 
 export interface IStorePost {
+  id?:              string;
   authorId:         string;
   universityId:     string;
   type:             PostType;

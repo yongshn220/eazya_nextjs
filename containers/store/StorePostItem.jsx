@@ -17,7 +17,7 @@ export default async function StorePostItem({id}) {
             alt="store first image"
             width={0}
             height={0}
-            sizes="100vw"
+            sizes="50vw, 25vw, 25vw"
             className="w-full aspect-[3/4] object-cover rounded-md"
           />
         </div>

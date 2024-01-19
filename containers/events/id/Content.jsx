@@ -8,7 +8,7 @@ export default function EventContent({post}) {
           <Image
             src={post.image}
             fill={true}
-            sizes="20vw"
+            sizes="50vw, 25vw, 25vw"
             alt="Event Post Image"
           />
         </div>
