@@ -1,8 +1,9 @@
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@components/ui/carousel"
 import {IStorePost} from "@models/collections/storePost";
 import Image from 'next/image'
+import React from "react";
+import ImageFullViewSelector from "@components/image/ImageFullViewSelector";
 import ImageFullViewer from "@components/image/ImageFullViewer";
-import ImageFullViewSelector from "@components/image/ImageFullViewer";
 
 export default function StoreContent({post}: {post: IStorePost}) {
   return (

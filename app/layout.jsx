@@ -6,7 +6,6 @@ import { Inter as FontSans } from "next/font/google"
 import { cn } from "@lib/utils"
 import Footer from "@components/footer/Footer";
 import {Theme} from "@radix-ui/themes";
-import ImageFullViewer from "@components/image/ImageFullViewer";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -34,7 +33,6 @@ export default function RootLayout({children}) {
             </div>
             <main className="app">
               <Nav/>
-              <ImageFullViewer/>
               <div className="content">
                 {children}
               </div>

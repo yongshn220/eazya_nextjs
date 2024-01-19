@@ -1,29 +1,14 @@
 "use client"
 
-import {useState} from "react";
-import Image from 'next/image'
+import {useSetRecoilState} from "@node_modules/recoil";
+import {imageFullViewAtom} from "@components/constants/globalStates";
 
-
-export default function ImageFullViewer() {
-  const [image, setImage] = useState<string>(null)
+export default function ImageFullViewSelector({src, children}) {
+  const setImageFullView = useSetRecoilState(imageFullViewAtom)
 
   return (
-    <div>
-      {
-        image &&
-        <div
-          className="absolute z-[9999] top-0 left-0 w-screen h-screen"
-          onClick={() => setImage(null)}
-        >
-          <Image
-            src={image}
-            fill
-            sizes="100vw"
-            alt="full view image"
-            className="w-full h-full object-contain"
-          />
-        </div>
-      }
+    <div onClick={() => setImageFullView(src)} className="cursor-pointer">
+      {children}
     </div>
   )
 }

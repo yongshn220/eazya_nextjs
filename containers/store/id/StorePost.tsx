@@ -1,6 +1,5 @@
 import StoreContent from "@containers/store/id/Content";
 import PostHeader from "@components/headers/PostHeader";
-import EventContent from "@containers/events/id/Content";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
 import {IStorePost} from "@models/collections/storePost";
@@ -11,6 +10,8 @@ import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
+import ImageFullViewer from "@components/image/ImageFullViewer";
+import React from "react";
 
 export default async function StorePost({id}) {
   const post: IStorePost = await getStorePostAction(id)
@@ -43,6 +44,7 @@ export default async function StorePost({id}) {
 
   return (
     <section className="w-full flex flex-col">
+      <ImageFullViewer/>
       <PostHeader postHeaderData={postHeaderData}/>
       <StoreContent post={post}/>
       <p className="text-lg mt-5">{`${numberOfComments} Comments`}</p>
