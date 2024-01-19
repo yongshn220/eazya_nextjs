@@ -5,6 +5,6 @@ export default function GeneralPostPage({ params }) {
   const postId = params.id
 
   return (
-    <GeneralPost id={postId}/>
+    <GeneralPost id={postId} type={type}/>
   )
 }

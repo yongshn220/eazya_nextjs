@@ -18,6 +18,8 @@ export default async function deleteGeneralPostAction(postId: string, type: Gene
 
     if (session.user.id !== generalPost.authorId.toString()) return null
 
+    await GeneralPostModel.findByIdAndDelete(postId)
+
     return true
   }
   catch (error) {

@@ -16,6 +16,10 @@ interface Props {
 
 export default function GeneralForm({mode, post, setPost, submitHandler}: Props) {
 
+  function handleSelectChange(value) {
+    setPost((prev) => ({...prev, communityType: value as GeneralCommunityType}))
+  }
+
   return (
     <div className="w-full">
       <FormHeader
@@ -28,10 +32,9 @@ export default function GeneralForm({mode, post, setPost, submitHandler}: Props)
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Select a community
           </span>
-          <Select value={post.communityType} onValueChange={(value: string) => setPost((prev) => ({...prev, communityType: GeneralCommunityType[value]}))}>
+          <Select value={post.communityType} onValueChange={handleSelectChange}>
             <SelectTrigger className="w-full py-5 mt-2 bg-white border-none shadow-none">
               <SelectValue>
-                {post.communityType}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
