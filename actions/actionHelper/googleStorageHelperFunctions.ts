@@ -45,3 +45,13 @@ export async function addBase64ToStorage(postType: PostType, session: Session, b
 
   return `https://storage.googleapis.com/${BUCKET_NAME}/${imageName}`;
 }
+
+export function getStorageFileFromStringUrl(stringUrl: string) {
+  const credentials = getCredentials()
+  const storage = new Storage({ credentials })
+  const url = new URL(stringUrl)
+  const urlPathParts = url.pathname.split('/').filter(part => part);
+  const bucketName = urlPathParts[0];
+  const filePath = urlPathParts.slice(1).join('/');
+  return storage.bucket(bucketName).file(filePath);
+}

@@ -8,6 +8,7 @@ import {Storage} from "@node_modules/@google-cloud/storage";
 import {revalidatePath} from "next/cache";
 import {connectToDB} from "@utils/database";
 import {redirect} from "next/navigation";
+import {getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 
 export default async function deleteEventPostAction(postId: string) {
   try {
@@ -15,18 +16,12 @@ export default async function deleteEventPostAction(postId: string) {
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    const eventPost = await EventPostModel.findById(postId)
-    if (!eventPost) return null
+    const post = await EventPostModel.findById(postId)
+    if (!post) return null
 
-    if (session.user.id !== eventPost.authorId.toString()) return null
+    if (session.user.id !== post.authorId.toString()) return null
 
-    const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
-    const storage = new Storage({ credentials })
-    const imageUrl = new URL(eventPost.image);
-    const urlPathParts = imageUrl.pathname.split('/').filter(part => part);
-    const bucketName = urlPathParts[0];
-    const filePath = urlPathParts.slice(1).join('/');
-    const file = storage.bucket(bucketName).file(filePath);
+    const file = getStorageFileFromStringUrl(post.image)
 
     await EventPostModel.findByIdAndDelete(postId)
     await file.delete()
