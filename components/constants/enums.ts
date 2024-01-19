@@ -18,6 +18,14 @@ export enum PostType {
   FIND_MEMBER = "Find Member",
 }
 
+export const PostTypeURL = {
+  [PostType.EVENT]: "events",
+  [PostType.GENERAL]: "community",
+  [PostType.STORE]: "store",
+  [PostType.FIND_MEMBER]: "find_member",
+}
+
+
 export enum NotificationType {
   COMMENT_ON_POST =     "CommentOnPost",
   REPLY_ON_COMMENT =    "ReplyOnComment",
@@ -45,7 +53,7 @@ export enum UserActivityType {
 }
 
 
-export enum GeneralCommunityType {
+export enum CommunityType {
   ENGLISH = "English",
   KOREAN = "Korean",
   CHINESE = "Chinese",

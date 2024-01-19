@@ -1,10 +1,10 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import getGeneralPostAction from "@actions/general/getGeneralPostAction";
+import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
 export default async function GeneralDetailPostItem({id, type}) {
-  const post = await getGeneralPostAction(id)
+  const post = await getCommunityPostAction(id)
   if (!post) {
     return <></>
   }

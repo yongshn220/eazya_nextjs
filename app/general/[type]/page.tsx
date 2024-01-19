@@ -1,10 +1,10 @@
 import General from "@containers/general";
-import {GeneralCommunityType} from "@components/constants/enums";
+import {CommunityType} from "@components/constants/enums";
 
 export default function GeneralHome({params}) {
-  const type: GeneralCommunityType = params.type
+  const type: CommunityType = params.type
 
   return (
-    <General type={type}/>
+    <General communityType={type}/>
   )
 }

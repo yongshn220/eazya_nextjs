@@ -11,7 +11,7 @@ import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequ
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 import {revalidatePath} from "next/cache";
 
-export default async function createGeneralPostAction(req: CreateGeneralPostRequest) {
+export default async function createCommunityPostAction(req: CreateGeneralPostRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)

@@ -1,12 +1,12 @@
 import GeneralPostItem from "@containers/general/PostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
-import getGeneralPostIdsAction from "@actions/general/getGeneralPostIdsAction";
-import {GeneralCommunityType} from "@components/constants/enums";
+import getCommunityPostIdsAction from "@actions/community/getCommunityPostIdsAction";
+import {CommunityType} from "@components/constants/enums";
 
 export default async function FindMemberPreview({type}) {
   // TODO
-  const generalPostIds = await getGeneralPostIdsAction(GeneralCommunityType.ENGLISH)
+  const generalPostIds = await getCommunityPostIdsAction(CommunityType.ENGLISH)
 
   return (
     <div className="relative">

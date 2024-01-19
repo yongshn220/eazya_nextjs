@@ -7,6 +7,7 @@ import InputFieldDescription from "@components/input/InputFieldDescription";
 import ImageUploader from "@containers/create-event-post/ImageUploader";
 
 export default function EventForm({mode, handleSubmit}) {
+  // TODO: handle mobile viewport
   return (
     <div className="w-full">
       <FormHeader
@@ -18,7 +19,7 @@ export default function EventForm({mode, handleSubmit}) {
         <div
           className="flex-center sm:hidden w-[10rem] h-[10rem] mt-7 border border-dashed rounded-lg break-inside-avoid cursor-pointer group"
         >
-          <p className={`text-gray-500 hover_text_blue`}>Add Image</p>
+          Add Image
         </div>
         <div className="w-full flex flex-row sm:h-[24rem] ">
           <div className="w-full flex-between flex-col sm:mr-10 gap-4 sm:gap-0">
@@ -28,7 +29,7 @@ export default function EventForm({mode, handleSubmit}) {
             <InputFieldDefault name="Location" value={""} placeholder="Location"/>
           </div>
           <div className="flex flex-col h-full gap-3">
-            <span className="font-satoshi font-semibold text-base text-gray-700">Image</span>
+            <span className="hidden sm:flex font-satoshi font-semibold text-base text-gray-700">Image</span>
             <ImageUploader/>
           </div>
 

@@ -2,7 +2,7 @@ import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue} from "@components/ui/select";
-import {GeneralCommunityType} from "@components/constants/enums";
+import {CommunityType} from "@components/constants/enums";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
 import {CreateGeneralPostRequest} from "@models/requests/CreateGeneralPostRequest";
@@ -17,7 +17,7 @@ interface Props {
 export default function GeneralForm({mode, post, setPost, submitHandler}: Props) {
 
   function handleSelectChange(value) {
-    setPost((prev) => ({...prev, communityType: value as GeneralCommunityType}))
+    setPost((prev) => ({...prev, communityType: value as CommunityType}))
   }
 
   return (
@@ -44,7 +44,7 @@ export default function GeneralForm({mode, post, setPost, submitHandler}: Props)
                 </SelectLabel>
                 <SelectSeparator/>
                 {
-                  Object.values(GeneralCommunityType).map((menuType) => (
+                  Object.values(CommunityType).map((menuType) => (
                     <SelectItem
                       key={menuType}
                       value={menuType}

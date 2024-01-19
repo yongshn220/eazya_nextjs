@@ -10,6 +10,8 @@ import {PostType, VoteType} from "@components/constants/enums";
 import createVoteAction from "@actions/vote/createVoteAction";
 import getEventPostAction from "@actions/event/getEventPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
+import ImageFullViewer from "@components/image/ImageFullViewer";
+import React from "react";
 
 
 export default async function EventPost({id}) {
@@ -44,6 +46,7 @@ export default async function EventPost({id}) {
 
   return (
     <section className="w-full flex flex-col">
+      <ImageFullViewer/>
       <PostHeader postHeaderData={postHeaderData}/>
       <EventContent post={post}/>
       <p className="text-lg mt-5">{`${numberOfComments} Comments`}</p>

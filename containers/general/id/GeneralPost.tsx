@@ -3,8 +3,8 @@ import PostHeader from "@components/headers/PostHeader";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
 import {IGeneralPost} from "@models/collections/generalPost";
-import getGeneralPostAction from "@actions/general/getGeneralPostAction";
-import deleteGeneralPostAction from "@actions/general/deleteGeneralPostAction";
+import getCommunityPostAction from "@actions/community/getCommunityPostAction";
+import deleteCommunityPostAction from "@actions/community/deleteCommunityPostAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
@@ -12,11 +12,11 @@ import GeneralContent from "@containers/general/id/Content";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 
 export default async function GeneralPost({id, type}) {
-  const post: IGeneralPost = await getGeneralPostAction(id)
+  const post: IGeneralPost = await getCommunityPostAction(id)
 
   async function handleDeletePost() {
     "use server"
-    await deleteGeneralPostAction(id, type)
+    await deleteCommunityPostAction(id, type)
   }
 
   async function handleCreateVote(voteType: VoteType) {

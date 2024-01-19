@@ -1,7 +1,7 @@
-import {GeneralCommunityType} from "@components/constants/enums";
+import {CommunityType} from "@components/constants/enums";
 
 export interface CreateGeneralPostRequest {
-  communityType: GeneralCommunityType;
+  communityType: CommunityType;
   title: string;
   description: string;
 }

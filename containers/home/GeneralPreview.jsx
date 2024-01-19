@@ -1,12 +1,12 @@
 import GeneralPostItem from "@containers/general/PostItem";
 import Link from 'next/link'
 import {hoveredTextColor} from "@components/constants/values";
-import getGeneralPostIdsAction from "@actions/general/getGeneralPostIdsAction";
-import {GeneralCommunityType} from "@components/constants/enums";
+import getCommunityPostIdsAction from "@actions/community/getCommunityPostIdsAction";
+import {CommunityType} from "@components/constants/enums";
 
-const DEFAULT_COMMUNITY_TYPE = GeneralCommunityType.ENGLISH
+const DEFAULT_COMMUNITY_TYPE = CommunityType.ENGLISH
 export default async function GeneralPreview() {
-  const generalPostIds = await getGeneralPostIdsAction(DEFAULT_COMMUNITY_TYPE)
+  const generalPostIds = await getCommunityPostIdsAction(DEFAULT_COMMUNITY_TYPE)
 
   return (
     <div className="relative">

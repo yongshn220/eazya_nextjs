@@ -3,11 +3,11 @@ import {redirect} from "next/navigation";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {GeneralCommunityType} from "@components/constants/enums";
+import {CommunityType} from "@components/constants/enums";
 import {GeneralPostModel} from "@models/collections/generalPost";
 
 
-export default async function deleteGeneralPostAction(postId: string, type: GeneralCommunityType) {
+export default async function deleteCommunityPostAction(postId: string, type: CommunityType) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)

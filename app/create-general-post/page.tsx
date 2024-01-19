@@ -2,14 +2,14 @@
 
 import CreateGeneralPost from "@containers/create-general-post";
 import { useSearchParams } from 'next/navigation'
-import {GeneralCommunityType} from "@components/constants/enums";
+import {CommunityType} from "@components/constants/enums";
 
 
 export default function CreateGeneralPostHome() {
   const searchParams = useSearchParams()
-  const type = searchParams.get('type') as GeneralCommunityType
+  const type = searchParams.get('type') as CommunityType
 
-  if (!type || !Object.values(GeneralCommunityType).includes(type)) {
+  if (!type || !Object.values(CommunityType).includes(type)) {
     return (<div>Something went wrong.</div>);
   }
 

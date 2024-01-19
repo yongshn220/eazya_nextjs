@@ -2,7 +2,7 @@ import GeneralDetailPostItem from "@containers/general/DetailPostItem";
 import PostPagination from "@components/page/PostPagination";
 import getCommunityPostIdsAction from "@actions/community/getCommunityPostIdsAction";
 
-export default async function GeneralPosts({type}) {
+export default async function CommunityPosts({type}) {
   const postIds = await getCommunityPostIdsAction(type)
 
   return (
