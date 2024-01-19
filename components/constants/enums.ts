@@ -3,6 +3,14 @@ export const FormMode = {
   EDIT:   "Edit",
 }
 
+export enum NavTab {
+  NONE =          "None",
+  EVENT =         "Event",
+  GENERAL =       "General",
+  STORE =         "Store",
+  FIND_MEMBER =   "Find Member",
+}
+
 export enum PostType {
   EVENT =     "Event",
   GENERAL =   "General",

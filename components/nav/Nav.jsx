@@ -8,10 +8,14 @@ import {Button} from "@components/ui/button";
 import NavDrawer from "@components/nav/NavDrawer";
 import NavDropDown from "@components/nav/NavDropDown";
 import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
+import {useRecoilValue} from "@node_modules/recoil";
+import {selectedNavTabAtom} from "@components/constants/globalStates";
+import {NavTab} from "@components/constants/enums";
 
 export default function Nav() {
   const { data: session } = useSession()
   const [providers, setProviders] = useState(null)
+  const selectedNavTab = useRecoilValue(selectedNavTabAtom)
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -35,14 +39,14 @@ export default function Nav() {
           </div>
 
           <div className="flex gap-5">
-            <Link href="/" className="flex">
-              <p className="font-satoshi font-semibold text-lg text-black">Events</p>
+            <Link href="/events" className="flex">
+              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.EVENT? "text-blue-600" : "text-black"}`}>EVENTS</p>
             </Link>
-            <Link href="/" className="flex">
-              <p className="font-satoshi font-semibold text-lg text-black">Community</p>
+            <Link href="/general/English" className="flex">
+              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.GENERAL? "text-blue-600" : "text-black"}`}>GENERAL</p>
             </Link>
-            <Link href="/" className="flex">
-              <p className="font-satoshi font-semibold text-lg text-black">Buy & Sell</p>
+            <Link href="/store" className="flex">
+              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.STORE? "text-blue-600" : "text-black"}`}>BUT & SELL</p>
             </Link>
           </div>
         </div>

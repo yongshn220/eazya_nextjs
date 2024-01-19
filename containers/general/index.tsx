@@ -3,12 +3,14 @@ import GeneralMenu from "@containers/general/Menu";
 import GeneralSearch from "@containers/general/Search";
 import GeneralPosts from "@containers/general/Posts";
 import PostPagination from "@components/page/PostPagination";
-import {GeneralCommunityType} from "@components/constants/enums";
+import {GeneralCommunityType, NavTab} from "@components/constants/enums";
+import NavTabSelector from "@components/nav/NavTabSelector";
 
 export default function General({type}: {type: GeneralCommunityType}) {
 
   return (
     <section className="w-full">
+      <NavTabSelector tab={NavTab.GENERAL}/>
       <HomeHeader
         title={type}
         subtitle="See the upcoming events on the campus"
