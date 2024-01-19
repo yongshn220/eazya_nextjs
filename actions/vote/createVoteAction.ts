@@ -25,6 +25,8 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     if (!session) return null
 
     const PostModel = GetPostModelByType(req.postType)
+    if (!PostModel) return null
+
     const post = await PostModel.findById(req.postId)
     if (!post) return null
 

@@ -24,6 +24,7 @@ export default async function StorePost({id}) {
 
   async function handleCreateVote(voteType: VoteType) {
     "use server"
+
     const req: CreateVoteRequest = {
       postType: PostType.STORE,
       postId: post.id,

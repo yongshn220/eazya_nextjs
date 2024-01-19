@@ -3,7 +3,6 @@ import {IStorePost} from "@models/collections/storePost";
 import Image from 'next/image'
 import React from "react";
 import ImageFullViewSelector from "@components/image/ImageFullViewSelector";
-import ImageFullViewer from "@components/image/ImageFullViewer";
 
 export default function StoreContent({post}: {post: IStorePost}) {
   return (
@@ -38,23 +37,10 @@ export default function StoreContent({post}: {post: IStorePost}) {
       </Carousel>
 
       <div className="flex-center flex-col gap-4">
-        <p className="text-2xl font-bold">Stony Brook Football Club</p>
-        <p className="text-2xl font-bold text-gray-700">$12</p>
+        <p className="text-2xl font-bold">{post.title}</p>
+        <p className="text-2xl font-bold text-gray-700">${post.price}</p>
       </div>
-
-      <p className="whitespace-pre-wrap">
-        "What is Lorem Ipsum??<br/><br/>
-
-        Lorem      Ipsum is simply dummy text of the printing and typesetting industry.
-
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br/>
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br/>
-        It has survived not only five centuries,
-        but also the leap into electronic typesetting, remaining essentially unchanged.<br/>
-
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
+      <p className="whitespace-pre-wrap">{post.description}</p>
     </section>
   )
 }

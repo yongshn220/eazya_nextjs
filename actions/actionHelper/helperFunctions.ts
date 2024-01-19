@@ -1,15 +1,17 @@
 import {PostType, VoteType} from "@components/constants/enums";
-import {EventPostModel, IEventPost} from "@models/collections/eventPost";
+import {EventPostModel} from "@models/collections/eventPost";
 import {VoteUser} from "@models/base/voteUserBase";
-import {GeneralPostModel, IGeneralPost} from "@models/collections/generalPost";
+import {GeneralPostModel} from "@models/collections/generalPost";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 import {Session} from "@node_modules/next-auth";
+import {StorePostModel} from "@models/collections/storePost";
 
 export function GetPostModelByType(postType: PostType) {
   if (postType === PostType.EVENT) return EventPostModel
   if (postType === PostType.GENERAL) return GeneralPostModel
-  else return EventPostModel
+  if (postType === PostType.STORE) return StorePostModel
+  else return null
 }
 
 export function getCommentAuthorNameAndSave(post: any, userId: string) {
@@ -30,7 +32,7 @@ export function getUserVoteType(userId: string, voteUser: VoteUser) {
   else return VoteType.NONE
 }
 
-export function makePostAnonymous(post: IEventPost | IGeneralPost) {
+export function makePostAnonymous(post: IPost) {
   post.voteUser = {upvoted: ["CONCEALED"], downvoted: ["CONCEALED"]}
   post.authorId = "CONCEALED"
   post.commentators = ["CONCEALED"]

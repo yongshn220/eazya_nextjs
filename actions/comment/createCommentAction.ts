@@ -24,9 +24,10 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
     const PostModel = GetPostModelByType(req.postType)
+    if (!PostModel) return null
 
     const post = await PostModel.findById(req.postId)
-    if (!post) return {status: StatusCodes.NOT_FOUND}
+    if (!post) return null
 
     const authorName = getCommentAuthorNameAndSave(post, session.user.id)
 
