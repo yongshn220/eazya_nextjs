@@ -3,22 +3,26 @@ import {redirect} from "next/navigation";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {CommunityType} from "@components/constants/enums";
-import {GeneralPostModel} from "@models/collections/generalPost";
+import {CommunityType, PostType} from "@components/constants/enums";
+import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
+import {getCommunityHomePath} from "@components/constants/tags";
 
 
-export default async function deleteCommunityPostAction(postId: string, type: CommunityType) {
+export default async function deleteCommunityPostAction(postType: PostType, communityType: CommunityType, postId: string) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    const generalPost =  await GeneralPostModel.findById(postId)
-    if (!generalPost) return null
+    const CommunityPostModel = getCommunityPostModelByType(postType)
+    if (!CommunityPostModel) return null
 
-    if (session.user.id !== generalPost.authorId.toString()) return null
+    const post =  await CommunityPostModel.findById(postId)
+    if (!post) return null
 
-    await GeneralPostModel.findByIdAndDelete(postId)
+    if (session.user.id !== post.authorId.toString()) return null
+
+    await CommunityPostModel.findByIdAndDelete(postId)
 
     return true
   }
@@ -27,7 +31,7 @@ export default async function deleteCommunityPostAction(postId: string, type: Co
     return null
   }
   finally {
-    revalidatePath(`/general/${type}`)
-    redirect(`/general/${type}`)
+    revalidatePath(getCommunityHomePath(postType, communityType))
+    redirect(getCommunityHomePath(postType, communityType))
   }
 }

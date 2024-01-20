@@ -8,15 +8,15 @@ import deleteCommunityPostAction from "@actions/community/deleteCommunityPostAct
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
-import GeneralContent from "@containers/general/id/Content";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
+import CommunityContent from "@components/post/community/CommunityContent";
 
-export default async function GeneralPost({id, type}) {
-  const post: IGeneralPost = await getCommunityPostAction(id)
+export default async function CommunityPost({postType, communityType, postId}) {
+  const post: IGeneralPost = await getCommunityPostAction(postType, postId)
 
   async function handleDeletePost() {
     "use server"
-    await deleteCommunityPostAction(id, type)
+    await deleteCommunityPostAction(postType, communityType, postId)
   }
 
   async function handleCreateVote(voteType: VoteType) {
@@ -41,7 +41,7 @@ export default async function GeneralPost({id, type}) {
   return (
     <section className="w-full flex flex-col">
       <PostHeader postHeaderData={postHeaderData}/>
-      <GeneralContent post={post}/>
+      <CommunityContent post={post}/>
       <p className="text-lg mt-5">{`${numberOfComments} Comments`}</p>
       <CreateComment postType={post.type} postId={post.id}/>
       <CommentList postType={post.type} postId={post.id} comments={post.comments}/>

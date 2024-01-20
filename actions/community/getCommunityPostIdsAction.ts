@@ -1,14 +1,19 @@
-import {CommunityType} from "@components/constants/enums";
+import {CommunityType, PostType} from "@components/constants/enums";
 import {connectToDB} from "@utils/database";
 import {GeneralPostModel} from "@models/collections/generalPost";
 import {toJson} from "@actions/actionHelper/utilFunction";
+import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
 
 
-export default async function getCommunityPostIdsAction(communityType: CommunityType) {
+export default async function getCommunityPostIdsAction(postType: PostType, communityType: CommunityType) {
   try {
     await connectToDB()
-    const generalPosts = await GeneralPostModel.find({communityType: communityType})
-    const ids = generalPosts.map(post => post._id)
+
+    const CommunityPostModel = getCommunityPostModelByType(postType)
+    if (!CommunityPostModel) return null
+
+    const posts = await CommunityPostModel.find({communityType: communityType})
+    const ids = posts.map(post => post._id)
 
     return toJson(ids)
   }

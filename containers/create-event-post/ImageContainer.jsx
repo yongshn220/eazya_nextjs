@@ -1,6 +1,5 @@
 import {Cross2Icon} from "@radix-ui/react-icons";
 import LoadingCircle from "@components/animation/LoadingCircle";
-import {hoveredTextColor} from "@components/constants/values";
 import Image from 'next/image'
 
 export default function ImageContainer({image, handleRemove, isLoading }) {

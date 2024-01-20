@@ -5,7 +5,7 @@ import {CommunityType, PostType} from "@components/constants/enums";
 import CreateCommunityPost from "@components/post/community/CreateCommunityPost";
 
 
-export default function CreateGeneralPostHome() {
+export default function CreateFindMemberPostHome() {
   const searchParams = useSearchParams()
   const type = searchParams.get('type') as CommunityType
 
@@ -14,6 +14,6 @@ export default function CreateGeneralPostHome() {
   }
 
   return (
-    <CreateCommunityPost postType={PostType.GENERAL} communityType={type}/>
+    <CreateCommunityPost postType={PostType.FIND_MEMBER} communityType={type}/>
   )
 }

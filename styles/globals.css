@@ -278,3 +278,11 @@
 .hover_text_blue {
   @apply hover:text-blue-500 group-hover:text-blue-500
 }
+
+.default_blue_text {
+  @apply text-blue-500
+}
+
+.default_red_text {
+  @apply text-red-500
+}

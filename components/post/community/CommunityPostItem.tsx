@@ -2,9 +2,18 @@ import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
+import {CommunityType, PostType} from "@components/constants/enums";
+import {getCommunityPostPath} from "@components/constants/tags";
 
-export default async function GeneralPostItem({id, type}) {
-  const post = await getCommunityPostAction(id)
+
+interface Props {
+  postType: PostType;
+  communityType: CommunityType;
+  postId: string;
+}
+
+export default async function CommunityPostItem({postType, communityType, postId}: Props) {
+  const post = await getCommunityPostAction(postType, postId)
   if (!post) {
     return <></>
   }
@@ -13,7 +22,7 @@ export default async function GeneralPostItem({id, type}) {
 
   return (
     <div>
-      <Link href={`/general/${type}/${id}`}>
+      <Link href={getCommunityPostPath(postType, communityType, postId)}>
         <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex-between items-center gap-5">
             <div className="flex flex-center gap-2">

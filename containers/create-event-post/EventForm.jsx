@@ -2,7 +2,6 @@ import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
 import InputFieldDefault from "@components/input/InputFieldDefault";
-import {hoveredTextColor} from "@components/constants/values";
 import InputFieldDescription from "@components/input/InputFieldDescription";
 import ImageUploader from "@containers/create-event-post/ImageUploader";
 

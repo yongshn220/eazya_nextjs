@@ -1,4 +1,3 @@
-import {highlightedTextColor, hoveredTextColor} from "@components/constants/values";
 import {Badge} from "@components/ui/badge"
 import Link from 'next/link'
 import {IUserActivity} from "@models/collections/userActivity";
@@ -17,7 +16,7 @@ export default function ActivityItem({activity}: Props) {
             <div className="flex-center gap-2">
               <Badge variant="outline" className="border-gray-300">{activity.postType}</Badge>
               <p className="text-sm text-gray-500">
-                You have created a <span className={`${highlightedTextColor}`}>{getActivityNameByType(activity.userActivityType)}</span>.
+                You have created a <span className="default_blue_text">{getActivityNameByType(activity.userActivityType)}</span>.
               </p>
             </div>
             <p className="text-sm text-gray-500">

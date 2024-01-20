@@ -1,6 +1,5 @@
 import StorePostItem from "@containers/store/StorePostItem";
 import Link from 'next/link'
-import {hoveredTextColor} from "@components/constants/values";
 import getStorePostIdsAction from "@actions/store/getStorePostIdsAction";
 
 export default async function StorePreview() {

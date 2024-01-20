@@ -6,14 +6,28 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 import {Session} from "@node_modules/next-auth";
 import {StorePostModel} from "@models/collections/storePost";
+import {FindMemberPostModel} from "@models/collections/findMemberPost";
 
+/*-------------
+     MODEL
+--------------*/
 export function GetPostModelByType(postType: PostType) {
   if (postType === PostType.EVENT) return EventPostModel
   if (postType === PostType.GENERAL) return GeneralPostModel
+  if (postType === PostType.FIND_MEMBER) return FindMemberPostModel
   if (postType === PostType.STORE) return StorePostModel
-  else return null
+  return null
 }
 
+export function getCommunityPostModelByType(postType: PostType) {
+  if (postType === PostType.GENERAL) return GeneralPostModel
+  if (postType === PostType.FIND_MEMBER) return FindMemberPostModel
+  return null
+}
+
+/*-------------
+     COMMENT
+--------------*/
 export function getCommentAuthorNameAndSave(post: any, userId: string) {
   post = toJson(post)
   if (post.authorId === userId) return "Author"
@@ -24,6 +38,10 @@ export function getCommentAuthorNameAndSave(post: any, userId: string) {
   return post.commentators.length;
 }
 
+
+/*-------------
+     VOTE
+--------------*/
 export function getUserVoteType(userId: string, voteUser: VoteUser) {
   const upvoteIds = voteUser.upvoted.map(id => id.toString())
   const downvoteIds = voteUser.downvoted.map(id => id.toString())
@@ -32,6 +50,10 @@ export function getUserVoteType(userId: string, voteUser: VoteUser) {
   else return VoteType.NONE
 }
 
+
+/*-------------
+     POST
+--------------*/
 export function makePostAnonymous(post: IPost) {
   post.voteUser = {upvoted: ["CONCEALED"], downvoted: ["CONCEALED"]}
   post.authorId = "CONCEALED"

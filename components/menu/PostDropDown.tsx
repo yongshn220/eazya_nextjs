@@ -3,7 +3,6 @@
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {useSession} from 'next-auth/react'
 import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
-import {dangerTextColor} from "@components/constants/values";
 import {DeletePostAlertDialog} from "@components/util/DeletePostAlertDialog";
 import {useState} from "react";
 import {IDropDown} from "@components/headers/PostHeader";
@@ -39,7 +38,7 @@ export default function PostDropDown({dropDownData}: Props) {
             :
             <>
               <DropdownMenuItem >Edit</DropdownMenuItem>
-              <DropdownMenuItem onClick={toggleDeleteDialogOpen} className={dangerTextColor}>Delete</DropdownMenuItem>
+              <DropdownMenuItem onClick={toggleDeleteDialogOpen} className="default_red_text">Delete</DropdownMenuItem>
             </>
           }
         </DropdownMenuContent>

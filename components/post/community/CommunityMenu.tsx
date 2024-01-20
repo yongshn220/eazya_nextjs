@@ -1,7 +1,6 @@
 import {Button} from "@components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select"
 import {CommunityType, PostType, PostTypeURL} from "@components/constants/enums";
-import {hoveredTextColor} from "@components/constants/values";
 import Link from 'next/link'
 
 
@@ -20,7 +19,7 @@ export default function CommunityMenu({postType, communityType}: Props) {
             <Link href={`/${PostTypeURL[postType]}/${menuType}`}>
               <Button variant="ghost"
                 key={menuType}
-                className={communityType === menuType ? hoveredTextColor : ''}
+                className={communityType === menuType ? 'default_blue_text' : ''}
               >
                 {menuType}
               </Button>

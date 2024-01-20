@@ -1,4 +1,5 @@
 import GeneralPreview from "@containers/home/GeneralPreview";
+import FindMemberPreview from "@containers/home/FindMemberPreview";
 
 export default function CommunityGroupPreview() {
   return (
@@ -9,7 +10,7 @@ export default function CommunityGroupPreview() {
 
       <div className="grid_12">
         <GeneralPreview/>
-        <GeneralPreview/>
+        <FindMemberPreview/>
       </div>
     </section>
   )

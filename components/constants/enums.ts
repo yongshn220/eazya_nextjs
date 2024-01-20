@@ -12,17 +12,17 @@ export enum NavTab {
 }
 
 export enum PostType {
-  EVENT =     "Event",
-  GENERAL =   "General",
-  STORE =     "Store",
+  EVENT =       "Event",
+  GENERAL =     "General",
+  STORE =       "Store",
   FIND_MEMBER = "Find Member",
 }
 
 export const PostTypeURL = {
-  [PostType.EVENT]: "events",
-  [PostType.GENERAL]: "community",
-  [PostType.STORE]: "store",
-  [PostType.FIND_MEMBER]: "find_member",
+  [PostType.EVENT]:       "events",
+  [PostType.GENERAL]:     "general",
+  [PostType.FIND_MEMBER]: "find-member",
+  [PostType.STORE]:       "store",
 }
 
 
