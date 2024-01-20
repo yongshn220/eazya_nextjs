@@ -16,12 +16,13 @@ export default async function editCommunityPostAction(postId: string, req: Commu
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    const {postType, title, description} = req
+    const {postType, communityType, title, description} = req
 
     const CommunityPostModel = getCommunityPostModelByType(postType)
     if (!CommunityPostModel) return null
 
     await CommunityPostModel.findOneAndUpdate({_id: postId}, {
+      communityType,
       title,
       description,
     })

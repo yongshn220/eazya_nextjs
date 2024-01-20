@@ -2,11 +2,11 @@
 import StoreForm from "@containers/create-store-post/StoreForm";
 import {useState} from "react";
 import {FormMode} from "@components/constants/enums";
-import {CreateStorePostRequest} from "@models/requests/CreateStorePostRequest"
+import {StoreFormRequest} from "@models/requests/StoreFormRequest"
 import createStorePostAction from "@actions/store/createStorePostAction";
 
 export default function CreateStorePost() {
-  const [storePost, setStorePost] = useState<CreateStorePostRequest>({
+  const [storePost, setStorePost] = useState<StoreFormRequest>({
     title: "",
     price: "",
     description: "",
@@ -16,7 +16,7 @@ export default function CreateStorePost() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    const req: CreateStorePostRequest = {...storePost}
+    const req: StoreFormRequest = {...storePost}
     createStorePostAction(req).then()
   }
 

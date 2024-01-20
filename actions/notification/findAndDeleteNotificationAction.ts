@@ -1,3 +1,5 @@
+"use server"
+
 import {DeleteNotificationRequest} from "@models/requests/DeleteNotificationRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";

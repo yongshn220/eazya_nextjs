@@ -1,3 +1,5 @@
+
+
 import {PostType, VoteType} from "@components/constants/enums";
 import {EventPostModel} from "@models/collections/eventPost";
 import {VoteUser} from "@models/base/voteUserBase";

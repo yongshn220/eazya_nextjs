@@ -1,7 +1,7 @@
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
-import {CreateStorePostRequest} from "@models/requests/CreateStorePostRequest";
+import {StoreFormRequest} from "@models/requests/StoreFormRequest";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
 import MultipleImageUploader from "@components/image/MultipleImageUploader";
@@ -17,19 +17,19 @@ const MAX_IMAGE_COUNT = 5
 
 interface Props {
   mode: string;
-  post: CreateStorePostRequest;
+  post: StoreFormRequest;
   setPost: any;
   submitHandler: Function;
 }
 
 export interface Image {
-  id: number;
+  id: string;
   url: string;
   isLoading: boolean;
 }
 
 export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
-  const [images, setImages] = useState<Array<Image>>([])
+  const [images, setImages] = useState<Array<Image>>(post.images.map(((image) => ({id: "", url: image, isLoading: false}))))
 
   useEffect(() => {
     setPost((prev) => ({...prev, images: images.map(image => image.url)}))

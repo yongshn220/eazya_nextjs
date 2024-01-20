@@ -1,4 +1,4 @@
-export interface CreateStorePostRequest {
+export interface StoreFormRequest {
   images: Array<string>;
   title: string;
   price: string;

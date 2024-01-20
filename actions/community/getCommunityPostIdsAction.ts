@@ -1,3 +1,5 @@
+"use server"
+
 import {CommunityType, PostType} from "@components/constants/enums";
 import {connectToDB} from "@utils/database";
 import {GeneralPostModel} from "@models/collections/generalPost";

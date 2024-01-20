@@ -1,6 +1,6 @@
 "use server"
 
-import {CreateStorePostRequest} from "@models/requests/CreateStorePostRequest";
+import {StoreFormRequest} from "@models/requests/StoreFormRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
@@ -11,9 +11,10 @@ import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequ
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
+import {getHomePath} from "@components/constants/tags";
 
 
-export default async function createStorePostAction(req: CreateStorePostRequest) {
+export default async function createStorePostAction(req: StoreFormRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
@@ -22,7 +23,7 @@ export default async function createStorePostAction(req: CreateStorePostRequest)
     const {images, title, price, description} = req
 
     const publicUrls = []
-    for (let image of images) {
+    for (const image of images) {
       const url = await addBase64ToStorage(PostType.STORE, session, image)
       if (!url) continue
       publicUrls.push(url)
@@ -59,7 +60,7 @@ export default async function createStorePostAction(req: CreateStorePostRequest)
     return null
   }
   finally {
-    revalidatePath('/store')
-    redirect('/store')
+    revalidatePath(getHomePath(PostType.STORE))
+    redirect(getHomePath(PostType.STORE))
   }
 }

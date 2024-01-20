@@ -1,3 +1,5 @@
+"use server"
+
 import {connectToDB} from "@utils/database";
 import {GeneralPostModel} from "@models/collections/generalPost";
 import {getServerSession} from "@node_modules/next-auth/next";

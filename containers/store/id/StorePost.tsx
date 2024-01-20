@@ -12,6 +12,7 @@ import {IPostHeader} from "@models/types/postHeader";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import ImageFullViewer from "@components/image/ImageFullViewer";
 import React from "react";
+import {getEditFormPath} from "@components/constants/tags";
 
 export default async function StorePost({id}) {
   const post: IStorePost = await getStorePostAction(id)
@@ -38,7 +39,7 @@ export default async function StorePost({id}) {
     post,
     deletePostHandler: handleDeletePost,
     createVoteHandler: handleCreateVote,
-    editHref: "#",
+    editHref: getEditFormPath(post.id, PostType.STORE),
   }
 
   const numberOfComments = getNumOfCommentsInPost(post)
