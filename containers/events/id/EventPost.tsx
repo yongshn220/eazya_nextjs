@@ -12,15 +12,16 @@ import getEventPostAction from "@actions/event/getEventPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import ImageFullViewer from "@components/image/ImageFullViewer";
 import React from "react";
+import {getEditFormPath} from "@components/constants/tags";
 
 
-export default async function EventPost({id}) {
-  const post: IEventPost  = await getEventPostAction(id)
+export default async function EventPost({postId}) {
+  const post: IEventPost  = await getEventPostAction(postId)
   if (!post) return <></>
 
   async function handleDeletePost() {
     "use server"
-    await deleteEventPostAction(id)
+    await deleteEventPostAction(postId)
   }
 
   async function handleCreateVote(voteType: VoteType) {
@@ -38,7 +39,7 @@ export default async function EventPost({id}) {
     post,
     deletePostHandler: handleDeletePost,
     createVoteHandler: handleCreateVote,
-    editHref: "#",
+    editHref: getEditFormPath(postId, PostType.EVENT),
   }
 
   const numberOfComments = getNumOfCommentsInPost(post)

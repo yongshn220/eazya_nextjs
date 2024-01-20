@@ -10,6 +10,7 @@ import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import CommunityContent from "@components/post/community/CommunityContent";
+import {getCommunityEditFormPath, getEditFormPath} from "@components/constants/tags";
 
 export default async function CommunityPost({postType, communityType, postId}) {
   const post: IGeneralPost = await getCommunityPostAction(postType, postId)
@@ -33,7 +34,7 @@ export default async function CommunityPost({postType, communityType, postId}) {
     post,
     deletePostHandler: handleDeletePost,
     createVoteHandler: handleCreateVote,
-    editHref: "#",
+    editHref: getCommunityEditFormPath(postId, postType, communityType),
   }
 
   const numberOfComments = getNumOfCommentsInPost(post)

@@ -1,3 +1,3 @@
-import {CreateCommunityRequestBase} from "@models/base/CreateCommunityRequestBase";
+import {CommunityFormRequest} from "@models/requests/CommunityFormRequest";
 
-export interface CreateFindMemberPostRequest extends CreateCommunityRequestBase {}
+export interface CreateFindMemberPostRequest extends CommunityFormRequest {}

@@ -1,10 +1,10 @@
 "use client"
 
 import {useState} from "react";
-import {CommunityType, PostType} from "@components/constants/enums";
+import {CommunityType, FormMode, PostType} from "@components/constants/enums";
 import createCommunityPostAction from "@actions/community/createCommunityPostAction";
 import {CreateGeneralPostRequest} from "@models/requests/CreateGeneralPostRequest";
-import {CreateCommunityRequestBase} from "@models/base/CreateCommunityRequestBase";
+import {CommunityFormRequest} from "@models/requests/CommunityFormRequest";
 import CommunityForm from "@components/post/community/CommunityForm";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function CreateCommunityPost({postType, communityType}: Props) {
-  const [post, setPost] = useState<CreateCommunityRequestBase>({
+  const [post, setPost] = useState<CommunityFormRequest>({
     postType,
     communityType: communityType,
     title: "",
@@ -23,15 +23,13 @@ export default function CreateCommunityPost({postType, communityType}: Props) {
   function handleSubmit(e) {
     e.preventDefault()
 
-    const req: CreateGeneralPostRequest = {...post}
-    createCommunityPostAction(req).then(() => {
-
-    })
+    const req: CommunityFormRequest = {...post}
+    createCommunityPostAction(req).then()
   }
 
   return (
     <section className="w-full">
-      <CommunityForm mode="Create" post={post} setPost={setPost} submitHandler={handleSubmit}/>
+      <CommunityForm mode={FormMode.CREATE} post={post} setPost={setPost} submitHandler={handleSubmit}/>
     </section>
   )
 }

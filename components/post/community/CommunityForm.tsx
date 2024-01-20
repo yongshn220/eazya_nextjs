@@ -2,14 +2,14 @@ import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue} from "@components/ui/select";
-import {CommunityType} from "@components/constants/enums";
+import {CommunityType, FormMode} from "@components/constants/enums";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
-import {CreateCommunityRequestBase} from "@models/base/CreateCommunityRequestBase";
+import {CommunityFormRequest} from "@models/requests/CommunityFormRequest";
 
 interface Props {
   mode: string;
-  post: CreateCommunityRequestBase;
+  post: CommunityFormRequest;
   setPost: any;
   submitHandler: Function;
 }
@@ -34,8 +34,7 @@ export default function CommunityForm({mode, post, setPost, submitHandler}: Prop
           </span>
           <Select value={post.communityType} onValueChange={handleSelectChange}>
             <SelectTrigger className="w-full py-5 mt-2 bg-white border-none shadow-none">
-              <SelectValue>
-              </SelectValue>
+              <SelectValue/>
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>

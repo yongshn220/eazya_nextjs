@@ -5,6 +5,6 @@ export default async function EventPostPage({ params }) {
   const postId = params.id
 
   return (
-    <EventPost id={postId}/>
+    <EventPost postId={postId}/>
   )
 }

@@ -1,6 +1,6 @@
 import {CommunityType, PostType} from "@components/constants/enums";
 
-export interface CreateCommunityRequestBase {
+export interface CommunityFormRequest {
   postType: PostType;
   communityType: CommunityType;
   title: string;

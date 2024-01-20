@@ -1,11 +1,15 @@
+"use server"
+
 import {EventFormRequest} from "@models/requests/EventFormRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {EventPostModel} from "@models/collections/eventPost";
-import {addFileToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
+import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {PostType} from "@components/constants/enums";
-
+import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
+import {getHomePath, getPostPath} from "@components/constants/tags";
 
 
 export default async function editEventPostAction(postId: string,  req: EventFormRequest) {
@@ -20,20 +24,30 @@ export default async function editEventPostAction(postId: string,  req: EventFor
     let {image, title, date, time, location, description } = req
 
     if (post.image !== image) {
-      const newPublicUrl = await addFileToStorage(PostType.EVENT, session, image)
-      if (!newPublicUrl) return null
+      image = await addBase64ToStorage(PostType.EVENT, session, image)
+      if (!image) return null
 
       const oldFile = getStorageFileFromStringUrl(post.image)
       await oldFile.delete()
     }
-    
 
+    await EventPostModel.findOneAndUpdate({_id: postId}, {
+      image,
+      title,
+      date,
+      time,
+      location,
+      description
+    })
 
+    return true
   }
   catch (error) {
-
+    console.log(error)
+    return null
   }
   finally {
-
+    revalidatePath(getHomePath(PostType.EVENT))
+    redirect(getPostPath(postId, PostType.EVENT))
   }
 }

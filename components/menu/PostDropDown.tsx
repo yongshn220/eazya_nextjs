@@ -6,6 +6,7 @@ import {HamburgerMenuIcon} from "@node_modules/@radix-ui/react-icons";
 import {DeletePostAlertDialog} from "@components/util/DeletePostAlertDialog";
 import {useState} from "react";
 import {IDropDown} from "@components/headers/PostHeader";
+import Link from "next/link";
 
 interface Props {
   dropDownData: IDropDown;
@@ -37,7 +38,9 @@ export default function PostDropDown({dropDownData}: Props) {
             </>
             :
             <>
-              <DropdownMenuItem >Edit</DropdownMenuItem>
+              <Link href={editHref}>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+              </Link>
               <DropdownMenuItem onClick={toggleDeleteDialogOpen} className="default_red_text">Delete</DropdownMenuItem>
             </>
           }

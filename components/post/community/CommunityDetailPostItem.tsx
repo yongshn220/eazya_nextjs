@@ -15,7 +15,7 @@ export default async function CommunityDetailPostItem({postId, postType, communi
 
   return (
     <div>
-      <Link href={getCommunityPostPath(postType, communityType, postId)}>
+      <Link href={getCommunityPostPath(postId, postType, communityType)}>
         <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex items-center gap-5">
             <div className="flex flex-center gap-2">

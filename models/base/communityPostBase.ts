@@ -20,8 +20,8 @@ export const CommunityPostBase = new Schema({
   commentators:   [{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments:       [ CommentBaseSchema ]
 }, {toJSON: { virtuals: true}, toObject: { virtuals: true}})
-
 CommunityPostBase.virtual('id').get(function() {return this._id.toHexString()})
+
 
 
 export interface ICommunityBase {

@@ -25,6 +25,13 @@ export const PostTypeURL = {
   [PostType.STORE]:       "store",
 }
 
+export const PostTypeEditURL = {
+  [PostType.EVENT]:       "edit-event-post",
+  [PostType.GENERAL]:     "edit-general-post",
+  [PostType.FIND_MEMBER]: "edit-find-member-post",
+  [PostType.STORE]:       "edit-store-post",
+}
+
 
 export enum NotificationType {
   COMMENT_ON_POST =     "CommentOnPost",
