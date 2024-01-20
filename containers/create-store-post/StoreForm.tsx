@@ -74,9 +74,9 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
             </div>
         </div>
 
-        <InputFieldDefaultClient name="Title" value={post.title} onChangeHandler={(e) => setPost({...post, title: e.target.value})} placeholder="Title"/>
-        <InputFieldPriceClient name="Price" value={post.price} onChangeHandler={(e) => setPost({...post, price: e.target.value})} placeholder="Price"/>
-        <InputFieldDescriptionClient name="Description" value={post.description} onChangeHandler={(e) => setPost({...post, description: e.target.value})} placeholder="Description" />
+        <InputFieldDefaultClient name="Title" value={post.title} onChangeHandler={(e) => setPost((prev) => ({...prev, title: e.target.value}))} placeholder="Title"/>
+        <InputFieldPriceClient name="Price" value={post.price} onChangeHandler={(e) => setPost((prev) => ({...prev, price: e.target.value}))} placeholder="Price"/>
+        <InputFieldDescriptionClient name="Description" value={post.description} onChangeHandler={(e) => setPost((prev) => ({...prev, description: e.target.value}))} placeholder="Description" />
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
           <Button type="submit">{mode}</Button>

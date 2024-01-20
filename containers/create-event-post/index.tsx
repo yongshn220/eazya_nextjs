@@ -1,30 +1,36 @@
+"use client"
+
 import EventForm from "@containers/create-event-post/EventForm";
-import {FormMode, PostType} from "@components/constants/enums";
+import {FormMode} from "@components/constants/enums";
 import createEventPostAction from "@actions/event/createEventPostAction";
-import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
+import {EventFormRequest} from "@models/requests/EventFormRequest";
+import {useState} from "react";
 
 
 export default function CreateEventPost() {
+  const [eventPost, setEventPost] = useState<EventFormRequest>({
+    image: "",
+    title: "",
+    date: "",
+    time: "",
+    location: "",
+    description: "",
+  })
 
-  async function createEvent(formData: FormData) {
-    "use server"
-    const req: CreateEventPostRequest = {
-      image: formData.get('Image') as File,
-      title: formData.get('Title') as string,
-      date: formData.get('Date') as string,
-      time: formData.get('Time') as string ,
-      location: formData.get('Location') as string,
-      description: formData.get('Description') as string,
-    }
+  function handleSubmit(e) {
+    e.preventDefault()
 
-    await createEventPostAction(req)
+    const req: EventFormRequest = {...eventPost}
+    createEventPostAction(req).then()
   }
 
   return (
     <section className="w-full">
       <EventForm
         mode={FormMode.CREATE}
-        handleSubmit={createEvent}
+        post={eventPost}
+        setPost={setEventPost}
+        submitHandler={handleSubmit}
       />
     </section>
   )

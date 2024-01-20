@@ -38,15 +38,18 @@ export default function Nav() {
             </Link>
           </div>
 
-          <div className="flex gap-5">
+          <div className="flex gap-10">
             <Link href="/events" className="flex">
               <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.EVENT? "text-blue-600" : "text-black"}`}>EVENTS</p>
             </Link>
             <Link href="/general/English" className="flex">
               <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.GENERAL? "text-blue-600" : "text-black"}`}>GENERAL</p>
             </Link>
+            <Link href="/find-member/English" className="flex">
+              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.FIND_MEMBER? "text-blue-600" : "text-black"}`}>FIND MEMBER</p>
+            </Link>
             <Link href="/store" className="flex">
-              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.STORE? "text-blue-600" : "text-black"}`}>BUT & SELL</p>
+              <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.STORE? "text-blue-600" : "text-black"}`}>BUY & SELL</p>
             </Link>
           </div>
         </div>

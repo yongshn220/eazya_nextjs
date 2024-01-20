@@ -1,12 +1,8 @@
 import {connectToDB} from "@utils/database";
-import {EventPostModel, IEventPost} from "@models/collections/eventPost";
+import {EventPostModel} from "@models/collections/eventPost";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {VoteType} from "@components/constants/enums";
-import {VoteUser} from "@models/base/voteUserBase";
-import {ReplyBase} from "@models/base/replyBase";
-import {CommentBase} from "@models/base/commentBase";
-import {getUserVoteType, makePostAnonymous, setDynamicDataToPost} from "@actions/actionHelper/helperFunctions";
+import { setDynamicDataToPost} from "@actions/actionHelper/helperFunctions";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 

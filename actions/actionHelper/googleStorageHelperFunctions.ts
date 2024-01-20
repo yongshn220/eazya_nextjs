@@ -23,14 +23,20 @@ export function base64ToBuffer(base64: string) {
 }
 
 export async function addFileToStorage(postType: PostType, session: Session, file: File) {
-  const buffer = await fileToBuffer(file)
-  const credentials = getCredentials()
-  const storage = new Storage({ credentials })
-  const imageName = `${postType}/${session.user.email}/${Date.now()}-${uuidv4()}`
-  const storageFile = storage.bucket(BUCKET_NAME).file(imageName)
-  await storageFile.save(buffer)
+  try {
+    const buffer = await fileToBuffer(file)
+    const credentials = getCredentials()
+    const storage = new Storage({ credentials })
+    const imageName = `${postType}/${session.user.email}/${Date.now()}-${uuidv4()}`
+    const storageFile = storage.bucket(BUCKET_NAME).file(imageName)
+    await storageFile.save(buffer)
 
-  return `https://storage.googleapis.com/${BUCKET_NAME}/${imageName}`;
+    return `https://storage.googleapis.com/${BUCKET_NAME}/${imageName}`;
+  }
+  catch (error) {
+    console.log(error)
+    return null
+  }
 }
 
 export async function addBase64ToStorage(postType: PostType, session: Session, base64: string) {

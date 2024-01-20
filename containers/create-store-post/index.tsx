@@ -16,16 +16,18 @@ export default function CreateStorePost() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    console.log("handle submit")
     const req: CreateStorePostRequest = {...storePost}
-    createStorePostAction(req).then(() => {
-
-    })
+    createStorePostAction(req).then()
   }
 
   return (
     <section className="w-full">
-      <StoreForm mode={FormMode.CREATE} post={storePost} setPost={setStorePost} submitHandler={handleSubmit}/>
+      <StoreForm
+        mode={FormMode.CREATE}
+        post={storePost}
+        setPost={setStorePost}
+        submitHandler={handleSubmit}
+      />
     </section>
   )
 }

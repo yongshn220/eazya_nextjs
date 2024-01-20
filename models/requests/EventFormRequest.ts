@@ -1,6 +1,6 @@
 
-export interface CreateEventPostRequest {
-  image: File;
+export interface EventFormRequest {
+  image: string;
   title: string;
   date: string;
   time: string;

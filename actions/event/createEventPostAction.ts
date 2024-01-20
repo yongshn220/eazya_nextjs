@@ -4,15 +4,15 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {connectToDB} from "@utils/database";
 import {EventPostModel} from "@models/collections/eventPost";
-import {CreateEventPostRequest} from "@models/requests/CreateEventPostRequest";
+import {EventFormRequest} from "@models/requests/EventFormRequest";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import {PostType, UserActivityType} from "@components/constants/enums";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {addFileToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
+import {addBase64ToStorage, addFileToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
 
-export default async function createEventPostAction(req: CreateEventPostRequest) {
+export default async function createEventPostAction(req: EventFormRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
@@ -20,7 +20,8 @@ export default async function createEventPostAction(req: CreateEventPostRequest)
 
     const {image, title, date, time, location, description } = req
 
-    const publicUrl = await addFileToStorage(PostType.EVENT, session, image)
+    const publicUrl = await addBase64ToStorage(PostType.EVENT, session, image)
+    if (!publicUrl) return null
 
     const newEventPost = new EventPostModel({
       authorId: session.user.id,

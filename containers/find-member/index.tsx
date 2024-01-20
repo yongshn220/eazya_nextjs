@@ -10,7 +10,7 @@ export default function FindMember({communityType}: {communityType: CommunityTyp
 
   return (
     <section className="w-full">
-      <NavTabSelector tab={NavTab.GENERAL}/>
+      <NavTabSelector tab={NavTab.FIND_MEMBER}/>
       <HomeHeader
         title={communityType}
         subtitle="See the upcoming events on the campus"
