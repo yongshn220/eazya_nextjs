@@ -5,10 +5,10 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StorePostModel} from "@models/collections/storePost";
 import {getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
-import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {PostType} from "@components/constants/enums";
-import {getHomePath} from "@components/constants/tags";
+import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
+import {revalidateTag} from "@node_modules/next/cache";
 
 
 export default async function deleteStorePostAction(postId: string) {
@@ -36,7 +36,7 @@ export default async function deleteStorePostAction(postId: string) {
     return null
   }
   finally {
-    revalidatePath(getHomePath(PostType.STORE))
+    revalidateTag(getPostIdsGroupTag(PostType.STORE))
     redirect(getHomePath(PostType.STORE))
   }
 }

@@ -7,10 +7,11 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {CommunityType, PostType} from "@components/constants/enums";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
-import {getCommunityHomePath} from "@components/constants/tags";
+import {getCommunityHomePath, getCommunityPostIdsGroupTag, getPostTag} from "@components/constants/tags";
+import {revalidateTag} from "@node_modules/next/cache";
 
 
-export default async function deleteCommunityPostAction(postType: PostType, communityType: CommunityType, postId: string) {
+export default async function deleteCommunityPostAction(postId: string, postType: PostType, communityType: CommunityType) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
@@ -33,7 +34,7 @@ export default async function deleteCommunityPostAction(postType: PostType, comm
     return null
   }
   finally {
-    revalidatePath(getCommunityHomePath(postType, communityType))
+    revalidateTag(getCommunityPostIdsGroupTag(postType, communityType))
     redirect(getCommunityHomePath(postType, communityType))
   }
 }

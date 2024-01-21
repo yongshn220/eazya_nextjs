@@ -2,13 +2,13 @@
 
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {StatusCodes} from "@node_modules/http-status-codes";
 import {EventPostModel} from "@models/collections/eventPost";
-import {Storage} from "@node_modules/@google-cloud/storage";
-import {revalidatePath} from "next/cache";
 import {connectToDB} from "@utils/database";
 import {redirect} from "next/navigation";
 import {getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
+import {revalidateTag} from "@node_modules/next/cache";
+import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
+import {PostType} from "@components/constants/enums";
 
 export default async function deleteEventPostAction(postId: string) {
   try {
@@ -32,7 +32,7 @@ export default async function deleteEventPostAction(postId: string) {
     return null
   }
   finally {
-    revalidatePath('/events')
-    redirect('/events')
+    revalidateTag(getPostIdsGroupTag(PostType.EVENT))
+    redirect(getHomePath(PostType.EVENT))
   }
 }

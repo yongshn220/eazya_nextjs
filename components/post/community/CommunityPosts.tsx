@@ -8,7 +8,9 @@ export default async function CommunityPosts({postType, communityType}) {
   const postIds = await getCommunityPostIdsAction(postType, communityType, 1)
   const posts = []
   for (const id of postIds) {
-    posts.push(await getCommunityPostAction(id, postType) as ICommunityPost)
+    const post = await getCommunityPostAction(id, postType) as ICommunityPost
+    if (!post) continue
+    posts.push(post)
   }
 
   return (

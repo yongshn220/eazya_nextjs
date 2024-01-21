@@ -17,7 +17,7 @@ export default async function CommunityPost({postType, communityType, postId}) {
 
   async function handleDeletePost() {
     "use server"
-    await deleteCommunityPostAction(postType, communityType, postId)
+    await deleteCommunityPostAction(postId, postType, communityType)
   }
 
   async function handleCreateVote(voteType: VoteType) {
