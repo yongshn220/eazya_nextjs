@@ -8,8 +8,8 @@ import {StoreFormRequest} from "@models/requests/StoreFormRequest";
 import {StorePostModel} from "@models/collections/storePost";
 import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {PostType} from "@components/constants/enums";
-import {revalidatePath} from "next/cache";
-import {getHomePath} from "@components/constants/tags";
+import {revalidateTag} from "next/cache";
+import {getHomePath, getPostPath, getPostTag} from "@components/constants/tags";
 import {redirect} from "next/navigation";
 
 export default async function editStorePostAction(postId: string, req: StoreFormRequest) {
@@ -55,7 +55,7 @@ export default async function editStorePostAction(postId: string, req: StoreForm
     return null
   }
   finally {
-    revalidatePath(getHomePath(PostType.STORE))
-    redirect(getHomePath(PostType.STORE))
+    revalidateTag(getPostTag(postId, PostType.STORE))
+    redirect(getPostPath(postId, PostType.STORE))
   }
 }

@@ -9,9 +9,9 @@ import {PostType, UserActivityType} from "@components/constants/enums";
 import {StorePostModel} from "@models/collections/storePost";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {revalidatePath} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {redirect} from "next/navigation";
-import {getHomePath} from "@components/constants/tags";
+import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
 
 
 export default async function createStorePostAction(req: StoreFormRequest) {
@@ -60,7 +60,7 @@ export default async function createStorePostAction(req: StoreFormRequest) {
     return null
   }
   finally {
-    revalidatePath(getHomePath(PostType.STORE))
+    revalidateTag(getPostIdsGroupTag(PostType.STORE))
     redirect(getHomePath(PostType.STORE))
   }
 }

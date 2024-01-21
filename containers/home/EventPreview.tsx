@@ -3,10 +3,11 @@ import Link from 'next/link'
 import getEventPostIdsAction from "@actions/event/getEventPostIdsAction";
 import getEventPostAction from "@actions/event/getEventPostAction";
 import {IEventPost} from "@models/collections/eventPost";
+import {getHomePath} from "@components/constants/tags";
+import {PostType} from "@components/constants/enums";
 
 export default async function EventPreview() {
   const eventPostIds = await getEventPostIdsAction(1) as Array<string>
-  console.log(eventPostIds)
   if (!eventPostIds) return <></>
 
   const eventPosts = []
@@ -17,7 +18,7 @@ export default async function EventPreview() {
 
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <Link href="/events">
+      <Link href={getHomePath(PostType.EVENT)}>
         <div className="flex flex-col border-s-4 cursor-pointer">
           <p className={`mx-4 font-satoshi text-xl font-bold text-gray-900 hover_text_blue`}>Events</p>
         </div>

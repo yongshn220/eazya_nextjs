@@ -26,6 +26,7 @@ const getCommunityPostIdsAction = async (postType: PostType, communityType: Comm
         if (!CommunityPostModel) return null
 
         const posts = await CommunityPostModel.find({communityType: communityType})
+          .sort({createdAt: -1})
           .skip((page - 1) * DEFAULT_PAGE_LENGTH.COMMUNITY)
           .limit(DEFAULT_PAGE_LENGTH.COMMUNITY)
 

@@ -1,15 +1,14 @@
 import Link from 'next/link'
 import getStorePostAction from "@actions/store/getStorePostAction";
 import Image from 'next/image'
+import {getPostPath} from "@components/constants/tags";
+import {PostType} from "@components/constants/enums";
 
-export default async function StorePostItem({id}) {
-  const post = await getStorePostAction(id)
-  if (!post) {
-    return <></>
-  }
+export default function StorePostItem({post}) {
+  if (!post) return <></>
 
   return (
-    <Link href={`/store/${id}`}>
+    <Link href={getPostPath(post.id, PostType.STORE)}>
       <div className="group relative glass_box">
         <div className="relative w-full bg-gray-200 group-hover:opacity-75">
           <Image
