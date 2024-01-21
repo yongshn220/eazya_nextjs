@@ -32,7 +32,7 @@ export interface ICommunityBase {
   communityType:  string;
   title:          string;
   description:    string;
-  createdAt:      Date;
+  createdAt:      string;
   outOfService:   boolean;
   voteUser:       VoteUser;
   votes:          number;

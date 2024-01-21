@@ -3,18 +3,27 @@ import {CommunityType, PostType, PostTypeEditURL, PostTypeURL} from "@components
 
 export enum ActionTag {
   USER_ACTIVITIES = "UserActivities",
-  EVENT_POST_IDS = "EventPostIdsTag",
 }
 
-export function getPostTag(postType: PostType, postId: string) {
+export function getPostTag(postId: string, postType: PostType) {
   return `${postType}/${postId}`
+}
 
+export function getPostIdsGroupTag(postType: PostType) {
+  return `${postType}/ids`
+}
+
+export function getCommunityPostIdsGroupTag(postType: PostType, communityType: CommunityType) {
+  return `${postType}/${communityType}/ids`
 }
 
 export function getPostIdsTag(postType: PostType, page: number) {
   return `${postType}/ids/${page}`
 }
 
+export function getCommunityPostIdsTag(postType: PostType, communityType: CommunityType, page: number) {
+  return `${postType}/${communityType}/ids/${page}`
+}
 
 export function getHomePath(postType: PostType) {
   return `/${PostTypeURL[postType]}`

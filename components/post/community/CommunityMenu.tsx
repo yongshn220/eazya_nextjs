@@ -16,7 +16,7 @@ export default function CommunityMenu({postType, communityType}: Props) {
       <div className="hidden md:flex justify-center bg-white border-b">
         {
           Object.values(CommunityType).map((menuType) => (
-            <Link href={`/${PostTypeURL[postType]}/${menuType}`}>
+            <Link key={menuType} href={`/${PostTypeURL[postType]}/${menuType}`}>
               <Button variant="ghost"
                 key={menuType}
                 className={communityType === menuType ? 'default_blue_text' : ''}

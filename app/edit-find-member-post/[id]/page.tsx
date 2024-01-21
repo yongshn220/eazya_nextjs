@@ -5,7 +5,7 @@ import EditCommunityPost from "@components/post/community/EditCommunityPost";
 
 export default async function EditFindMemberPostPage({params}) {
   const postId = params.id
-  const post = await getCommunityPostAction(PostType.FIND_MEMBER, postId)
+  const post = await getCommunityPostAction(postId, PostType.FIND_MEMBER)
 
   return (
     <EditCommunityPost post={post}/>

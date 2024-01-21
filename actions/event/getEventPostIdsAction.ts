@@ -4,14 +4,14 @@ import {EventPostModel} from "@models/collections/eventPost";
 import {connectToDB} from "@utils/database";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
-import {ActionTag, getPostIdsTag} from "@components/constants/tags";
+import {getPostIdsGroupTag, getPostIdsTag} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
 import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 
 
 const getEventPostIdsAction = async (page: number) => {
   const action = unstable_cache(
-    async (page: number) => {
+    async () => {
       try {
         console.log("Event ids", page)
         await connectToDB()
@@ -29,9 +29,9 @@ const getEventPostIdsAction = async (page: number) => {
       }
     },
     [getPostIdsTag(PostType.EVENT, page)],
-    { tags: [getPostIdsTag(PostType.EVENT, page), ActionTag.EVENT_POST_IDS]}
+    { tags: [getPostIdsTag(PostType.EVENT, page), getPostIdsGroupTag(PostType.EVENT)]}
   )
-  return await action(page)
+  return await action()
 }
 
 export default getEventPostIdsAction

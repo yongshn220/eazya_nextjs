@@ -5,8 +5,8 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
-import {revalidatePath} from "next/cache";
-import {getCommunityHomePath, getCommunityPostPath} from "@components/constants/tags";
+import {revalidateTag} from "next/cache";
+import {getCommunityPostPath, getPostTag} from "@components/constants/tags";
 import {redirect} from "next/navigation";
 
 
@@ -34,7 +34,7 @@ export default async function editCommunityPostAction(postId: string, req: Commu
     return null
   }
   finally {
-    revalidatePath(getCommunityHomePath(req.postType, req.communityType))
+    revalidateTag(getPostTag(postId, req.postType))
     redirect(getCommunityPostPath(postId, req.postType, req.communityType))
   }
 }

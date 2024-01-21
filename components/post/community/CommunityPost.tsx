@@ -13,7 +13,7 @@ import CommunityContent from "@components/post/community/CommunityContent";
 import {getCommunityEditFormPath, getEditFormPath} from "@components/constants/tags";
 
 export default async function CommunityPost({postType, communityType, postId}) {
-  const post: IGeneralPost = await getCommunityPostAction(postType, postId)
+  const post: IGeneralPost = await getCommunityPostAction(postId, postType)
 
   async function handleDeletePost() {
     "use server"

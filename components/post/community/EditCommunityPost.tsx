@@ -12,7 +12,7 @@ export default function EditCommunityPost({post}: {post: ICommunityPost}) {
   const [communityPost, setCommunityPost] = useState<CommunityFormRequest>({
     postType: post.type as PostType,
     communityType: post.communityType as CommunityType,
-    title: post.type,
+    title: post.title,
     description: post.description,
   })
 

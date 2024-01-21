@@ -6,10 +6,10 @@ import {IEventPost} from "@models/collections/eventPost";
 
 
 export default async function EventPosts() {
-  const eventPostIds = await getEventPostIdsAction(1)
-  const eventPosts = []
-  for (const id of eventPostIds) {
-    eventPosts.push(await getEventPostAction(id) as IEventPost)
+  const postIds = await getEventPostIdsAction(1)
+  const posts = []
+  for (const id of postIds) {
+    posts.push(await getEventPostAction(id) as IEventPost)
   }
 
 
@@ -17,7 +17,7 @@ export default async function EventPosts() {
     <section>
       <div className="grid_image">
         {
-          eventPosts.map(post => (
+          posts.map(post => (
             <EventPostItem key={post.id} post={post}/>
           ))
         }

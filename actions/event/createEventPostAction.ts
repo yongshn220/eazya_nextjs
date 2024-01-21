@@ -11,7 +11,7 @@ import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequ
 import {PostType, UserActivityType} from "@components/constants/enums";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 import {addBase64ToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
-import {ActionTag} from "@components/constants/tags";
+import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
 
 export default async function createEventPostAction(req: EventFormRequest) {
   try {
@@ -57,7 +57,7 @@ export default async function createEventPostAction(req: EventFormRequest) {
     return null
   }
   finally {
-    revalidateTag(ActionTag.EVENT_POST_IDS)
-    redirect('/events')
+    revalidateTag(getPostIdsGroupTag(PostType.EVENT))
+    redirect(getHomePath(PostType.EVENT))
   }
 }

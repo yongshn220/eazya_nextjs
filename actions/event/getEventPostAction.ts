@@ -14,7 +14,7 @@ import {PostType} from "@components/constants/enums";
 
 const getEventPostAction = async (postId: string) => {
   const action = unstable_cache(
-    async (postId: string) => {
+    async () => {
       try {
         await connectToDB()
         const eventPost = await EventPostModel.findById(postId)
@@ -33,10 +33,10 @@ const getEventPostAction = async (postId: string) => {
         return null
       }
     },
-    [getPostTag(PostType.EVENT, postId)],
-    { tags: [getPostTag(PostType.EVENT, postId)] }
+    [getPostTag(postId, PostType.EVENT)],
+    { tags: [getPostTag(postId, PostType.EVENT)] }
   )
-  return await action(postId)
+  return await action()
 }
 
 export default getEventPostAction

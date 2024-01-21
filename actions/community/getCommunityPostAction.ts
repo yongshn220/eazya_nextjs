@@ -8,27 +8,39 @@ import {getCommunityPostModelByType, setDynamicDataToPost} from "@actions/action
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {ICommunityPost, IPost} from "@models/union/union";
 import {PostType} from "@components/constants/enums";
+import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
+import {getPostTag} from "@components/constants/tags";
 
 
-export default async function getCommunityPostAction(postType: PostType, postId: string) {
-  try {
-    await connectToDB()
+const getCommunityPostAction = async (postId: string, postType: PostType) => {
+  const action = unstable_cache(
+    async () => {
+      try {
+        await connectToDB()
 
-    const CommunityPostModel = getCommunityPostModelByType(postType)
-    if (!CommunityPostModel) return null
+        const CommunityPostModel = getCommunityPostModelByType(postType)
+        if (!CommunityPostModel) return null
 
-    const communityPost = await CommunityPostModel.findById(postId)
-    if (!communityPost) return null
+        const communityPost = await CommunityPostModel.findById(postId)
+        if (!communityPost) return null
 
-    const session = await getServerSession(authOptions)
-    let post = communityPost.toObject() as IPost
-    post = toJson(post)
-    post = setDynamicDataToPost(session, post)
+        const session = await getServerSession(authOptions)
+        let post = communityPost.toObject() as IPost
+        console.log("community post", post.title)
+        post = toJson(post)
+        post = setDynamicDataToPost(session, post)
 
-    return toJson(post)
-  }
-  catch (error) {
-    console.log(error)
-    return null
-  }
+        return toJson(post)
+      }
+      catch (error) {
+        console.log(error)
+        return null
+      }
+    },
+    [getPostTag(postId, postType)],
+    { tags: [getPostTag(postId, postType)]}
+  )
+  return await action()
 }
+
+export default getCommunityPostAction

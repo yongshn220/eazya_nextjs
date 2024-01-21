@@ -1,21 +1,14 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
-import {PostTypeURL} from "@components/constants/enums";
 import {getCommunityPostPath} from "@components/constants/tags";
 
-export default async function CommunityDetailPostItem({postId, postType, communityType}) {
-  const post = await getCommunityPostAction(postType, postId)
-  if (!post) {
-    return <></>
-  }
-
+export default function CommunityDetailPostItem({post, postType, communityType}) {
   const numberOfComments = getNumOfCommentsInPost(post)
 
   return (
     <div>
-      <Link href={getCommunityPostPath(postId, postType, communityType)}>
+      <Link href={getCommunityPostPath(post.id, postType, communityType)}>
         <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex items-center gap-5">
             <div className="flex flex-center gap-2">

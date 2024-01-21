@@ -8,9 +8,9 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {PostType, UserActivityType} from "@components/constants/enums";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
-import {getCommunityHomePath} from "@components/constants/tags";
+import {getCommunityHomePath, getCommunityPostIdsGroupTag, getHomePath} from "@components/constants/tags";
 
 export default async function createCommunityPostAction(req: CreateGeneralPostRequest) {
   try {
@@ -52,7 +52,7 @@ export default async function createCommunityPostAction(req: CreateGeneralPostRe
     return null
   }
   finally {
-    revalidatePath(getCommunityHomePath(req.postType, req.communityType))
+    revalidateTag(getCommunityPostIdsGroupTag(req.postType, req.communityType))
     redirect(getCommunityHomePath(req.postType, req.communityType))
   }
 }

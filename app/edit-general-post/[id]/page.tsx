@@ -5,7 +5,7 @@ import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 
 export default async function EditGeneralPostHome({params}) {
   const postId = params.id
-  const post = await getCommunityPostAction(PostType.GENERAL, postId)
+  const post = await getCommunityPostAction(postId, PostType.GENERAL)
 
   return (
     <EditCommunityPost post={post}/>

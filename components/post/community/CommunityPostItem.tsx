@@ -4,25 +4,22 @@ import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {CommunityType, PostType} from "@components/constants/enums";
 import {getCommunityPostPath} from "@components/constants/tags";
+import {ICommunityPost} from "@models/union/union";
 
 
 interface Props {
   postType: PostType;
   communityType: CommunityType;
-  postId: string;
+  post: ICommunityPost;
 }
 
-export default async function CommunityPostItem({postType, communityType, postId}: Props) {
-  const post = await getCommunityPostAction(postType, postId)
-  if (!post) {
-    return <></>
-  }
+export default async function CommunityPostItem({postType, communityType, post}: Props) {
 
   const numberOfComments = getNumOfCommentsInPost(post)
 
   return (
     <div>
-      <Link href={getCommunityPostPath(postId, postType, communityType)}>
+      <Link href={getCommunityPostPath(post.id, postType, communityType)}>
         <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex-between items-center gap-5">
             <div className="flex flex-center gap-2">

@@ -18,10 +18,10 @@ export default function EventPostLoadMore() {
 
   useEffect(() => {
     if (inView) {
-      console.log("page:", page)
       getEventPostIdsAction(page).then((ids: Array<string>) => {
         ids.map(id => getEventPostAction(id).then((post) => {
-          setPosts((prev) => [...prev, post])
+          if (post)
+            setPosts((prev) => [...prev, post])
         }))
         if (ids.length === DEFAULT_PAGE_LENGTH.EVENT) {
           setPage(prev => prev + 1)
