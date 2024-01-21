@@ -15,6 +15,8 @@ import getNotificationsAction from "@actions/notification/getNotificationsAction
 import LoadingCircle from "@components/animation/LoadingCircle";
 import {INotification} from "@models/collections/notification";
 import {NotificationType} from "@components/constants/enums";
+import NotificationLoadMore from "@components/nav/NotificationLoadMore";
+import {getMessageByNotificationType} from "@components/nav/helperFunction";
 
 export default function NavNotificationDropDown() {
   const [open, setOpen] = useState(false)
@@ -24,7 +26,7 @@ export default function NavNotificationDropDown() {
   useEffect(() => {
     if (open) {
       setIsLoading(true)
-      getNotificationsAction().then((results) => {
+      getNotificationsAction(1).then((results) => {
         results && setNotifications(results)
         setIsLoading(false)
       })
@@ -40,21 +42,17 @@ export default function NavNotificationDropDown() {
             <NotificationIcon/>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-96 p-2">
+        <DropdownMenuContent className="w-96 p-2 max-h-[80vh] overflow-scroll no-scrollbar">
           <DropdownMenuLabel>Notifications</DropdownMenuLabel>
           <DropdownMenuSeparator/>
+          <div className="divide-y">
           {
-            isLoading ?
-            <LoadingCircle/>
-            :
-            <div className="divide-y">
-            {
-              notifications.map(notification => (
-                <NotificationItem key={notification.id} notification={notification}/>
-              ))
-            }
-            </div>
+            notifications.map(notification => (
+              <NotificationItem key={notification.id} notification={notification}/>
+            ))
           }
+          <NotificationLoadMore/>
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
@@ -82,20 +80,4 @@ function NotificationItem({notification}: Props) {
       </div>
     </DropdownMenuItem>
   )
-}
-
-
-function getMessageByNotificationType(type: NotificationType) {
-  switch(type) {
-    case NotificationType.COMMENT_ON_POST: return "Someone added a comment on your post."
-    case NotificationType.REPLY_ON_COMMENT: return "Someone added a reply on your comment."
-    case NotificationType.REPLY_ON_REPLY: return "Someone added a reply on your reply."
-    case NotificationType.UPVOTE_ON_POST: return "Someone upvoted on your post."
-    case NotificationType.UPVOTE_ON_COMMENT: return "Someone upvoted on your comment."
-    case NotificationType.UPVOTE_ON_REPLY: return "Someone upvoted on your reply."
-    case NotificationType.DOWNVOTE_ON_POST: return "Someone downvoted on your post."
-    case NotificationType.DOWNVOTE_ON_COMMENT: return "Someone downvoted on your comment."
-    case NotificationType.DOWNVOTE_ON_REPLY: return "Someone downvoted on your reply."
-    default: return ""
-  }
 }

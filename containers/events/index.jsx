@@ -1,5 +1,5 @@
 import HomeHeader from "@components/headers/HomeHeader";
-import EventPosts from "@containers/events/Posts";
+import EventPosts from "@containers/events/EventPosts";
 import PostPagination from "@components/page/PostPagination";
 import NavTabSelector from "@components/nav/NavTabSelector";
 import {NavTab} from "@components/constants/enums";

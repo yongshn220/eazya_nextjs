@@ -1,15 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import {getEventPostApi} from "@services/eventPost";
 
-export default async function EventPostItem({id}) {
-  const post = await getEventPostApi(id)
+export default function EventPostItem({post}) {
   if (!post) {
     return <></>
   }
 
   return (
-    <Link href={`/events/${id}`}>
+    <Link href={`/events/${post.id}`}>
       <div className="group relative glass_box">
         <div className="relative w-full bg-gray-200 group-hover:opacity-75">
           <Image

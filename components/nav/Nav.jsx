@@ -29,7 +29,7 @@ export default function Nav() {
   return (
     <nav className="w-full mb-16 pt-3">
       {/* Desktop Navigation */}
-      <div className="hidden sm:flex justify-between">
+      <div className="hidden md:flex justify-between">
         <div className="flex gap-20 flex-center">
           <div>
             <Link href="/" className="flex gap-2 flex-center">
@@ -75,7 +75,7 @@ export default function Nav() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex sm:hidden flex-between">
+      <div className="flex-between md:hidden">
         <div className="flex gap-20">
           <div>
             <Link href="/" className="flex gap-2 flex-center">
@@ -85,8 +85,13 @@ export default function Nav() {
           </div>
         </div>
 
-        <div className="flex relative">
-          <NavDrawer providers={providers}/>
+        <div className="relative flex gap-4">
+          <div className="flex-center">
+            <NavNotificationDropDown/>
+          </div>
+          <div className="flex-center">
+            <NavDrawer providers={providers}/>
+          </div>
         </div>
       </div>
     </nav>

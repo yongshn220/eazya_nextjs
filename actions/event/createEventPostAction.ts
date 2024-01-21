@@ -5,12 +5,13 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {connectToDB} from "@utils/database";
 import {EventPostModel} from "@models/collections/eventPost";
 import {EventFormRequest} from "@models/requests/EventFormRequest";
-import {revalidatePath} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {redirect} from "next/navigation";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import {PostType, UserActivityType} from "@components/constants/enums";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {addBase64ToStorage, addFileToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
+import {addBase64ToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
+import {ActionTag} from "@components/constants/tags";
 
 export default async function createEventPostAction(req: EventFormRequest) {
   try {
@@ -56,7 +57,7 @@ export default async function createEventPostAction(req: EventFormRequest) {
     return null
   }
   finally {
-    revalidatePath('/events')
+    revalidateTag(ActionTag.EVENT_POST_IDS)
     redirect('/events')
   }
 }
