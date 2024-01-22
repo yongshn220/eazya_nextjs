@@ -6,7 +6,7 @@ import CommunityPostItem from "@components/post/community/CommunityPostItem";
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {ICommunityPost} from "@models/union/union";
 
-const DEFAULT_COMMUNITY_TYPE = CommunityType.ENGLISH
+const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
 export default async function GeneralPreview() {
   const postIds = await getCommunityPostIdsAction(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE, 1)

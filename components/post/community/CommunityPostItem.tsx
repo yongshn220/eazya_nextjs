@@ -1,11 +1,10 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {CommunityType, PostType} from "@components/constants/enums";
 import {getCommunityPostPath} from "@components/constants/tags";
 import {ICommunityPost} from "@models/union/union";
-
+import {CommentIcon, VoteIcon} from "@components/icon/icons";
 
 interface Props {
   postType: PostType;
@@ -39,19 +38,15 @@ export default async function CommunityPostItem({postType, communityType, post}:
 
           <div className="flex flex-between">
             <div className="flex gap-2">
-              <Badge variant="outline">English</Badge>
+              <Badge variant="outline">{post.communityType}</Badge>
             </div>
             <div className="flex gap-4">
               <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                </div>
+                <VoteIcon/>
                 <p className="text-xs leading-5 text-gray-500">{post.votes}</p>
               </div>
               <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                </div>
+                <CommentIcon/>
                 <p className="text-xs leading-5 text-gray-500">{numberOfComments}</p>
               </div>
             </div>

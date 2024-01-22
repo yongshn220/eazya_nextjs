@@ -1,7 +1,7 @@
 "use server"
 
 import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
-import {revalidatePath} from "@node_modules/next/cache";
+import {revalidateTag} from "@node_modules/next/cache";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
@@ -16,6 +16,7 @@ import {NotificationType, PostType, UserActivityType} from "@components/constant
 import createNotificationAction from "@actions/notification/createNotificationAction";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
+import {getPostTag} from "@components/constants/tags";
 
 export default async function createCommentAction(req: CreateCommentRequest) {
   try {
@@ -73,6 +74,6 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
-    revalidatePath(`/${req.postType}/${req.postId}`)
+    revalidateTag(getPostTag(req.postId, req.postType))
   }
 }

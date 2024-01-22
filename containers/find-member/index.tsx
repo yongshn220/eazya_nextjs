@@ -22,7 +22,6 @@ export default function FindMember({communityType}: {communityType: CommunityTyp
           <CommunityMenu postType={PostType.FIND_MEMBER} communityType={communityType}/>
           <CommunitySearch/>
           <CommunityPosts postType={PostType.FIND_MEMBER} communityType={communityType}/>
-          <PostPagination/>
         </div>
       </div>
     </section>

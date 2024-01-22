@@ -1,5 +1,5 @@
 import { Schema, model, models } from 'mongoose'
-import {UniversityIds} from "@components/constants/values";
+import {MajorType, UniversityIds} from "@components/constants/values";
 
 const UserSchema = new Schema({
   email: {
@@ -15,6 +15,11 @@ const UserSchema = new Schema({
     enum: Object.values(UniversityIds),
     required: [true, 'UniversityId is required!'],
   },
+  major: {
+    type: String,
+    required: true,
+    default: MajorType.NONE
+  }
 })
 
 const User = models.User || model("User", UserSchema)

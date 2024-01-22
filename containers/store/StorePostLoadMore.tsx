@@ -47,8 +47,10 @@ export default function StorePostLoadMore() {
         }
       </div>
       {
-        !isDone &&
-        <div ref={ref}>
+        (isDone) ?
+        <div className="flex-center mt-10 text-gray-400">End Page</div>
+          :
+        <div ref={ref} className="flex-center">
           <Lottie animationData={loadingAnimation} loop={true} className="w-[100px] h-[100px]"/>
         </div>
       }

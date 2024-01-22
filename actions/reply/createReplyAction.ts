@@ -6,13 +6,14 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {ReplyBase} from "@models/base/replyBase";
-import {revalidatePath} from "@node_modules/next/cache";
+import {revalidateTag} from "@node_modules/next/cache";
 import {getCommentAuthorNameAndSave, GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
 import {NotificationType, PostType, UserActivityType} from "@components/constants/enums";
 import createNotificationAction from "@actions/notification/createNotificationAction";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
+import {getPostTag} from "@components/constants/tags";
 
 export default async function createReplyAction(req: CreateReplyRequest) {
   try {
@@ -76,6 +77,6 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
-    revalidatePath(`/events/${req.postId}`)
+    revalidateTag(getPostTag(req.postId, req.postType))
   }
 }

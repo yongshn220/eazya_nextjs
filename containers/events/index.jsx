@@ -17,7 +17,6 @@ export default function Events() {
       />
       <div className="w-full mt-10">
         <EventPosts/>
-        <PostPagination/>
       </div>
     </section>
   )

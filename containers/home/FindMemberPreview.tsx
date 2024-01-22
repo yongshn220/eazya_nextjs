@@ -7,7 +7,7 @@ import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {ICommunityPost} from "@models/union/union";
 
 
-const DEFAULT_COMMUNITY_TYPE = CommunityType.ENGLISH
+const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
 export default async function FindMemberPreview() {
   const postIds = await getCommunityPostIdsAction(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE, 1)

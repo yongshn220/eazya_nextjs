@@ -1,3 +1,4 @@
+
 export const FormMode = {
   CREATE: "Create ",
   EDIT:   "Edit",
@@ -14,8 +15,8 @@ export enum NavTab {
 export enum PostType {
   EVENT =       "Event",
   GENERAL =     "General",
-  STORE =       "Store",
   FIND_MEMBER = "Find Member",
+  STORE =       "Store",
 }
 
 export const PostTypeURL = {
@@ -70,7 +71,7 @@ export enum UserActivityType {
 
 
 export enum CommunityType {
-  ENGLISH = "English",
+  EVERYONE = "Everyone",
   KOREAN = "Korean",
   CHINESE = "Chinese",
   INDIAN = "Indian",

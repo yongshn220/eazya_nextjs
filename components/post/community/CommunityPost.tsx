@@ -1,8 +1,7 @@
-import {PostType, VoteType} from "@components/constants/enums";
+import {VoteType} from "@components/constants/enums";
 import PostHeader from "@components/headers/PostHeader";
 import CreateComment from "@components/post/comment/CreateComment";
 import CommentList from "@components/post/comment/CommentList";
-import {IGeneralPost} from "@models/collections/generalPost";
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import deleteCommunityPostAction from "@actions/community/deleteCommunityPostAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
@@ -10,10 +9,11 @@ import createVoteAction from "@actions/vote/createVoteAction";
 import {IPostHeader} from "@models/types/postHeader";
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import CommunityContent from "@components/post/community/CommunityContent";
-import {getCommunityEditFormPath, getEditFormPath} from "@components/constants/tags";
+import {getCommunityEditFormPath} from "@components/constants/tags";
+import {ICommunityPost} from "@models/union/union";
 
 export default async function CommunityPost({postType, communityType, postId}) {
-  const post: IGeneralPost = await getCommunityPostAction(postId, postType)
+  const post: ICommunityPost = await getCommunityPostAction(postId, postType)
 
   async function handleDeletePost() {
     "use server"
@@ -23,7 +23,7 @@ export default async function CommunityPost({postType, communityType, postId}) {
   async function handleCreateVote(voteType: VoteType) {
     "use server"
     const req: CreateVoteRequest = {
-      postType: PostType.GENERAL,
+      postType: postType,
       postId: post.id,
       voteType: voteType,
     }

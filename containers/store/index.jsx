@@ -17,7 +17,6 @@ export default function Store() {
       />
       <div className="w-full mt-10">
         <StorePosts/>
-        <PostPagination/>
       </div>
     </section>
   )

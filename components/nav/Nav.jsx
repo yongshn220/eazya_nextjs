@@ -42,10 +42,10 @@ export default function Nav() {
             <Link href="/events" className="flex">
               <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.EVENT? "text-blue-600" : "text-black"}`}>EVENTS</p>
             </Link>
-            <Link href="/general/English" className="flex">
+            <Link href="/general/Everyone" className="flex">
               <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.GENERAL? "text-blue-600" : "text-black"}`}>GENERAL</p>
             </Link>
-            <Link href="/find-member/English" className="flex">
+            <Link href="/find-member/Everyone" className="flex">
               <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.FIND_MEMBER? "text-blue-600" : "text-black"}`}>FIND MEMBER</p>
             </Link>
             <Link href="/store" className="flex">

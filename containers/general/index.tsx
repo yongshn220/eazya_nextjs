@@ -22,7 +22,6 @@ export default function General({communityType}: {communityType: CommunityType})
           <CommunityMenu postType={PostType.GENERAL} communityType={communityType}/>
           <CommunitySearch/>
           <CommunityPosts postType={PostType.GENERAL} communityType={communityType}/>
-          <PostPagination/>
         </div>
       </div>
     </section>

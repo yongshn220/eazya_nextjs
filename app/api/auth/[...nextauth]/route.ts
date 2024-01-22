@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 import { connectToDB } from "@utils/database";
 import User from '@models/collections/user'
-import {UniversityIds} from "@components/constants/values";
+import {MajorType, UniversityIds} from "@components/constants/values";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -38,6 +38,7 @@ export const authOptions: NextAuthOptions = {
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
             universityId: universityId,
+            major: MajorType.NONE,
           })
         }
         return true

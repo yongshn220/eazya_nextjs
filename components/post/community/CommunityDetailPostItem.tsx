@@ -2,6 +2,8 @@ import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {getCommunityPostPath} from "@components/constants/tags";
+import {CommentIcon, VoteIcon} from "@components/icon/icons";
+import React from "react";
 
 export default function CommunityDetailPostItem({post, postType, communityType}) {
   const numberOfComments = getNumOfCommentsInPost(post)
@@ -31,20 +33,15 @@ export default function CommunityDetailPostItem({post, postType, communityType})
 
           <div className="flex flex-between">
             <div className="flex gap-2">
-              <Badge variant="outline">General</Badge>
-              <Badge variant="outline">General</Badge>
+              <Badge variant="outline">{post.communityType}</Badge>
             </div>
             <div className="flex gap-4">
               <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                </div>
+                <VoteIcon/>
                 <p className="text-xs leading-5 text-gray-500">{post.votes}</p>
               </div>
               <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                </div>
+                <CommentIcon/>
                 <p className="text-xs leading-5 text-gray-500">{numberOfComments}</p>
               </div>
             </div>

@@ -6,12 +6,13 @@ import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {NotificationType, VoteType} from "@components/constants/enums";
-import {revalidatePath} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {ObjectId} from "mongodb";
 import mongoose from "mongoose";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
 import createNotificationAction from "@actions/notification/createNotificationAction";
 import findAndDeleteNotificationAction from "@actions/notification/findAndDeleteNotificationAction";
+import {getPostTag} from "@components/constants/tags";
 
 enum VotingResult {
   CANCEL,
@@ -53,7 +54,7 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     return null
   }
   finally {
-    revalidatePath(`/events/${req.postId}`)
+    revalidateTag(getPostTag(req.postId, req.postType))
   }
 }
 

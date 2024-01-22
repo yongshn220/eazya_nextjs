@@ -40,7 +40,7 @@ export default function NotificationLoadMore() {
       }
       {
         !isDone &&
-        <div ref={ref}>
+        <div ref={ref} className="flex-center">
           <Lottie animationData={loadingAnimation} loop={true} className="w-[100px] h-[100px]"/>
         </div>
       }
