@@ -8,7 +8,7 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {CommentBase} from "@models/base/commentBase";
 import {
-  getCommentAuthorNameAndSave,
+  getCommentAuthorName,
   GetPostModelByType
 } from "@actions/actionHelper/helperFunctions";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
@@ -22,7 +22,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return {status: StatusCodes.UNAUTHORIZED}
+    if (!session) return null
 
     const PostModel = GetPostModelByType(req.postType)
     if (!PostModel) return null
@@ -30,12 +30,13 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     const post = await PostModel.findById(req.postId)
     if (!post) return null
 
-    const authorName = getCommentAuthorNameAndSave(post, session.user.id)
+    const authorName = getCommentAuthorName(post, session.user.id)
 
     const newComment: CommentBase = {
       postId: req.postId,
       authorId: session.user.id,
       authorName,
+      authorMajor: session.user.major,
       content: req.content,
       createdAt: new Date(),
       isSecret: req.isSecret,

@@ -30,13 +30,11 @@ export function getCommunityPostModelByType(postType: PostType) {
 /*-------------
      COMMENT
 --------------*/
-export function getCommentAuthorNameAndSave(post: any, userId: string) {
+export function getCommentAuthorName(post: any, userId: string) {
   post = toJson(post)
   if (post.authorId === userId) return "Author"
   if (post.commentators.includes(userId)) return post.commentators.indexOf(userId) + 1;
-
   post.commentators.push(userId);
-  post.save()
   return post.commentators.length;
 }
 

@@ -23,6 +23,7 @@ export default function Comment({postType, postId, comment, isReplyOn, onToggleR
     <div className="flex flex-col py-5 gap-4 border-b border-gray-300">
       <InfoHeader
         author={comment.authorName}
+        authorMajor={comment.authorMajor}
         date={comment.createdAt}
         votes={comment.votes}
         myVoteType={comment.myVoteType}

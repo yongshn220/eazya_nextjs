@@ -1,12 +1,13 @@
 import { Schema, model, models } from 'mongoose'
-import {UniversityIds} from "@components/constants/values";
+import {MajorType, UniversityIds} from "@components/constants/values";
 import {PostType, VoteType} from "@components/constants/enums";
 import {CommentBase, CommentBaseSchema} from "@models/base/commentBase";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 
 const EventPostSchema = new Schema({
-  authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
   universityId:   { type: String, enum: Object.values(UniversityIds), required: true, },
+  authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  authorMajor:    { type: String, required: true, default: MajorType.NONE },
   type:           { type: String, enum: Object.values(PostType), required: true, },
   image:          { type: String, default: "" },
   title:          { type: String, required: true, },
@@ -28,8 +29,9 @@ export const EventPostModel = models.EventPost || model("EventPost", EventPostSc
 
 export interface IEventPost {
   id?:            string;
-  authorId:       string;
   universityId:   string;
+  authorId:       string;
+  authorMajor:    string;
   type:           PostType;
   image:          string;
   title:          string;

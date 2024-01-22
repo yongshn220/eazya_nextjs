@@ -15,12 +15,19 @@ export default function EditCommunityPost({post}: {post: ICommunityPost}) {
     title: post.title,
     description: post.description,
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: CommunityFormRequest = {...communityPost}
-    editCommunityPostAction(post.id, req).then()
+    editCommunityPostAction(post.id, req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to edit post")
+      }
+    })
   }
 
   return (
@@ -30,6 +37,7 @@ export default function EditCommunityPost({post}: {post: ICommunityPost}) {
         post={communityPost}
         setPost={setCommunityPost}
         submitHandler={handleSubmit}
+        loading={loading}
       />
     </section>
   )

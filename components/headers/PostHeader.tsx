@@ -3,6 +3,7 @@ import InfoHeader from "@components/headers/InfoHeader";
 import PostDropDown from "@components/menu/PostDropDown";
 import {IPostHeader} from "@models/types/postHeader";
 import {IEventPost} from "@models/collections/eventPost";
+import {MajorType} from "@components/constants/values";
 
 export interface IDropDown {
   isMine: boolean;
@@ -37,6 +38,7 @@ export default function PostHeader({postHeaderData}: Props) {
       <div className="w-full flex-center gap-6 mt-3 mb-5">
         <InfoHeader
           author={"Author"}
+          authorMajor={post.authorMajor}
           date={post.createdAt}
           votes={post.votes}
           createVoteHandler={postHeaderData.createVoteHandler}

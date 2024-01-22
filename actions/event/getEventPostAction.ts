@@ -18,14 +18,14 @@ const getEventPostAction = async (postId: string) => {
       try {
         await connectToDB()
         const eventPost = await EventPostModel.findById(postId)
+
         if (!eventPost) return null
 
         const session = await getServerSession(authOptions)
         let post = eventPost.toObject() as IPost
-        console.log("getEventPostAction", post.title)
         post = toJson(post)
         post = setDynamicDataToPost(session, post)
-
+        console.log(post)
         return toJson(post)
       }
       catch (error) {

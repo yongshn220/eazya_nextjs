@@ -2,10 +2,12 @@ import {Schema, Types} from 'mongoose'
 import {ReplyBase, ReplyBaseSchema} from "@models/base/replyBase";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 import {VoteType} from "@components/constants/enums";
+import {MajorType} from "@components/constants/values";
 
 export const CommentBaseSchema = new Schema({
   authorId:     { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   authorName:   { type: String, required: true },
+  authorMajor:  { type: String, required: true, default: MajorType.NONE},
   content:      { type: String, required: true },
   createdAt:    { type: Date, required: true },
   isSecret:     { type: Boolean, default: false, required: true },
@@ -21,6 +23,7 @@ export interface CommentBase {
   postId:         string;
   authorId:       string;
   authorName:     string;
+  authorMajor:    string;
   content:        string;
   createdAt:      Date;
   isSecret:       boolean;

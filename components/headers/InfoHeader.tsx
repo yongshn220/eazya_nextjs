@@ -9,7 +9,7 @@ import {Badge} from "@components/ui/badge";
 import {useState} from "react";
 
 
-export default function InfoHeader({author, date, votes, createVoteHandler, myVoteType, isMine}) {
+export default function InfoHeader({author, authorMajor, date, votes, createVoteHandler, myVoteType, isMine}) {
   const [vote, setVote] = useState({
     count: votes,
     type: myVoteType,
@@ -51,7 +51,7 @@ export default function InfoHeader({author, date, votes, createVoteHandler, myVo
           <p className="text-sm font-semibold">
             {isMine? author : `User_${author}`}
           </p>
-          <Badge variant="outline" className="border-gray-300">CSE</Badge>
+          <Badge variant="outline" className="border-gray-300">{authorMajor}</Badge>
           {isMine && <Badge className="bg-blue-400 hover:bg-blue-400">Me</Badge>}
         </div>
         <p className="text-sm text-gray-500">{date}</p>

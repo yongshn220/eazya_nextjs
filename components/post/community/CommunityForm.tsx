@@ -12,9 +12,10 @@ interface Props {
   post: CommunityFormRequest;
   setPost: any;
   submitHandler: Function;
+  loading: boolean;
 }
 
-export default function CommunityForm({mode, post, setPost, submitHandler}: Props) {
+export default function CommunityForm({mode, post, setPost, submitHandler, loading}: Props) {
 
   function handleSelectChange(value) {
     setPost((prev) => ({...prev, communityType: value as CommunityType}))
@@ -61,7 +62,11 @@ export default function CommunityForm({mode, post, setPost, submitHandler}: Prop
         <InputFieldDescriptionClient name="Description" value={post.description} placeholder="Description" onChangeHandler={(e => setPost(prev => ({...prev, description: e.target.value})))}/>
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
-          <Button type="submit">{mode}</Button>
+          {
+            loading
+            ? <Button disabled={true}>{mode}...</Button>
+            : <Button type="submit">{mode}</Button>
+          }
         </div>
       </form>
     </div>

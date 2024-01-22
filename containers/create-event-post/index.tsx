@@ -16,12 +16,19 @@ export default function CreateEventPost() {
     location: "",
     description: "",
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: EventFormRequest = {...eventPost}
-    createEventPostAction(req).then()
+    createEventPostAction(req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to create the post.")
+      }
+    })
   }
 
   return (
@@ -31,6 +38,7 @@ export default function CreateEventPost() {
         post={eventPost}
         setPost={setEventPost}
         submitHandler={handleSubmit}
+        loading={loading}
       />
     </section>
   )

@@ -7,6 +7,8 @@ import {IEventPost} from "@models/collections/eventPost";
 
 export default async function EventPosts() {
   const postIds = await getEventPostIdsAction(1)
+  if (!postIds) return <></>
+
   const posts = []
   for (const id of postIds) {
     posts.push(await getEventPostAction(id) as IEventPost)

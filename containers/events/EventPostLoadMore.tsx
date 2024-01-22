@@ -33,6 +33,7 @@ export default function EventPostLoadMore() {
     }
   }, [inView])
 
+
   return (
     <div className="flex-center flex-col">
       <div className="grid_image">

@@ -7,7 +7,7 @@ import {StatusCodes} from "@node_modules/http-status-codes";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {ReplyBase} from "@models/base/replyBase";
 import {revalidateTag} from "@node_modules/next/cache";
-import {getCommentAuthorNameAndSave, GetPostModelByType} from "@actions/actionHelper/helperFunctions";
+import {getCommentAuthorName, GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequest";
 import {NotificationType, PostType, UserActivityType} from "@components/constants/enums";
 import createNotificationAction from "@actions/notification/createNotificationAction";
@@ -28,13 +28,14 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     const post = await PostModel.findById(req.postId)
     if (!post) return {status: StatusCodes.NOT_FOUND}
 
-    const authorName = getCommentAuthorNameAndSave(post, session.user.id)
+    const authorName = getCommentAuthorName(post, session.user.id)
 
     const newReply: ReplyBase = {
       postId: req.postId,
       commentId: req.commentId,
       authorId: session.user.id,
       authorName,
+      authorMajor: session.user.major,
       content: req.content,
       createdAt: new Date(),
       isSecret: req.isSecret,

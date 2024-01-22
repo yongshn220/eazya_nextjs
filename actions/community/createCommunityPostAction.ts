@@ -23,8 +23,9 @@ export default async function createCommunityPostAction(req: CreateGeneralPostRe
     const CommunityPostModel = getCommunityPostModelByType(postType)
 
     const newCommunityPost = new CommunityPostModel({
-      authorId: session.user.id,
       universityId: session.user.universityId,
+      authorId: session.user.id,
+      authorMajor: session.user.major,
       type: postType,
       communityType,
       title,

@@ -16,12 +16,19 @@ export default function EditEventPost({post}) {
     location: post.location,
     description: post.description,
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: EventFormRequest = {...eventPost}
-    editEventPostAction(post.id, req).then(() => {{}})
+    editEventPostAction(post.id, req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to edit the post.")
+      }
+    })
   }
 
   return (
@@ -31,6 +38,7 @@ export default function EditEventPost({post}) {
         post={eventPost}
         setPost={setEventPost}
         submitHandler={handleSubmit}
+        loading={loading}
       />
     </section>
   )

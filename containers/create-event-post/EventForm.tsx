@@ -14,11 +14,12 @@ interface Props {
   post: EventFormRequest;
   setPost: any;
   submitHandler: Function;
+  loading: boolean;
 }
 
 
-export default function EventForm({mode, post, setPost, submitHandler}: Props) {
-  const [isLoading, setIsLoading] = useState(false)
+export default function EventForm({mode, post, setPost, submitHandler, loading}: Props) {
+  const [imageLoading, setImageLoading] = useState(false)
 
   // TODO: handle mobile viewport
   return (
@@ -41,8 +42,8 @@ export default function EventForm({mode, post, setPost, submitHandler}: Props) {
           </div>
           <div className="flex flex-col h-full gap-3">
             <span className="hidden sm:flex font-satoshi font-semibold text-base text-gray-700">Image</span>
-            <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setIsLoading}>
-              <ImageContainer image={post.image} handleRemove={() => setPost(prev => ({...prev, image: ""}))} isLoading={isLoading}/>
+            <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setImageLoading}>
+              <ImageContainer image={post.image} handleRemove={() => setPost(prev => ({...prev, image: ""}))} isLoading={imageLoading}/>
             </SingleImageUploader>
           </div>
 
@@ -50,7 +51,11 @@ export default function EventForm({mode, post, setPost, submitHandler}: Props) {
         <InputFieldDescriptionClient name="Description" value={post.description} placeholder="Description" onChangeHandler={(e) => setPost(prev => ({...prev, description: e.target.value}))}/>
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
-          <Button type="submit">{mode}</Button>
+          {
+            loading
+            ? <Button disabled={true}>{mode}...</Button>
+            : <Button type="submit">{mode}</Button>
+          }
         </div>
       </form>
     </div>

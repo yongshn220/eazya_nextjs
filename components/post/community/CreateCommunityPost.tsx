@@ -19,17 +19,31 @@ export default function CreateCommunityPost({postType, communityType}: Props) {
     title: "",
     description: "",
   })
+  const [loading, setLoading] = useState<boolean>(false)
+
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: CommunityFormRequest = {...post}
-    createCommunityPostAction(req).then()
+    createCommunityPostAction(req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to create post")
+      }
+    })
   }
 
   return (
     <section className="w-full">
-      <CommunityForm mode={FormMode.CREATE} post={post} setPost={setPost} submitHandler={handleSubmit}/>
+      <CommunityForm
+        mode={FormMode.CREATE}
+        post={post}
+        setPost={setPost}
+        submitHandler={handleSubmit}
+        loading={loading}
+      />
     </section>
   )
 }

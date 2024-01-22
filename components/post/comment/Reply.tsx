@@ -29,6 +29,7 @@ export default function Reply({reply, postType, postId, commentId}: Props) {
     <div className="flex flex-col py-5 gap-4">
       <InfoHeader
         author={reply.authorName}
+        authorMajor={reply.authorMajor}
         date={reply.createdAt}
         votes={reply.votes}
         createVoteHandler={handleCreateVote}
