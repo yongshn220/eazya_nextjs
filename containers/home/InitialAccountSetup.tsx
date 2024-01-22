@@ -2,31 +2,16 @@
 
 import { Button } from "@/components/ui/button"
 import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
-import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select"
 import {Label} from "@components/ui/label";
-import {Input} from "@components/ui/input";
 import {useState} from "react";
 import SelectMajorCombobox from "@containers/home/SelectMajorCombobox";
 
 
 export default function InitialAccountSetup() {
-  const [majorSearchInput, setMajorSearchInput] = useState<string>("")
-  const [majorSelectOn, setMajorSelectOn] = useState<boolean>(false)
+  const [major, setMajor] = useState<string>("")
 
-
-  function handleMajorInputChange(e) {
-    if (e.target.value === "") {
-      setMajorSelectOn(false)
-    }
-    else {
-      setMajorSelectOn(true)
-      setMajorSearchInput(e.target.value)
-    }
-  }
-
-  function handleMajorSelect(value) {
-    setMajorSearchInput(value)
-    setMajorSelectOn(false)
+  function handleSubmit() {
+    //TODO
   }
 
   return (
@@ -44,11 +29,11 @@ export default function InitialAccountSetup() {
         <div className="grid gap-4 py-4">
           <div className="w-full flex-center gap-4">
             <Label htmlFor="Major" className="text-right">Major</Label>
-            <SelectMajorCombobox/>
+            <SelectMajorCombobox major={major} setMajor={setMajor}/>
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button onClick={handleSubmit}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

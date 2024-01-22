@@ -11,12 +11,10 @@ import {useState} from "react";
 import {MajorList} from "@components/constants/values";
 import {ScrollArea} from "@components/ui/scroll-area";
 
-const frameworks = MajorList
+const majorList = MajorList
 
-export default function SelectMajorCombobox() {
+export default function SelectMajorCombobox({major, setMajor}) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
-
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -27,8 +25,8 @@ export default function SelectMajorCombobox() {
           aria-expanded={open}
           className="w-[400px] justify-between"
         >
-          {value
-            ? frameworks.find((framework) => framework === value)
+          {major
+            ? majorList.find((_major) => _major === major)
             : "Select major..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -39,22 +37,22 @@ export default function SelectMajorCombobox() {
           <ScrollArea className="h-64">
             <CommandEmpty>No major found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {majorList.map((_major) => (
                 <CommandItem
-                  key={framework}
-                  value={framework}
+                  key={_major}
+                  value={_major}
                   onSelect={(currentValue) => {
-                    setValue(framework === value ? "" : framework)
+                    setMajor(_major === major ? "" : _major)
                     setOpen(false)
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework ? "opacity-100" : "opacity-0"
+                      major === _major ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework}
+                  {_major}
                 </CommandItem>
               ))}
             </CommandGroup>
