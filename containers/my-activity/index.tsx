@@ -2,14 +2,16 @@ import Image from "next/image";
 import {Button} from "@components/ui/button";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import ActivityContent from "@containers/my-activity/Content";
-import getUserActivitiesAction from "@actions/userActivity/getUserActivitiesAction";
+import ActivityContent from "@containers/my-activity/ActivityContent";
+import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAction";
+import {UserActivityMenu} from "@components/constants/enums";
+import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 
 export default async function MyActivity() {
   const session = await getServerSession(authOptions)
   if (!session) return (<></>)
 
-  const activities = await getUserActivitiesAction(session)
+  const activityIds = await getUserActivityIdsAction(UserActivityMenu.ALL, 1)
 
   return (
     <section className="w-full">
@@ -24,7 +26,7 @@ export default async function MyActivity() {
         </div>
         <Button variant="outline">My Account</Button>
       </div>
-      <ActivityContent activities={activities}/>
+      <ActivityContent activityIds={activityIds}/>
     </section>
   )
 }

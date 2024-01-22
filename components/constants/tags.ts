@@ -1,8 +1,20 @@
-import {CommunityType, PostType, PostTypeEditURL, PostTypeURL} from "@components/constants/enums";
+import {CommunityType, PostType, PostTypeEditURL, PostTypeURL, UserActivityMenu} from "@components/constants/enums";
 
 
 export enum ActionTag {
   USER_ACTIVITIES = "UserActivities",
+}
+
+export function getActivityTag(id: string) {
+  return `activity/${id}`
+}
+
+export function getActivityIdsGroupTag() {
+  return 'activity/ids'
+}
+
+export function getActivityIdsTag(activityMenu: UserActivityMenu, page: number) {
+  return `activity/${activityMenu}/ids/${page}`
 }
 
 export function getPostTag(postId: string, postType: PostType) {

@@ -46,11 +46,20 @@ export enum NotificationType {
   NONE =                "None"
 }
 
-export enum ActivityMenu {
-  ALL =     "All",
-  EVENT =   "Event",
-  GENERAL = "General",
-  STORE =   "Buy & Sell",
+export enum UserActivityMenu {
+  ALL =           "All",
+  EVENT =         "Event",
+  GENERAL =       "General",
+  FIND_MEMBER =   "Find Member",
+  STORE =         "Buy & Sell"
+}
+
+export const ActivityToPostType = {
+  [UserActivityMenu.ALL]: "",
+  [UserActivityMenu.EVENT]: PostType.EVENT,
+  [UserActivityMenu.GENERAL]: PostType.GENERAL,
+  [UserActivityMenu.FIND_MEMBER]: PostType.FIND_MEMBER,
+  [UserActivityMenu.STORE]: PostType.STORE,
 }
 
 export enum UserActivityType {
@@ -75,11 +84,11 @@ export enum VoteType {
   NONE = "voteTypeNone",
 }
 
-export function PostTypeToActivityMenu(postType: PostType) {
+export function PostTypeToUserActivityMenu(postType: PostType) {
   switch(postType) {
-    case PostType.EVENT: return ActivityMenu.EVENT
-    case PostType.GENERAL: return ActivityMenu.GENERAL
-    case PostType.STORE: return ActivityMenu.STORE
-    default: return ActivityMenu.ALL
+    case PostType.EVENT: return UserActivityMenu.EVENT
+    case PostType.GENERAL: return UserActivityMenu.GENERAL
+    case PostType.STORE: return UserActivityMenu.STORE
+    default: return UserActivityMenu.ALL
   }
 }

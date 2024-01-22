@@ -1,13 +1,31 @@
+'use client'
+
 import {Badge} from "@components/ui/badge"
 import Link from 'next/link'
 import {IUserActivity} from "@models/collections/userActivity";
 import {UserActivityType} from "@components/constants/enums";
+import {useEffect, useState} from "react";
+import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 
 interface Props {
-  activity: IUserActivity
+  id: string
 }
 
-export default function ActivityItem({activity}: Props) {
+export default function ActivityItem({id}: Props) {
+  const [activity, setActivity] = useState<IUserActivity>(null)
+
+  useEffect(() => {
+    getUserActivityAction(id).then((res) => {
+      if (res) {
+        setActivity(res)
+      }
+    })
+  }, [])
+
+  if (!activity) {
+    return <></>
+  }
+
   return (
     <div className="w-full cursor-pointer group">
       <Link href="#">

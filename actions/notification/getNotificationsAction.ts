@@ -6,9 +6,7 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {INotification, NotificationModel} from "@models/collections/notification";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {toJson} from "@actions/actionHelper/utilFunction";
-
-
-const DEFAULT_LENGTH = 3
+import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 
 export default async function getNotificationsAction(page: number = 1) {
   try {
@@ -17,9 +15,9 @@ export default async function getNotificationsAction(page: number = 1) {
     if (!session) return null
 
     let notifications = await NotificationModel.find({fromUserId: session.user.id})
-      .skip((page - 1) * DEFAULT_LENGTH)
-      .limit(DEFAULT_LENGTH)
       .sort({createdAt: -1})
+      .skip((page - 1) * DEFAULT_PAGE_LENGTH.NOTIFICATION)
+      .limit(DEFAULT_PAGE_LENGTH.NOTIFICATION)
 
     notifications = notifications.map(notification => notification.toObject())
 
@@ -28,8 +26,5 @@ export default async function getNotificationsAction(page: number = 1) {
   catch (error) {
     console.log(error)
     return null
-  }
-  finally {
-
   }
 }

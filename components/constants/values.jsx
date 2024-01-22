@@ -6,8 +6,9 @@ export const UniversityIds = [
 
 
 export const DEFAULT_PAGE_LENGTH = {
-  EVENT: 4,
-  COMMUNITY: 4,
-  STORE: 4,
-  NOTIFICATION: 4,
+  EVENT: 8,
+  COMMUNITY: 8,
+  STORE: 8,
+  NOTIFICATION: 10,
+  USER_ACTIVITY: 10,
 }
