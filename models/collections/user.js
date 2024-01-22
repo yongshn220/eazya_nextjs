@@ -2,6 +2,7 @@ import { Schema, model, models } from 'mongoose'
 import {MajorType, UniversityIds} from "@components/constants/values";
 
 const UserSchema = new Schema({
+  initialized: { type: Boolean, required: true, default: false},
   email: {
     type: String,
     unique: [true, 'Email already exists!'],
@@ -19,7 +20,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     default: MajorType.NONE
-  }
+  },
+  createdAt: { type: Date, required: true, default: new Date() },
 })
 
 const User = models.User || model("User", UserSchema)

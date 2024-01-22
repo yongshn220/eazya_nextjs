@@ -1,24 +1,51 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import {Button} from "@/components/ui/button"
 import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import {Label} from "@components/ui/label";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SelectMajorCombobox from "@containers/home/SelectMajorCombobox";
+import {MajorType} from "@components/constants/values";
+import editProfileAction from "@actions/profile/editProfileAction";
+import {EditProfileRequest} from "@models/requests/EditProfileRequest";
+import {useSession} from "next-auth/react";
 
 
 export default function InitialAccountSetup() {
-  const [major, setMajor] = useState<string>("")
+  const {data: session} = useSession()
+  const [major, setMajor] = useState<MajorType>(MajorType.NONE)
+  const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (session?.user) {
+      if (!session.user.initialized) {
+        setOpen(true)
+      }
+
+      setMajor(session.user.major)
+    }
+  }, [session])
+
+  if (!session) return <></>
 
   function handleSubmit() {
-    //TODO
+    setLoading(true)
+
+    const req: EditProfileRequest = {
+      major: major
+    }
+
+    editProfileAction(req).then((res) => {
+      if (res) {
+        console.log("Profile Updated")
+        setOpen(false)
+      }
+    })
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Welcome to EazyA!</DialogTitle>
@@ -33,7 +60,11 @@ export default function InitialAccountSetup() {
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleSubmit}>Save changes</Button>
+          {
+            loading
+              ? <Button disabled={true}>Joining...</Button>
+              : <Button onClick={handleSubmit} disabled={major === MajorType.NONE}>Join</Button>
+          }
         </DialogFooter>
       </DialogContent>
     </Dialog>

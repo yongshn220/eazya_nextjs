@@ -19,6 +19,8 @@ export const authOptions: NextAuthOptions = {
       })
       session.user.id = sessionUser._id.toString()
       session.user.universityId = sessionUser.universityId.toString()
+      session.user.major = sessionUser.major as MajorType
+      session.user.initialized = sessionUser.initialized
       return session
     },
     async signIn({profile}) {
@@ -36,9 +38,9 @@ export const authOptions: NextAuthOptions = {
           await User.create({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture,
             universityId: universityId,
             major: MajorType.NONE,
+            createdAt: new Date(),
           })
         }
         return true
