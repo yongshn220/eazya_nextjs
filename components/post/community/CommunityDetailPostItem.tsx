@@ -2,7 +2,7 @@ import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
 import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {getCommunityPostPath} from "@components/constants/tags";
-import {CommentIcon, VoteIcon} from "@components/icon/icons";
+import {CommentIcon, UserHexaIcon, VoteIcon} from "@components/icon/icons";
 import React from "react";
 
 export default function CommunityDetailPostItem({post, postType, communityType}) {
@@ -14,9 +14,7 @@ export default function CommunityDetailPostItem({post, postType, communityType})
         <div className="group flex flex-col py-5 gap-4 cursor-pointer">
           <div className="flex items-center gap-5">
             <div className="flex flex-center gap-2">
-              <img className="h-6 w-6 flex-none rounded-full bg-gray-50"
-                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                   alt=""/>
+              <UserHexaIcon/>
               <p className="text-sm font-semibold">CSE Major</p>
             </div>
             <p className="text-sm text-gray-500">{post.createdAt}</p>
