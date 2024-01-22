@@ -12,12 +12,19 @@ export default function EditStorePost({post}) {
     description: post.description,
     images: post.images,
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: StoreFormRequest = {...storePost}
-    editStorePostAction(post.id, req).then()
+    editStorePostAction(post.id, req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to edit post")
+      }
+    })
   }
 
   return (
@@ -27,6 +34,7 @@ export default function EditStorePost({post}) {
         post={storePost}
         setPost={setStorePost}
         submitHandler={handleSubmit}
+        loading={loading}
       />
     </section>
   )

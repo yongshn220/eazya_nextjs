@@ -10,8 +10,6 @@ import Image from 'next/image'
 import LoadingCircle from "@components/animation/LoadingCircle";
 import {Cross2Icon} from "@node_modules/@radix-ui/react-icons";
 import InputFieldPriceClient from "@components/input/InputFieldPriceClient";
-import {Simulate} from "react-dom/test-utils";
-import submit = Simulate.submit;
 
 const MAX_IMAGE_COUNT = 5
 
@@ -20,6 +18,7 @@ interface Props {
   post: StoreFormRequest;
   setPost: any;
   submitHandler: Function;
+  loading: boolean;
 }
 
 export interface Image {
@@ -28,8 +27,9 @@ export interface Image {
   isLoading: boolean;
 }
 
-export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
+export default function StoreForm({mode, post, setPost, submitHandler, loading}: Props) {
   const [images, setImages] = useState<Array<Image>>(post.images.map(((image) => ({id: "", url: image, isLoading: false}))))
+
 
   useEffect(() => {
     setPost((prev) => ({...prev, images: images.map(image => image.url)}))
@@ -79,7 +79,11 @@ export default function StoreForm({mode, post, setPost, submitHandler}: Props) {
         <InputFieldDescriptionClient name="Description" value={post.description} onChangeHandler={(e) => setPost((prev) => ({...prev, description: e.target.value}))} placeholder="Description" />
         <div className="w-full flex-end mb-5 gap-7">
           <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
-          <Button type="submit">{mode}</Button>
+          {
+            loading
+            ? <Button disabled={true}>{mode}...</Button>
+            : <Button type="submit">{mode}</Button>
+          }
         </div>
       </form>
     </div>

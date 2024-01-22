@@ -12,12 +12,19 @@ export default function CreateStorePost() {
     description: "",
     images: [],
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   function handleSubmit(e) {
     e.preventDefault()
+    setLoading(true)
 
     const req: StoreFormRequest = {...storePost}
-    createStorePostAction(req).then()
+    createStorePostAction(req).then((res) => {
+      setLoading(false)
+      if (!res) {
+        console.log("Fail to create post")
+      }
+    })
   }
 
   return (
@@ -27,6 +34,7 @@ export default function CreateStorePost() {
         post={storePost}
         setPost={setStorePost}
         submitHandler={handleSubmit}
+        loading={loading}
       />
     </section>
   )

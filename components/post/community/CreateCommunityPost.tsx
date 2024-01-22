@@ -21,7 +21,6 @@ export default function CreateCommunityPost({postType, communityType}: Props) {
   })
   const [loading, setLoading] = useState<boolean>(false)
 
-
   function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
