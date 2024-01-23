@@ -11,6 +11,7 @@ import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/
 import {getPostTag} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
 import {toElapsed} from "@components/constants/helperFunctions";
+import {REVALIDATE_TIME} from "@components/constants/values";
 
 
 const getStorePostAction = async (postId: string) => {
@@ -36,7 +37,7 @@ const getStorePostAction = async (postId: string) => {
       }
     },
     [getPostTag(userId, postId, PostType.STORE)],
-    { tags: [getPostTag(userId, postId, PostType.STORE)]}
+    { tags: [getPostTag(userId, postId, PostType.STORE)], revalidate: REVALIDATE_TIME.STORE}
   )
   return await action()
 }

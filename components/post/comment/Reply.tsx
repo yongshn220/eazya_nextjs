@@ -3,6 +3,8 @@ import {ReplyBase} from "@models/base/replyBase";
 import {PostType, VoteType} from "@components/constants/enums";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
+import {LockIcon, LockOpenIcon} from "@components/icon/icons";
+import React from "react";
 
 interface Props {
   reply: ReplyBase;
@@ -36,7 +38,15 @@ export default function Reply({reply, postType, postId, commentId}: Props) {
         myVoteType={reply.myVoteType}
         isMine={reply.isMine}
       />
-      <p className="text-sm leading-6 text-gray-900">{reply.content}</p>
+      <div>
+        {
+          reply.isSecret
+            ? reply.hasAuthorityToRead
+              ? <p className="flex items-center gap-1 text-sm leading-6 text-gray-900"><LockOpenIcon/>{reply.content}</p>
+              : <LockIcon/>
+            : <p className="text-sm leading-6 text-gray-900">{reply.content}</p>
+        }
+      </div>
     </div>
   )
 }

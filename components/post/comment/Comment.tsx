@@ -4,6 +4,8 @@ import CreateReply from "@components/post/comment/CreateReply";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import {VoteType} from "@components/constants/enums";
+import React from "react";
+import {LockIcon, LockOpenIcon} from "@components/icon/icons";
 
 export default function Comment({postType, postId, comment, isReplyOn, onToggleReply }) {
 
@@ -30,8 +32,19 @@ export default function Comment({postType, postId, comment, isReplyOn, onToggleR
         isMine={comment.isMine}
         createVoteHandler={handleCreateVote}
       />
-      <p className="text-sm leading-6 text-gray-900">{comment.content}</p>
-      <p className="text-xs leading-5 text-gray-500 cursor-pointer" onClick={onToggleReply}>Reply</p>
+      <div>
+        {
+          comment.isSecret
+            ? comment.hasAuthorityToRead
+              ? <p className="flex items-center gap-1 text-sm leading-6 text-gray-900"><LockOpenIcon/>{comment.content}</p>
+              : <LockIcon/>
+            : <p className="text-sm leading-6 text-gray-900">{comment.content}</p>
+        }
+      </div>
+      {
+        comment.hasAuthorityToRead &&
+        <p className="text-xs leading-5 text-gray-500 cursor-pointer" onClick={onToggleReply}>Reply</p>
+      }
       { isReplyOn && <CreateReply postType={postType} postId={postId} commentId={comment.id}/> }
       <ReplyList replies={comment.replies} postType={postType} postId={postId} commentId={comment.id}/>
     </div>

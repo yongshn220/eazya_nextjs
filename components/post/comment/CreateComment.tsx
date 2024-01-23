@@ -22,14 +22,17 @@ export default function CreateComment({postType, postId}) {
       <div className="flex flex-col glassmorphism mt-4 p-4 gap-5">
         <InputFieldDefaultClient name="" value={comment.content} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
         <div className="flex-between">
-          <div className="flex items-center space-x-2">
-            <Checkbox id="terms" onClick={() => {setComment(prev => ({...prev, isSecret: !prev.isSecret}))}}/>
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Secret Comment
-            </label>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center space-x-2">
+              <Checkbox id="terms" onClick={() => {setComment(prev => ({...prev, isSecret: !prev.isSecret}))}}/>
+              <label
+                htmlFor="terms"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Secret Comment
+              </label>
+            </div>
+            <p className="text-xs font-medium text-gray-500">Only you and author can see it.</p>
           </div>
           <Button type="submit">Post</Button>
         </div>

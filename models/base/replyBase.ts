@@ -20,17 +20,18 @@ ReplyBaseSchema.virtual('id').get(function() {return this._id.toHexString()})
 
 
 export interface ReplyBase {
-  id?:            string;
-  postId:         string;
-  commentId:      string;
-  authorId:       string;
-  authorName:     string;
-  authorMajor:    string;
-  content:        string;
-  createdAt:      string;
-  isSecret:       boolean;
-  voteUser:       VoteUser;
-  votes:          number;
-  myVoteType?:    VoteType;
-  isMine?:        boolean;
+  id?:                      string;
+  postId:                   string;
+  commentId:                string;
+  authorId:                 string;   // hidden
+  authorName:               string;   // anonymous name
+  authorMajor:              string;
+  content:                  string;
+  createdAt:                string;
+  isSecret:                 boolean;
+  voteUser:                 VoteUser;
+  votes:                    number;
+  myVoteType?:              VoteType;
+  hasAuthorityToRead?:      boolean;
+  isMine?:                  boolean;
 }

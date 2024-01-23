@@ -10,6 +10,8 @@ import {Session} from "@node_modules/next-auth";
 import {StorePostModel} from "@models/collections/storePost";
 import {FindMemberPostModel} from "@models/collections/findMemberPost";
 import {toElapsed} from "@components/constants/helperFunctions";
+import {CommentBase} from "@models/base/commentBase";
+import {ReplyBase} from "@models/base/replyBase";
 
 /*-------------
      MODEL
@@ -38,7 +40,6 @@ export function getCommentAuthorName(post: any, userId: string) {
   post.commentators.push(userId);
   return post.commentators.length;
 }
-
 
 /*-------------
      VOTE
@@ -86,13 +87,29 @@ export function setDynamicDataToPost(session: Session, post: IPost) {
     comment.myVoteType = getUserVoteType(userId, comment.voteUser)
     comment.isMine = (comment.authorId === userId)
     comment.createdAt = toElapsed(comment.createdAt.toString())
+    handleSecretMessage(session, post.authorId, comment)
 
     comment.replies.forEach(reply => {
       reply.myVoteType = getUserVoteType(userId, reply.voteUser)
       reply.isMine = (reply.authorId === userId)
       reply.createdAt = toElapsed(reply.createdAt.toString())
+      handleSecretMessage(session, comment.authorId, reply)
     })
   })
 
   return makePostAnonymous(post)
+}
+
+function handleSecretMessage(session: Session, targetAuthorId: string, msg: ReplyBase | CommentBase) {
+  if (!msg.isSecret) {
+    msg.hasAuthorityToRead = true
+    return
+  }
+  if (session.user.id === msg.authorId || session.user.id === targetAuthorId) {
+    msg.hasAuthorityToRead = true
+    return
+  }
+
+  msg.content = "CONCEALED"
+  msg.hasAuthorityToRead = false
 }
