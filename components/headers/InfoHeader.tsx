@@ -47,7 +47,7 @@ export default function InfoHeader({author, authorMajor, date, votes, createVote
         <div className="flex flex-center gap-2">
           <UserHexaIcon/>
           <p className="text-sm font-semibold">
-            {isMine? author : `User_${author}`}
+            {(author === "Author")? author : `User_${author}`}
           </p>
           <Badge variant="outline" className="border-gray-300">{authorMajor}</Badge>
           {isMine && <Badge className="bg-blue-400 hover:bg-blue-400">Me</Badge>}

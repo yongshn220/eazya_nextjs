@@ -14,6 +14,12 @@ export const DEFAULT_PAGE_LENGTH = {
   USER_ACTIVITY: 10,
 }
 
+export const REVALIDATE_TIME = {
+  EVENT: 60,
+  COMMUNITY: 60,
+  STORE: 60,
+}
+
 
 // TODO: Handle Multiple Universities' Major
 export const MajorList = ["NONE", "UNDECLARED", "AAS","ACC","ADV","AFH","AFS","AIM","AMR","AMS","ANP","ANT","ARB","ARH","ARS","ASC","AST","ATM","BCP","BIO","BME","BUS","CAR","CCS","CDS","CEF","CHE","CHI","CIV","CLL","CLS","CLT","CME","COM","CSE","CWL","DAN","DIA","EAS","EBH","ECO","EDP","EEL","EEO","EGL","ENS","ENV","ESE","ESG","ESM","EST","EUR","EXT","FLA","FLM","FRN","GEO","GER","GLI","GRK","GSS","HAD","HAL","HAN","HAT","HBA","HBH","HBM","HBP","HBW","HBY","HDG","HDO","HDP","HIN","HIS","HNI","HON","HUE","HUF","HUG","HUI","HUL","HUR","HUS","HWC","IAE","IAP","INT","ISE","ITL","JDH","JDS","JPN","JRN","KOR","KSW","LAC","LAN","LAT","LCR","LDR","LHD","LHW","LIA","LIN","MAE","MAP","MAR","MAT","MDA","MEC","MSL","MUS","MVL","OAE","PER","PHI","PHY","POL","POR","PSY","RLS","RUS","SBU","SCH","SCI","SKT","SLN","SOC","SPN","SSE","SUS","THR","TRK","TVW","UKR","VIP","WAE","WRT","WSE","WST"]

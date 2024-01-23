@@ -1,4 +1,5 @@
 import {CommunityType, PostType, PostTypeEditURL, PostTypeURL, UserActivityMenu} from "@components/constants/enums";
+import {Session} from "@node_modules/next-auth";
 
 
 export enum ActionTag {
@@ -9,16 +10,16 @@ export function getActivityTag(id: string) {
   return `activity/${id}`
 }
 
-export function getActivityIdsGroupTag() {
-  return 'activity/ids'
+export function getActivityIdsGroupTag(userId: string) {
+  return `${userId}/activity/ids`
 }
 
-export function getActivityIdsTag(activityMenu: UserActivityMenu, page: number) {
-  return `activity/${activityMenu}/ids/${page}`
+export function getActivityIdsTag(userId: string, activityMenu: UserActivityMenu, page: number) {
+  return `${userId}/activity/${activityMenu}/ids/${page}`
 }
 
-export function getPostTag(postId: string, postType: PostType) {
-  return `${postType}/${postId}`
+export function getPostTag(userId: string, postId: string, postType: PostType) {
+  return `${userId}/${postType}/${postId}`
 }
 
 export function getPostIdsGroupTag(postType: PostType) {

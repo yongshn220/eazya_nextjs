@@ -1,6 +1,6 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import {getNumOfCommentsInPost, toElapsed} from "@components/constants/helperFunctions";
+import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {getCommunityPostPath} from "@components/constants/tags";
 import {CommentIcon, UserHexaIcon, VoteIcon} from "@components/icon/icons";
 import React from "react";
@@ -17,7 +17,7 @@ export default function CommunityDetailPostItem({post, postType, communityType})
               <UserHexaIcon/>
               <p className="text-sm font-semibold">CSE Major</p>
             </div>
-            <p className="text-sm text-gray-500">{toElapsed(post.createdAt)}</p>
+            <p className="text-sm text-gray-500">{post.createdAt}</p>
           </div>
 
           <div className="flex flex-col gap-2">

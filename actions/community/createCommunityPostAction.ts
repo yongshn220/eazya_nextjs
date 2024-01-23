@@ -5,10 +5,10 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "next-auth/next";
 import {redirect} from "next/navigation";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import {PostType, UserActivityType} from "@components/constants/enums";
+import {UserActivityType} from "@components/constants/enums";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {revalidatePath, revalidateTag} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {getCommunityHomePath, getCommunityPostIdsGroupTag, getHomePath} from "@components/constants/tags";
 
@@ -41,6 +41,7 @@ export default async function createCommunityPostAction(req: CreateGeneralPostRe
     const activityReq: CreateUserActivityRequest = {
       userActivityType: UserActivityType.CREATE_POST,
       postType: postType,
+      communityType: communityType,
       postId: newCommunityPost._id,
       preview: newCommunityPost.title,
     }

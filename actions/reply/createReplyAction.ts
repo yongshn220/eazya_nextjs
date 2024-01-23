@@ -16,12 +16,11 @@ import createUserActivityAction from "@actions/userActivity/createUserActivityAc
 import {getPostTag} from "@components/constants/tags";
 
 export default async function createReplyAction(req: CreateReplyRequest) {
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return {status: StatusCodes.UNAUTHORIZED}
+
   try {
-    await connectToDB()
-
-    const session = await getServerSession(authOptions)
-    if (!session) return {status: StatusCodes.UNAUTHORIZED}
-
     const PostModel = GetPostModelByType(req.postType)
     if (!PostModel) return null
 
@@ -37,7 +36,7 @@ export default async function createReplyAction(req: CreateReplyRequest) {
       authorName,
       authorMajor: session.user.major,
       content: req.content,
-      createdAt: new Date(),
+      createdAt: new Date().toString(),
       isSecret: req.isSecret,
       voteUser: { upvoted: [], downvoted: [] },
       votes: 0,
@@ -49,22 +48,25 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     comment.replies.push(newReply)
     await post.save()
 
-    const notiReq: CreateNotificationRequest = {
-      fromUserId: session.user.id,
-      toUserId: post.authorId.toString(),
-      notificationType: NotificationType.REPLY_ON_COMMENT,
-      postType: req.postType,
-      postId: req.postId,
-      commentId: req.commentId,
-      preview: comment.content,
+    // NOTIFICATION
+    if (session.user.id !== post.authorId.toString()) {
+      const notiReq: CreateNotificationRequest = {
+        fromUserId: session.user.id,
+        toUserId: post.authorId.toString(),
+        notificationType: NotificationType.REPLY_ON_COMMENT,
+        postType: req.postType,
+        postId: req.postId,
+        commentId: req.commentId,
+        preview: comment.content,
+      }
+      await createNotificationAction(notiReq)
     }
-    await createNotificationAction(notiReq)
 
     // USER ACTIVITY
     const newReplyId = comment.replies[comment.replies.length - 1]._id
     const activityReq: CreateUserActivityRequest = {
-      userActivityType: UserActivityType.CREATE_POST,
-      postType: PostType.EVENT,
+      userActivityType: UserActivityType.CREATE_REPLY,
+      postType: req.postType,
       postId: req.postId,
       commentId: req.commentId,
       replyId: newReplyId,
@@ -78,6 +80,6 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
-    revalidateTag(getPostTag(req.postId, req.postType))
+    revalidateTag(getPostTag(session.user.id, req.postId, req.postType))
   }
 }

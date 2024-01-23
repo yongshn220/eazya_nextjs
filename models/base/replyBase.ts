@@ -27,7 +27,7 @@ export interface ReplyBase {
   authorName:     string;
   authorMajor:    string;
   content:        string;
-  createdAt:      Date;
+  createdAt:      string;
   isSecret:       boolean;
   voteUser:       VoteUser;
   votes:          number;

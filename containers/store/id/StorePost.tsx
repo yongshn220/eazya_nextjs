@@ -31,7 +31,6 @@ export default async function StorePost({id}) {
       postId: post.id,
       voteType: voteType,
     }
-
     await createVoteAction(req)
   }
 

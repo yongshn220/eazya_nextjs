@@ -2,7 +2,6 @@ import {DropdownMenuItem} from "@components/ui/dropdown-menu";
 import {Badge} from "@components/ui/badge";
 import {INotification} from "@models/collections/notification";
 import {getMessageByNotificationType} from "@components/nav/helperFunction";
-import {toElapsed} from "@components/constants/helperFunctions";
 
 
 interface Props {
@@ -15,7 +14,7 @@ export default function NotificationItem({notification}: Props) {
       <div className="w-full flex-start flex-col py-3 gap-2">
         <div className="w-full flex-between">
           <Badge variant="outline" className="border-gray-300">{notification.postType}</Badge>
-          <div className="text-xs text-gray-500">{toElapsed(notification.createdAt)}</div>
+          <div className="text-xs text-gray-500">{notification.createdAt}</div>
         </div>
         <p className="w-full flex-start font-semibold line-clamp-1">
           {notification.preview}

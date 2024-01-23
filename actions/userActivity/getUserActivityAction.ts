@@ -7,6 +7,7 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
 import {getActivityTag} from "@components/constants/tags";
 import {IUserActivity, UserActivityModel} from "@models/collections/userActivity";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 
 const getUserActivityAction = async (id: string) => {
@@ -22,7 +23,7 @@ const getUserActivityAction = async (id: string) => {
 
         const activity = activityDoc.toObject() as IUserActivity
 
-        console.log("get User Activity", activity.postType)
+        activity.createdAt = toElapsed(activity.createdAt.toString())
 
         return toJson(activity)
       }

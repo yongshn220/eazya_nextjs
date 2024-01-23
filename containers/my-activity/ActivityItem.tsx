@@ -3,10 +3,17 @@
 import {Badge} from "@components/ui/badge"
 import Link from 'next/link'
 import {IUserActivity} from "@models/collections/userActivity";
-import {UserActivityType} from "@components/constants/enums";
-import {useEffect, useState} from "react";
+import {
+  CommunityPostType,
+  CommunityType,
+  PostType,
+  PostTypeToCommunityPostType,
+  UserActivityType
+} from "@components/constants/enums";
+import {useEffect, useMemo, useState} from "react";
 import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
-import {toElapsed} from "@components/constants/helperFunctions";
+import {getCommunityPostPath, getPostPath} from "@components/constants/tags";
+
 
 interface Props {
   id: string
@@ -23,13 +30,23 @@ export default function ActivityItem({id}: Props) {
     })
   }, [])
 
+  const postLink = useMemo(() => {
+    if (!activity) return "#"
+    if (Object.values(CommunityPostType).includes(PostTypeToCommunityPostType(activity.postType))) {
+      return getCommunityPostPath(activity.postId, activity.postType, activity.communityType)
+    }
+    else {
+      return getPostPath(activity.postId, activity.postType)
+    }
+  }, [activity])
+
   if (!activity) {
     return <></>
   }
 
   return (
     <div className="w-full cursor-pointer group">
-      <Link href="#">
+      <Link href={postLink}>
         <div className="w-full flex-start flex-col gap-3 py-6">
           <div className="w-full flex-between">
             <div className="flex-center gap-2">
@@ -39,7 +56,7 @@ export default function ActivityItem({id}: Props) {
               </p>
             </div>
             <p className="text-sm text-gray-500">
-              {toElapsed(activity.createdAt)}
+              {activity.createdAt}
             </p>
           </div>
           <p className={`font-semibold hover_text_blue`}>{activity.preview}</p>

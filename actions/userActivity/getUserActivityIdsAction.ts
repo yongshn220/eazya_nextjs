@@ -12,12 +12,13 @@ import {ActivityToPostType, UserActivityMenu} from "@components/constants/enums"
 
 
 const getUserActivityIdsAction = async (userActivityMenu: UserActivityMenu, page: number) => {
+    await connectToDB()
+    const session = await getServerSession(authOptions)
+    if (!session) return null
+
     const action = unstable_cache(
     async () => {
       try {
-        await connectToDB()
-        const session = await getServerSession(authOptions)
-        if (!session) return null
 
         const filter = {userId: session.user.id}
         if (userActivityMenu !== UserActivityMenu.ALL) {
@@ -38,8 +39,8 @@ const getUserActivityIdsAction = async (userActivityMenu: UserActivityMenu, page
         return null
       }
     },
-    [getActivityIdsTag(userActivityMenu, page)],
-    { tags: [getActivityIdsTag(userActivityMenu, page), getActivityIdsGroupTag()]}
+    [getActivityIdsTag(session.user.id, userActivityMenu, page)],
+    { tags: [getActivityIdsTag(session.user.id, userActivityMenu, page), getActivityIdsGroupTag(session.user.id)]}
   )
   return await action()
 }

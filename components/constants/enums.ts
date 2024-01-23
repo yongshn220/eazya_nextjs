@@ -19,6 +19,11 @@ export enum PostType {
   STORE =       "Store",
 }
 
+export enum CommunityPostType {
+  GENERAL =     "General",
+  FIND_MEMBER = "Find Member",
+}
+
 export const PostTypeURL = {
   [PostType.EVENT]:       "events",
   [PostType.GENERAL]:     "general",
@@ -32,7 +37,6 @@ export const PostTypeEditURL = {
   [PostType.FIND_MEMBER]: "edit-find-member-post",
   [PostType.STORE]:       "edit-store-post",
 }
-
 
 export enum NotificationType {
   COMMENT_ON_POST =     "CommentOnPost",
@@ -85,11 +89,10 @@ export enum VoteType {
   NONE = "voteTypeNone",
 }
 
-export function PostTypeToUserActivityMenu(postType: PostType) {
+export function PostTypeToCommunityPostType(postType: PostType) {
   switch(postType) {
-    case PostType.EVENT: return UserActivityMenu.EVENT
-    case PostType.GENERAL: return UserActivityMenu.GENERAL
-    case PostType.STORE: return UserActivityMenu.STORE
-    default: return UserActivityMenu.ALL
+    case PostType.GENERAL: return CommunityPostType.GENERAL
+    case PostType.FIND_MEMBER: return CommunityPostType.FIND_MEMBER
+    default: return null
   }
 }

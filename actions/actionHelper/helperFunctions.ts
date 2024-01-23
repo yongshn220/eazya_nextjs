@@ -9,6 +9,7 @@ import {IPost} from "@models/union/union";
 import {Session} from "@node_modules/next-auth";
 import {StorePostModel} from "@models/collections/storePost";
 import {FindMemberPostModel} from "@models/collections/findMemberPost";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 /*-------------
      MODEL
@@ -71,22 +72,25 @@ export function makePostAnonymous(post: IPost) {
 
 export function setDynamicDataToPost(session: Session, post: IPost) {
   if (!session) {
-      post.myVoteType = VoteType.NONE
-      return makePostAnonymous(post)
-    }
+    post.myVoteType = VoteType.NONE
+    return makePostAnonymous(post)
+  }
 
   const userId = session.user.id
 
   post.myVoteType = getUserVoteType(userId, post.voteUser)
   post.isMine = (post.authorId === userId)
+  post.createdAt = toElapsed(post.createdAt.toString())
 
   post.comments.forEach(comment => {
     comment.myVoteType = getUserVoteType(userId, comment.voteUser)
     comment.isMine = (comment.authorId === userId)
+    comment.createdAt = toElapsed(comment.createdAt.toString())
 
     comment.replies.forEach(reply => {
       reply.myVoteType = getUserVoteType(userId, reply.voteUser)
       reply.isMine = (reply.authorId === userId)
+      reply.createdAt = toElapsed(reply.createdAt.toString())
     })
   })
 

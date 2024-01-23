@@ -19,11 +19,11 @@ import createUserActivityAction from "@actions/userActivity/createUserActivityAc
 import {getPostTag} from "@components/constants/tags";
 
 export default async function createCommentAction(req: CreateCommentRequest) {
-  try {
-    await connectToDB()
-    const session = await getServerSession(authOptions)
-    if (!session) return null
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return null
 
+  try {
     const PostModel = GetPostModelByType(req.postType)
     if (!PostModel) return null
 
@@ -38,7 +38,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
       authorName,
       authorMajor: session.user.major,
       content: req.content,
-      createdAt: new Date(),
+      createdAt: new Date().toString(),
       isSecret: req.isSecret,
       voteUser: { upvoted: [], downvoted: [] },
       votes: 0,
@@ -48,24 +48,26 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     await post.save()
 
     // NOTIFICATION
-    const notiReq: CreateNotificationRequest = {
-      fromUserId: session.user.id,
-      toUserId: post.authorId.toString(),
-      notificationType: NotificationType.COMMENT_ON_POST,
-      postType: req.postType,
-      postId: req.postId,
-      preview: post.title,
+    if (session.user.id !== post.authorId.toString()) {
+      const notiReq: CreateNotificationRequest = {
+        fromUserId: session.user.id,
+        toUserId: post.authorId.toString(),
+        notificationType: NotificationType.COMMENT_ON_POST,
+        postType: req.postType,
+        postId: req.postId,
+        preview: post.title,
+      }
+      await createNotificationAction(notiReq)
     }
-    await createNotificationAction(notiReq)
 
     // USER ACTIVITY
     const newCommentId = post.comments[post.comments.length - 1]._id;
     const activityReq: CreateUserActivityRequest = {
-      userActivityType: UserActivityType.CREATE_POST,
-      postType: PostType.EVENT,
-      postId: newComment.postId,
+      userActivityType: UserActivityType.CREATE_COMMENT,
+      postType: req.postType,
+      postId: req.postId,
       commentId: newCommentId,
-      preview: newComment.content,
+      preview: req.content,
     }
     await createUserActivityAction(activityReq)
 
@@ -75,6 +77,6 @@ export default async function createCommentAction(req: CreateCommentRequest) {
     return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
-    revalidateTag(getPostTag(req.postId, req.postType))
+    revalidateTag(getPostTag(session.user.id, req.postId, req.postType))
   }
 }

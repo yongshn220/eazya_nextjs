@@ -4,15 +4,19 @@ import {connectToDB} from "@utils/database";
 import {EventPostModel} from "@models/collections/eventPost";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
-import { setDynamicDataToPost} from "@actions/actionHelper/helperFunctions";
+import {setDynamicDataToPost} from "@actions/actionHelper/helperFunctions";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
 import {getPostTag} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 
 const getEventPostAction = async (postId: string) => {
+  const session = await getServerSession(authOptions)
+  const userId = session?.user?.id ?? "GUEST"
+
   const action = unstable_cache(
     async () => {
       try {
@@ -21,11 +25,10 @@ const getEventPostAction = async (postId: string) => {
 
         if (!eventPost) return null
 
-        const session = await getServerSession(authOptions)
         let post = eventPost.toObject() as IPost
         post = toJson(post)
         post = setDynamicDataToPost(session, post)
-        console.log(post)
+
         return toJson(post)
       }
       catch (error) {
@@ -33,8 +36,8 @@ const getEventPostAction = async (postId: string) => {
         return null
       }
     },
-    [getPostTag(postId, PostType.EVENT)],
-    { tags: [getPostTag(postId, PostType.EVENT)] }
+    [getPostTag(userId, postId, PostType.EVENT)],
+    { tags: [getPostTag(userId, postId, PostType.EVENT)] }
   )
   return await action()
 }

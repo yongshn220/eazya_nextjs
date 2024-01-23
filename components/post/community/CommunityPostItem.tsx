@@ -1,6 +1,6 @@
 import { Badge } from "@components/ui/badge"
 import Link from 'next/link'
-import {getNumOfCommentsInPost, toElapsed} from "@components/constants/helperFunctions";
+import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import {CommunityType, PostType} from "@components/constants/enums";
 import {getCommunityPostPath} from "@components/constants/tags";
 import {ICommunityPost} from "@models/union/union";
@@ -27,7 +27,7 @@ export default async function CommunityPostItem({postType, communityType, post}:
               <p className="text-sm font-semibold">SBU Student</p>
               <Badge variant="outline" className="border-gray-300">{post.authorMajor}</Badge>
             </div>
-            <p className="text-sm text-gray-500">{toElapsed(post.createdAt)}</p>
+            <p className="text-sm text-gray-500">{post.createdAt}</p>
           </div>
 
           <div className="flex flex-col gap-2">

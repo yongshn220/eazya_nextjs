@@ -11,17 +11,18 @@ import {ActionTag, getActivityIdsGroupTag, getPostIdsGroupTag} from "@components
 import {PostType} from "@components/constants/enums";
 
 export default async function createUserActivityAction(req: CreateUserActivityRequest) {
-  try {
-    await connectToDB()
-    const session = await getServerSession(authOptions)
-    if (!session) return null
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return null
 
-    const {userActivityType, postType, postId, commentId, replyId, preview} = req
+  try {
+    const {userActivityType, postType, communityType, postId, commentId, replyId, preview} = req
 
     const newUserActivity = new UserActivityModel({
       userId: session.user.id,
       userActivityType,
       postType,
+      communityType,
       postId,
       commentId,
       replyId,
@@ -36,6 +37,6 @@ export default async function createUserActivityAction(req: CreateUserActivityRe
     return null
   }
   finally {
-    revalidateTag(getActivityIdsGroupTag())
+    revalidateTag(getActivityIdsGroupTag(session.user.id))
   }
 }
