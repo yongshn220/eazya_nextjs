@@ -4,6 +4,7 @@ import PostDropDown from "@components/menu/PostDropDown";
 import {IPostHeader} from "@models/types/postHeader";
 import {IEventPost} from "@models/collections/eventPost";
 import {MajorType} from "@components/constants/values";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 export interface IDropDown {
   isMine: boolean;
@@ -39,7 +40,7 @@ export default function PostHeader({postHeaderData}: Props) {
         <InfoHeader
           author={"Author"}
           authorMajor={post.authorMajor}
-          date={post.createdAt}
+          date={toElapsed(post.createdAt)}
           votes={post.votes}
           createVoteHandler={postHeaderData.createVoteHandler}
           myVoteType={post.myVoteType}

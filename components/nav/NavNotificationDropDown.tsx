@@ -17,6 +17,7 @@ import {INotification} from "@models/collections/notification";
 import {NotificationType} from "@components/constants/enums";
 import NotificationLoadMore from "@components/nav/NotificationLoadMore";
 import {getMessageByNotificationType} from "@components/nav/helperFunction";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 export default function NavNotificationDropDown() {
   const [open, setOpen] = useState(false)
@@ -69,7 +70,7 @@ function NotificationItem({notification}: Props) {
       <div className="w-full flex-start flex-col py-3 gap-2">
         <div className="w-full flex-between">
           <Badge variant="outline" className="border-gray-300">{notification.postType}</Badge>
-          <div className="text-xs text-gray-500">{notification.createdAt}</div>
+          <div className="text-xs text-gray-500">{toElapsed(notification.createdAt)}</div>
         </div>
         <p className="w-full flex-start font-semibold line-clamp-1">
           {notification.preview}

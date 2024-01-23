@@ -3,6 +3,7 @@ import {ReplyBase} from "@models/base/replyBase";
 import {PostType, VoteType} from "@components/constants/enums";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import createVoteAction from "@actions/vote/createVoteAction";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 interface Props {
   reply: ReplyBase;
@@ -30,7 +31,7 @@ export default function Reply({reply, postType, postId, commentId}: Props) {
       <InfoHeader
         author={reply.authorName}
         authorMajor={reply.authorMajor}
-        date={reply.createdAt}
+        date={toElapsed(reply.createdAt)}
         votes={reply.votes}
         createVoteHandler={handleCreateVote}
         myVoteType={reply.myVoteType}

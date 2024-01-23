@@ -4,6 +4,7 @@ import CreateReply from "@components/post/comment/CreateReply";
 import createVoteAction from "@actions/vote/createVoteAction";
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import {VoteType} from "@components/constants/enums";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 export default function Comment({postType, postId, comment, isReplyOn, onToggleReply }) {
 
@@ -24,7 +25,7 @@ export default function Comment({postType, postId, comment, isReplyOn, onToggleR
       <InfoHeader
         author={comment.authorName}
         authorMajor={comment.authorMajor}
-        date={comment.createdAt}
+        date={toElapsed(comment.createdAt)}
         votes={comment.votes}
         myVoteType={comment.myVoteType}
         isMine={comment.isMine}

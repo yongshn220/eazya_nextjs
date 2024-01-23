@@ -6,6 +6,7 @@ import {IUserActivity} from "@models/collections/userActivity";
 import {UserActivityType} from "@components/constants/enums";
 import {useEffect, useState} from "react";
 import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
+import {toElapsed} from "@components/constants/helperFunctions";
 
 interface Props {
   id: string
@@ -38,7 +39,7 @@ export default function ActivityItem({id}: Props) {
               </p>
             </div>
             <p className="text-sm text-gray-500">
-              {activity.createdAt}
+              {toElapsed(activity.createdAt)}
             </p>
           </div>
           <p className={`font-semibold hover_text_blue`}>{activity.preview}</p>

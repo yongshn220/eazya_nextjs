@@ -7,7 +7,8 @@ import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import {UserActivityModel} from "@models/collections/userActivity";
 import {revalidateTag} from "@node_modules/next/dist/server/web/spec-extension/revalidate-tag";
-import {ActionTag} from "@components/constants/tags";
+import {ActionTag, getActivityIdsGroupTag, getPostIdsGroupTag} from "@components/constants/tags";
+import {PostType} from "@components/constants/enums";
 
 export default async function createUserActivityAction(req: CreateUserActivityRequest) {
   try {
@@ -35,6 +36,6 @@ export default async function createUserActivityAction(req: CreateUserActivityRe
     return null
   }
   finally {
-    revalidateTag(ActionTag.USER_ACTIVITIES)
+    revalidateTag(getActivityIdsGroupTag())
   }
 }
