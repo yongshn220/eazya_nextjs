@@ -12,13 +12,14 @@ export default async function createNotificationAction(req: CreateNotificationRe
     const session = await getServerSession(authOptions)
     if (!session) return null
 
-    const {fromUserId, toUserId, notificationType, postType, postId, commentId, replyId, preview } = req
+    const {fromUserId, toUserId, notificationType, postType, communityType, postId, commentId, replyId, preview } = req
 
     const newNotification = new NotificationModel({
       fromUserId,
       toUserId,
       notificationType,
       postType,
+      communityType,
       postId,
       commentId,
       replyId,

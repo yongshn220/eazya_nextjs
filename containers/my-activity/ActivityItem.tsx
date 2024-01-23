@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {IUserActivity} from "@models/collections/userActivity";
 import {
   CommunityPostType,
-  CommunityType,
+  CommunityType, isCommunityPostType,
   PostType,
   PostTypeToCommunityPostType,
   UserActivityType
@@ -32,7 +32,7 @@ export default function ActivityItem({id}: Props) {
 
   const postLink = useMemo(() => {
     if (!activity) return "#"
-    if (Object.values(CommunityPostType).includes(PostTypeToCommunityPostType(activity.postType))) {
+    if (isCommunityPostType(activity.postType)) {
       return getCommunityPostPath(activity.postId, activity.postType, activity.communityType)
     }
     else {

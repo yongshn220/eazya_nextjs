@@ -54,6 +54,7 @@ export default async function createCommentAction(req: CreateCommentRequest) {
         toUserId: post.authorId.toString(),
         notificationType: NotificationType.COMMENT_ON_POST,
         postType: req.postType,
+        communityType: post.communityType ?? null,
         postId: req.postId,
         preview: post.title,
       }

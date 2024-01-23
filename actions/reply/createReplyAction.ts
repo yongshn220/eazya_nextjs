@@ -67,6 +67,7 @@ export default async function createReplyAction(req: CreateReplyRequest) {
     const activityReq: CreateUserActivityRequest = {
       userActivityType: UserActivityType.CREATE_REPLY,
       postType: req.postType,
+      communityType: post.communityType ?? null,
       postId: req.postId,
       commentId: req.commentId,
       replyId: newReplyId,

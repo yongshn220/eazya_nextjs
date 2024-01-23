@@ -5,7 +5,7 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/route";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
-import {NotificationType, VoteType} from "@components/constants/enums";
+import {CommunityType, NotificationType, VoteType} from "@components/constants/enums";
 import {revalidateTag} from "next/cache";
 import {ObjectId} from "mongodb";
 import mongoose from "mongoose";
@@ -13,6 +13,7 @@ import {CreateNotificationRequest} from "@models/requests/CreateNotificationRequ
 import createNotificationAction from "@actions/notification/createNotificationAction";
 import findAndDeleteNotificationAction from "@actions/notification/findAndDeleteNotificationAction";
 import {getPostTag} from "@components/constants/tags";
+import {IPost} from "@models/union/union";
 
 enum VotingResult {
   CANCEL,
@@ -20,10 +21,11 @@ enum VotingResult {
 }
 
 export default async function createVoteAction(req: CreateVoteRequest) {
+  await connectToDB();
+  const session = await getServerSession(authOptions);
+  if (!session) return null
+
   try {
-    await connectToDB();
-    const session = await getServerSession(authOptions);
-    if (!session) return null
 
     const PostModel = GetPostModelByType(req.postType)
     if (!PostModel) return null
@@ -37,7 +39,7 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     const votingResult: VotingResult = handleVoting(session.user.id, req.voteType, votingTarget)
     await post.save()
 
-    const notiReq = createNotificationRequest(req, session.user.id, votingTarget)
+    const notiReq = createNotificationRequest(req, session.user.id, post.communityType, votingTarget)
 
     if (votingResult === VotingResult.CANCEL) {
       await findAndDeleteNotificationAction(notiReq)
@@ -54,7 +56,7 @@ export default async function createVoteAction(req: CreateVoteRequest) {
     return null
   }
   finally {
-    revalidateTag(getPostTag(req.postId, req.postType))
+    revalidateTag(getPostTag(session.user.id, req.postId, req.postType))
   }
 }
 
@@ -102,7 +104,7 @@ function removeUserIdFromVotes(votes: Array<ObjectId>, userId: ObjectId) {
    return votes.filter((oid: ObjectId) => !oid.equals(userId));
 }
 
-function createNotificationRequest(req: CreateVoteRequest, userId: string, votingTarget: any): CreateNotificationRequest {
+function createNotificationRequest(req: CreateVoteRequest, userId: string, communityType: CommunityType,  votingTarget: any): CreateNotificationRequest {
   let notificationType: NotificationType
   let preview: string
 
@@ -124,6 +126,7 @@ function createNotificationRequest(req: CreateVoteRequest, userId: string, votin
     toUserId: votingTarget.authorId,
     notificationType,
     postType: req.postType,
+    communityType: communityType ?? null,
     postId: req.postId,
     commentId: req.commentId,
     replyId: req.replyId,

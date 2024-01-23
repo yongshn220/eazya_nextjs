@@ -96,3 +96,7 @@ export function PostTypeToCommunityPostType(postType: PostType) {
     default: return null
   }
 }
+
+export function isCommunityPostType(postType: PostType) {
+  return Object.values(CommunityPostType).includes(PostTypeToCommunityPostType(postType))
+}

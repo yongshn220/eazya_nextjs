@@ -9,23 +9,20 @@ import getNotificationsAction from "@actions/notification/getNotificationsAction
 import {INotification} from "@models/collections/notification";
 import NotificationLoadMore from "@components/nav/NotificationLoadMore";
 import {getMessageByNotificationType} from "@components/nav/helperFunction";
+import NotificationItem from "@components/nav/NotificationItem";
 
 
 export default function NavNotificationDropDown() {
   const [open, setOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [notifications, setNotifications] = useState([])
 
   useEffect(() => {
     if (open) {
-      setIsLoading(true)
       getNotificationsAction(1).then((results) => {
         results && setNotifications(results)
-        setIsLoading(false)
       })
     }
   }, [open])
-
 
   return (
     <div className="h-full">
@@ -54,23 +51,4 @@ export default function NavNotificationDropDown() {
 
 interface Props {
   notification: INotification
-}
-
-function NotificationItem({notification}: Props) {
-  return (
-    <DropdownMenuItem className="cursor-pointer">
-      <div className="w-full flex-start flex-col py-3 gap-2">
-        <div className="w-full flex-between">
-          <Badge variant="outline" className="border-gray-300">{notification.postType}</Badge>
-          <div className="text-xs text-gray-500">{notification.createdAt}</div>
-        </div>
-        <p className="w-full flex-start font-semibold line-clamp-1">
-          {notification.preview}
-        </p>
-        <p className="text-xs text-gray-600">
-          {getMessageByNotificationType(notification.notificationType)}
-        </p>
-      </div>
-    </DropdownMenuItem>
-  )
 }

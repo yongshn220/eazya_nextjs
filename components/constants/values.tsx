@@ -5,7 +5,6 @@ export const UniversityIds = [
   "gmail",
 ]
 
-
 export const DEFAULT_PAGE_LENGTH = {
   EVENT: 8,
   COMMUNITY: 8,

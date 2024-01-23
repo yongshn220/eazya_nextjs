@@ -10,8 +10,6 @@ export default async function EventPreview() {
   const eventPostIds = await getEventPostIdsAction(1) as Array<string>
   if (!eventPostIds) return <></>
 
-  console.log(eventPostIds)
-
   const eventPosts = []
   for (const id of eventPostIds) {
     eventPosts.push(await getEventPostAction(id) as IEventPost)
