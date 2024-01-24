@@ -22,7 +22,7 @@ export default function CreateComment({postType, postId}) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col glassmorphism mt-4 p-4 gap-5">
-        <InputFieldDefaultClient name="" value={session? comment.content : "Please login to add a comment."} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
+        <InputFieldDefaultClient name="" value={session? comment.content : "Please signin to add a comment."} placeholder="Add a comment..." onChangeHandler={(e) => {setComment(prev => ({...prev, content:e.target.value}))}}/>
         <div className="flex-between">
           <div className="flex flex-col gap-2">
             <div className="flex items-center space-x-2">

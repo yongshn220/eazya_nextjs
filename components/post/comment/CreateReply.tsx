@@ -23,7 +23,7 @@ export default function CreateReply({postType, postId, commentId}) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col glassmorphism p-4 gap-5">
-        <InputFieldDefaultClient name="" value={session? reply.content : "Please login to reply."} placeholder="Add a reply..." onChangeHandler={(e) => {setReply(prev => ({...prev, content:e.target.value}))}}/>
+        <InputFieldDefaultClient name="" value={session? reply.content : "Please signin to reply."} placeholder="Add a reply..." onChangeHandler={(e) => {setReply(prev => ({...prev, content:e.target.value}))}}/>
         <div className="flex-between">
           <div className="flex flex-col gap-2">
             <div className="flex items-center space-x-2">
