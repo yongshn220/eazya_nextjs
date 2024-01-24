@@ -22,9 +22,9 @@ export default function EventPostItem({post}) {
         <div className="w-full mt-4 flex flex-col gap-3">
           <h3 className="text-md font-bold text-gray-900 line-clamp-1">{post.title}</h3>
           <div className="flex flex-col gap-1 text-sm text-gray-700">
-            {/*<p className="line-clamp-1">*/}
-            {/*  {post.date}*/}
-            {/*</p>*/}
+            <p className="line-clamp-1">
+              {post.date}
+            </p>
             {/*<p className="line-clamp-1">*/}
             {/*  {post.location}*/}
             {/*</p>*/}

@@ -15,13 +15,11 @@ import React from "react";
 import {getEditFormPath} from "@components/constants/tags";
 
 
-export default async function EventPost({postId}) {
-  const post: IEventPost  = await getEventPostAction(postId)
-  if (!post) return <></>
+export default async function EventPost({post}) {
 
   async function handleDeletePost() {
     "use server"
-    await deleteEventPostAction(postId)
+    await deleteEventPostAction(post.id)
   }
 
   async function handleCreateVote(voteType: VoteType) {
@@ -39,7 +37,7 @@ export default async function EventPost({postId}) {
     post,
     deletePostHandler: handleDeletePost,
     createVoteHandler: handleCreateVote,
-    editHref: getEditFormPath(postId, PostType.EVENT),
+    editHref: getEditFormPath(post.id, PostType.EVENT),
   }
 
   const numberOfComments = getNumOfCommentsInPost(post)
