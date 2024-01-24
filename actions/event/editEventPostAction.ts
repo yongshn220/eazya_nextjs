@@ -13,11 +13,11 @@ import {getHomePath, getPostPath, getPostTag} from "@components/constants/tags";
 
 
 export default async function editEventPostAction(postId: string,  req: EventFormRequest) {
-  try {
-    await connectToDB()
-    const session = await getServerSession(authOptions)
-    if (!session) return null
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return null
 
+  try {
     const post = await EventPostModel.findById(postId)
     if (!post) return null
 
@@ -47,7 +47,7 @@ export default async function editEventPostAction(postId: string,  req: EventFor
     return null
   }
   finally {
-    revalidateTag(getPostTag(postId, PostType.EVENT))
+    revalidateTag(getPostTag(session.user.id, postId, PostType.EVENT))
     redirect(getPostPath(postId, PostType.EVENT))
   }
 }

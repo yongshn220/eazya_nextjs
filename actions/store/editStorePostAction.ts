@@ -9,15 +9,15 @@ import {StorePostModel} from "@models/collections/storePost";
 import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {PostType} from "@components/constants/enums";
 import {revalidateTag} from "next/cache";
-import {getHomePath, getPostPath, getPostTag} from "@components/constants/tags";
+import {getPostPath, getPostTag} from "@components/constants/tags";
 import {redirect} from "next/navigation";
 
 export default async function editStorePostAction(postId: string, req: StoreFormRequest) {
-  try {
-    await connectToDB()
-    const session = await getServerSession(authOptions)
-    if (!session) return null
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return null
 
+  try {
     const post = await StorePostModel.findById(postId)
     if (!post) return null
 
@@ -55,7 +55,7 @@ export default async function editStorePostAction(postId: string, req: StoreForm
     return null
   }
   finally {
-    revalidateTag(getPostTag(postId, PostType.STORE))
+    revalidateTag(getPostTag(session.user.id, postId, PostType.STORE))
     redirect(getPostPath(postId, PostType.STORE))
   }
 }
