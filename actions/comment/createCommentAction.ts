@@ -4,7 +4,7 @@ import {CreateCommentRequest} from "@models/requests/CreateCommentRequest";
 import {revalidateTag} from "@node_modules/next/cache";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {CommentBase} from "@models/base/commentBase";
 import {

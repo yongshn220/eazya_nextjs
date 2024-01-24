@@ -2,7 +2,7 @@
 
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {getCommunityPostModelByType, setDynamicDataToPost} from "@actions/actionHelper/helperFunctions";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";

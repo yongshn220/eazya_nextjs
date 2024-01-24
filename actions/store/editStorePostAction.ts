@@ -3,7 +3,7 @@
 
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {StoreFormRequest} from "@models/requests/StoreFormRequest";
 import {StorePostModel} from "@models/collections/storePost";
 import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";

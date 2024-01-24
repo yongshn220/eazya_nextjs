@@ -1,7 +1,7 @@
 import {Button} from "@components/ui/button";
 import Link from 'next/link'
 import {getServerSession} from "next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 
 export default async function HomeHeader({ title, subtitle, buttonName, createRoute }) {
   const session = await getServerSession(authOptions)

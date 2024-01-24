@@ -2,7 +2,7 @@
 
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {CreateReplyRequest} from "@models/requests/CreateReplyRequest";
 import {ReplyBase} from "@models/base/replyBase";

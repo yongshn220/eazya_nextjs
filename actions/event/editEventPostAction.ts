@@ -3,7 +3,7 @@
 import {EventFormRequest} from "@models/requests/EventFormRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {EventPostModel} from "@models/collections/eventPost";
 import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {PostType} from "@components/constants/enums";

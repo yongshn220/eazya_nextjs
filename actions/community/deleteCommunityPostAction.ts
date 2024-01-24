@@ -4,7 +4,7 @@ import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {CommunityType, PostType} from "@components/constants/enums";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {getCommunityHomePath, getCommunityPostIdsGroupTag, getPostTag} from "@components/constants/tags";

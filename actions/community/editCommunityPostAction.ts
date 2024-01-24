@@ -3,7 +3,7 @@
 import {CommunityFormRequest} from "@models/requests/CommunityFormRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {revalidateTag} from "next/cache";
 import {getCommunityPostPath, getPostTag} from "@components/constants/tags";

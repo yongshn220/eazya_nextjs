@@ -3,7 +3,7 @@
 import {CreateVoteRequest} from "@models/requests/CreateVoteRequest";
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {GetPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {CommunityType, NotificationType, VoteType} from "@components/constants/enums";
 import {revalidateTag} from "next/cache";

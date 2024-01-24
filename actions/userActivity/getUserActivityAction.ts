@@ -2,7 +2,7 @@
 
 import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
-import {authOptions} from "@app/api/auth/[...nextauth]/route";
+import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
 import {getActivityTag} from "@components/constants/tags";
