@@ -11,11 +11,11 @@ import {redirect} from "next/navigation";
 
 
 export default async function editCommunityPostAction(postId: string, req: CommunityFormRequest) {
-  try {
-    await connectToDB()
-    const session = await getServerSession(authOptions)
-    if (!session) return null
+  await connectToDB()
+  const session = await getServerSession(authOptions)
+  if (!session) return null
 
+  try {
     const {postType, communityType, title, description} = req
 
     const CommunityPostModel = getCommunityPostModelByType(postType)
@@ -34,7 +34,7 @@ export default async function editCommunityPostAction(postId: string, req: Commu
     return null
   }
   finally {
-    revalidateTag(getPostTag(postId, req.postType))
+    revalidateTag(getPostTag(session.user.id, postId, req.postType))
     redirect(getCommunityPostPath(postId, req.postType, req.communityType))
   }
 }
