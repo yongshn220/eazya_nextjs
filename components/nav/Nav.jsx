@@ -86,9 +86,12 @@ export default function Nav() {
         </div>
 
         <div className="relative flex gap-4">
-          <div className="flex-center">
-            <NavNotificationDropDown/>
-          </div>
+          {
+            session &&
+            <div className="flex-center">
+              <NavNotificationDropDown/>
+            </div>
+          }
           <div className="flex-center">
             <NavDrawer providers={providers}/>
           </div>

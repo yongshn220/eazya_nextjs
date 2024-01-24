@@ -10,11 +10,15 @@ import {INotification} from "@models/collections/notification";
 import NotificationLoadMore from "@components/nav/NotificationLoadMore";
 import {getMessageByNotificationType} from "@components/nav/helperFunction";
 import NotificationItem from "@components/nav/NotificationItem";
+import {useSession} from "@node_modules/next-auth/react";
 
 
 export default function NavNotificationDropDown() {
   const [open, setOpen] = useState(false)
+  const { data: session } = useSession()
   const [notifications, setNotifications] = useState([])
+
+  if (!session) return <></>
 
   useEffect(() => {
     if (open) {
