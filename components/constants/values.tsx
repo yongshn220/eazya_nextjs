@@ -2,6 +2,7 @@
 // TODO: Handle Multiple University
 export const UniversityIds = [
   "stonybrook",
+  "gmail"
 ]
 
 export const DEFAULT_PAGE_LENGTH = {

@@ -1,14 +1,14 @@
 import {PostType} from "@components/constants/enums";
 import CommunityPost from "@components/post/community/CommunityPost";
 import {Metadata, ResolvingMetadata} from "@node_modules/next";
-import {ICommunityPost} from "@models/union/union";
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
+import {ICommunityPost} from "@models/union/union";
 
 
 export async function generateMetadata({ params }, parent: ResolvingMetadata): Promise<Metadata> {
   const communityType = params.type
   const postId = params.id
-  const post: ICommunityPost  = await getCommunityPostAction(communityType, postId)
+  const post: ICommunityPost  = await getCommunityPostAction(postId, communityType)
   if (!post) return {}
 
   return {
@@ -17,11 +17,12 @@ export async function generateMetadata({ params }, parent: ResolvingMetadata): P
   }
 }
 
-export default function FindMemberPostPage({ params }) {
+
+export default function GeneralPostPage({ params }) {
   const communityType = params.type
   const postId = params.id
 
   return (
-    <CommunityPost postType={PostType.FIND_MEMBER} communityType={communityType} postId={postId}/>
+    <CommunityPost postType={PostType.GENERAL} communityType={communityType} postId={postId}/>
   )
 }
