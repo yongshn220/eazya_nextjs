@@ -1,6 +1,7 @@
 
 export default function SingleImageUploader({setImage, disabled, setIsLoading, children}) {
   async function handleImageChange(e) {
+    e.preventDefault()
     setIsLoading(true);
 
     const file = e.target.files[0];

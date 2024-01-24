@@ -6,6 +6,8 @@ export default function CommunitySearch() {
         placeholder="Search"
         required
         className="search_input peer"
+        value={"Searching will be available soon!"}
+        disabled={true}
       />
     </div>
   )

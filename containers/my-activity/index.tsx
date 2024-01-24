@@ -6,6 +6,7 @@ import ActivityContent from "@containers/my-activity/ActivityContent";
 import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAction";
 import {UserActivityMenu} from "@components/constants/enums";
 import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
+import Link from "next/link";
 
 export default async function MyActivity() {
   const session = await getServerSession(authOptions)
@@ -22,9 +23,11 @@ export default async function MyActivity() {
       <div className="flex-between glassmorphism mt-4">
         <div className="flex-center gap-4">
           <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" />
-          <p className="font-semibold">{session?.user.email}</p>
+          <p className="text-sm sm:text-base font-semibold">{session?.user.email}</p>
         </div>
-        <Button variant="outline">My Account</Button>
+        <Link href={"/account"}>
+          <Button variant="outline">My Account</Button>
+        </Link>
       </div>
       <ActivityContent activityIds={activityIds}/>
     </section>

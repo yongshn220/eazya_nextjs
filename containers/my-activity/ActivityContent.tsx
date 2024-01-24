@@ -27,7 +27,7 @@ export default function ActivityContent({activityIds}: Props) {
 
   return (
     <>
-      <div className="flex-start gap-10 mt-16 font-semibold pb-2 border-b border-gray-300 ">
+      <div className="flex-start text-sm sm:text-base mt-16 font-semibold pb-2 border-b border-gray-300 gap-10">
         {
           Object.values(UserActivityMenu).map(menuItem => (
             <p key={menuItem}

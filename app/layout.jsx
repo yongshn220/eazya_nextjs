@@ -22,25 +22,28 @@ export const metadata = {
 export default function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        fontSans.variable
-      )}>
-        <Theme>
-          <Provider>
-            <div className="main">
-              <div className="gradient"></div>
-            </div>
-            <main className="app">
-              <Nav/>
-              <div className="content">
-                {children}
-              </div>
-            </main>
-            <Footer/>
-          </Provider>
-        </Theme>
-      </body>
+    <head>
+      <link rel="icon" href="/assets/images/eazyaLogo.png"/>
+    </head>
+    <body className={cn(
+      "min-h-screen bg-background font-sans antialiased",
+      fontSans.variable
+    )}>
+    <Theme>
+      <Provider>
+        <div className="main">
+          <div className="gradient"></div>
+        </div>
+        <main className="app">
+          <Nav/>
+          <div className="content">
+            {children}
+          </div>
+        </main>
+        <Footer/>
+      </Provider>
+    </Theme>
+    </body>
     </html>
   )
 }

@@ -7,6 +7,8 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from 'next-auth/react'
 import {useState} from "react";
 import Image from "next/image";
+import {getCommunityHomePath, getHomePath} from "@components/constants/tags";
+import {CommunityType, PostType} from "@components/constants/enums";
 
 export default function NavDrawer({providers}) {
   const { data: session } = useSession()
@@ -32,22 +34,22 @@ export default function NavDrawer({providers}) {
 
           <div className="w-full flex-center flex-col gap-4 pb-4">
             <DrawerClose asChild>
-              <Link href="/events" className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getHomePath(PostType.EVENT)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">Events</p>
               </Link>
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href="/general" className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getCommunityHomePath(PostType.GENERAL, CommunityType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">General</p>
               </Link>
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href="/find-member" className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getCommunityHomePath(PostType.FIND_MEMBER, CommunityType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">Find Member</p>
               </Link>
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href="/buy-sell" className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getHomePath(PostType.STORE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">Buy & Sell</p>
               </Link>
             </DrawerClose>
@@ -58,13 +60,16 @@ export default function NavDrawer({providers}) {
               {
                 session?.user ?
                 <>
-                  <Link href="/profile" className="dropdown_link" onClick={() => setIsOpen(false)}>
-                    <p className="text-lg">My Activity</p>
-                  </Link>
-                  <Link href="/profile" className="dropdown_link" onClick={() => setIsOpen(false)}>
-                    <p className="text-lg">Account</p>
-                  </Link>
-                  <Button onClick={handleSignOut} className="w-full">Sign Out</Button>
+                  <DrawerClose asChild>
+                    <Link href="/my-activity" className="dropdown_link" onClick={() => setIsOpen(false)}>
+                      <p className="text-lg">My Activity</p>
+                    </Link>
+                  </DrawerClose>
+                  <DrawerClose asChild className="w-full">
+                    <Link href="/">
+                      <Button onClick={handleSignOut} className="w-full">Sign Out</Button>
+                    </Link>
+                  </DrawerClose>
                 </>
                   :
                 <>

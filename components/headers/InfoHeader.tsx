@@ -8,6 +8,7 @@ import InvertedFilledTriangleIcon from "@public/assets/icons/invertedFilledTrian
 import {Badge} from "@components/ui/badge";
 import React, {useState} from "react";
 import {UserHexaIcon} from "@components/icon/icons";
+import {useSession} from "@node_modules/next-auth/react";
 
 
 export default function InfoHeader({author, authorMajor, date, votes, createVoteHandler, myVoteType, isMine}) {
@@ -15,8 +16,11 @@ export default function InfoHeader({author, authorMajor, date, votes, createVote
     count: votes,
     type: myVoteType,
   })
+  const { data: session } = useSession()
 
   function handleVoting(newType: VoteType) {
+    if (!session) return
+
     setVote((prev) => {
       if (vote.type === VoteType.NONE) {
         if (newType === VoteType.UP)
@@ -42,8 +46,8 @@ export default function InfoHeader({author, authorMajor, date, votes, createVote
   }
 
   return (
-    <div className="w-full flex-between">
-      <div className="flex-center gap-5">
+    <div className="w-full flex justify-between">
+      <div className="flex-start flex-col gap-2 sm:flex-row sm:gap-5">
         <div className="flex flex-center gap-2">
           <UserHexaIcon/>
           <p className="text-sm font-semibold">
@@ -54,14 +58,14 @@ export default function InfoHeader({author, authorMajor, date, votes, createVote
         </div>
         <p className="text-sm text-gray-500">{date}</p>
       </div>
-      <div className="flex-center px-2 py-1 border border-gray-300 rounded-full">
-        <div className="mr-1 cursor-pointer" onClick={() => handleVoting(VoteType.UP)}>
+      <div className="flex-center px-2 py-1 border border-gray-300 rounded-full h-8">
+        <div className={`mr-1 ${session? "cursor-pointer" : "text-gray-400"}`} onClick={() => handleVoting(VoteType.UP)}>
           {
             (vote.type === VoteType.UP) ? <FilledTriangleIcon/> : <TriangleIcon/>
           }
         </div>
         <p className="border-l border-r px-2 font-satoshi">{vote.count}</p>
-        <div className="ml-1 cursor-pointer" onClick={() => handleVoting(VoteType.DOWN)}>
+        <div className={`ml-1 ${session? "cursor-pointer" : "text-gray-400"}`} onClick={() => handleVoting(VoteType.DOWN)}>
           {
             (vote.type === VoteType.DOWN) ? <InvertedFilledTriangleIcon/> : <InvertedTriangleIcon/>
           }

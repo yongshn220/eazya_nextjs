@@ -35,7 +35,7 @@ export default function PostHeader({postHeaderData}: Props) {
         </p>
       </div>
 
-      <div className="w-full flex-center gap-6 mt-3 mb-5">
+      <div className="w-full flex-start gap-6 mt-3 mb-5">
         <InfoHeader
           author={"Author"}
           authorMajor={post.authorMajor}

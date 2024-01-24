@@ -1,5 +1,3 @@
-
-
 import {PostType, VoteType} from "@components/constants/enums";
 import {EventPostModel} from "@models/collections/eventPost";
 import {VoteUser} from "@models/base/voteUserBase";
@@ -72,27 +70,14 @@ export function makePostAnonymous(post: IPost) {
 }
 
 export function setDynamicDataToPost(session: Session, post: IPost) {
-  if (!session) {
-    post.myVoteType = VoteType.NONE
-    return makePostAnonymous(post)
-  }
-
-  const userId = session.user.id
-
-  post.myVoteType = getUserVoteType(userId, post.voteUser)
-  post.isMine = (post.authorId === userId)
-  post.createdAt = toElapsed(post.createdAt.toString())
+  setDynamicData(session, post)
 
   post.comments.forEach(comment => {
-    comment.myVoteType = getUserVoteType(userId, comment.voteUser)
-    comment.isMine = (comment.authorId === userId)
-    comment.createdAt = toElapsed(comment.createdAt.toString())
+    setDynamicData(session, comment)
     handleSecretMessage(session, post.authorId, comment)
 
     comment.replies.forEach(reply => {
-      reply.myVoteType = getUserVoteType(userId, reply.voteUser)
-      reply.isMine = (reply.authorId === userId)
-      reply.createdAt = toElapsed(reply.createdAt.toString())
+      setDynamicData(session, reply)
       handleSecretMessage(session, comment.authorId, reply)
     })
   })
@@ -100,14 +85,28 @@ export function setDynamicDataToPost(session: Session, post: IPost) {
   return makePostAnonymous(post)
 }
 
+function setDynamicData(session: Session, act: IPost | CommentBase | ReplyBase) {
+  if (session) {
+    act.myVoteType = getUserVoteType(session.user.id, act.voteUser)
+    act.isMine = (act.authorId === session.user.id)
+  }
+  else {
+    act.myVoteType = VoteType.NONE
+    act.isMine = false
+  }
+  act.createdAt = toElapsed(act.createdAt.toString())
+}
+
+
 function handleSecretMessage(session: Session, targetAuthorId: string, msg: ReplyBase | CommentBase) {
   if (!msg.isSecret) {
-    msg.hasAuthorityToRead = true
-    return
+    msg.hasAuthorityToRead = true; return
   }
-  if (session.user.id === msg.authorId || session.user.id === targetAuthorId) {
-    msg.hasAuthorityToRead = true
-    return
+  if (!session) {
+    msg.hasAuthorityToRead = false; return
+  }
+  if (session?.user.id === msg.authorId || session?.user.id === targetAuthorId) {
+    msg.hasAuthorityToRead = true; return
   }
 
   msg.content = "CONCEALED"
