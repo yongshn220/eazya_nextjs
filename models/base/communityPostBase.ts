@@ -1,13 +1,13 @@
 
 import { Schema } from 'mongoose'
-import {MajorType, UniversityIds} from "@components/constants/values";
+import {MajorType, UniversityCode} from "@components/constants/values";
 import {CommunityType, PostType, VoteType} from "@components/constants/enums";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 import {CommentBase, CommentBaseSchema} from "@models/base/commentBase";
 
 
 export const CommunityPostBase = new Schema({
-  universityId:   { type: String, enum: Object.values(UniversityIds), required: true, },
+  universityCode:   { type: String, enum: Object.values(UniversityCode), required: true, },
   authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
   authorMajor:    { type: String, required: true, default: MajorType.NONE },
   type:           { type: String, enum: Object.values(PostType), required: true, },
@@ -27,7 +27,7 @@ CommunityPostBase.virtual('id').get(function() {return this._id.toHexString()})
 
 export interface ICommunityBase {
   id?:            string;
-  universityId:   string;
+  universityCode:   string;
   authorId:       string;
   authorMajor:    string;
   type:           string;

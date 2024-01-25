@@ -30,7 +30,7 @@ export default async function createStorePostAction(req: StoreFormRequest) {
     }
 
     const newStorePost = new StorePostModel({
-      universityId: session.user.universityId,
+      universityCode: session.user.universityId,
       authorId: session.user.id,
       authorMajor: session.user.major,
       type: PostType.STORE,

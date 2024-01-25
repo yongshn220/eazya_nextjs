@@ -10,7 +10,7 @@ import NavDropDown from "@components/nav/NavDropDown";
 import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
 import {useRecoilValue} from "@node_modules/recoil";
 import {selectedNavTabAtom} from "@components/constants/globalStates";
-import {NavTab} from "@components/constants/enums";
+import {NavTab, UtilPath} from "@components/constants/enums";
 
 export default function Nav() {
   const { data: session } = useSession()
@@ -64,9 +64,9 @@ export default function Nav() {
             <>
               {providers &&
                 Object.values(providers).map((provider) => (
-                  <Button key={provider.name} onClick={() => signIn(provider.id)}>
-                    Sign In
-                  </Button>
+                  <Link key={provider.name} href={UtilPath.SIGNIN}>
+                    <Button>Sign In</Button>
+                  </Link>
                 ))
               }
             </>

@@ -1,9 +1,14 @@
 
 // TODO: Handle Multiple University
-export const UniversityIds = [
-  "stonybrook",
-  "gmail"
+
+export const allowedEmailDomains = [
+  "stonybrook.edu",
+  "gmail.com",
 ]
+
+export enum UniversityCode {
+  STONY_BROOK = "SBU"
+}
 
 export const DEFAULT_PAGE_LENGTH = {
   EVENT: 8,

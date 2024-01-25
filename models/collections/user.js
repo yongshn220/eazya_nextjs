@@ -1,5 +1,5 @@
 import { Schema, model, models } from 'mongoose'
-import {MajorType, UniversityIds} from "@components/constants/values";
+import {MajorType, UniversityCode} from "@components/constants/values";
 
 const UserSchema = new Schema({
   initialized: { type: Boolean, required: true, default: false},
@@ -8,12 +8,17 @@ const UserSchema = new Schema({
     unique: [true, 'Email already exists!'],
     required: [true, 'Email is required!'],
   },
+  password: {
+    type: String,
+    required: [true, 'Password is required!'],
+  },
   username: {
     type: String,
+    required: [true, 'Username is required!'],
   },
-  universityId: {
+  universityCode: {
     type: String,
-    enum: Object.values(UniversityIds),
+    enum: Object.values(UniversityCode),
     required: [true, 'UniversityId is required!'],
   },
   major: {

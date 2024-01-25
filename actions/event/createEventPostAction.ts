@@ -25,7 +25,7 @@ export default async function createEventPostAction(req: EventFormRequest) {
     if (!publicUrl) return null
 
     const newEventPost = new EventPostModel({
-      universityId: session.user.universityId,
+      universityCode: session.user.universityId,
       authorId: session.user.id,
       authorMajor: session.user.major,
       type: PostType.EVENT,

@@ -4,6 +4,12 @@ export const FormMode = {
   EDIT:   "Edit",
 }
 
+export const UtilPath = {
+  SIGNIN: "/signin",
+  SIGNUP: "/signup",
+  ACTIVITY: "/my-activity",
+}
+
 export enum NavTab {
   NONE =          "None",
   EVENT =         "Event",

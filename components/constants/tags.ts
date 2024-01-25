@@ -38,6 +38,7 @@ export function getCommunityPostIdsTag(postType: PostType, communityType: Commun
   return `${postType}/${communityType}/ids/${page}`
 }
 
+
 export function getHomePath(postType: PostType) {
   return `/${PostTypeURL[postType]}`
 }

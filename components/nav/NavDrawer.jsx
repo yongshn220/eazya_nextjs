@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import {useState} from "react";
 import Image from "next/image";
 import {getCommunityHomePath, getHomePath} from "@components/constants/tags";
-import {CommunityType, PostType} from "@components/constants/enums";
+import {CommunityType, PostType, UtilPath} from "@components/constants/enums";
 
 export default function NavDrawer({providers}) {
   const { data: session } = useSession()
@@ -75,9 +75,9 @@ export default function NavDrawer({providers}) {
                 <>
                   {providers &&
                     Object.values(providers).map((provider) => (
-                      <Button key={provider.name} onClick={() => signIn(provider.id)} className="w-full">
-                        Sign In
-                      </Button>
+                      <Link key={provider.name} href={UtilPath.SIGNIN}>
+                        <Button>Sign In</Button>
+                      </Link>
                     ))
                   }
                 </>

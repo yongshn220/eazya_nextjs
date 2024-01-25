@@ -6,7 +6,7 @@ declare module "next-auth" {
     user: {
       address: string
       id: string
-      universityId: string
+      universityCode: string
       major: MajorType
       initialized: boolean
     } & DefaultSession["user"]
