@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <section className="w-full flex-center flex-col gap-14">
       <NavTabSelector tab={NavTab.NONE}/>
-      {/*<InitialAccountSetup/>*/}
+      <InitialAccountSetup/>
       <EventPreview/>
       <CommunityGroupPreview/>
       <StorePreview/>

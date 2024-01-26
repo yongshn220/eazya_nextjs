@@ -7,12 +7,9 @@ import {Button} from "@/components/ui/button"
 import Link from "@node_modules/next/link";
 import {useState} from "react";
 import {allowedEmailDomains} from "@components/constants/values";
-import signupAction from "@actions/account/signupAction";
 import {StatusCodes} from "@node_modules/http-status-codes";
-import {useRouter} from 'next/navigation'
-import {signIn} from "@node_modules/next-auth/react";
-import {UtilPath} from "@components/constants/enums";
 import {MailboxIcon} from "@node_modules/lucide-react";
+import signupAction from "@actions/account/signupAction";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -25,8 +22,6 @@ export default function SignUpPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isEmailVerifying, setIsEmailVerifying] = useState(false)
 
-
-  const router = useRouter()
 
   function signupValidCheck() {
     const emailDomain = email.split('@')[1]
