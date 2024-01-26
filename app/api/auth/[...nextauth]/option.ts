@@ -37,13 +37,11 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: "/",
-  },
   callbacks: {
     async session({session}) {
       if (!session) return null
 
+      await connectToDB()
       const sessionUser = await User.findOne({email: session.user.email})
       if (!sessionUser) return null
 

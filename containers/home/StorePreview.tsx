@@ -10,7 +10,10 @@ export default async function StorePreview() {
   const postIds = await getStorePostIdsAction(1)
   const posts = []
   for (const id of postIds) {
-    posts.push(await getStorePostAction(id) as IStorePost)
+    const post = await getStorePostAction(id) as IStorePost
+    if (!post) continue
+
+    posts.push(post)
   }
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
