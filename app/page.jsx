@@ -11,8 +11,8 @@ export default async function Home() {
     <section className="w-full flex-center flex-col gap-14">
       <NavTabSelector tab={NavTab.NONE}/>
       <InitialAccountSetup/>
-      <CommunityGroupPreview/>
       <EventPreview/>
+      <CommunityGroupPreview/>
       <StorePreview/>
     </section>
   )
