@@ -22,19 +22,19 @@ export default async function GeneralPreview() {
 
   return (
     <div className="relative">
-      {/*<Link href={getCommunityHomePath(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE)}>*/}
-      {/*  <div className="glass_box cursor-pointer group">*/}
-      {/*    <p className={`text-md font-semibold hover_text_blue`}>General</p>*/}
-      {/*  </div>*/}
-      {/*</Link>*/}
+      <Link href={getCommunityHomePath(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE)}>
+        <div className="glass_box cursor-pointer group">
+          <p className={`text-md font-semibold hover_text_blue`}>General</p>
+        </div>
+      </Link>
 
-      {/*<ul role="list" className="divide-y divide-gray-300 border-b">*/}
-      {/*  {*/}
-      {/*    posts.slice(0, 5).map((post) => (*/}
-      {/*      <CommunityPostItem key={post.id} postType={PostType.GENERAL} communityType={DEFAULT_COMMUNITY_TYPE} post={post}/>*/}
-      {/*    ))*/}
-      {/*  }*/}
-      {/*</ul>*/}
+      <ul role="list" className="divide-y divide-gray-300 border-b">
+        {
+          // posts.slice(0, 5).map((post) => (
+          //   <CommunityPostItem key={post.id} postType={PostType.GENERAL} communityType={DEFAULT_COMMUNITY_TYPE} post={post}/>
+          // ))
+        }
+      </ul>
     </div>
   )
 }
