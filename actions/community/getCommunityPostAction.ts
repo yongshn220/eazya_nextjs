@@ -15,12 +15,11 @@ import {REVALIDATE_TIME} from "@components/constants/values";
 const getCommunityPostAction = async (postId: string, postType: PostType) => {
   const session = await getServerSession(authOptions)
   const userId = session?.user?.id ?? "GUEST"
+  await connectToDB()
 
   const action = unstable_cache(
     async () => {
       try {
-        await connectToDB()
-
         const CommunityPostModel = getCommunityPostModelByType(postType)
         if (!CommunityPostModel) return null
 

@@ -10,11 +10,12 @@ import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 
 
 const getEventPostIdsAction = async (page: number) => {
+  await connectToDB()
+
   const action = unstable_cache(
     async () => {
       try {
         console.log("Event ids", page)
-        await connectToDB()
         const eventPosts = await EventPostModel.find({})
           .sort({createdAt: -1})
           .skip((page - 1) * DEFAULT_PAGE_LENGTH.EVENT)

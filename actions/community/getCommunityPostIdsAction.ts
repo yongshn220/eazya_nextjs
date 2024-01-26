@@ -10,11 +10,11 @@ import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 
 
 const getCommunityPostIdsAction = async (postType: PostType, communityType: CommunityType, page: number) => {
+  await connectToDB()
+
   const action = unstable_cache(
     async () => {
       try {
-        await connectToDB()
-
         const CommunityPostModel = getCommunityPostModelByType(postType)
         if (!CommunityPostModel) return null
 

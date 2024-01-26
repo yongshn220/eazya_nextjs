@@ -10,10 +10,11 @@ import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 
 
 const getStorePostIdsAction = async (page: number) => {
+  await connectToDB()
+
   const action = unstable_cache(
     async () => {
       try {
-        await connectToDB()
         const storePosts = await StorePostModel.find({})
           .sort({createdAt: -1})
           .skip((page - 1) * DEFAULT_PAGE_LENGTH.STORE)
