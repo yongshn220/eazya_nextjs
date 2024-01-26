@@ -29,8 +29,7 @@ export default async function sendEmailVerificationAction(req: SendEmailVerifica
     else return null
 
     const transporter = nodemailer.createTransport({
-      port: 465,
-      host: "smtp.gmail.com",
+      service: "gmail",
       auth: {
         user: process.env.NODEMAILER_EMAIL,
         pass: process.env.NODEMAILER_PW,
