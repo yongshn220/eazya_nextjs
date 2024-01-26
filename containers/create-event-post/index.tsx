@@ -24,10 +24,10 @@ export default function CreateEventPost() {
     setLoading(true)
 
     const req: EventFormRequest = {...eventPost}
-    createEventPostAction(req).then(({status}) => {
+    createEventPostAction(req).then(res => {
       setLoading(false)
-      if (status !== StatusCodes.OK) {
-        console.log("Fail to create the post.", status)
+      if (res.status !== StatusCodes.OK) {
+        console.log("Fail to create the post.", res.status)
       }
     })
   }
