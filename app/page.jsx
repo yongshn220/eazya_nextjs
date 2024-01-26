@@ -9,9 +9,9 @@ import InitialAccountSetup from "@containers/home/InitialAccountSetup";
 export default function Home() {
   return (
     <section className="w-full flex-center flex-col gap-14">
-      {/*<NavTabSelector tab={NavTab.NONE}/>*/}
-      {/*<InitialAccountSetup/>*/}
-      {/*<EventPreview/>*/}
+      <NavTabSelector tab={NavTab.NONE}/>
+      <InitialAccountSetup/>
+      <EventPreview/>
       {/*<CommunityGroupPreview/>*/}
       {/*<StorePreview/>*/}
     </section>
