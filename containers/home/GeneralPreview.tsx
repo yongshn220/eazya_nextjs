@@ -14,9 +14,9 @@ export default async function GeneralPreview() {
   const posts = []
   for (const id of postIds) {
     const post = await getCommunityPostAction(id, PostType.GENERAL) as ICommunityPost
-    if (!post) continue
-
-    posts.push(post)
+    if (post) {
+      posts.push(post)
+    }
   }
 
 

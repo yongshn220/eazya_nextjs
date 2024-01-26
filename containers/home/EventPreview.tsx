@@ -12,7 +12,10 @@ export default async function EventPreview() {
 
   const eventPosts = []
   for (const id of eventPostIds) {
-    eventPosts.push(await getEventPostAction(id) as IEventPost)
+    const post = await getEventPostAction(id) as IEventPost
+    if (post) {
+      eventPosts.push(post)
+    }
   }
 
 

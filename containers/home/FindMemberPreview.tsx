@@ -15,9 +15,9 @@ export default async function FindMemberPreview() {
   const posts = []
   for (const id of postIds) {
     const post = await getCommunityPostAction(id, PostType.FIND_MEMBER) as ICommunityPost
-    if (!post) continue
-
-    posts.push(post)
+    if (post) {
+      posts.push(post)
+    }
   }
 
 
