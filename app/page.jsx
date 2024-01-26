@@ -12,7 +12,7 @@ export default function Home() {
       <NavTabSelector tab={NavTab.NONE}/>
       <InitialAccountSetup/>
       <EventPreview/>
-      <CommunityGroupPreview/>
+      {/*<CommunityGroupPreview/>*/}
       <StorePreview/>
     </section>
   )

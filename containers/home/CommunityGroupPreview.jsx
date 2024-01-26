@@ -9,8 +9,8 @@ export default function CommunityGroupPreview() {
       </div>
 
       <div className="grid_12">
-        {/*<GeneralPreview/>*/}
-        {/*<FindMemberPreview/>*/}
+        <GeneralPreview/>
+        <FindMemberPreview/>
       </div>
     </section>
   )
