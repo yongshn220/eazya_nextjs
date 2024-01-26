@@ -21,7 +21,10 @@ import {getPostTag} from "@components/constants/tags";
 export default async function createCommentAction(req: CreateCommentRequest) {
   await connectToDB()
   const session = await getServerSession(authOptions)
-  if (!session) return null
+  if (!session) {
+  console.log("Get session fail")
+  return null
+}
 
   try {
     const PostModel = GetPostModelByType(req.postType)

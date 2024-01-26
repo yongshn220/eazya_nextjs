@@ -16,7 +16,10 @@ export default async function createCommunityPostAction(req: CreateGeneralPostRe
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return null
+    if (!session) {
+  console.log("Get session fail")
+  return null
+}
 
     const {postType, communityType, title, description} = req
 

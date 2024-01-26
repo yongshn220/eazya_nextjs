@@ -17,12 +17,18 @@ export default async function createEventPostAction(req: EventFormRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return null
+    if (!session) {
+      console.log("Session fail")
+      return null
+    }
 
     const {image, title, date, time, location, description } = req
 
     const publicUrl = await addBase64ToStorage(PostType.EVENT, session, image)
-    if (!publicUrl) return null
+    if (!publicUrl) {
+      console.log("Fail to add base64 to storage")
+      return null
+    }
 
     const newEventPost = new EventPostModel({
       universityCode: session.user.universityCode,

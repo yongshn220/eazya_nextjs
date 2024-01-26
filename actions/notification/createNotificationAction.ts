@@ -10,7 +10,7 @@ export default async function createNotificationAction(req: CreateNotificationRe
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return null
+    if (!session) {return null
 
     const {fromUserId, toUserId, notificationType, postType, communityType, postId, commentId, replyId, preview } = req
 
