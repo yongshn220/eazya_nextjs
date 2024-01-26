@@ -29,12 +29,28 @@ export default async function sendEmailVerificationAction(req: SendEmailVerifica
     else return null
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      port: 465,
+      host: "smtp.gmail.com",
       auth: {
         user: process.env.NODEMAILER_EMAIL,
         pass: process.env.NODEMAILER_PW,
       }
     })
+
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        }
+        else {
+          console.log("Server is ready to take our messages");
+          resolve(success);
+        }
+      });
+    });
+
 
     const mailOptions = {
       from: process.env.NODEMAILER_EMAIL,
@@ -47,11 +63,18 @@ export default async function sendEmailVerificationAction(req: SendEmailVerifica
         </p>`
     }
 
-    transporter.sendMail(mailOptions, function (error) {
-      if (error) {
-        throw new Error()
-      }
-    })
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        }
+        else {
+          console.log(info);
+          resolve(info);
+        }
+      });
+    });
     return true
   }
   catch (error) {
