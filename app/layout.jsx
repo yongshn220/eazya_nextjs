@@ -24,6 +24,15 @@ export default function RootLayout({children}) {
     <html lang="en">
     <head>
       <link rel="icon" href="/assets/images/eazyaLogo.png"/>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X48SYYDLT6"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)}
+        gtag('js', new Date());
+
+        gtag('config', 'G-X48SYYDLT6');
+      </script>
     </head>
     <body className={cn(
       "min-h-screen bg-background font-sans antialiased",
