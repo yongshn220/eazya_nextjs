@@ -12,6 +12,7 @@ import {StatusCodes} from "@node_modules/http-status-codes";
 import {useRouter} from 'next/navigation'
 import {signIn} from "@node_modules/next-auth/react";
 import {UtilPath} from "@components/constants/enums";
+import {MailboxIcon} from "@node_modules/lucide-react";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,9 @@ export default function SignUpPage() {
   const [passwordError, setPasswordError] = useState(false)
   const [confirmPasswordError, setConfirmPasswordError] = useState(false)
   const [serverMessage, setServerMessage] = useState("")
-  const [onSubmitting, setOnSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isEmailVerifying, setIsEmailVerifying] = useState(false)
+
 
   const router = useRouter()
 
@@ -48,11 +51,9 @@ export default function SignUpPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    setOnSubmitting(true)
+    setIsSubmitting(true)
     try {
       if (!signupValidCheck()) return
-
-      const [emailSave, passwordSave] = [email, password]
 
       const res1 = await signupAction({email, password})
       if (res1.status === StatusCodes.UNAUTHORIZED) {
@@ -65,83 +66,106 @@ export default function SignUpPage() {
         return setServerMessage("Internal server error.")
       }
 
-      const res2 = await signIn("credentials", {
-        email: emailSave,
-        password: passwordSave,
-        redirect: false,
-      })
-
-      if (res2.ok)
-        router.replace('/')
-      else
-        router.replace(UtilPath.SIGNIN)
+      setIsEmailVerifying(true)
     }
     catch (error) {
       return setServerMessage("Internal server error.")
     }
     finally {
-      setOnSubmitting(false)
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="flex-center w-full mt-20">
-      <div className="w-full max-w-md">
-        <Card className="mx-auto">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email">University email</Label>
-                  <Input id="email" placeholder="Enter your email (.edu)" required type="email" onChange={e => setEmail(e.target.value)}/>
+    <div className="flex-center flex-col w-full mt-20">
+      {
+        !isEmailVerifying &&
+        <div className="w-full max-w-md">
+          <Card className="mx-auto">
+            <CardHeader className="space-y-1">
+              <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">University email</Label>
+                    <Input id="email" disabled={isSubmitting} placeholder="Enter your email (.edu)" required type="email" onChange={e => setEmail(e.target.value)}/>
+                    {
+                      emailError &&
+                      <p className="text-red-500 text-sm">Email should be a university email ends with .edu</p>
+                    }
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="newPassword">Password</Label>
+                    <Input id="newPassword" disabled={isSubmitting} required type="password" onChange={e => setPassword(e.target.value)}/>
+                    {
+                      passwordError &&
+                      <p className="text-red-500 text-sm">Your password must be have at least:
+                        <br/> - 8 characters long <br/> - 1 uppercase & 1 lowercase <br/> - 1 number</p>
+                    }
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <Input id="confirmPassword" disabled={isSubmitting} required type="password"
+                           onChange={e => setConfirmPassword(e.target.value)}/>
+                    {
+                      confirmPasswordError &&
+                      <p className="text-red-500 text-sm">Password is not match</p>
+                    }
+                  </div>
+                  <p className="text-red-500 text-sm">{serverMessage}</p>
                   {
-                    emailError &&
-                    <p className="text-red-500 text-sm">Email should be a university email ends with .edu</p>
+                    isSubmitting ?
+                      <Button className="w-full" disabled={true}>
+                        Creating Account...
+                      </Button>
+                      :
+                      <Button className="w-full" type="submit">
+                        Create Account
+                      </Button>
                   }
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="newPassword">Password</Label>
-                  <Input id="newPassword" required type="password" onChange={e => setPassword(e.target.value)} />
-                  {
-                    passwordError &&
-                    <p className="text-red-500 text-sm">Your password must be have at least:
-                      <br/> - 8 characters long <br/> - 1 uppercase & 1 lowercase <br/> - 1 number</p>
-                  }
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input id="confirmPassword" required type="password" onChange={e => setConfirmPassword(e.target.value)} />
-                  {
-                    confirmPasswordError &&
-                    <p className="text-red-500 text-sm">Email should be a university email ends with .edu</p>
-                  }
-                </div>
-                <p className="text-red-500 text-sm">{serverMessage}</p>
-                {
-                  onSubmitting ?
-                  <Button className="w-full" disabled={true}>
-                    Creating Account...
-                  </Button>
-                    :
-                  <Button className="w-full" type="submit">
-                    Create Account
-                  </Button>
-                }
+              </form>
+              <div className="flex-center mt-4 text-center text-sm gap-2">
+                <p>Already have an account?</p>
+                <Link className="underline" href="/signin">
+                  Sign In
+                </Link>
               </div>
-            </form>
-            <div className="flex-center mt-4 text-center text-sm gap-2">
-              <p>Already have an account?</p>
-              <Link className="underline" href="/signin">
-                Sign In
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      }
+      {
+        isEmailVerifying &&
+        <div className="max-w-md">
+          <Card className="mx-auto">
+            <CardContent>
+              <div className="flex justify-center items-center mt-6">
+                <MailboxIcon className="h-12 w-12 text-gray-700 dark:text-gray-300"/>
+              </div>
+              <h1 className="text-3xl font-bold text-center mt-4 text-gray-700 dark:text-gray-200">Email Verification</h1>
+              <p className="text-gray-600 dark:text-gray-400 text-center mt-2 px-6">
+                We have sent a verification link to your email. Please check your inbox and click the link to verify your
+                email address.
+              </p>
+              <div className="flex justify-center mt-6">
+                <Button className="w-full">
+                  Resend Email
+                </Button>
+              </div>
+              <div className="flex-center mt-4 text-center text-sm gap-2">
+                <p>Successfully verified your email?</p>
+                <Link className="underline" href="/signin">
+                  Sign In
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      }
     </div>
-)
+  )
 }
 

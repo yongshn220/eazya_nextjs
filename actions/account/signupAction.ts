@@ -5,8 +5,10 @@ import User from "@models/collections/user";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {connectToDB} from "@utils/database";
 import bcrypt from "bcryptjs";
-import {UniversityCode, MajorType, allowedEmailDomains} from "@components/constants/values";
-import { signIn } from "next-auth/react";
+import {allowedEmailDomains, MajorType, UniversityCode} from "@components/constants/values";
+import {SendEmailVerificationRequest} from "@models/requests/SendEmailVerificationRequest";
+import {EmailType} from "@components/constants/enums";
+import sendEmailVerificationAction from "@actions/verification/sendEmailVerificationAction";
 
 
 export default async function signupAction(req: SignupRequest) {
@@ -21,17 +23,28 @@ export default async function signupAction(req: SignupRequest) {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = await User.findOne({email})
-    if (user) return {status: StatusCodes.CONFLICT}
+    if (user && user.isVerified) return {status: StatusCodes.CONFLICT}
 
-    await User.create({
-      universityCode: UniversityCode.STONY_BROOK,
+    const data = {
+        initialized: false,
+        universityCode: UniversityCode.STONY_BROOK,
+        email,
+        password: hashedPassword,
+        username: emailName[0],
+        major: MajorType.NONE,
+        createdAt: new Date(),
+    }
+    const newUser = (user)
+      ? await User.findOneAndUpdate({email}, data)
+      : await User.create(data)
+
+    const sendEmailReq: SendEmailVerificationRequest = {
       email,
-      password: hashedPassword,
-      username: emailName[0],
-      major: MajorType.NONE,
-      createdAt: new Date,
-      initialized: false,
-    })
+      emailType: EmailType.VERIFY,
+      userId: newUser._id,
+    }
+    const res = await sendEmailVerificationAction(sendEmailReq)
+    if (!res) return {status: StatusCodes.REQUEST_TIMEOUT}
 
     return {status: StatusCodes.OK}
   }

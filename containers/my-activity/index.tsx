@@ -7,6 +7,7 @@ import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAc
 import {UserActivityMenu} from "@components/constants/enums";
 import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 import Link from "next/link";
+import {UserHexaIcon} from "@components/icon/icons";
 
 export default async function MyActivity() {
   const session = await getServerSession(authOptions)
@@ -22,7 +23,7 @@ export default async function MyActivity() {
 
       <div className="flex-between glassmorphism mt-4">
         <div className="flex-center gap-4">
-          <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt="profile" />
+          <UserHexaIcon/>
           <p className="text-sm sm:text-base font-semibold">{session?.user.email}</p>
         </div>
         <Link href={"/account"}>

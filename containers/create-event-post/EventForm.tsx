@@ -37,7 +37,7 @@ export default function EventForm({mode, post, setPost, submitHandler, loading}:
       <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={(e) => submitHandler(e)}>
         {/* Image uploader for mobile */}
         <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setImageLoading}>
-          <span className="font-satoshi font-semibold text-base text-gray-700">Image</span>
+          <span className="sm:hidden font-satoshi font-semibold text-base text-gray-700">Image</span>
           <div
             className="relative flex-center sm:hidden w-full h-[10rem] mt-2 border rounded-lg break-inside-avoid cursor-pointer group">
             {post.image

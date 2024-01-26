@@ -12,7 +12,7 @@ import {useSession} from "next-auth/react";
 
 
 export default function InitialAccountSetup() {
-  const {data: session} = useSession()
+  const {data: session, update} = useSession()
   const [major, setMajor] = useState<MajorType>(MajorType.NONE)
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -39,6 +39,7 @@ export default function InitialAccountSetup() {
     editProfileAction(req).then((res) => {
       if (res) {
         console.log("Profile Updated")
+        update((prev) => ({...prev, initialized: true}))
         setOpen(false)
       }
     })

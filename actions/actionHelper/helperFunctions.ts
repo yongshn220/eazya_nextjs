@@ -32,8 +32,7 @@ export function getCommunityPostModelByType(postType: PostType) {
      COMMENT
 --------------*/
 export function getCommentAuthorName(post: any, userId: string) {
-  post = toJson(post)
-  if (post.authorId === userId) return "Author"
+  if (post.authorId.toString() === userId) return "Author"
   if (post.commentators.includes(userId)) return post.commentators.indexOf(userId) + 1;
   post.commentators.push(userId);
   return post.commentators.length;

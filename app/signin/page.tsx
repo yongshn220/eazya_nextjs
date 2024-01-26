@@ -13,6 +13,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [onSubmitting, setOnSubmitting] = useState(false)
+  const [error, setError] = useState(false)
 
   const router = useRouter()
 
@@ -29,8 +30,7 @@ export default function SignInPage() {
         router.replace('/')
       }
       if (res.error) {
-        console.log('erroe')
-        return;
+        setError(true)
       }
     }
     catch (error) {
@@ -49,7 +49,7 @@ export default function SignInPage() {
             <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onChange={e => setError(false)}>
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">University email</Label>
@@ -59,6 +59,10 @@ export default function SignInPage() {
                   <Label htmlFor="password">Password</Label>
                   <Input id="password" required type="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
+                {
+                  error &&
+                  <p className="text-red-500 text-sm">Wrong email or password.</p>
+                }
                 {
                   onSubmitting ?
                   <Button className="w-full" disabled={true}>

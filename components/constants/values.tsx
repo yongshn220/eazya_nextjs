@@ -3,7 +3,6 @@
 
 export const allowedEmailDomains = [
   "stonybrook.edu",
-  "gmail.com",
 ]
 
 export enum UniversityCode {

@@ -23,6 +23,8 @@ export const authOptions: NextAuthOptions = {
           const passwordsMatch = await bcrypt.compare(password, user.password)
           if (!passwordsMatch) return null
 
+          if (!user.isVerified) return null
+
           return user.toObject()
         }
         catch (error) {
@@ -47,6 +49,7 @@ export const authOptions: NextAuthOptions = {
       session.user.universityCode = sessionUser.universityCode.toString()
       session.user.major = sessionUser.major as MajorType
       session.user.initialized = sessionUser.initialized
+      session.user.isVerified = sessionUser.isVerified
       return session
     },
   }

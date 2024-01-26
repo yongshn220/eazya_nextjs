@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   universityCode: {
     type: String,
     enum: Object.values(UniversityCode),
-    required: [true, 'UniversityId is required!'],
+    required: [true, 'universityCode is required!'],
   },
   major: {
     type: String,
@@ -27,6 +27,11 @@ const UserSchema = new Schema({
     default: MajorType.NONE
   },
   createdAt: { type: Date, required: true, default: new Date() },
+  forgotPasswordToken: String,
+  forgotPasswordTokenExpiry: Date,
+  isVerified: { type: Boolean, default: false},
+  verifyToken: String,
+  verifyTokenExpiry: Date,
 })
 
 const User = models.User || model("User", UserSchema)

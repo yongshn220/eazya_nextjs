@@ -10,6 +10,11 @@ export const UtilPath = {
   ACTIVITY: "/my-activity",
 }
 
+export enum EmailType {
+  VERIFY,
+  RESET,
+}
+
 export enum NavTab {
   NONE =          "None",
   EVENT =         "Event",

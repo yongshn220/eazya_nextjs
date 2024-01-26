@@ -9,6 +9,7 @@ declare module "next-auth" {
       universityCode: string
       major: MajorType
       initialized: boolean
+      isVerified: boolean
     } & DefaultSession["user"]
   }
 
