@@ -25,7 +25,7 @@ export default function RootLayout({children}) {
     <html lang="en">
     <head>
       <link rel="icon" href="/assets/images/eazyaLogo.png"/>
-      <GoogleAnalytics gaId="G-X48SYYDLT6"></GoogleAnalytics>
+      <GoogleAnalytics gaId="G-RDCDRE0DZT"></GoogleAnalytics>
     </head>
     <body className={cn(
       "min-h-screen bg-background font-sans antialiased",
