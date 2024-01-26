@@ -23,11 +23,11 @@ export default async function FindMemberPreview() {
 
   return (
     <div className="relative">
-      <Link href={getCommunityHomePath(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE)}>
-        <div className="glass_box cursor-pointer group">
-          <p className={`text-md font-semibold hover_text_blue`}>Find Member</p>
-        </div>
-      </Link>
+      {/*<Link href={getCommunityHomePath(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE)}>*/}
+      {/*  <div className="glass_box cursor-pointer group">*/}
+      {/*    <p className={`text-md font-semibold hover_text_blue`}>Find Member</p>*/}
+      {/*  </div>*/}
+      {/*</Link>*/}
 
       <ul role="list" className="divide-y divide-gray-300 border-b">
         {

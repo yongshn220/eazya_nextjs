@@ -22,11 +22,11 @@ export default async function GeneralPreview() {
 
   return (
     <div className="relative">
-      <Link href={getCommunityHomePath(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE)}>
-        <div className="glass_box cursor-pointer group">
-          <p className={`text-md font-semibold hover_text_blue`}>General</p>
-        </div>
-      </Link>
+      {/*<Link href={getCommunityHomePath(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE)}>*/}
+      {/*  <div className="glass_box cursor-pointer group">*/}
+      {/*    <p className={`text-md font-semibold hover_text_blue`}>General</p>*/}
+      {/*  </div>*/}
+      {/*</Link>*/}
 
       <ul role="list" className="divide-y divide-gray-300 border-b">
         {
