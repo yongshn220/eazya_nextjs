@@ -12,6 +12,7 @@ import {PostType, UserActivityType} from "@components/constants/enums";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 import {addBase64ToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
+import {StatusCodes} from "@node_modules/http-status-codes";
 
 export default async function createEventPostAction(req: EventFormRequest) {
   try {
@@ -19,7 +20,7 @@ export default async function createEventPostAction(req: EventFormRequest) {
     const session = await getServerSession(authOptions)
     if (!session) {
       console.log("Session fail")
-      return null
+      return {status: StatusCodes.UNAUTHORIZED}
     }
 
     const {image, title, date, time, location, description } = req
@@ -27,7 +28,7 @@ export default async function createEventPostAction(req: EventFormRequest) {
     const publicUrl = await addBase64ToStorage(PostType.EVENT, session, image)
     if (!publicUrl) {
       console.log("Fail to add base64 to storage")
-      return null
+      return {status: StatusCodes.CONFLICT}
     }
 
     const newEventPost = new EventPostModel({
@@ -57,11 +58,11 @@ export default async function createEventPostAction(req: EventFormRequest) {
     }
     await createUserActivityAction(activityReq)
 
-    return newEventPost
+    return {status: StatusCodes.OK, res: newEventPost}
   }
   catch (error) {
     console.log(error)
-    return null
+    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
   finally {
     revalidateTag(getPostIdsGroupTag(PostType.EVENT))

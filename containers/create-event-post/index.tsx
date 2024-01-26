@@ -5,6 +5,7 @@ import {FormMode} from "@components/constants/enums";
 import createEventPostAction from "@actions/event/createEventPostAction";
 import {EventFormRequest} from "@models/requests/EventFormRequest";
 import {useState} from "react";
+import {StatusCodes} from "@node_modules/http-status-codes";
 
 
 export default function CreateEventPost() {
@@ -23,10 +24,10 @@ export default function CreateEventPost() {
     setLoading(true)
 
     const req: EventFormRequest = {...eventPost}
-    createEventPostAction(req).then((res) => {
+    createEventPostAction(req).then(({status}) => {
       setLoading(false)
-      if (!res) {
-        console.log("Fail to create the post.")
+      if (status !== StatusCodes.OK) {
+        console.log("Fail to create the post.", status)
       }
     })
   }
