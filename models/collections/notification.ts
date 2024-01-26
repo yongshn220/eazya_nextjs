@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose'
+import {model, models, Schema} from 'mongoose'
 import {CommunityType, NotificationType, PostType} from "@components/constants/enums";
 
 

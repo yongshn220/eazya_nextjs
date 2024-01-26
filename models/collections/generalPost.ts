@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose'
+import {model, models} from 'mongoose'
 import {CommunityPostBase, ICommunityBase} from "@models/base/communityPostBase";
 
 

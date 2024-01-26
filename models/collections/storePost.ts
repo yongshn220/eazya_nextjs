@@ -1,6 +1,6 @@
-import { Schema, model, models } from 'mongoose'
+import {model, models, Schema} from 'mongoose'
 import {MajorType, UniversityCode} from "@components/constants/values";
-import {CommunityType, PostType, VoteType} from "@components/constants/enums";
+import {PostType, VoteType} from "@components/constants/enums";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 import {CommentBase, CommentBaseSchema} from "@models/base/commentBase";
 
