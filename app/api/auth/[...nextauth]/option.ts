@@ -42,9 +42,9 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({session}) {
-      const sessionUser = await User.findOne({
-        email: session.user.email
-      })
+      if (!session) return null
+
+      const sessionUser = await User.findOne({email: session.user.email})
       if (!sessionUser) return null
 
       session.user.id = sessionUser._id.toString()
