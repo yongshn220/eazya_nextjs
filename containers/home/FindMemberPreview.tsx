@@ -11,9 +11,13 @@ const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
 export default async function FindMemberPreview() {
   const postIds = await getCommunityPostIdsAction(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE, 1)
+
   const posts = []
   for (const id of postIds) {
-    posts.push(await getCommunityPostAction(id, PostType.FIND_MEMBER) as ICommunityPost)
+    const post = await getCommunityPostAction(id, PostType.FIND_MEMBER) as ICommunityPost
+    if (!post) return <></>
+
+    posts.push(post)
   }
 
 
