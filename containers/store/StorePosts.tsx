@@ -8,7 +8,10 @@ export default async function StorePosts() {
   const postIds = await getStorePostIdsAction(1)
   const posts = []
   for (const id of postIds) {
-    posts.push(await getStorePostAction(id) as IStorePost)
+    const post = await getStorePostAction(id) as IStorePost
+    if (!post) continue
+
+    posts.push(post)
   }
 
   return (

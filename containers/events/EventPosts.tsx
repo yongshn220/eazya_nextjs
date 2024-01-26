@@ -11,7 +11,10 @@ export default async function EventPosts() {
 
   const posts = []
   for (const id of postIds) {
-    posts.push(await getEventPostAction(id) as IEventPost)
+    const post = await getEventPostAction(id) as IEventPost
+    if (!post) continue
+
+    posts.push(post)
   }
 
 
