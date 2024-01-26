@@ -1,11 +1,9 @@
 'use client'
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {UserActivityMenu} from "@components/constants/enums";
-import {IUserActivity} from "@models/collections/userActivity";
 import ActivityItem from "@containers/my-activity/ActivityItem";
 import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAction";
-import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 import ActivityLoadMore from "@containers/my-activity/ActivityLoadMore";
 
 interface Props {

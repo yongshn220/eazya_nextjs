@@ -1,11 +1,9 @@
-import Image from "next/image";
 import {Button} from "@components/ui/button";
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import ActivityContent from "@containers/my-activity/ActivityContent";
 import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAction";
 import {UserActivityMenu} from "@components/constants/enums";
-import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 import Link from "next/link";
 import {UserHexaIcon} from "@components/icon/icons";
 

@@ -3,13 +3,7 @@
 import {Badge} from "@components/ui/badge"
 import Link from 'next/link'
 import {IUserActivity} from "@models/collections/userActivity";
-import {
-  CommunityPostType,
-  CommunityType, isCommunityPostType,
-  PostType,
-  PostTypeToCommunityPostType,
-  UserActivityType
-} from "@components/constants/enums";
+import {isCommunityPostType, UserActivityType} from "@components/constants/enums";
 import {useEffect, useMemo, useState} from "react";
 import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 import {getCommunityPostPath, getPostPath} from "@components/constants/tags";

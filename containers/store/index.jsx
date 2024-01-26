@@ -1,6 +1,4 @@
 import HomeHeader from "@components/headers/HomeHeader";
-import PostPagination from "@components/page/PostPagination";
-import StorePostItem from "@containers/store/StorePostItem";
 import StorePosts from "@containers/store/StorePosts";
 import NavTabSelector from "@components/nav/NavTabSelector";
 import {NavTab} from "@components/constants/enums";

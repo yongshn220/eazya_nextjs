@@ -1,5 +1,4 @@
 import HomeHeader from "@components/headers/HomeHeader";
-import PostPagination from "@components/page/PostPagination";
 import {CommunityType, NavTab, PostType} from "@components/constants/enums";
 import NavTabSelector from "@components/nav/NavTabSelector";
 import CommunityMenu from "@components/post/community/CommunityMenu";

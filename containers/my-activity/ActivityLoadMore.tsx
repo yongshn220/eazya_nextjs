@@ -5,10 +5,8 @@ import loadingAnimation from '@components/constants/animation/loadingCircle.json
 import {useInView} from "react-intersection-observer";
 import {useEffect, useState} from "react";
 import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
-import {IUserActivity} from "@models/collections/userActivity";
 import getUserActivityIdsAction from "@actions/userActivity/getUserActivityIdsAction";
 import ActivityItem from "@containers/my-activity/ActivityItem";
-import getUserActivityAction from "@actions/userActivity/getUserActivityAction";
 
 export default function ActivityLoadMore({activityMenu}) {
   const {ref, inView} = useInView()

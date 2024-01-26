@@ -14,7 +14,8 @@ interface Props {
 }
 
 export default async function CommunityPostItem({postType, communityType, post}: Props) {
-
+  if (!post) return <></>
+  
   const numberOfComments = getNumOfCommentsInPost(post)
 
   return (

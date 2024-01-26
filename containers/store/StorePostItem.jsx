@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import getStorePostAction from "@actions/store/getStorePostAction";
 import Image from 'next/image'
 import {getPostPath} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
+
 
 export default function StorePostItem({post}) {
   if (!post) return <></>

@@ -4,10 +4,6 @@ import Lottie from "lottie-react";
 import loadingAnimation from '@components/constants/animation/loadingCircle.json'
 import {useInView} from "react-intersection-observer";
 import {useEffect, useState} from "react";
-import getEventPostIdsAction from "@actions/event/getEventPostIdsAction";
-import EventPostItem from "@containers/events/EventPostItem";
-import {IEventPost} from "@models/collections/eventPost";
-import getEventPostAction from "@actions/event/getEventPostAction";
 import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
 import {IStorePost} from "@models/collections/storePost";
 import getStorePostIdsAction from "@actions/store/getStorePostIdsAction";

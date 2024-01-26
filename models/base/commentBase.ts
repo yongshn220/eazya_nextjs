@@ -1,4 +1,4 @@
-import {Schema, Types} from 'mongoose'
+import {Schema} from 'mongoose'
 import {ReplyBase, ReplyBaseSchema} from "@models/base/replyBase";
 import {VoteUser, VoteUserBaseSchema} from "@models/base/voteUserBase";
 import {VoteType} from "@components/constants/enums";

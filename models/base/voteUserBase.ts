@@ -1,4 +1,4 @@
-import {Schema, Types} from "mongoose";
+import {Schema} from "mongoose";
 
 export const VoteUserBaseSchema = new Schema({
   upvoted:      [{ type: Schema.Types.ObjectId, ref: 'User' }],

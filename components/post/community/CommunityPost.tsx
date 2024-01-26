@@ -11,9 +11,11 @@ import {getNumOfCommentsInPost} from "@components/constants/helperFunctions";
 import CommunityContent from "@components/post/community/CommunityContent";
 import {getCommunityEditFormPath} from "@components/constants/tags";
 import {ICommunityPost} from "@models/union/union";
+import React from "react";
 
 export default async function CommunityPost({postType, communityType, postId}) {
   const post: ICommunityPost = await getCommunityPostAction(postId, postType)
+  if (!post) return <></>
 
   async function handleDeletePost() {
     "use server"
