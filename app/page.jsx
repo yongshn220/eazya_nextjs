@@ -6,13 +6,13 @@ import {NavTab} from "@components/constants/enums";
 import InitialAccountSetup from "@containers/home/InitialAccountSetup";
 
 
-export default function Home() {
+export default async function Home() {
   return (
     <section className="w-full flex-center flex-col gap-14">
       <NavTabSelector tab={NavTab.NONE}/>
       <InitialAccountSetup/>
       <EventPreview/>
-      {/*<CommunityGroupPreview/>*/}
+      <CommunityGroupPreview/>
       <StorePreview/>
     </section>
   )

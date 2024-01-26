@@ -1,7 +1,7 @@
 import GeneralPreview from "@containers/home/GeneralPreview";
 import FindMemberPreview from "@containers/home/FindMemberPreview";
 
-export default function CommunityGroupPreview() {
+export default async function CommunityGroupPreview() {
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="flex flex-col border-s-4">
