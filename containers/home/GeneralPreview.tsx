@@ -9,15 +9,15 @@ import {ICommunityPost} from "@models/union/union";
 const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
 export default async function GeneralPreview() {
-  const postIds = await getCommunityPostIdsAction(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE, 1)
-
-  const posts = []
-  for (const id of postIds) {
-    const post = await getCommunityPostAction(id, PostType.GENERAL) as ICommunityPost
-    if (!post) continue
-
-    posts.push(post)
-  }
+  // const postIds = await getCommunityPostIdsAction(PostType.GENERAL, DEFAULT_COMMUNITY_TYPE, 1)
+  //
+  // const posts = []
+  // for (const id of postIds) {
+  //   const post = await getCommunityPostAction(id, PostType.GENERAL) as ICommunityPost
+  //   if (!post) continue
+  //
+  //   posts.push(post)
+  // }
 
 
   return (

@@ -10,15 +10,15 @@ import {ICommunityPost} from "@models/union/union";
 const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
 export default async function FindMemberPreview() {
-  const postIds = await getCommunityPostIdsAction(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE, 1)
-
-  const posts = []
-  for (const id of postIds) {
-    const post = await getCommunityPostAction(id, PostType.FIND_MEMBER) as ICommunityPost
-    if (!post) continue
-
-    posts.push(post)
-  }
+  // const postIds = await getCommunityPostIdsAction(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE, 1)
+  //
+  // const posts = []
+  // for (const id of postIds) {
+  //   const post = await getCommunityPostAction(id, PostType.FIND_MEMBER) as ICommunityPost
+  //   if (!post) continue
+  //
+  //   posts.push(post)
+  // }
 
 
   return (
