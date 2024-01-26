@@ -17,13 +17,12 @@ import {REVALIDATE_TIME} from "@components/constants/values";
 const getEventPostAction = async (postId: string) => {
   const session = await getServerSession(authOptions)
   const userId = session?.user?.id ?? "GUEST"
+  await connectToDB()
 
   const action = unstable_cache(
     async () => {
       try {
-        await connectToDB()
         const eventPost = await EventPostModel.findById(postId)
-
         if (!eventPost) return null
 
         let post = eventPost.toObject() as IPost
