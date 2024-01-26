@@ -45,6 +45,8 @@ export const authOptions: NextAuthOptions = {
       const sessionUser = await User.findOne({
         email: session.user.email
       })
+      if (!sessionUser) return null
+
       session.user.id = sessionUser._id.toString()
       session.user.universityCode = sessionUser.universityCode.toString()
       session.user.major = sessionUser.major as MajorType
