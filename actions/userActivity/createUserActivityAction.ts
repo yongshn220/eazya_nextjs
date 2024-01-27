@@ -30,7 +30,6 @@ export default async function createUserActivityAction(req: CreateUserActivityRe
       createdAt: new Date(),
     })
     newUserActivity.save()
-    return newUserActivity
   }
   catch (error) {
     console.log(error)
