@@ -7,9 +7,24 @@ import {Storage} from "@node_modules/@google-cloud/storage";
 
 const BUCKET_NAME = 'eazya_bucket_sbu'
 
-export function getCredentials() {
+export function getLocalCredentials() {
   return JSON.parse(Buffer.from(process.env.GOOGLE_CLOUD_STORAGE_CREDENTIALS_BASE64, 'base64').toString('ascii'))
 }
+
+export function getGCPCredentials() {
+  // for Vercel, use environment variables
+  return process.env.GOOGLE_PRIVATE_KEY
+    ? {
+        credentials: {
+          client_email: process.env.GCLOUD_SERVICE_ACCOUNT_EMAIL,
+          private_key: process.env.GOOGLE_PRIVATE_KEY,
+        },
+        projectId: process.env.GCP_PROJECT_ID,
+      }
+      // for local development, use gcloud CLI
+    : getLocalCredentials()
+}
+
 
 export function base64ToBuffer(base64: string) {
   if (base64.startsWith('data:image/')) {
@@ -27,7 +42,7 @@ export async function addBase64ToStorage(postType: PostType, session: Session, b
       return null
     }
 
-    const credentials = getCredentials()
+    const credentials = getGCPCredentials()
     const storage = new Storage({ credentials })
     const imageName = `${postType}/${session.user.email}/${Date.now()}-${uuidv4()}`
     const storageFile = storage.bucket(BUCKET_NAME).file(imageName)
@@ -43,7 +58,7 @@ export async function addBase64ToStorage(postType: PostType, session: Session, b
 
 export function getStorageFileFromStringUrl(stringUrl: string) {
   try {
-    const credentials = getCredentials()
+    const credentials = getGCPCredentials()
     const storage = new Storage({ credentials })
     const url = new URL(stringUrl)
     const urlPathParts = url.pathname.split('/').filter(part => part);
