@@ -9,7 +9,7 @@ export default function Store() {
       <NavTabSelector tab={NavTab.STORE}/>
       <HomeHeader
         title="Buy & Sell"
-        subtitle="Second-hand market"
+        subtitle="Sell what you don't use anymore and buy what you need!"
         buttonName="Item"
         createRoute="create-store-post"
       />

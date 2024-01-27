@@ -9,9 +9,9 @@ export default function EventPostItem({post}) {
   return (
     <Link href={`/events/${post.id}`}>
       <div className="group relative glass_box">
-        <div className="relative w-full bg-gray-200 group-hover:opacity-75">
+        <div className="relative w-full group-hover:opacity-75">
           <Image
-            src={post.image}
+            src={(post.image)? post.image : "/assets/images/no_image_post_1.png"}
             alt="post item image"
             width={0}
             height={0}

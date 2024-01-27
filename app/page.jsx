@@ -8,7 +8,7 @@ import InitialAccountSetup from "@containers/home/InitialAccountSetup";
 
 export default async function Home() {
   return (
-    <section className="w-full flex-center flex-col gap-14">
+    <section className="w-full flex-center flex-col gap-20">
       <NavTabSelector tab={NavTab.NONE}/>
       <InitialAccountSetup/>
       <EventPreview/>

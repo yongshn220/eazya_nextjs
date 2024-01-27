@@ -5,6 +5,7 @@ import getStorePostAction from "@actions/store/getStorePostAction";
 import {IStorePost} from "@models/collections/storePost";
 import {getHomePath} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
+import Image from "@node_modules/next/image";
 
 export default async function StorePreview() {
   const postIds = await getStorePostIdsAction(1)
@@ -16,11 +17,17 @@ export default async function StorePreview() {
     posts.push(post)
   }
   return (
-    <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8 ">
       <Link href={getHomePath(PostType.STORE)}>
-        <div className="flex flex-col border-s-4 group cursor-pointer">
-          <h1 className={`mx-4 font-satoshi text-xl font-bold text-gray-900 hover_text_blue`}>Buy & Sell</h1>
-          <p className="mx-4 font-satoshi text-md text-gray-500">Second-hand market</p>
+        <div className="relative p-2 h-8 rounded-lg flex-center cursor-pointer group">
+          <Image
+            src={"/assets/images/title_background_2.png"}
+            fill
+            sizes="100vw"
+            className="w-full object-cover rounded-md opacity-600"
+            alt="1"
+          />
+          <p className={`absolute text-lg font-semibold hover_text_blue`}>Buy & Sell</p>
         </div>
       </Link>
 

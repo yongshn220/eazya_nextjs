@@ -12,8 +12,8 @@ export default function FindMember({communityType}: {communityType: CommunityTyp
     <section className="w-full">
       <NavTabSelector tab={NavTab.FIND_MEMBER}/>
       <HomeHeader
-        title={communityType}
-        subtitle="See the upcoming events on the campus"
+        title={PostType.FIND_MEMBER}
+        subtitle="Recruit and participate in a variety of small groups, clubs, and projects!"
         buttonName="Post"
         createRoute={`create-find-member-post?type=${communityType}`}
       />

@@ -10,9 +10,9 @@ export default function StorePostItem({post}) {
   return (
     <Link href={getPostPath(post.id, PostType.STORE)}>
       <div className="group relative glass_box">
-        <div className="relative w-full bg-gray-200 group-hover:opacity-75">
+        <div className="relative w-full group-hover:opacity-75">
           <Image
-            src={post.images[0]}
+            src={(post.images.length > 0)? post.images[0] : "/assets/images/no_image_post_1.png"}
             alt="store first image"
             width={0}
             height={0}

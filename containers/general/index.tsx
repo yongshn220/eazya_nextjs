@@ -11,8 +11,8 @@ export default function General({communityType}: {communityType: CommunityType})
     <section className="w-full">
       <NavTabSelector tab={NavTab.GENERAL}/>
       <HomeHeader
-        title={communityType}
-        subtitle="See the upcoming events on the campus"
+        title={`${PostType.GENERAL}`}
+        subtitle={`Share anything and everything! :)`}
         buttonName="Post"
         createRoute={`create-general-post?type=${communityType}`}
       />

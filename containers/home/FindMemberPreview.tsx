@@ -5,7 +5,7 @@ import {getCommunityHomePath} from "@components/constants/tags";
 import CommunityPostItem from "@components/post/community/CommunityPostItem";
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {ICommunityPost} from "@models/union/union";
-
+import Image from 'next/image'
 
 const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
 
@@ -24,8 +24,15 @@ export default async function FindMemberPreview() {
   return (
     <div className="relative">
       <Link href={getCommunityHomePath(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE)}>
-        <div className="glass_box cursor-pointer group">
-          <p className={`text-md font-semibold hover_text_blue`}>Find Member</p>
+        <div className="relative h-8 rounded-lg flex-center cursor-pointer group">
+          <Image
+            src={"/assets/images/title_background_2.png"}
+            fill
+            sizes="20vw"
+            className="w-full object-cover rounded-md opacity-50"
+            alt="1"
+          />
+          <p className={`absolute text-lg font-semibold hover_text_blue`}>Find Member</p>
         </div>
       </Link>
 

@@ -10,7 +10,7 @@ export default function Events() {
       <NavTabSelector tab={NavTab.EVENT}/>
       <HomeHeader
         title="Events"
-        subtitle="See the upcoming events on the campus"
+        subtitle="See the upcoming events on the campus!"
         buttonName="Event"
         createRoute="create-event-post"
       />
