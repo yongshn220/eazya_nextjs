@@ -37,7 +37,7 @@ const getEventPostAction = async (postId: string) => {
       }
     },
     [getPostTag(userId, postId, PostType.EVENT)],
-    { tags: [getPostTag(userId, postId, PostType.EVENT)], revalidate: REVALIDATE_TIME.EVENT}
+    { tags: [getPostTag(userId, postId, PostType.EVENT)], revalidate: 10}
   )
   return await action()
 }

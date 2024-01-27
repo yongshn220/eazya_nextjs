@@ -6,7 +6,7 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
 import {getCommunityPostIdsGroupTag, getCommunityPostIdsTag,} from "@components/constants/tags";
-import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
+import {DEFAULT_PAGE_LENGTH, REVALIDATE_TIME} from "@components/constants/values";
 
 
 const getCommunityPostIdsAction = async (postType: PostType, communityType: CommunityType, page: number) => {
@@ -33,7 +33,7 @@ const getCommunityPostIdsAction = async (postType: PostType, communityType: Comm
       }
     },
     [getCommunityPostIdsTag(postType, communityType, page)],
-    { tags: [getCommunityPostIdsTag(postType, communityType, page), getCommunityPostIdsGroupTag(postType, communityType)] }
+    { tags: [getCommunityPostIdsTag(postType, communityType, page), getCommunityPostIdsGroupTag(postType, communityType)], revalidate: REVALIDATE_TIME.COMMUNITY }
   )
   return await action()
 }

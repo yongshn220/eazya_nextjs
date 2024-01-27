@@ -38,7 +38,7 @@ const getCommunityPostAction = async (postId: string, postType: PostType) => {
       }
     },
     [getPostTag(userId, postId, postType)],
-    { tags: [getPostTag(userId, postId, postType)], revalidate: REVALIDATE_TIME.COMMUNITY}
+    { tags: [getPostTag(userId, postId, postType)], revalidate: 10}
   )
   return await action()
 }

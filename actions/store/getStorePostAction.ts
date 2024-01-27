@@ -37,7 +37,7 @@ const getStorePostAction = async (postId: string) => {
       }
     },
     [getPostTag(userId, postId, PostType.STORE)],
-    { tags: [getPostTag(userId, postId, PostType.STORE)], revalidate: REVALIDATE_TIME.STORE}
+    { tags: [getPostTag(userId, postId, PostType.STORE)], revalidate: 10}
   )
   return await action()
 }

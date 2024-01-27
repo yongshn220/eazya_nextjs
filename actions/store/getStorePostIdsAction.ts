@@ -6,7 +6,7 @@ import {toJson} from "@actions/actionHelper/utilFunction";
 import {unstable_cache} from "@node_modules/next/dist/server/web/spec-extension/unstable-cache";
 import {PostType} from "@components/constants/enums";
 import {getPostIdsGroupTag, getPostIdsTag} from "@components/constants/tags";
-import {DEFAULT_PAGE_LENGTH} from "@components/constants/values";
+import {DEFAULT_PAGE_LENGTH, REVALIDATE_TIME} from "@components/constants/values";
 
 
 const getStorePostIdsAction = async (page: number) => {
@@ -29,7 +29,7 @@ const getStorePostIdsAction = async (page: number) => {
       }
     },
     [getPostIdsTag(PostType.STORE, page)],
-    { tags: [getPostIdsTag(PostType.STORE, page), getPostIdsGroupTag(PostType.STORE)]}
+    { tags: [getPostIdsTag(PostType.STORE, page), getPostIdsGroupTag(PostType.STORE)], revalidate: REVALIDATE_TIME.STORE}
   )
   return await action()
 }
