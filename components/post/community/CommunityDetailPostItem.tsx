@@ -15,7 +15,7 @@ export default function CommunityDetailPostItem({post, postType, communityType})
           <div className="flex items-center gap-5">
             <div className="flex flex-center gap-2">
               <UserHexaIcon/>
-              <p className="text-sm font-semibold">CSE Major</p>
+              <p className="text-sm font-semibold">{post.authorMajor}</p>
             </div>
             <p className="text-sm text-gray-500">{post.createdAt}</p>
           </div>
