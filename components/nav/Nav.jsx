@@ -28,7 +28,7 @@ export default function Nav() {
 
   return (
     <nav className="flex-center sticky top-0 w-full mb-8 pt-3 bg-white z-50 nav_shadow">
-      <div className="max-w-7xl w-full">
+      <div className="max-w-7xl px-4 w-full">
         {/* Desktop Navigation */}
         <div className=" hidden md:flex justify-between">
           <div className="flex gap-20 flex-center">

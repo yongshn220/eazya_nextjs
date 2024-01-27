@@ -28,6 +28,7 @@ export default function StoreContent({post}: {post: IStorePost}) {
                   />
                 </div>
               </ImageFullViewSelector>
+              <div className="flex-center sm:hidden w-full text-sm text-gray-500">{`${index + 1} / ${post.images.length}`}</div>
             </CarouselItem>
             ))
           }
