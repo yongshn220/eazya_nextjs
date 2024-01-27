@@ -44,7 +44,7 @@ export default function StoreForm({mode, post, setPost, submitHandler, loading}:
       <FormHeader
         mode={mode}
         title="Item"
-        subtitle="Sell second-hand bulabula"
+        subtitle="Sell what you don't use anymore and buy what you need!"
       />
       <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={(e) => submitHandler(e)}>
         <div className="w-full">

@@ -33,7 +33,7 @@ export default function EventForm({mode, post, setPost, submitHandler, loading}:
   // TODO: handle mobile viewport
   return (
     <div className="w-full">
-      <FormHeader mode={mode} title="Event" subtitle="Share the upcoming event on the campus"/>
+      <FormHeader mode={mode} title="Event" subtitle="Share a new event on the campus!"/>
       <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={(e) => submitHandler(e)}>
         {/* Image uploader for mobile */}
         <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setImageLoading}>

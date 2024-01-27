@@ -26,7 +26,7 @@ export default function CommunityForm({mode, post, setPost, submitHandler, loadi
       <FormHeader
         mode={mode}
         title={post.postType}
-        subtitle="Share anything you like!"
+        subtitle="Share anything and everything! :)"
       />
       <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-8" onSubmit={(e) => submitHandler(e)}>
         <div className="w-full flex-start flex-col">
