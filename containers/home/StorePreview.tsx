@@ -21,7 +21,7 @@ export default async function StorePreview() {
       <Link href={getHomePath(PostType.STORE)}>
         <div className="relative p-2 h-8 rounded-lg flex-center cursor-pointer group">
           <Image
-            src={"/assets/images/title_background_2.png"}
+            src={"/assets/images/title_background.png"}
             fill
             sizes="100vw"
             className="w-full object-cover rounded-md opacity-600"

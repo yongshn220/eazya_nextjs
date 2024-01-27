@@ -148,7 +148,7 @@
   height: 100%;
   filter: blur(100px) saturate(150%);
   top: 80px;
-  opacity: 0.15;
+  opacity: 0.08;
 }
 
 @media screen and (max-width: 640px) {
@@ -285,7 +285,7 @@
 
 
 .grid_12 {
-  @apply mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-20;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-x-10;
 }
 
 

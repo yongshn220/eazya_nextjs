@@ -25,7 +25,7 @@ export default async function CommunityPostItem({postType, communityType, post}:
           <div className="flex-between items-center gap-5">
             <div className="flex flex-center gap-2">
               <UserHexaIcon/>
-              <p className="text-sm font-semibold">SBU Student</p>
+              <p className="text-sm">SBU Student</p>
               <Badge variant="outline" className="border-gray-300">{post.authorMajor}</Badge>
             </div>
             <p className="text-sm text-gray-500">{post.createdAt}</p>

@@ -26,7 +26,7 @@ export default async function FindMemberPreview() {
       <Link href={getCommunityHomePath(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE)}>
         <div className="relative h-8 rounded-lg flex-center cursor-pointer group">
           <Image
-            src={"/assets/images/title_background_2.png"}
+            src={"/assets/images/title_background.png"}
             fill
             sizes="20vw"
             className="w-full object-cover rounded-md opacity-50"
