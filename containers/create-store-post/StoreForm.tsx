@@ -72,6 +72,7 @@ export default function StoreForm({mode, post, setPost, submitHandler, loading}:
                 ))
               }
             </div>
+            <p className="flex md:hidden text-gray-400 ">If you are uploading an image via mobile, please use the bottom left option to reduce the size when selecting an image in Photos.</p>
         </div>
 
         <InputFieldDefaultClient name="Title" value={post.title} onChangeHandler={(e) => setPost((prev) => ({...prev, title: e.target.value}))} placeholder="Title"/>

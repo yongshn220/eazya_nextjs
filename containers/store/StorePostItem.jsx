@@ -21,7 +21,7 @@ export default function StorePostItem({post}) {
           />
         </div>
         <div className="w-full mt-4 flex-start flex-col gap-1">
-          <h3 className="text-sm text-gray-700 line-clamp-2">
+          <h3 className="text-sm text-gray-700 line-clamp-1">
             {post.title}
           </h3>
           <p className="text-sm font-medium text-gray-900">${post.price}</p>
