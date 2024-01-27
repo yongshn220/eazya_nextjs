@@ -30,7 +30,7 @@ export default function SingleImageUploader({setImage, disabled, setIsLoading, c
         id="file-input"
         name="Image"
         style={{display: 'none'}}
-        accept="image/*,image/heic"
+        accept="image/*"
         disabled={disabled}
         onChange={handleImageChange}
       />

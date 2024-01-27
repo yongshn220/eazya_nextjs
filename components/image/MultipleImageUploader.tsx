@@ -45,7 +45,7 @@ export default function MultipleImageUploader({images, setImages, maxNum, childr
         id="file-input"
         name="Image"
         style={{display: 'none'}}
-        accept="image/*,image/heic"
+        accept="image/*"
         onChange={handleImageChange}
         multiple
       />
