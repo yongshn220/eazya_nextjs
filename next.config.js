@@ -5,6 +5,7 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '50mb',
     },
+    serverMinification: false
   },
   images: {
     domains: ['lh3.googleusercontent.com', 'storage.googleapis.com', 'tailwindui.com'],
