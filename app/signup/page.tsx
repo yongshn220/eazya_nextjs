@@ -72,7 +72,11 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex-center flex-col w-full mt-20">
+    <div className="flex-center flex-col w-full mt-16">
+      <div className="w-full flex-center flex-col">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 blue_gradient">Welcome to EazyA!</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">A completely anonymous university community</p>
+      </div>
       {
         !isEmailVerifying &&
         <div className="w-full max-w-md">
@@ -85,7 +89,8 @@ export default function SignUpPage() {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">University email</Label>
-                    <Input id="email" disabled={isSubmitting} placeholder="Enter your email (.edu)" required type="email" onChange={e => setEmail(e.target.value)}/>
+                    <Input id="email" disabled={isSubmitting} placeholder="Enter your email (.edu)" required
+                           type="email" onChange={e => setEmail(e.target.value)}/>
                     {
                       emailError &&
                       <p className="text-red-500 text-sm">Email should be a university email ends with .edu</p>
@@ -93,7 +98,8 @@ export default function SignUpPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="newPassword">Password</Label>
-                    <Input id="newPassword" disabled={isSubmitting} required type="password" onChange={e => setPassword(e.target.value)}/>
+                    <Input id="newPassword" disabled={isSubmitting} required type="password"
+                           onChange={e => setPassword(e.target.value)}/>
                     {
                       passwordError &&
                       <p className="text-red-500 text-sm">Your password must be have at least:
@@ -140,9 +146,11 @@ export default function SignUpPage() {
               <div className="flex justify-center items-center mt-6">
                 <MailboxIcon className="h-12 w-12 text-gray-700 dark:text-gray-300"/>
               </div>
-              <h1 className="text-3xl font-bold text-center mt-4 text-gray-700 dark:text-gray-200">Email Verification</h1>
+              <h1 className="text-3xl font-bold text-center mt-4 text-gray-700 dark:text-gray-200">Email
+                Verification</h1>
               <p className="text-gray-600 dark:text-gray-400 text-center mt-2 px-6">
-                We have sent a verification link to your email. Please check your inbox and click the link to verify your
+                We have sent a verification link to your email. Please check your inbox and click the link to verify
+                your
                 email address.
               </p>
               <div className="flex justify-center mt-6">

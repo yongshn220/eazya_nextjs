@@ -35,11 +35,11 @@ export default function RootLayout({children}) {
     )}>
     <Theme>
       <Provider>
-        <div className="main">
-          <div className="gradient"></div>
-        </div>
+        {/*<div className="main">*/}
+        {/*  <div className="gradient"></div>*/}
+        {/*</div>*/}
+        <Nav/>
         <main className="app">
-          <Nav/>
           <div className="content">
             {children}
           </div>

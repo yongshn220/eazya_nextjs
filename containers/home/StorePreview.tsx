@@ -24,10 +24,10 @@ export default async function StorePreview() {
             src={"/assets/images/title_background.png"}
             fill
             sizes="100vw"
-            className="w-full object-cover rounded-md opacity-600"
+            className="w-full object-cover rounded-md opacity-50"
             alt="1"
           />
-          <p className={`absolute text-lg font-semibold hover_text_blue`}>Buy & Sell</p>
+          <p className="absolute text-lg font-semibold hover_text_blue">Buy & Sell</p>
         </div>
       </Link>
 

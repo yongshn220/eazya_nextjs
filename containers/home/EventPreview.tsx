@@ -23,18 +23,15 @@ export default async function EventPreview() {
   return (
     <section className="w-full flex-col px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <Link href={getHomePath(PostType.EVENT)}>
-        {/*<div className="flex flex-col border-s-4 cursor-pointer">*/}
-        {/*  <p className={`mx-4 font-satoshi text-xl font-bold text-gray-900 hover_text_blue`}>Events</p>*/}
-        {/*</div>*/}
         <div className="relative p-2 h-8 rounded-lg flex-center cursor-pointer group">
           <Image
             src={"/assets/images/title_background.png"}
             fill
             sizes="100vw"
-            className="w-full object-cover rounded-md opacity-600"
-            alt="1"
+            className="w-full object-cover rounded-md opacity-50"
+            alt="title background"
           />
-          <p className={`absolute text-lg font-semibold hover_text_blue`}>Events</p>
+          <p className="absolute w-full text-center text-lg font-semibold hover_text_blue">Events</p>
         </div>
       </Link>
 

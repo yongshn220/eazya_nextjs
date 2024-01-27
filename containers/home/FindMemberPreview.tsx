@@ -30,9 +30,9 @@ export default async function FindMemberPreview() {
             fill
             sizes="20vw"
             className="w-full object-cover rounded-md opacity-50"
-            alt="1"
+            alt="title background"
           />
-          <p className={`absolute text-lg font-semibold hover_text_blue`}>Find Member</p>
+          <p className="absolute w-full text-center text-lg font-semibold hover_text_blue">Find Member</p>
         </div>
       </Link>
 

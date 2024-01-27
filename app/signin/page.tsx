@@ -42,8 +42,12 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex-center w-full mt-20">
-      <div className="w-full max-w-md">
+    <div className="flex-center flex-col w-full mt-16">
+      <div className="w-full max-w-md mb-[50px]">
+        <div className="w-full flex-center flex-col">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 blue_gradient">Welcome to EazyA!</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">A completely anonymous university community</p>
+        </div>
         <Card className="mx-auto">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
@@ -53,7 +57,8 @@ export default function SignInPage() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">University email</Label>
-                  <Input id="email" placeholder="Enter your email (.edu)" required type="email" onChange={(e) => setEmail(e.target.value)}/>
+                  <Input id="email" placeholder="Enter your email (.edu)" required type="email"
+                         onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
@@ -65,13 +70,13 @@ export default function SignInPage() {
                 }
                 {
                   onSubmitting ?
-                  <Button className="w-full" disabled={true}>
-                    Signing In...
-                  </Button>
-                  :
-                  <Button className="w-full" type="submit">
-                    Sign In
-                  </Button>
+                    <Button className="w-full" disabled={true}>
+                      Signing In...
+                    </Button>
+                    :
+                    <Button className="w-full" type="submit">
+                      Sign In
+                    </Button>
                 }
               </div>
             </form>
@@ -86,6 +91,17 @@ export default function SignInPage() {
           </CardContent>
         </Card>
       </div>
+      {/*<section className="w-full p-10">*/}
+      {/*  <div className="container px-4 md:px-6">*/}
+      {/*    <div className="flex flex-col items-center justify-center space-y-4 text-center">*/}
+      {/*      <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Faster iteration. More innovation.</h2>*/}
+      {/*      <p className="max-w-[900px] text-gray-500 md:text-xl dark:text-gray-400">*/}
+      {/*        The platform for rapid progress. Let your team focus on shipping features instead of managing*/}
+      {/*        infrastructure with automated CI/CD, built-in testing, and integrated collaboration.*/}
+      {/*      </p>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
     </div>
   )
 }
