@@ -31,7 +31,7 @@ export default function RootLayout({children}) {
       <meta property="og:image" content="/assets/images/eazya_open_graph.png"/>
       <meta property="og:image:type" content="image/png"/>
       <meta property="og:image:width" content="1024"/>
-      <meta property="og:image:height" content="1024"/>
+      <meta property="og:image:height" content="720"/>
       <GoogleAnalytics gaId="G-RDCDRE0DZT"></GoogleAnalytics>
     </head>
     <body className={cn(
