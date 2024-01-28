@@ -19,7 +19,8 @@ export const fontSans = FontSans({
 
 export const metadata = {
   title: "eazyA",
-  description: "University Community"
+  description: "University Community",
+  metadataBase: new URL("https://www.eazya.net/"),
 }
 
 
