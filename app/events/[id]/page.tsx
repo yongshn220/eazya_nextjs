@@ -15,7 +15,6 @@ export async function generateMetadata({ params }, parent: ResolvingMetadata): P
   }
 }
 
-
 export default async function EventPostPage({ params }) {
   const postId = params.id
 
