@@ -41,7 +41,7 @@ export default function StoreContent({post}: {post: IStorePost}) {
         <p className="text-2xl font-bold">{post.title}</p>
         <p className="text-2xl font-bold text-gray-700">${post.price}</p>
       </div>
-      <p className="whitespace-pre-wrap">{post.description}</p>
+      <p className="whitespace-pre-wrap break-all">{post.description}</p>
     </section>
   )
 }
