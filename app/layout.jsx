@@ -28,10 +28,6 @@ export default function RootLayout({children}) {
     <head>
       <link rel="icon" href="/assets/images/eazyaLogo.png"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-      {/*<meta property="og:image" content="/assets/images/eazya_open_graph.png"/>*/}
-      {/*<meta property="og:image:type" content="image/png"/>*/}
-      {/*<meta property="og:image:width" content="1024"/>*/}
-      {/*<meta property="og:image:height" content="720"/>*/}
       <GoogleAnalytics gaId="G-RDCDRE0DZT"></GoogleAnalytics>
     </head>
     <body className={cn(
