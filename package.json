@@ -25,6 +25,7 @@
     "@tanstack/react-query": "^5.17.1",
     "@tanstack/react-query-devtools": "^5.17.1",
     "@vercel/analytics": "^1.1.2",
+    "@vercel/blob": "^0.19.0",
     "@vercel/speed-insights": "^1.0.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -50,7 +51,8 @@
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "vaul": "^0.8.0"
+    "vaul": "^0.8.0",
+    "vercel": "^33.3.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

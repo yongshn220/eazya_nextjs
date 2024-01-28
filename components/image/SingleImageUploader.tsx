@@ -23,6 +23,7 @@ export default function SingleImageUploader({setImage, disabled, setIsLoading, c
     }
   }
 
+
   return (
     <div className="w-full h-full">
       <input
