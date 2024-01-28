@@ -3,6 +3,8 @@ import {IStorePost} from "@models/collections/storePost";
 import Image from 'next/image'
 import React from "react";
 import ImageFullViewSelector from "@components/image/ImageFullViewSelector";
+import TextLink from "@components/util/TextLink";
+
 
 export default function StoreContent({post}: {post: IStorePost}) {
   return (
@@ -41,7 +43,7 @@ export default function StoreContent({post}: {post: IStorePost}) {
         <p className="text-2xl font-bold">{post.title}</p>
         <p className="text-2xl font-bold text-gray-700">${post.price}</p>
       </div>
-      <p className="whitespace-pre-wrap break-all">{post.description}</p>
+      <p className="whitespace-pre-wrap break-all"><TextLink>{post.description}</TextLink></p>
     </section>
   )
 }

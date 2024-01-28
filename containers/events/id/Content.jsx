@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ImageFullViewSelector from "@components/image/ImageFullViewSelector";
+import TextLink from "@components/util/TextLink";
 
 export default function EventContent({post}) {
   return (
@@ -22,7 +23,7 @@ export default function EventContent({post}) {
           <p className="text-md font-semibold text-gray-700">{post.location}</p>
         </div>
       </div>
-      <p className="whitespace-pre-wrap break-all">{post.description}</p>
+      <p className="whitespace-pre-wrap break-all"><TextLink>{post.description}</TextLink></p>
     </section>
   )
 }
