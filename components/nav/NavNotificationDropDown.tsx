@@ -32,8 +32,11 @@ export default function NavNotificationDropDown() {
     <div className="h-full">
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger className="h-full">
-          <div className="flex-center h-full hover:scale-[1.1] cursor-pointer">
+          <div className="relative flex-center h-full hover:scale-[1.1] cursor-pointer">
             <NotificationIcon/>
+            <div className="absolute flex-center left-3 top-[-5px]  bg-red-500 w-6 h-6 rounded-full border border-white">
+              <p className="text-white font-semibold text-xs" >12</p>
+            </div>
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-96 p-2 max-h-[80vh] overflow-scroll no-scrollbar">
