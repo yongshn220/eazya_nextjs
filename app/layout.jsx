@@ -1,13 +1,14 @@
 import '@styles/globals.css'
 import '@radix-ui/themes/styles.css';
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Nav from "@components/nav/Nav";
 import Provider from "@components/provider/Provider";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@lib/utils"
 import Footer from "@components/footer/Footer";
 import {Theme} from "@radix-ui/themes";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export const fontSans = FontSans({
@@ -44,6 +45,7 @@ export default function RootLayout({children}) {
           <div className="content">
             {children}
           </div>
+          <Analytics />
           <SpeedInsights />
         </main>
         <Footer/>
