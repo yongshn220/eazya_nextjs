@@ -9,34 +9,29 @@ import {redirect} from "next/navigation";
 import {PostType} from "@components/constants/enums";
 import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
 import {revalidateTag} from "@node_modules/next/cache";
+import {deleteFile} from "@components/constants/firebaseHelper";
+import {StatusCodes} from "@node_modules/http-status-codes";
 
 
 export default async function deleteStorePostAction(postId: string) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return null
+    if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
     const post = await StorePostModel.findById(postId)
-    if (!post) return null
+    if (!post) return {status: StatusCodes.NOT_FOUND}
 
     if (session.user.id !== post.authorId.toString()) return null
 
     await StorePostModel.findByIdAndDelete(postId)
 
-    const files = post.images.map((image) => getStorageFileFromStringUrl(image))
-    for (const file of files) {
-      await file.delete()
-    }
-
-    return true
+    revalidateTag(getPostIdsGroupTag(PostType.STORE))
+    return {status: StatusCodes.OK}
   }
   catch (error) {
     console.log(error)
-    return null
-  }
-  finally {
     revalidateTag(getPostIdsGroupTag(PostType.STORE))
-    redirect(getHomePath(PostType.STORE))
+    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
 }

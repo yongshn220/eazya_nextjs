@@ -10,30 +10,21 @@ import SingleImageUploader from "@components/image/SingleImageUploader";
 import LoadingCircle from "@components/animation/LoadingCircle";
 import Image from "@node_modules/next/image";
 import {Cross2Icon} from "@node_modules/@radix-ui/react-icons";
+import {ImageData} from "@containers/edit-event-post";
 
 
 interface Props {
   mode: string;
   post: EventFormRequest;
   setPost: Dispatch<SetStateAction<EventFormRequest>>;
-  setImageFile: Dispatch<SetStateAction<File>>;
+  image: ImageData;
+  setImage: Dispatch<SetStateAction<ImageData>>
   submitHandler: Function;
   loading: boolean;
 }
 
-export interface Image {
-  file: File;
-  url: string;
-  isLoading: boolean;
-}
 
-export default function EventForm({mode, post, setPost, setImageFile, submitHandler, loading}: Props) {
-  const [image, setImage] = useState<Image>({file: null, url: "", isLoading: false})
-
-  useEffect(() => {
-    setImageFile(image.file)
-  }, [image])
-
+export default function EventForm({mode, post, setPost, image, setImage, submitHandler, loading}: Props) {
   function handleRemoveImage(e) {
     e.preventDefault()
 
@@ -50,7 +41,7 @@ export default function EventForm({mode, post, setPost, setImageFile, submitHand
           <span className="sm:hidden font-satoshi font-semibold text-base text-gray-700">Image</span>
           <div
             className="relative flex-center sm:hidden w-full h-[10rem] mt-2 border rounded-lg break-inside-avoid cursor-pointer group">
-            {image.file
+            {image.url
               ? <div>
                 {image.isLoading
                   ? <LoadingCircle/>
@@ -79,7 +70,7 @@ export default function EventForm({mode, post, setPost, setImageFile, submitHand
             <SingleImageUploader setImage={setImage} disabled={false}>
               <div
                 className={`relative hidden sm:flex justify-center items-center w-[18rem] h-full border rounded-lg group ${image.file ? '' : 'cursor-pointer hover:border-blue-300'}`}>
-                {image.file
+                {image.url
                   ? <div>
                     {image.isLoading
                       ? <LoadingCircle/>

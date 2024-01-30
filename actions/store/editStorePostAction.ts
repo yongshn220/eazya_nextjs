@@ -14,17 +14,12 @@ import {redirect} from "next/navigation";
 import {StatusCodes} from "@node_modules/http-status-codes";
 import {del} from "@node_modules/@vercel/blob";
 
-export default async function editStorePostAction(urls, postId: string, req: StoreFormRequest) {
+export default async function editStorePostAction(postId: string, req: StoreFormRequest) {
   await connectToDB()
   const session = await getServerSession(authOptions)
   if (!session) return null
 
   try {
-
-    for (const url of urls) {
-        await del(url, {token: process.env.BLOB_READ_WRITE_TOKEN})
-      }
-
     const post = await StorePostModel.findById(postId)
     if (!post) return {status: StatusCodes.UNAUTHORIZED}
 

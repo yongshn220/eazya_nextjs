@@ -1,19 +1,27 @@
 "use client"
+
 import StoreForm from "@containers/create-store-post/StoreForm";
 import {useState} from "react";
 import {FormMode, PostType} from "@components/constants/enums";
 import {StoreFormRequest} from "@models/requests/StoreFormRequest"
 import createStorePostAction from "@actions/store/createStorePostAction";
-import {upload} from "@vercel/blob/client";
 import {useRouter} from "next/navigation";
 import {getHomePath} from "@components/constants/tags";
 import {StatusCodes} from "@node_modules/http-status-codes";
+import {uploadFile} from "@components/constants/firebaseHelper";
+
+export interface ImageData {
+  id: string;
+  file: File;
+  url: string;
+  isLoading: boolean;
+}
 
 export default function CreateStorePost() {
   const router = useRouter()
-  const [imageFiles, setImageFiles] = useState<Array<File>>([])
+  const [images, setImages] = useState<Array<ImageData>>([])
   const [storePost, setStorePost] = useState<StoreFormRequest>({
-    images: [],
+    images: [], // not using
     title: "",
     price: "",
     description: "",
@@ -25,15 +33,11 @@ export default function CreateStorePost() {
       e.preventDefault()
       setLoading(true)
 
-      let imageUrls = []
-      for (const file of imageFiles) {
-        const blob = await upload("store/"+file.name, file, {
-          access: 'public',
-          handleUploadUrl: '/api/store/upload',
-        })
-        imageUrls.push(blob.url)
-      }
-      const res = await createStorePostAction({...storePost, images: imageUrls})
+      const curImageFiles = images.map((i) => i.file).filter(file => !!file)
+      const uploadPromises = curImageFiles.map((file) => uploadFile(PostType.STORE, file))
+      const urlsToAdd = await Promise.all(uploadPromises) as Array<string>
+
+      const res = await createStorePostAction({...storePost, images: urlsToAdd})
       if (res.status !== StatusCodes.OK) console.log(res.status)
     }
     catch (error) {
@@ -51,7 +55,8 @@ export default function CreateStorePost() {
         mode={FormMode.CREATE}
         post={storePost}
         setPost={setStorePost}
-        setImageFiles={setImageFiles}
+        images={images}
+        setImages={setImages}
         submitHandler={handleSubmit}
         loading={loading}
       />

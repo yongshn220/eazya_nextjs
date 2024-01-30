@@ -22,19 +22,12 @@ export default async function createStorePostAction(req: StoreFormRequest) {
 
     const {images, title, price, description} = req
 
-    const publicUrls = []
-    for (const image of images) {
-      const url = await addBase64ToStorage(PostType.STORE, session, image)
-      if (!url) continue
-      publicUrls.push(url)
-    }
-
     const newStorePost = new StorePostModel({
       universityCode: session.user.universityCode,
       authorId: session.user.id,
       authorMajor: session.user.major,
       type: PostType.STORE,
-      images: publicUrls,
+      images: images,
       title,
       price,
       description,

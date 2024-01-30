@@ -8,7 +8,7 @@ const nextConfig = {
     serverMinification: false
   },
   images: {
-    domains: ['lh3.googleusercontent.com', 'storage.googleapis.com', 'tailwindui.com', 'vaukrks0yoaghxpd.public.blob.vercel-storage.com'],
+    domains: ['lh3.googleusercontent.com', 'storage.googleapis.com', 'tailwindui.com', 'firebasestorage.googleapis.com'],
   },
   webpack(config) {
     config.experiments = {

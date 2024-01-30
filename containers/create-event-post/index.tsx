@@ -1,6 +1,5 @@
 "use client"
 
-import { upload } from '@vercel/blob/client';
 import EventForm from "@containers/create-event-post/EventForm";
 import {FormMode, PostType} from "@components/constants/enums";
 import createEventPostAction from "@actions/event/createEventPostAction";
@@ -8,10 +7,17 @@ import {EventFormRequest} from "@models/requests/EventFormRequest";
 import {useState} from "react";
 import {useRouter} from 'next/navigation'
 import {getHomePath} from "@components/constants/tags";
+import {uploadFile} from "@components/constants/firebaseHelper";
 
+export interface ImageData {
+  file: File;
+  url: string;
+  isLoading: boolean;
+}
 
 export default function CreateEventPost() {
-  const [imageFile, setImageFile] = useState<File>(null)
+  const router = useRouter()
+  const [image, setImage] = useState<ImageData>({file: null, url: "", isLoading: false})
   const [eventPost, setEventPost] = useState<EventFormRequest>({
     image: "",
     title: "",
@@ -21,7 +27,6 @@ export default function CreateEventPost() {
     description: "",
   })
   const [loading, setLoading] = useState<boolean>(false)
-  const router = useRouter()
 
 
   async function handleSubmit(e) {
@@ -29,14 +34,7 @@ export default function CreateEventPost() {
       e.preventDefault()
       setLoading(true)
 
-      let imageUrl = ""
-      if (imageFile) {
-        const blob = await upload("event/"+imageFile.name, imageFile, {
-          access: 'public',
-          handleUploadUrl: '/api/event/upload',
-        })
-        imageUrl = blob.url
-      }
+      let imageUrl = (image.file)? await uploadFile(PostType.EVENT, image.file) : ""
 
       await createEventPostAction({...eventPost, image: imageUrl})
     }
@@ -55,8 +53,9 @@ export default function CreateEventPost() {
       <EventForm
         mode={FormMode.CREATE}
         post={eventPost}
-        setImageFile={setImageFile}
         setPost={setEventPost}
+        image={image}
+        setImage={setImage}
         submitHandler={handleSubmit}
         loading={loading}
       />

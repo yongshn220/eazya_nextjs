@@ -64,3 +64,6 @@ export function getCommunityEditFormPath(postId: string, postType: PostType, com
 }
 
 
+export function getFileLocation(postType: PostType, filename: string) {
+  return `${postType}/${filename}`
+}

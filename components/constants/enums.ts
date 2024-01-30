@@ -100,6 +100,7 @@ export enum VoteType {
   NONE = "voteTypeNone",
 }
 
+
 export function PostTypeToCommunityPostType(postType: PostType) {
   switch(postType) {
     case PostType.GENERAL: return CommunityPostType.GENERAL
