@@ -5,11 +5,9 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {EventPostModel} from "@models/collections/eventPost";
-import {addBase64ToStorage, getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {PostType} from "@components/constants/enums";
 import {revalidateTag} from "next/cache";
-import {redirect} from "next/navigation";
-import {getHomePath, getPostPath, getPostTag} from "@components/constants/tags";
+import {getPostTag} from "@components/constants/tags";
 import {StatusCodes} from "@node_modules/http-status-codes";
 
 

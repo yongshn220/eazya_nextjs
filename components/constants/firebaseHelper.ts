@@ -1,5 +1,5 @@
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from "@node_modules/@firebase/storage";
-import {storage} from "@firebaseConfig";
+import {storage} from "@firebase";
 import {getFileLocation} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
 
