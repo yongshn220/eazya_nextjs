@@ -26,7 +26,7 @@ export default function EventContent({post}) {
           <p className="text-md font-semibold text-gray-700">{post.location}</p>
         </div>
       </div>
-      <p className="whitespace-pre-wrap break-all"><TextLink>{post.description}</TextLink></p>
+      <p className="whitespace-pre-wrap"><TextLink>{post.description}</TextLink></p>
     </section>
   )
 }

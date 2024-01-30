@@ -7,7 +7,8 @@ import {getMessageByNotificationType} from "@components/nav/helperFunction";
 import Link from "next/link";
 import {isCommunityPostType} from "@components/constants/enums";
 import {getCommunityPostPath, getPostPath} from "@components/constants/tags";
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
+import readNotificationAction from "@actions/notification/readNotificationAction";
 
 
 interface Props {
@@ -23,17 +24,26 @@ export default function NotificationItem({notification}: Props) {
       : getPostPath(notification.postId, notification.postType)
   }, [notification])
 
+  useEffect(() => {
+    if (!notification.isRead) {
+      console.log("not read")
+      readNotificationAction(notification.id).then()
+    }
+  }, [])
+
   return (
     <Link href={pageLink}>
       <DropdownMenuItem className="cursor-pointer">
-        <div className="w-full flex-start flex-col py-3 gap-2">
+        <div className={`w-full flex-start flex-col p-2 gap-2 ${!notification.isRead && "bg-blue-50 rounded-lg"}`}>
           <div className="w-full flex-between">
             <Badge variant="outline" className="border-gray-300">{notification.postType}</Badge>
             <div className="text-xs text-gray-500">{notification.createdAt}</div>
           </div>
-          <p className="w-full flex-start font-semibold line-clamp-1">
-            {notification.preview}
-          </p>
+          <div className="w-full flex-start overflow-hidden">
+            <p className="font-semibold line-clamp-2">
+              {notification.preview}
+            </p>
+          </div>
           <p className="text-xs text-gray-600">
             {getMessageByNotificationType(notification.notificationType)}
           </p>

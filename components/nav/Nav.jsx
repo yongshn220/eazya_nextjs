@@ -11,11 +11,12 @@ import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
 import {useRecoilValue} from "@node_modules/recoil";
 import {selectedNavTabAtom} from "@components/constants/globalStates";
 import {NavTab, UtilPath} from "@components/constants/enums";
+import getNotificationsAction from "@actions/notification/getNotificationsAction";
 
 export default function Nav() {
   const { data: session } = useSession()
-  const [providers, setProviders] = useState(null)
   const selectedNavTab = useRecoilValue(selectedNavTabAtom)
+  const [providers, setProviders] = useState(null)
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -25,6 +26,8 @@ export default function Nav() {
     setupProviders().then()
   }, [])
 
+
+  if (!session) return <></>
 
   return (
     <nav className="flex-center sticky top-0 w-full mb-8 pt-3 bg-white z-50 nav_shadow">
