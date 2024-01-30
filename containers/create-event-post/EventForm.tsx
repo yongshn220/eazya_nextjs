@@ -2,7 +2,7 @@
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
-import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import {EventFormRequest} from "@models/requests/EventFormRequest";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
