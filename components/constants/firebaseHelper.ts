@@ -1,7 +1,7 @@
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from "@node_modules/@firebase/storage";
-import {storage} from "@firebase";
 import {getFileLocation} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
+import {storage} from "@firebase";
 
 export function uploadFile(postType: PostType, file: File): Promise<string> {
   return new Promise((resolve, reject) => {

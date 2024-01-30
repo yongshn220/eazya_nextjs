@@ -1,4 +1,3 @@
-
 import InfoHeader from "@components/headers/InfoHeader";
 import PostDropDown from "@components/menu/PostDropDown";
 import {IPostHeader} from "@models/types/postHeader";

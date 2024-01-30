@@ -4,12 +4,9 @@ import {connectToDB} from "@utils/database";
 import {getServerSession} from "@node_modules/next-auth/next";
 import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {StorePostModel} from "@models/collections/storePost";
-import {getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
-import {redirect} from "next/navigation";
 import {PostType} from "@components/constants/enums";
-import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
+import {getPostIdsGroupTag} from "@components/constants/tags";
 import {revalidateTag} from "@node_modules/next/cache";
-import {deleteFile} from "@components/constants/firebaseHelper";
 import {StatusCodes} from "@node_modules/http-status-codes";
 
 

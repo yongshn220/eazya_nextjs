@@ -9,7 +9,6 @@ import {revalidateTag} from "next/cache";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import {PostType, UserActivityType} from "@components/constants/enums";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
-import {addBase64ToStorage} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {getPostIdsGroupTag} from "@components/constants/tags";
 import {StatusCodes} from "@node_modules/http-status-codes";
 
