@@ -10,15 +10,15 @@ import {StorePostModel} from "@models/collections/storePost";
 import {CreateUserActivityRequest} from "@models/requests/CreateUserActivityRequest";
 import createUserActivityAction from "@actions/userActivity/createUserActivityAction";
 import {revalidateTag} from "next/cache";
-import {redirect} from "next/navigation";
-import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
+import {getPostIdsGroupTag} from "@components/constants/tags";
+import {StatusCodes} from "@node_modules/http-status-codes";
 
 
 export default async function createStorePostAction(req: StoreFormRequest) {
   try {
     await connectToDB()
     const session = await getServerSession(authOptions)
-    if (!session) return null
+    if (!session) return {status: StatusCodes.UNAUTHORIZED}
 
     const {images, title, price, description} = req
 
@@ -54,14 +54,12 @@ export default async function createStorePostAction(req: StoreFormRequest) {
     }
     await createUserActivityAction(activityReq)
 
-    return newStorePost
+    revalidateTag(getPostIdsGroupTag(PostType.STORE))
+    return {status: StatusCodes.OK}
   }
   catch (error) {
     console.log(error)
-    return null
-  }
-  finally {
     revalidateTag(getPostIdsGroupTag(PostType.STORE))
-    redirect(getHomePath(PostType.STORE))
+    return null
   }
 }

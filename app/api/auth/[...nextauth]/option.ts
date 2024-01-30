@@ -4,6 +4,9 @@ import User from "@models/collections/user";
 import {connectToDB} from "@utils/database";
 import bcrypt from "bcryptjs";
 import {MajorType} from "@components/constants/values";
+import {revalidatePath} from "@node_modules/next/cache";
+import {getHomePath} from "@components/constants/tags";
+import {PostType} from "@components/constants/enums";
 
 
 export const authOptions: NextAuthOptions = {
@@ -24,6 +27,8 @@ export const authOptions: NextAuthOptions = {
           if (!passwordsMatch) return null
 
           if (!user.isVerified) return null
+
+          revalidatePath('/') // TODO:
 
           return user.toObject()
         }
@@ -50,6 +55,7 @@ export const authOptions: NextAuthOptions = {
       session.user.major = sessionUser.major as MajorType
       session.user.initialized = sessionUser.initialized
       session.user.isVerified = sessionUser.isVerified
+
       return session
     },
   }

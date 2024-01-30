@@ -5,10 +5,11 @@ import {authOptions} from "@app/api/auth/[...nextauth]/option";
 import {EventPostModel} from "@models/collections/eventPost";
 import {connectToDB} from "@utils/database";
 import {redirect} from "next/navigation";
-import {getStorageFileFromStringUrl} from "@actions/actionHelper/googleStorageHelperFunctions";
 import {revalidateTag} from "@node_modules/next/cache";
 import {getHomePath, getPostIdsGroupTag} from "@components/constants/tags";
 import {PostType} from "@components/constants/enums";
+import { del } from '@vercel/blob';
+
 
 export default async function deleteEventPostAction(postId: string) {
   try {
@@ -21,14 +22,13 @@ export default async function deleteEventPostAction(postId: string) {
 
     if (session.user.id !== post.authorId.toString()) return null
 
-    const file = getStorageFileFromStringUrl(post.image)
-
     await EventPostModel.findByIdAndDelete(postId)
-    await file.delete()
+    await del(post.image)
 
     return true
   }
   catch (error) {
+    console.log(error)
     return null
   }
   finally {

@@ -25,7 +25,7 @@ export default function ImageFullViewer() {
             <Image
               src={src}
               fill
-              sizes="100vw"
+              sizes="20vw, 20vw, 20vw"
               alt="full view image"
               className="object-contain object-center"
             />

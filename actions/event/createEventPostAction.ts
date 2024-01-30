@@ -19,27 +19,17 @@ export default async function createEventPostAction(req: EventFormRequest) {
     const session = await getServerSession(authOptions)
     if (!session) {
       console.log("Session fail")
-      return {status: StatusCodes.UNAUTHORIZED, res: null}
+      return {status: StatusCodes.UNAUTHORIZED}
     }
 
     const {image, title, date, time, location, description } = req
-
-    let imageUrl = ""
-
-    if (image) {
-      imageUrl = await addBase64ToStorage(PostType.EVENT, session, image)
-      if (!imageUrl) {
-        console.log("Fail to add base64 to storage")
-        return {status: StatusCodes.CONFLICT, res: null}
-      }
-    }
 
     const newEventPost = new EventPostModel({
       universityCode: session.user.universityCode,
       authorId: session.user.id,
       authorMajor: session.user.major,
       type: PostType.EVENT,
-      image: imageUrl,
+      image: image,
       title,
       date,
       time,
@@ -62,11 +52,11 @@ export default async function createEventPostAction(req: EventFormRequest) {
     await createUserActivityAction(activityReq)
 
     revalidateTag(getPostIdsGroupTag(PostType.EVENT))
-    return {status: StatusCodes.OK, res: "newEventPost"}
+    return {status: StatusCodes.OK}
   }
   catch (error) {
     console.log(error)
     revalidateTag(getPostIdsGroupTag(PostType.EVENT))
-    return {status: StatusCodes.INTERNAL_SERVER_ERROR, res: null}
+    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
 }

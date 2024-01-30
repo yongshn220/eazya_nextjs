@@ -41,15 +41,10 @@ export async function addBase64ToStorage(postType: PostType, session: Session, b
       console.log("fail to convert base64 to buffer")
       return null
     }
-    console.log(1)
     const credentials = getGCPCredentials()
-    console.log(credentials)
     const storage = new Storage({ credentials })
-    console.log(2)
     const imageName = `${postType}/${session.user.email}/${Date.now()}-${uuidv4()}`
-    console.log(3)
     const storageFile = storage.bucket(BUCKET_NAME).file(imageName)
-    console.log(4)
     await storageFile.save(buffer)
 
     return `https://storage.googleapis.com/${BUCKET_NAME}/${imageName}`;

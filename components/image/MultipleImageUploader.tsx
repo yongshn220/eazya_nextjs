@@ -1,9 +1,10 @@
 import { v4 as uuid } from 'uuid';
-import {Image} from "@containers/create-store-post/StoreForm";
+import {ImageData} from "@containers/edit-store-post";
+import {Dispatch, SetStateAction} from "react";
 
 interface Props {
-  images: Array<Image>;
-  setImages: any;
+  images: Array<ImageData>;
+  setImages: Dispatch<SetStateAction<Array<ImageData>>>;
   maxNum: number;
   children: any;
 }
@@ -19,12 +20,12 @@ export default function MultipleImageUploader({images, setImages, maxNum, childr
           const reader = new FileReader();
           reader.readAsDataURL(file);
           const imageId = uuid()
-          setImages((prev) =>([...prev, {id: imageId, url: null, isLoading: true}]))
+          setImages((prev) =>([...prev, {id: imageId, file: file, url: null, isLoading: true}]))
 
           reader.onloadend = () => {
             setImages((prevImages) => {
               return prevImages.map(prev => {
-                return (prev.id !== imageId)? prev : {...prev, url: reader.result, isLoading: false}
+                return (prev.id !== imageId)? prev : {...prev, url: reader.result.toString(), isLoading: false}
               })
             })
           };

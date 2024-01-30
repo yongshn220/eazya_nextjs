@@ -24,7 +24,7 @@ export default function StoreContent({post}: {post: IStorePost}) {
                   <Image
                     src={image}
                     fill
-                    sizes="100vw, 50vw, 25vw"
+                    sizes="20vw, 20vw, 20vw"
                     className="w-full object-contain rounded-md"
                     alt="Store Item Image"
                   />

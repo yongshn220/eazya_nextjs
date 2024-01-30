@@ -1,28 +1,35 @@
+import {Image} from "@containers/create-event-post/EventForm";
+import {Dispatch, SetStateAction} from "react";
 
-export default function SingleImageUploader({setImage, disabled, setIsLoading, children}) {
+interface Props {
+  setImage: Dispatch<SetStateAction<Image>>,
+  disabled: boolean,
+  children: any
+}
+
+export default function SingleImageUploader({setImage, disabled, children}: Props) {
   async function handleImageChange(e) {
     e.preventDefault()
-    setIsLoading(true);
+    setImage((prev) => ({...prev, isLoading: true}))
 
     const file = e.target.files[0];
+
     if (!file) return;
 
     try {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        setIsLoading(false)
-        setImage(reader.result)
+        setImage({file: file, url: reader.result.toString(), isLoading: false})
       };
     }
     catch (error) {
       console.error(error);
     }
     finally {
-      setIsLoading(false)
+      setImage((prev) => ({...prev, isLoading: false}))
     }
   }
-
 
   return (
     <div className="w-full h-full">

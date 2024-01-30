@@ -1,11 +1,11 @@
+
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
 import {Button} from "@components/ui/button";
-import React, {useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import {EventFormRequest} from "@models/requests/EventFormRequest";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
-import ImageContainer from "@containers/create-event-post/ImageContainer";
 import SingleImageUploader from "@components/image/SingleImageUploader";
 import LoadingCircle from "@components/animation/LoadingCircle";
 import Image from "@node_modules/next/image";
@@ -15,37 +15,47 @@ import {Cross2Icon} from "@node_modules/@radix-ui/react-icons";
 interface Props {
   mode: string;
   post: EventFormRequest;
-  setPost: any;
+  setPost: Dispatch<SetStateAction<EventFormRequest>>;
+  setImageFile: Dispatch<SetStateAction<File>>;
   submitHandler: Function;
   loading: boolean;
 }
 
+export interface Image {
+  file: File;
+  url: string;
+  isLoading: boolean;
+}
 
-export default function EventForm({mode, post, setPost, submitHandler, loading}: Props) {
-  const [imageLoading, setImageLoading] = useState(false)
+export default function EventForm({mode, post, setPost, setImageFile, submitHandler, loading}: Props) {
+  const [image, setImage] = useState<Image>({file: null, url: "", isLoading: false})
+
+  useEffect(() => {
+    setImageFile(image.file)
+  }, [image])
 
   function handleRemoveImage(e) {
     e.preventDefault()
-    setPost(prev => ({...prev, image: ""}))
-    setImageLoading(false)
+
+    setImage({file: null, url: "", isLoading: false})
   }
 
-  // TODO: handle mobile viewport
+
   return (
     <div className="w-full">
       <FormHeader mode={mode} title="Event" subtitle="Share a new event on the campus!"/>
       <form className="flex-center flex-col glassmorphism mt-10 gap-4 sm:gap-12" onSubmit={(e) => submitHandler(e)}>
         {/* Image uploader for mobile */}
-        <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setImageLoading}>
+        <SingleImageUploader setImage={setImage} disabled={false}>
           <span className="sm:hidden font-satoshi font-semibold text-base text-gray-700">Image</span>
           <div
             className="relative flex-center sm:hidden w-full h-[10rem] mt-2 border rounded-lg break-inside-avoid cursor-pointer group">
-            {post.image
+            {image.file
               ? <div>
-                {imageLoading
+                {image.isLoading
                   ? <LoadingCircle/>
                   : <div>
-                    <Image src={post.image} layout="fill" className="object-contain" alt="EventImage"/>
+                    <Image src={image.url} layout="fill" className="object-contain" alt="EventImage"/>
                     <Cross2Icon className="absolute right-0 top-0 m-3 cursor-pointer" width={20} height={20}
                                 onClick={handleRemoveImage}/>
                   </div>
@@ -66,15 +76,15 @@ export default function EventForm({mode, post, setPost, submitHandler, loading}:
           <div className="flex flex-col h-full gap-3">
             {/* Image uploader for desktop */}
             <span className="hidden sm:flex font-satoshi font-semibold text-base text-gray-700">Image</span>
-            <SingleImageUploader setImage={(image: string) => setPost(prev => ({...prev, image: image}))} disabled={false} setIsLoading={setImageLoading}>
+            <SingleImageUploader setImage={setImage} disabled={false}>
               <div
-                className={`relative hidden sm:flex justify-center items-center w-[18rem] h-full border rounded-lg group ${post.image ? '' : 'cursor-pointer hover:border-blue-300'}`}>
-                {post.image
+                className={`relative hidden sm:flex justify-center items-center w-[18rem] h-full border rounded-lg group ${image.file ? '' : 'cursor-pointer hover:border-blue-300'}`}>
+                {image.file
                   ? <div>
-                    {imageLoading
+                    {image.isLoading
                       ? <LoadingCircle/>
                       : <div>
-                        <Image src={post.image} layout="fill" className="object-contain" alt="EventImage"/>
+                        <Image src={image.url} layout="fill" className="object-contain" alt="EventImage"/>
                         <Cross2Icon className="absolute right-0 top-0 m-3 cursor-pointer" width={20} height={20}
                                     onClick={handleRemoveImage}/>
                       </div>

@@ -1,15 +1,16 @@
 import FormHeader from "@components/headers/FormHeader";
 import Link from 'next/link'
+import Image from 'next/image'
 import {Button} from "@components/ui/button";
 import {StoreFormRequest} from "@models/requests/StoreFormRequest";
 import InputFieldDefaultClient from "@components/input/InputFieldDefaultClient";
 import InputFieldDescriptionClient from "@components/input/InputFieldDescriptionClient";
 import MultipleImageUploader from "@components/image/MultipleImageUploader";
-import React, {useEffect, useState} from "react";
-import Image from 'next/image'
+import React, {Dispatch, SetStateAction} from "react";
 import LoadingCircle from "@components/animation/LoadingCircle";
 import {Cross2Icon} from "@node_modules/@radix-ui/react-icons";
 import InputFieldPriceClient from "@components/input/InputFieldPriceClient";
+import {ImageData} from "@containers/edit-store-post";
 
 const MAX_IMAGE_COUNT = 5
 
@@ -17,23 +18,13 @@ interface Props {
   mode: string;
   post: StoreFormRequest;
   setPost: any;
+  images: Array<ImageData>;
+  setImages: Dispatch<SetStateAction<Array<ImageData>>>;
   submitHandler: Function;
   loading: boolean;
 }
 
-export interface Image {
-  id: string;
-  url: string;
-  isLoading: boolean;
-}
-
-export default function StoreForm({mode, post, setPost, submitHandler, loading}: Props) {
-  const [images, setImages] = useState<Array<Image>>(post.images.map(((image) => ({id: "", url: image, isLoading: false}))))
-
-
-  useEffect(() => {
-    setPost((prev) => ({...prev, images: images.map(image => image.url)}))
-  }, [images])
+export default function StoreForm({mode, post, setPost, images, setImages, submitHandler, loading}: Props) {
 
   function handleRemoveImage(index) {
     setImages(images => images.filter((_, i) => i !== index));
@@ -58,7 +49,7 @@ export default function StoreForm({mode, post, setPost, submitHandler, loading}:
               </MultipleImageUploader>
               {
                 images.map((image, index) => (
-                  <div key={image.id} className="relative shrink-0 flex-center w-[8rem] h-[8rem] border-2 rounded-lg">
+                  <div key={index} className="relative shrink-0 flex-center w-[8rem] h-[8rem] border-2 rounded-lg">
                     {
                       image.isLoading ?
                       <LoadingCircle/>

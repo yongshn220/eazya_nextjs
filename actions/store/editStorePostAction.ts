@@ -11,51 +11,40 @@ import {PostType} from "@components/constants/enums";
 import {revalidateTag} from "next/cache";
 import {getPostPath, getPostTag} from "@components/constants/tags";
 import {redirect} from "next/navigation";
+import {StatusCodes} from "@node_modules/http-status-codes";
+import {del} from "@node_modules/@vercel/blob";
 
-export default async function editStorePostAction(postId: string, req: StoreFormRequest) {
+export default async function editStorePostAction(urls, postId: string, req: StoreFormRequest) {
   await connectToDB()
   const session = await getServerSession(authOptions)
   if (!session) return null
 
   try {
-    const post = await StorePostModel.findById(postId)
-    if (!post) return null
 
-    if (session.user.id !== post.authorId.toString()) return null
+    for (const url of urls) {
+        await del(url, {token: process.env.BLOB_READ_WRITE_TOKEN})
+      }
+
+    const post = await StorePostModel.findById(postId)
+    if (!post) return {status: StatusCodes.UNAUTHORIZED}
+
+    if (session.user.id !== post.authorId.toString()) return {status: StatusCodes.UNAUTHORIZED}
 
     let {images, title, price, description} = req
 
-    const imagesToAdd = images.filter(image => !post.images.includes(image));
-    const imagesToDelete = post.images.filter(image => !images.includes(image));
-    const imagesToKeep = post.images.filter(image => images.includes(image))
-
-    const newUrls = []
-    for (const image of imagesToAdd) {
-      const url = await addBase64ToStorage(PostType.STORE, session, image)
-      if (!url) continue
-      newUrls.push(url)
-    }
-
     await StorePostModel.findOneAndUpdate({_id: postId}, {
-      images: [...imagesToKeep, ...newUrls],
+      images: images,
       title,
       price,
       description,
     })
 
-    const oldFiles = imagesToDelete.map((image) => getStorageFileFromStringUrl(image))
-    for (const file of oldFiles) {
-      await file.delete()
-    }
-
-    return true
+    revalidateTag(getPostTag(session.user.id, postId, PostType.STORE))
+    return {status: StatusCodes.OK}
   }
   catch (error) {
     console.log(error)
-    return null
-  }
-  finally {
     revalidateTag(getPostTag(session.user.id, postId, PostType.STORE))
-    redirect(getPostPath(postId, PostType.STORE))
+    return {status: StatusCodes.INTERNAL_SERVER_ERROR}
   }
 }
