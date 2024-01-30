@@ -1,8 +1,8 @@
-import {Image} from "@containers/create-event-post/EventForm";
 import {Dispatch, SetStateAction} from "react";
+import {ImageData} from "@containers/edit-event-post";
 
 interface Props {
-  setImage: Dispatch<SetStateAction<Image>>,
+  setImage: Dispatch<SetStateAction<ImageData>>,
   disabled: boolean,
   children: any
 }
