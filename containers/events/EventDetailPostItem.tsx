@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function EventPostItem({post}) {
+export default function EventDetailPostItem({post}) {
   if (!post) {
     return <></>
   }
 
   return (
     <Link href={`/events/${post.id}`}>
-      <div className="group relative glass_box_thin">
+      <div className="group relative glass_box">
         <div className="relative w-full group-hover:opacity-75">
           <Image
             src={(post.image)? post.image : "/assets/images/no_image_post_1.png"}
@@ -20,7 +20,15 @@ export default function EventPostItem({post}) {
           />
         </div>
         <div className="w-full mt-4 flex flex-col gap-3">
-          <h3 className="text-xs text-gray-900 line-clamp-1">{post.title}</h3>
+          <h3 className="text-md font-bold text-gray-900 line-clamp-1">{post.title}</h3>
+          <div className="flex flex-col gap-1 text-sm text-gray-700">
+            <p className="line-clamp-1">
+              {post.date}
+            </p>
+            {/*<p className="line-clamp-1">*/}
+            {/*  {post.location}*/}
+            {/*</p>*/}
+          </div>
         </div>
       </div>
     </Link>

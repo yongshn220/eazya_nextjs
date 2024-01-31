@@ -258,8 +258,8 @@
   @apply flex-1 break-inside-avoid rounded-lg border bg-white/20 bg-clip-padding p-4 backdrop-blur-lg backdrop-filter w-full h-fit flex flex-col flex-center;
 }
 
-.glass_box_2 {
-  @apply flex-1 break-inside-avoid rounded-lg bg-gray-300/50 bg-clip-padding p-2 backdrop-blur-lg backdrop-filter w-full h-fit flex flex-col flex-center;
+.glass_box_thin {
+  @apply flex-1 break-inside-avoid rounded-lg border bg-white/20 bg-clip-padding p-2 backdrop-blur-lg backdrop-filter w-full h-fit flex flex-col flex-center;
 }
 
 .flex-center {
@@ -287,6 +287,9 @@
   @apply mt-6 grid grid-cols-2 md:grid-cols-4 xl:gap-x-8 gap-x-6 gap-y-10;
 }
 
+.grid_preview_image_sm {
+  @apply mt-6 grid grid-cols-2 md:grid-cols-5;
+}
 
 .grid_12 {
   @apply grid grid-cols-1 md:grid-cols-2 gap-x-10;

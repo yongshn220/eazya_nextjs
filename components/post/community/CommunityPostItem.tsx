@@ -21,18 +21,18 @@ export default async function CommunityPostItem({postType, communityType, post}:
   return (
     <div>
       <Link href={getCommunityPostPath(post.id, postType, communityType)}>
-        <div className="group flex flex-col py-5 gap-4 cursor-pointer">
+        <div className="group flex flex-col py-5 gap-2 cursor-pointer">
           <div className="flex-between items-center gap-5">
             <div className="flex flex-center gap-2">
               <UserHexaIcon/>
-              <p className="text-sm">SBU Student</p>
+              <p className="text-xs">SBU Student</p>
               <Badge variant="outline" className="border-gray-300">{post.authorMajor}</Badge>
             </div>
             <p className="text-sm text-gray-500">{post.createdAt}</p>
           </div>
 
           <div className="flex flex-col gap-2">
-            <p className={`text-lg font-semibold leading-6 text-gray-900 line-clamp-1 hover_text_blue`}>
+            <p className={` font-semibold leading-6 text-gray-900 line-clamp-1 hover_text_blue`}>
               {post.title}
             </p>
           </div>

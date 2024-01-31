@@ -1,8 +1,8 @@
-import EventPostItem from "@containers/events/EventPostItem";
 import getEventPostIdsAction from "@actions/event/getEventPostIdsAction";
 import EventPostLoadMore from "@containers/events/EventPostLoadMore";
 import getEventPostAction from "@actions/event/getEventPostAction";
 import {IEventPost} from "@models/collections/eventPost";
+import EventDetailPostItem from "@containers/events/EventDetailPostItem";
 
 
 export default async function EventPosts() {
@@ -23,7 +23,7 @@ export default async function EventPosts() {
       <div className="grid_image">
         {
           posts.map(post => (
-            <EventPostItem key={post.id} post={post}/>
+            <EventDetailPostItem key={post.id} post={post}/>
           ))
         }
       </div>
