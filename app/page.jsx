@@ -4,6 +4,7 @@ import StorePreview from "@containers/home/StorePreview";
 import NavTabSelector from "@components/nav/NavTabSelector";
 import {NavTab} from "@components/constants/enums";
 import InitialAccountSetup from "@containers/home/InitialAccountSetup";
+import UserFeedback from "@containers/home/UserFeedback";
 
 
 export default async function Home() {
