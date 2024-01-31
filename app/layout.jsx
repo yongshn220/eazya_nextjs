@@ -16,13 +16,12 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-
 export const metadata = {
-  title: "eazyA",
-  description: "University Community",
+  title: "EazyA - An Anonymous University Community",
+  description: "Join EazyA, the premier online platform for university students, faculty, and alumni. Connect, collaborate, and access a wealth of resources tailored for academic success and community involvement.",
+  keywords: "University Community, Student Collaboration, Academic Resources, Alumni Network, Faculty Support, University Events",
   metadataBase: new URL("https://www.eazya.net/"),
 }
-
 
 export default function RootLayout({children}) {
   return (

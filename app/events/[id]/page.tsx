@@ -9,9 +9,12 @@ export async function generateMetadata({ params }, parent: ResolvingMetadata): P
   const post: IEventPost  = await getEventPostAction(postId)
   if (!post) return {}
 
+  const baseTitle = "University Events - ";
+  const baseDescription = "Find out more about university events: ";
+
   return {
-    title: post.title,
-    description: post.description,
+    title: baseTitle + post.title,
+    description: baseDescription + post.description,
   }
 }
 

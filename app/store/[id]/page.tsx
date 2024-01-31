@@ -10,8 +10,8 @@ export async function generateMetadata({ params }, parent: ResolvingMetadata): P
   if (!post) return {}
 
   return {
-    title: post.title,
-    description: post.description,
+    title: `For Sale: ${post.title} - University Buy and Sell`,
+    description: post.description || 'Check out this great item for sale at the University Buy and Sell. Find textbooks, electronics, and more!',
   }
 }
 

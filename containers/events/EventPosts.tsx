@@ -17,7 +17,6 @@ export default async function EventPosts() {
     posts.push(post)
   }
 
-
   return (
     <section>
       <div className="grid_image">

@@ -4,8 +4,9 @@ import {Metadata} from "@node_modules/next";
 
 
 export const metadata: Metadata = {
-  title: 'University Find-Member',
-  description: "It's a place where students can find out about competitions, projects, studies, clubs, and small activities within the university and find friends to do them with.",
+  title: 'University Find-Member - Connect for Competitions, Projects, and Clubs',
+  description: "Discover and join university competitions, projects, study groups, clubs, and activities. Connect with like-minded students and find friends to share these experiences at [Your University Name].",
+  keywords: 'University Competitions, Student Projects, Study Groups, University Clubs, Campus Activities, Student Collaboration',
 }
 
 export default function FindMemberHome({params}) {

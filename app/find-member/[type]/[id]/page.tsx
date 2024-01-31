@@ -11,9 +11,12 @@ export async function generateMetadata({ params }, parent: ResolvingMetadata): P
   const post: ICommunityPost  = await getCommunityPostAction(communityType, postId)
   if (!post) return {}
 
+  const baseTitle = "Community Find Member - ";
+  const baseDescription = "Learn more about our community: ";
+
   return {
-    title: post.title,
-    description: post.description,
+    title: baseTitle + post.title,
+    description: baseDescription + post.description,
   }
 }
 

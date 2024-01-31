@@ -35,7 +35,7 @@ export default async function EventPreview() {
         </div>
       </Link>
 
-      <div className="grid_preview_image_sm">
+      <div className="grid_preview_image_thin">
         {
           eventPosts.slice(0, 4).map((post) => (
             <EventPostItem key={post.id} post={post}/>
