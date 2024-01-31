@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { signIn, useSession, getProviders } from 'next-auth/react'
+import { useSession, getProviders } from 'next-auth/react'
 import {Button} from "@components/ui/button";
 import NavDrawer from "@components/nav/NavDrawer";
 import NavDropDown from "@components/nav/NavDropDown";
@@ -11,7 +11,7 @@ import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
 import {useRecoilValue} from "@node_modules/recoil";
 import {selectedNavTabAtom} from "@components/constants/globalStates";
 import {NavTab, UtilPath} from "@components/constants/enums";
-import getNotificationsAction from "@actions/notification/getNotificationsAction";
+
 
 export default function Nav() {
   const { data: session } = useSession()
@@ -26,8 +26,6 @@ export default function Nav() {
     setupProviders().then()
   }, [])
 
-
-  if (!session) return <></>
 
   return (
     <nav className="flex-center sticky top-0 w-full mb-8 pt-3 bg-white z-50 nav_shadow">
