@@ -8,7 +8,12 @@ import editCommunityPostAction from "@actions/community/editCommunityPostAction"
 import {ICommunityPost} from "@models/union/union";
 
 
-export default function EditCommunityPost({post}: {post: ICommunityPost}) {
+interface Props {
+  post: ICommunityPost,
+  communityList: Array<string>
+}
+
+export default function EditCommunityPost({post, communityList}: Props) {
   const [communityPost, setCommunityPost] = useState<CommunityFormRequest>({
     postType: post.type as PostType,
     communityType: post.communityType as CommunityType,
@@ -34,6 +39,7 @@ export default function EditCommunityPost({post}: {post: ICommunityPost}) {
     <section className="w-full">
       <CommunityForm
         mode={FormMode.EDIT}
+        communityList={communityList}
         post={communityPost}
         setPost={setCommunityPost}
         submitHandler={handleSubmit}

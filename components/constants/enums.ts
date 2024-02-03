@@ -46,10 +46,11 @@ export const PostTypeURL = {
 }
 
 export const PostTypeEditURL = {
-  [PostType.EVENT]:       "edit-event-post",
-  [PostType.GENERAL]:     "edit-general-post",
-  [PostType.FIND_MEMBER]: "edit-find-member-post",
-  [PostType.STORE]:       "edit-store-post",
+  [PostType.EVENT]:             "edit-event-post",
+  [PostType.GENERAL]:           "edit-general-post",
+  [PostType.FIND_MEMBER]:       "edit-find-member-post",
+  [PostType.STORE]:             "edit-store-post",
+  [PostType.KNOWLEDGE_HUB]:     "edit-knowledge-hub-post",
 }
 
 export enum NotificationType {
