@@ -21,6 +21,7 @@ export enum NavTab {
   GENERAL =       "General",
   STORE =         "Store",
   FIND_MEMBER =   "Find Member",
+  KNOWLEDGE_HUB = "Knowledge Hub",
 }
 
 export enum PostType {
@@ -28,6 +29,7 @@ export enum PostType {
   GENERAL =     "General",
   FIND_MEMBER = "Find Member",
   STORE =       "Store",
+  KNOWLEDGE_HUB = "Knowledge Hub",
 }
 
 export enum CommunityPostType {
@@ -36,10 +38,11 @@ export enum CommunityPostType {
 }
 
 export const PostTypeURL = {
-  [PostType.EVENT]:       "events",
-  [PostType.GENERAL]:     "general",
-  [PostType.FIND_MEMBER]: "find-member",
-  [PostType.STORE]:       "store",
+  [PostType.EVENT]:             "events",
+  [PostType.GENERAL]:           "general",
+  [PostType.FIND_MEMBER]:       "find-member",
+  [PostType.STORE]:             "store",
+  [PostType.KNOWLEDGE_HUB]:     "knowledge-hub",
 }
 
 export const PostTypeEditURL = {
@@ -84,8 +87,7 @@ export enum UserActivityType {
   CREATE_REPLY = "CreateReply",
 }
 
-
-export enum CommunityType {
+export enum StudentGroupType {
   EVERYONE = "Everyone",
   KOREAN = "Korean",
   CHINESE = "Chinese",
@@ -94,12 +96,24 @@ export enum CommunityType {
   EXCHANGE = "Exchange",
 }
 
+export enum KnowledgeType {
+  GENERAL = "General",
+  PROGRAMMING = "Programming",
+}
+
+export enum BaseType {
+  ALL = "All",
+  NONE = "None",
+}
+
+export type CommunityType = StudentGroupType | KnowledgeType | BaseType
+export const CommunityTypeList = [...Object.values(StudentGroupType), ...Object.values(KnowledgeType)]
+
 export enum VoteType {
   UP = "voteTypeUp",
   DOWN = "voteTypeDown",
   NONE = "voteTypeNone",
 }
-
 
 export function PostTypeToCommunityPostType(postType: PostType) {
   switch(postType) {

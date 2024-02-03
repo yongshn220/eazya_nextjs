@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import {useState} from "react";
 import Image from "next/image";
 import {getCommunityHomePath, getHomePath} from "@components/constants/tags";
-import {CommunityType, PostType, UtilPath} from "@components/constants/enums";
+import {CommunityType, PostType, StudentGroupType, UtilPath} from "@components/constants/enums";
 
 export default function NavDrawer({providers}) {
   const { data: session } = useSession()
@@ -39,12 +39,12 @@ export default function NavDrawer({providers}) {
               </Link>
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href={getCommunityHomePath(PostType.GENERAL, CommunityType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getCommunityHomePath(PostType.GENERAL, StudentGroupType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">General</p>
               </Link>
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href={getCommunityHomePath(PostType.FIND_MEMBER, CommunityType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
+              <Link href={getCommunityHomePath(PostType.FIND_MEMBER, StudentGroupType.EVERYONE)} className="dropdown_link" onClick={() => setIsOpen(false)}>
                 <p className="text-lg">Find Member</p>
               </Link>
             </DrawerClose>

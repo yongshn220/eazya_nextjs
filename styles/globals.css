@@ -292,9 +292,8 @@
 }
 
 .grid_12 {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-x-10;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-10;
 }
-
 
 .hover_text_blue {
   @apply hover:text-blue-500 group-hover:text-blue-500

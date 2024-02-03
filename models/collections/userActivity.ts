@@ -1,12 +1,12 @@
 import { Schema, model, models } from 'mongoose'
-import {CommunityType, PostType, UserActivityType} from "@components/constants/enums";
+import {CommunityType, CommunityTypeList, PostType, UserActivityType} from "@components/constants/enums";
 
 
 const userActivitySchema = new Schema({
   userId:             { type: Schema.Types.ObjectId, ref: 'User', required: true },
   userActivityType:   { type: String, enum: Object.values(UserActivityType), required: true },
   postType:           { type: String, enum: Object.values(PostType), required: true },
-  communityType:      { type: String, enum: Object.values(CommunityType) },
+  communityType:      { type: String, enum: Object.values(CommunityTypeList) },
   postId:             { type: Schema.Types.ObjectId, required: true },
   commentId:          { type: Schema.Types.ObjectId },
   replyId:            { type: Schema.Types.ObjectId },

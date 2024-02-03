@@ -2,7 +2,6 @@ import {PostType, VoteType} from "@components/constants/enums";
 import {EventPostModel} from "@models/collections/eventPost";
 import {VoteUser} from "@models/base/voteUserBase";
 import {GeneralPostModel} from "@models/collections/generalPost";
-import {toJson} from "@actions/actionHelper/utilFunction";
 import {IPost} from "@models/union/union";
 import {Session} from "@node_modules/next-auth";
 import {StorePostModel} from "@models/collections/storePost";
@@ -10,6 +9,7 @@ import {FindMemberPostModel} from "@models/collections/findMemberPost";
 import {toElapsed} from "@components/constants/helperFunctions";
 import {CommentBase} from "@models/base/commentBase";
 import {ReplyBase} from "@models/base/replyBase";
+import {KnowledgeHubPostModel} from "@models/collections/knowledgeHubPost";
 
 /*-------------
      MODEL
@@ -19,12 +19,14 @@ export function GetPostModelByType(postType: PostType) {
   if (postType === PostType.GENERAL) return GeneralPostModel
   if (postType === PostType.FIND_MEMBER) return FindMemberPostModel
   if (postType === PostType.STORE) return StorePostModel
+  if (postType === PostType.KNOWLEDGE_HUB) return KnowledgeHubPostModel
   return null
 }
 
 export function getCommunityPostModelByType(postType: PostType) {
   if (postType === PostType.GENERAL) return GeneralPostModel
   if (postType === PostType.FIND_MEMBER) return FindMemberPostModel
+  if (postType === PostType.KNOWLEDGE_HUB) return KnowledgeHubPostModel
   return null
 }
 

@@ -1,6 +1,6 @@
 "use server"
 
-import {CommunityType, PostType} from "@components/constants/enums";
+import {BaseType, CommunityType, PostType} from "@components/constants/enums";
 import {connectToDB} from "@utils/database";
 import {toJson} from "@actions/actionHelper/utilFunction";
 import {getCommunityPostModelByType} from "@actions/actionHelper/helperFunctions";
@@ -18,7 +18,8 @@ const getCommunityPostIdsAction = async (postType: PostType, communityType: Comm
         const CommunityPostModel = getCommunityPostModelByType(postType)
         if (!CommunityPostModel) return null
 
-        const posts = await CommunityPostModel.find({communityType: communityType})
+        const filter = communityType === BaseType.ALL? {} : {communityType: communityType}
+        const posts = await CommunityPostModel.find(filter)
           .sort({createdAt: -1})
           .skip((page - 1) * DEFAULT_PAGE_LENGTH.COMMUNITY)
           .limit(DEFAULT_PAGE_LENGTH.COMMUNITY)

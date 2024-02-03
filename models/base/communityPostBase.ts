@@ -11,7 +11,7 @@ export const CommunityPostBase = new Schema({
   authorId:       { type: Schema.Types.ObjectId, ref: 'User', required: true },
   authorMajor:    { type: String, required: true, default: MajorType.NONE },
   type:           { type: String, enum: Object.values(PostType), required: true, },
-  communityType:  { type: String, enum: Object.values(CommunityType), required: true },
+  communityType:  { type: String, required: true },
   title:          { type: String, required: true, },
   description:    { type: String, required: true, },
   createdAt:      { type: Date, required: true, },

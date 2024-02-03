@@ -10,9 +10,10 @@ import CommunityForm from "@components/post/community/CommunityForm";
 interface Props {
   postType: PostType;
   communityType: CommunityType;
+  communityList: Array<string>;
 }
 
-export default function CreateCommunityPost({postType, communityType}: Props) {
+export default function CreateCommunityPost({postType, communityType, communityList}: Props) {
   const [post, setPost] = useState<CommunityFormRequest>({
     postType,
     communityType: communityType,
@@ -38,6 +39,7 @@ export default function CreateCommunityPost({postType, communityType}: Props) {
     <section className="w-full">
       <CommunityForm
         mode={FormMode.CREATE}
+        communityList={communityList}
         post={post}
         setPost={setPost}
         submitHandler={handleSubmit}

@@ -51,7 +51,7 @@ export function getEditFormPath(postId: string, postType: PostType) {
   return `/${PostTypeEditURL[postType]}/${postId}`
 }
 
-export function getCommunityHomePath(postType: PostType, communityType: CommunityType) {
+export function getCommunityHomePath(postType: PostType, communityType: CommunityType | string) {
   return `/${PostTypeURL[postType]}/${communityType}`
 }
 
@@ -61,6 +61,10 @@ export function getCommunityPostPath(postId: string, postType: PostType, communi
 
 export function getCommunityEditFormPath(postId: string, postType: PostType, communityType: CommunityType) {
   return `/${PostTypeEditURL[postType]}/${postId}?type=${communityType}`
+}
+
+export function getCommunityPostFormPath(postType: PostType, communityType: CommunityType) {
+  return `create-${PostTypeURL[postType]}-post?type=${communityType}`
 }
 
 

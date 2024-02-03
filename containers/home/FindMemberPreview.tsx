@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import getCommunityPostIdsAction from "@actions/community/getCommunityPostIdsAction";
-import {CommunityType, PostType} from "@components/constants/enums";
+import {CommunityType, PostType, StudentGroupType} from "@components/constants/enums";
 import {getCommunityHomePath} from "@components/constants/tags";
 import CommunityPostItem from "@components/post/community/CommunityPostItem";
 import getCommunityPostAction from "@actions/community/getCommunityPostAction";
 import {ICommunityPost} from "@models/union/union";
 import Image from 'next/image'
 
-const DEFAULT_COMMUNITY_TYPE = CommunityType.EVERYONE
+const DEFAULT_COMMUNITY_TYPE = StudentGroupType.EVERYONE
 
-export default async function FindMemberPreview() {
+export default async function FindMemberPreview({maxItemLength}) {
   const postIds = await getCommunityPostIdsAction(PostType.FIND_MEMBER, DEFAULT_COMMUNITY_TYPE, 1)
 
   const posts = []
@@ -38,7 +38,7 @@ export default async function FindMemberPreview() {
 
       <ul role="list" className="divide-y divide-gray-300 border-b">
         {
-          posts.slice(0, 5).map((post) => (
+          posts.slice(0, maxItemLength).map((post) => (
             <CommunityPostItem key={post.id} postType={PostType.FIND_MEMBER} communityType={DEFAULT_COMMUNITY_TYPE} post={post}/>
           ))
         }

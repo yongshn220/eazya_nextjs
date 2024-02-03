@@ -1,6 +1,6 @@
 import HomeHeader from "@components/headers/HomeHeader";
 import PostPagination from "@components/page/PostPagination";
-import {CommunityType, NavTab, PostType} from "@components/constants/enums";
+import {CommunityType, NavTab, PostType, StudentGroupType} from "@components/constants/enums";
 import NavTabSelector from "@components/nav/NavTabSelector";
 import CommunityMenu from "@components/post/community/CommunityMenu";
 import CommunitySearch from "@components/post/community/CommunitySearch";
@@ -19,7 +19,7 @@ export default function FindMember({communityType}: {communityType: CommunityTyp
       />
       <div className="w-full">
         <div className="w-full flex-col justify-center gap-20">
-          <CommunityMenu postType={PostType.FIND_MEMBER} communityType={communityType}/>
+          <CommunityMenu postType={PostType.FIND_MEMBER} communityType={communityType} communityList={Object.values(StudentGroupType)}/>
           <CommunitySearch/>
           <CommunityPosts postType={PostType.FIND_MEMBER} communityType={communityType}/>
         </div>

@@ -11,9 +11,10 @@ import {getCommunityHomePath} from "@components/constants/tags";
 interface Props {
   postType: PostType;
   communityType: CommunityType;
+  communityList: Array<string>
 }
 
-export default function CommunityMenu({postType, communityType}: Props) {
+export default function CommunityMenu({postType, communityType, communityList}: Props) {
   const router = useRouter()
 
   return (
@@ -21,7 +22,7 @@ export default function CommunityMenu({postType, communityType}: Props) {
       {/* desktop view */}
       <div className="hidden md:flex justify-center bg-white border-b">
         {
-          Object.values(CommunityType).map((menuType) => (
+          communityList.map((menuType) => (
             <Link key={menuType} href={getCommunityHomePath(postType, menuType)}>
               <Button variant="ghost"
                 key={menuType}
@@ -43,7 +44,7 @@ export default function CommunityMenu({postType, communityType}: Props) {
           <SelectContent>
             <SelectGroup>
               {
-                Object.values(CommunityType).map((menuType) => (
+                communityList.map((menuType) => (
                   <SelectItem value={menuType} key={menuType}>
                     {menuType}
                   </SelectItem>

@@ -10,7 +10,8 @@ import NavDropDown from "@components/nav/NavDropDown";
 import NavNotificationDropDown from "@components/nav/NavNotificationDropDown";
 import {useRecoilValue} from "@node_modules/recoil";
 import {selectedNavTabAtom} from "@components/constants/globalStates";
-import {NavTab, UtilPath} from "@components/constants/enums";
+import {KnowledgeType, NavTab, PostType, StudentGroupType, UtilPath} from "@components/constants/enums";
+import {getCommunityHomePath, getHomePath} from "@components/constants/tags";
 
 
 export default function Nav() {
@@ -41,16 +42,19 @@ export default function Nav() {
             </div>
 
             <div className="flex gap-10">
-              <Link href="/events" className="flex">
+              <Link href={getHomePath(PostType.EVENT)} className="flex">
                 <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.EVENT? "text-blue-600" : "text-black"}`}>EVENTS</p>
               </Link>
-              <Link href="/general/Everyone" className="flex">
+              <Link href={getCommunityHomePath(PostType.GENERAL, StudentGroupType.EVERYONE)}  className="flex">
                 <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.GENERAL? "text-blue-600" : "text-black"}`}>GENERAL</p>
               </Link>
-              <Link href="/find-member/Everyone" className="flex">
+              <Link href={getCommunityHomePath(PostType.KNOWLEDGE_HUB, KnowledgeType.PROGRAMMING)} className="flex">
+                <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.KNOWLEDGE_HUB? "text-blue-600" : "text-black"}`}>KNOWLEDGE HUB</p>
+              </Link>
+              <Link href={getCommunityHomePath(PostType.FIND_MEMBER, StudentGroupType.EVERYONE)}  className="flex">
                 <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.FIND_MEMBER? "text-blue-600" : "text-black"}`}>FIND MEMBER</p>
               </Link>
-              <Link href="/store" className="flex">
+              <Link href={getHomePath(PostType.STORE)} className="flex">
                 <p className={`font-satoshi text-sm hover_text_blue ${selectedNavTab === NavTab.STORE? "text-blue-600" : "text-black"}`}>BUY & SELL</p>
               </Link>
             </div>

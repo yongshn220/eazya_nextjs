@@ -9,14 +9,14 @@ import {CommunityFormRequest} from "@models/requests/CommunityFormRequest";
 
 interface Props {
   mode: string;
+  communityList: Array<string>;
   post: CommunityFormRequest;
   setPost: any;
   submitHandler: Function;
   loading: boolean;
 }
 
-export default function CommunityForm({mode, post, setPost, submitHandler, loading}: Props) {
-
+export default function CommunityForm({mode, communityList, post, setPost, submitHandler, loading}: Props) {
   function handleSelectChange(value) {
     setPost((prev) => ({...prev, communityType: value as CommunityType}))
   }
@@ -44,7 +44,7 @@ export default function CommunityForm({mode, post, setPost, submitHandler, loadi
                 </SelectLabel>
                 <SelectSeparator/>
                 {
-                  Object.values(CommunityType).map((menuType) => (
+                  communityList.map((menuType) => (
                     <SelectItem
                       key={menuType}
                       value={menuType}

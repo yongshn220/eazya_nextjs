@@ -1,5 +1,5 @@
 import {model, models, Schema} from 'mongoose'
-import {CommunityType, NotificationType, PostType} from "@components/constants/enums";
+import {CommunityType, CommunityTypeList, NotificationType, PostType} from "@components/constants/enums";
 
 
 const NotificationSchema = new Schema({
@@ -7,7 +7,7 @@ const NotificationSchema = new Schema({
   toUserId:           { type: Schema.Types.ObjectId, ref: 'User', required: true},
   notificationType:   { type: String, enum: Object.values(NotificationType), required: true },
   postType:           { type: String, enum: Object.values(PostType), required: true },
-  communityType:      { type: String, enum: Object.values(CommunityType) },
+  communityType:      { type: String, enum: Object.values(CommunityTypeList) },
   postId:             { type: Schema.Types.ObjectId, required: true },
   commentId:          { type: Schema.Types.ObjectId, required: false },
   replyId:            { type: Schema.Types.ObjectId, required: false },
